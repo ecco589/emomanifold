@@ -7,11 +7,27 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent
 
 # 模型配置
-MODEL_NAME = "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
+# 支持的模型: 'deepseek', 'ernie'
+CURRENT_MODEL = "ernie"  # 当前使用的模型
+
+# 模型路径配置
 MODEL_CACHE_DIR = PROJECT_ROOT / "models"  # 模型下载缓存目录
 
-# 本地模型路径（ModelScope下载后的实际路径）
-MODEL_LOCAL_PATH = MODEL_CACHE_DIR / "deepseek-ai" / "DeepSeek-R1-Distill-Qwen-1___5B"
+# DeepSeek模型配置
+DEEPSEEK_MODEL_NAME = "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
+DEEPSEEK_LOCAL_PATH = MODEL_CACHE_DIR / "deepseek-ai" / "DeepSeek-R1-Distill-Qwen-1___5B"
+
+# ERNIE模型配置
+ERNIE_MODEL_NAME = "PaddlePaddle/ERNIE-4.5-0.3B-PT"
+ERNIE_LOCAL_PATH = Path.home() / ".cache" / "modelscope" / "hub" / "models" / "PaddlePaddle" / "ERNIE-4___5-0___3B-PT"
+
+# 根据当前模型选择配置
+if CURRENT_MODEL == "ernie":
+    MODEL_NAME = ERNIE_MODEL_NAME
+    MODEL_LOCAL_PATH = ERNIE_LOCAL_PATH
+else:
+    MODEL_NAME = DEEPSEEK_MODEL_NAME
+    MODEL_LOCAL_PATH = DEEPSEEK_LOCAL_PATH
 
 # 数据目录
 DATA_DIR = PROJECT_ROOT / "data"

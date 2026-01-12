@@ -3,7 +3,7 @@
 负责加载 DeepSeek-R1-Distill-Qwen-1.5B 模型并提取必要的组件
 """
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoModel, AutoTokenizer
 import config
 
 
@@ -60,14 +60,28 @@ class ModelLoader:
                 except ImportError:
                     use_device_map = False
             
-            self.model = AutoModelForCausalLM.from_pretrained(
-                model_path,
-                trust_remote_code=True,
-                dtype=torch.float16 if self.device != "cpu" else torch.float32,
-                device_map="auto" if use_device_map else None,
-                output_hidden_states=True,  # 需要输出隐藏状态
-                local_files_only=True  # 只使用本地文件，避免网络请求
-            )
+            # 根据模型类型选择加载方式
+            # ERNIE等双向模型使用AutoModel，单向模型使用AutoModelForCausalLM
+            if hasattr(config, 'CURRENT_MODEL') and config.CURRENT_MODEL == "ernie":
+                print("检测到ERNIE模型，使用双向模型加载方式...")
+                self.model = AutoModel.from_pretrained(
+                    model_path,
+                    trust_remote_code=True,
+                    dtype=torch.float16 if self.device != "cpu" else torch.float32,
+                    device_map="auto" if use_device_map else None,
+                    output_hidden_states=True,
+                    local_files_only=True
+                )
+            else:
+                print("使用因果语言模型加载方式...")
+                self.model = AutoModelForCausalLM.from_pretrained(
+                    model_path,
+                    trust_remote_code=True,
+                    dtype=torch.float16 if self.device != "cpu" else torch.float32,
+                    device_map="auto" if use_device_map else None,
+                    output_hidden_states=True,
+                    local_files_only=True
+                )
             
             # 如果没有使用device_map，手动移动到设备
             if not use_device_map:
@@ -75,23 +89,38 @@ class ModelLoader:
             
             self.model.eval()  # 设置为评估模式
             
+            # 检查模型类型
+            model_type = type(self.model).__name__
+            print(f"模型类型: {model_type}")
+            if "Bert" in model_type or "Ernie" in model_type or "AutoModel" == model_type:
+                print("确认：这是双向注意力模型")
+            else:
+                print("注意：这是单向注意力模型（因果模型）")
+            
             # 提取输出层权重矩阵（解嵌入矩阵）
+            # 对于双向模型（如BERT/ERNIE），使用输入embedding矩阵
+            # 对于单向模型（如GPT），使用输出层权重矩阵
             if hasattr(self.model, 'lm_head'):
                 self.output_embedding = self.model.lm_head.weight.data
             elif hasattr(self.model, 'embed_out'):
                 self.output_embedding = self.model.embed_out.weight.data
+            elif hasattr(self.model, 'get_input_embeddings'):
+                # 双向模型：使用输入embedding矩阵（词汇表embedding）
+                input_embeddings = self.model.get_input_embeddings()
+                self.output_embedding = input_embeddings.weight.data
+                print("双向模型：使用输入embedding矩阵作为词汇表表示")
             else:
                 # 尝试从config中获取输出层名称
                 print("警告：未找到标准的输出层，尝试查找...")
                 for name, module in self.model.named_modules():
-                    if 'lm_head' in name.lower() or 'output' in name.lower():
+                    if 'lm_head' in name.lower() or 'output' in name.lower() or 'embed' in name.lower():
                         if hasattr(module, 'weight'):
                             self.output_embedding = module.weight.data
                             print(f"找到输出层: {name}")
                             break
             
             if self.output_embedding is None:
-                raise ValueError("无法找到输出层权重矩阵")
+                raise ValueError("无法找到输出层权重矩阵或输入embedding矩阵")
             
             print(f"模型加载成功")
             print(f"   词汇表大小: {len(self.tokenizer)}")
@@ -144,10 +173,14 @@ class ModelLoader:
         
         input_ids = input_ids.to(self.device)
         
+        # 创建attention_mask（双向模型需要，确保所有token都能被看到）
+        attention_mask = torch.ones_like(input_ids)
+        
         # 前向传播，获取隐藏状态
         with torch.no_grad():
             outputs = self.model(
                 input_ids=input_ids,
+                attention_mask=attention_mask,
                 output_hidden_states=True,
                 return_dict=True
             )
@@ -272,251 +305,3 @@ class ModelLoader:
                     readable_tokens.append(f"[{token_id}]")
         
         return readable_tokens
-    
-    def _parse_response(self, raw_response):
-        """
-        解析模型响应，分离推理过程和实际输出
-        
-        Args:
-            raw_response: 原始响应文本
-            
-        Returns:
-            tuple: (reasoning, output) 推理过程和实际输出
-        """
-        reasoning = ""
-        output = ""
-        
-        # 先分离推理和输出（在清理标记之前，避免丢失关键标记）
-        # DeepSeek-R1 格式: ...推理内容...</think>实际输出
-        reasoning_end_marker = "</think>"
-        
-        if reasoning_end_marker in raw_response:
-            # 有明确的结束标记，分离推理和输出
-            parts = raw_response.split(reasoning_end_marker, 1)
-            reasoning = parts[0].strip()
-            output = parts[1].strip() if len(parts) > 1 else ""
-        else:
-            # 没有明确的推理结束标记，尝试通过内容特征识别
-            # 推理过程通常包含：思考性语言、分析过程、计划等
-            # 实际输出通常是：直接回答、结论、建议等
-            
-            # 检查是否包含明显的推理特征（中文）
-            reasoning_keywords = [
-                "我需要", "我应该", "让我", "首先", "接下来", "然后", "最后",
-                "看来", "可能", "应该", "需要", "考虑", "分析", "思考",
-                "用户", "问题", "回答", "确保", "检查", "回顾", "今天"
-            ]
-            
-            # 查找可能的推理和输出分界点
-            # 通常推理过程会包含多个段落，输出通常是直接回答
-            lines = raw_response.split('\n')
-            reasoning_lines = []
-            output_lines = []
-            found_output_start = False
-            
-            for i, line in enumerate(lines):
-                line_stripped = line.strip()
-                if not line_stripped:
-                    if not found_output_start:
-                        reasoning_lines.append(line)
-                    else:
-                        output_lines.append(line)
-                    continue
-                
-                # 检查是否包含推理关键词
-                is_reasoning = any(keyword in line_stripped for keyword in reasoning_keywords)
-                
-                # 如果前几行都是推理，且当前行也是推理，继续作为推理
-                if not found_output_start and (is_reasoning or i < 3):
-                    reasoning_lines.append(line)
-                # 如果遇到看起来像输出的内容（不包含推理关键词，且长度较短或格式不同）
-                elif not found_output_start and not is_reasoning and len(line_stripped) < 100:
-                    # 可能是输出的开始
-                    found_output_start = True
-                    output_lines.append(line)
-                elif found_output_start:
-                    output_lines.append(line)
-                else:
-                    # 如果推理行数已经很多（>5行），后续可能是输出
-                    if len(reasoning_lines) > 5 and not is_reasoning:
-                        found_output_start = True
-                        output_lines.append(line)
-                    else:
-                        reasoning_lines.append(line)
-            
-            reasoning = '\n'.join(reasoning_lines).strip()
-            output = '\n'.join(output_lines).strip()
-            
-            # 如果分离后输出为空，说明整个内容都是推理，将最后一部分作为输出
-            if not output and reasoning:
-                # 取最后一段作为可能的输出
-                reasoning_parts = reasoning.split('\n\n')
-                if len(reasoning_parts) > 1:
-                    output = reasoning_parts[-1]
-                    reasoning = '\n\n'.join(reasoning_parts[:-1])
-                else:
-                    # 如果只有一段，整个作为输出（可能是没有推理的直接回答）
-                    output = reasoning
-                    reasoning = ""
-        
-        # 清理推理过程中的特殊标记
-        reasoning = reasoning.replace("<｜Assistant｜>", "")
-        reasoning = reasoning.replace("<｜end▁of▁sentence｜>", "")
-        reasoning = reasoning.replace("<｜User｜>", "")
-        reasoning = reasoning.replace("<｜begin▁of▁sentence｜>", "")
-        reasoning = reasoning.replace("<think>", "")
-        reasoning = reasoning.replace("</think>", "")
-        reasoning = reasoning.replace("<|im_start|>", "").replace("<|im_end|>", "")
-        reasoning = reasoning.strip()
-        
-        # 清理输出中的特殊标记
-        output = output.replace("<｜Assistant｜>", "")
-        output = output.replace("<｜end▁of▁sentence｜>", "")
-        output = output.replace("<｜User｜>", "")
-        output = output.replace("<｜begin▁of▁sentence｜>", "")
-        output = output.replace("<think>", "")
-        output = output.replace("</think>", "")
-        output = output.replace("<|im_start|>", "").replace("<|im_end|>", "")
-        output = output.strip()
-        
-        return reasoning, output
-    
-    def generate(self, prompt, max_new_tokens=100, temperature=0.6, top_p=0.95, do_sample=True, return_reasoning=False, **kwargs):
-        """
-        生成文本回复
-        
-        Args:
-            prompt: 输入提示文本
-            max_new_tokens: 最大生成的新token数量
-            temperature: 采样温度（推荐0.6，根据模型说明）
-            top_p: nucleus采样参数（推荐0.95，根据模型说明）
-            do_sample: 是否使用采样
-            return_reasoning: 是否返回推理过程
-            **kwargs: 其他生成参数
-            
-        Returns:
-            如果 return_reasoning=False: 返回实际输出字符串
-            如果 return_reasoning=True: 返回 (reasoning, output) 元组
-        """
-        if not self._model_loaded:
-            raise RuntimeError("请先调用 load() 方法加载模型")
-        
-        # 编码输入
-        input_ids = self.tokenizer.encode(prompt, return_tensors="pt", add_special_tokens=False).to(self.device)
-        
-        # 创建 attention_mask
-        attention_mask = torch.ones_like(input_ids)
-        
-        # 获取 eos_token_id
-        eos_token_id = self.tokenizer.eos_token_id
-        if eos_token_id is None:
-            eos_token_id = self.tokenizer.pad_token_id
-        
-        # 设置 pad_token_id（如果 pad_token_id 和 eos_token_id 相同，使用 eos_token_id）
-        pad_token_id = self.tokenizer.pad_token_id
-        if pad_token_id is None:
-            pad_token_id = eos_token_id
-        
-        # 生成参数（根据模型说明设置）
-        generation_config = {
-            "max_new_tokens": max_new_tokens,
-            "temperature": temperature,
-            "top_p": top_p,
-            "do_sample": do_sample,
-            "pad_token_id": pad_token_id,
-            "eos_token_id": eos_token_id,
-            "attention_mask": attention_mask,
-            "repetition_penalty": 1.1,  # 减少重复
-            **kwargs
-        }
-        
-        # 生成文本
-        with torch.no_grad():
-            outputs = self.model.generate(
-                input_ids,
-                **generation_config
-            )
-        
-        # 解码生成的文本（只取新生成的部分）
-        generated_ids = outputs[0][input_ids.shape[1]:]
-        
-        # 移除 eos_token 及其之后的内容
-        if eos_token_id in generated_ids:
-            eos_index = (generated_ids == eos_token_id).nonzero(as_tuple=True)[0]
-            if len(eos_index) > 0:
-                generated_ids = generated_ids[:eos_index[0]]
-        
-        raw_response = self.tokenizer.decode(generated_ids, skip_special_tokens=False)
-        
-        # 解析响应，分离推理和输出
-        reasoning, output = self._parse_response(raw_response)
-        
-        if return_reasoning:
-            return reasoning, output
-        else:
-            return output
-    
-    def chat(self, message, history=None, max_new_tokens=100, temperature=0.6, top_p=0.95, return_reasoning=False, **kwargs):
-        """
-        与模型进行对话
-        
-        Args:
-            message: 用户消息
-            history: 对话历史，格式为 [(user_msg1, assistant_msg1), (user_msg2, assistant_msg2), ...]
-            max_new_tokens: 最大生成的新token数量
-            temperature: 采样温度（默认0.6，根据模型说明推荐）
-            top_p: nucleus采样参数（默认0.95，根据模型说明推荐）
-            return_reasoning: 是否返回推理过程
-            **kwargs: 其他生成参数
-            
-        Returns:
-            如果 return_reasoning=False: 返回实际输出字符串
-            如果 return_reasoning=True: 返回 (reasoning, output) 元组
-        """
-        if not self._model_loaded:
-            raise RuntimeError("请先调用 load() 方法加载模型")
-        
-        if history is None:
-            history = []
-        
-        # 构建消息列表用于 chat_template
-        messages = []
-        for user_msg, assistant_msg in history:
-            messages.append({"role": "user", "content": user_msg})
-            messages.append({"role": "assistant", "content": assistant_msg})
-        
-        # 添加当前用户消息
-        messages.append({"role": "user", "content": message})
-        
-        # 使用 tokenizer 的 chat_template 格式化对话
-        # 根据模型说明：避免添加系统提示，所有指令都应包含在用户提示中
-        if hasattr(self.tokenizer, 'apply_chat_template') and self.tokenizer.chat_template:
-            # 使用 chat_template 格式化，并添加 generation prompt
-            # 根据模型说明，强制模型在输出开始时使用 "\n" 来确保进行推理
-            prompt = self.tokenizer.apply_chat_template(
-                messages,
-                tokenize=False,
-                add_generation_prompt=True
-            )
-        else:
-            # 回退到手动格式化（使用 DeepSeek-R1 的特殊格式）
-            conversation_text = ""
-            for msg in messages:
-                if msg["role"] == "user":
-                    conversation_text += f"<｜User｜>{msg['content']}<｜end▁of▁sentence｜>"
-                elif msg["role"] == "assistant":
-                    conversation_text += f"<｜Assistant｜>{msg['content']}<｜end▁of▁sentence｜>"
-            # 添加 assistant 提示，强制使用 "\n" 开始推理
-            prompt = conversation_text + "<｜Assistant｜>\n"
-        
-        # 生成回复
-        result = self.generate(
-            prompt,
-            max_new_tokens=max_new_tokens,
-            temperature=temperature,
-            top_p=top_p,
-            return_reasoning=return_reasoning,
-            **kwargs
-        )
-        
-        return result
