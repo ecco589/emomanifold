@@ -35,9 +35,20 @@ class ModelLoader:
         print(f"设备: {self.device}")
         
         try:
+            # 获取模型配置
+            model_config = None
+            if hasattr(config, 'CURRENT_MODEL'):
+                try:
+                    model_config = config.ModelConfig(config.CURRENT_MODEL)
+                except (ValueError, AttributeError):
+                    pass
+            
             # 优先使用本地模型路径
             model_path = self.model_name
-            if hasattr(config, 'MODEL_LOCAL_PATH') and config.MODEL_LOCAL_PATH.exists():
+            if model_config and model_config.is_available():
+                model_path = str(model_config.local_path)
+                print(f"使用本地模型路径: {model_path}")
+            elif hasattr(config, 'MODEL_LOCAL_PATH') and config.MODEL_LOCAL_PATH.exists():
                 model_path = str(config.MODEL_LOCAL_PATH)
                 print(f"使用本地模型路径: {model_path}")
             
@@ -60,14 +71,25 @@ class ModelLoader:
                 except ImportError:
                     use_device_map = False
             
+            # GLM模型在MPS上内存不足，强制使用CPU
+            if model_config and model_config.model_name == "glm":
+                print("检测到GLM模型，使用CPU模式以避免内存问题...")
+                load_device = "cpu"
+                load_dtype = torch.float32
+                self.device = "cpu"  # 更新设备
+            else:
+                load_device = self.device
+                load_dtype = torch.float16 if self.device != "cpu" else torch.float32
+            
             # 根据模型类型选择加载方式
             # ERNIE等双向模型使用AutoModel，单向模型使用AutoModelForCausalLM
-            if hasattr(config, 'CURRENT_MODEL') and config.CURRENT_MODEL == "ernie":
-                print("检测到ERNIE模型，使用双向模型加载方式...")
+            is_bidirectional = model_config.is_bidirectional if model_config else False
+            if is_bidirectional:
+                print("检测到双向模型，使用双向模型加载方式...")
                 self.model = AutoModel.from_pretrained(
                     model_path,
                     trust_remote_code=True,
-                    dtype=torch.float16 if self.device != "cpu" else torch.float32,
+                    dtype=load_dtype,
                     device_map="auto" if use_device_map else None,
                     output_hidden_states=True,
                     local_files_only=True
@@ -77,7 +99,7 @@ class ModelLoader:
                 self.model = AutoModelForCausalLM.from_pretrained(
                     model_path,
                     trust_remote_code=True,
-                    dtype=torch.float16 if self.device != "cpu" else torch.float32,
+                    dtype=load_dtype,
                     device_map="auto" if use_device_map else None,
                     output_hidden_states=True,
                     local_files_only=True
@@ -85,7 +107,7 @@ class ModelLoader:
             
             # 如果没有使用device_map，手动移动到设备
             if not use_device_map:
-                self.model = self.model.to(self.device)
+                self.model = self.model.to(load_device)
             
             self.model.eval()  # 设置为评估模式
             
@@ -186,7 +208,14 @@ class ModelLoader:
             )
         
         # 获取最后一层的隐藏状态
-        hidden_states = outputs.hidden_states[-1]  # [batch_size, seq_len, hidden_dim]
+        hidden_states = outputs.hidden_states[-1]  # 可能是 [batch_size, seq_len, hidden_dim] 或 [seq_len, batch_size, hidden_dim]
+        
+        # ChatGLM等模型可能返回 [seq_len, batch_size, hidden_dim]，需要转置
+        if hidden_states.dim() == 3:
+            # 检查维度顺序：如果第一个维度小于第二个维度，可能是 [seq_len, batch_size, hidden_dim]
+            if hidden_states.shape[0] > hidden_states.shape[1] and hidden_states.shape[1] == 1:
+                # 这是 [seq_len, batch_size=1, hidden_dim]，转置为 [batch_size=1, seq_len, hidden_dim]
+                hidden_states = hidden_states.transpose(0, 1)
         
         if return_dict:
             return {
@@ -196,39 +225,6 @@ class ModelLoader:
             }
         else:
             return hidden_states
-    
-    def encode(self, text):
-        """
-        将文本编码为 token IDs
-        
-        Args:
-            text: 输入文本
-            
-        Returns:
-            torch.Tensor: token IDs
-        """
-        if not self._model_loaded:
-            raise RuntimeError("请先调用 load() 方法加载模型")
-        
-        return self.tokenizer.encode(text, return_tensors="pt").squeeze(0)
-    
-    def decode(self, token_ids):
-        """
-        将 token IDs 解码为文本
-        
-        Args:
-            token_ids: token IDs（可以是 tensor 或 list）
-            
-        Returns:
-            str: 解码后的文本
-        """
-        if not self._model_loaded:
-            raise RuntimeError("请先调用 load() 方法加载模型")
-        
-        if isinstance(token_ids, torch.Tensor):
-            token_ids = token_ids.cpu().tolist()
-        
-        return self.tokenizer.decode(token_ids, skip_special_tokens=True)
     
     def tokenize(self, text, return_tokens=False):
         """

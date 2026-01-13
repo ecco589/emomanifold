@@ -64,14 +64,56 @@ class DimensionExtractor:
             torch.Tensor: 词的embedding向量，如果词不存在则返回None
         """
         try:
-            # 将词转换为token IDs
-            token_ids = self.tokenizer.encode(word, add_special_tokens=False)
+            # 将词转换为token IDs（兼容不同tokenizer）
+            try:
+                # 先尝试标准方式
+                if hasattr(self.tokenizer, 'encode'):
+                    # 检查tokenizer类型
+                    tokenizer_name = type(self.tokenizer).__name__.lower()
+                    if 'glm' in tokenizer_name or 'chatglm' in tokenizer_name:
+                        # ChatGLM tokenizer需要特殊处理
+                        token_ids = self.tokenizer([word], return_tensors=None, add_special_tokens=False)
+                        if isinstance(token_ids, dict):
+                            token_ids = token_ids['input_ids'][0] if 'input_ids' in token_ids else token_ids.get('input_ids', [])
+                        elif isinstance(token_ids, list) and len(token_ids) > 0 and isinstance(token_ids[0], list):
+                            token_ids = token_ids[0]
+                    else:
+                        token_ids = self.tokenizer.encode(word, add_special_tokens=False)
+                else:
+                    token_ids = []
+            except (TypeError, AttributeError) as e:
+                # 某些tokenizer不支持某些参数，尝试其他方式
+                try:
+                    token_ids = self.tokenizer(word, return_tensors=None, add_special_tokens=False)
+                    if isinstance(token_ids, dict):
+                        token_ids = token_ids.get('input_ids', [])
+                        if isinstance(token_ids, list) and len(token_ids) > 0 and isinstance(token_ids[0], list):
+                            token_ids = token_ids[0]
+                except:
+                    # 最后尝试最简单的方式
+                    token_ids = self.tokenizer.convert_tokens_to_ids(self.tokenizer.tokenize(word))
             
             if len(token_ids) == 0:
                 return None
             
-            # 取第一个token的ID（如果词被分成多个token）
-            token_id = token_ids[0]
+            # 对于ChatGLM等tokenizer，可能第一个token是前缀（如空格），需要找到实际词的token
+            # 检查tokenizer类型
+            tokenizer_name = type(self.tokenizer).__name__.lower()
+            if 'glm' in tokenizer_name or 'chatglm' in tokenizer_name:
+                # ChatGLM: 第一个token通常是空格前缀(30910)，跳过它，使用实际词的token
+                # 如果只有一个token，使用它；如果有多个，跳过第一个空token
+                if len(token_ids) > 1:
+                    # 检查第一个token是否为空（解码后为空字符串）
+                    first_token_decoded = self.tokenizer.decode([token_ids[0]], skip_special_tokens=True)
+                    if not first_token_decoded.strip():
+                        token_id = token_ids[1]  # 使用第二个token（实际词）
+                    else:
+                        token_id = token_ids[0]
+                else:
+                    token_id = token_ids[0]
+            else:
+                # 其他tokenizer：使用第一个token
+                token_id = token_ids[0]
             
             # 获取对应的embedding
             if token_id < self.output_embedding.shape[0]:

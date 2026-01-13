@@ -40,10 +40,13 @@ class EmotionProjector:
         
         hidden_state = hidden_state.to(self.device).float()
         
+        # 归一化hidden state，使其与output embedding的数值范围匹配
+        hidden_state_norm = hidden_state / (torch.norm(hidden_state) + 1e-8)
+        
         projections = {}
         for dim_name, dim_vector in self.dimensions.items():
             # 计算点积（投影值）
-            projection_value = torch.dot(hidden_state, dim_vector).item()
+            projection_value = torch.dot(hidden_state_norm, dim_vector).item()
             projections[dim_name] = projection_value
         
         return projections
@@ -85,20 +88,6 @@ class EmotionProjector:
         
         return projections
     
-    def project_token_level(self, hidden_states: torch.Tensor, 
-                           token_ids: Optional[List[int]] = None) -> Dict[str, List[float]]:
-        """
-        从隐藏状态中提取每个 Token 的情感坐标
-        
-        Args:
-            hidden_states: 隐藏状态
-            token_ids: Token ID 列表（可选）
-            
-        Returns:
-            Dict: Token-level 情感坐标
-        """
-        return self.project_sequence(hidden_states)
-    
     def project_text(self, model_loader, text: str) -> Tuple[Dict[str, List[float]], List[str]]:
         """
         对文本进行完整的情感投影流程
@@ -120,6 +109,6 @@ class EmotionProjector:
         )  # [batch_size, seq_len, hidden_dim]
         
         # 投影到情感维度
-        emotion_coords = self.project_token_level(hidden_states, token_ids)
+        emotion_coords = self.project_sequence(hidden_states)
         
         return emotion_coords, tokens

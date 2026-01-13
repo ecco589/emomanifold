@@ -25,12 +25,18 @@ EmotionManifold/
 │   ├── model_loader.py     # 模型加载
 │   ├── dimension_extractor.py  # 情感维度提取
 │   ├── emotion_projector.py   # Token-level情感投影
-│   └── visualizer.py       # 可视化
+│   ├── visualizer.py       # 可视化
+│   └── test_framework.py   # 统一测试框架
 ├── data/                   # 数据目录
 │   └── vad_lexicon/        # VAD词库
 ├── scripts/                # 脚本工具
+│   ├── download_model.py   # 模型下载脚本
+│   └── install_dependencies.sh  # 依赖安装脚本
 ├── examples/               # 示例代码
-└── config.py               # 配置文件
+│   ├── test_unified.py     # 统一模型测试脚本（推荐）
+│   └── test_single_model.py  # 单模型测试示例
+├── config.py               # 配置文件（包含模型配置管理）
+└── outputs/                # 输出目录（测试结果）
 ```
 
 ## 环境要求
@@ -39,35 +45,65 @@ EmotionManifold/
 - M1 MacBook Pro（已优化 MPS 支持）
 - 依赖见 `requirements.txt`
 
-## 安装步骤
+## 快速开始
 
-1. 克隆项目（如果从 Git 获取）
+### 1. 环境设置
 
-2. **创建并激活虚拟环境**（推荐，避免全局污染）：
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # macOS/Linux
-   ```
-   详细说明请参考 [SETUP.md](SETUP.md)
+创建并激活虚拟环境（推荐，避免依赖冲突）：
+```bash
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+```
 
-3. 安装依赖：
-   ```bash
-   pip install -r requirements.txt
-   ```
+安装依赖：
+```bash
+pip install -r requirements.txt
+```
 
-4. 下载模型：
-   ```bash
-   modelscope download --model deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
-   ```
-   或使用 SDK：
-   ```python
-   from modelscope import snapshot_download
-   model_dir = snapshot_download('deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B')
-   ```
+### 2. 下载模型
 
-## 使用说明
+使用 ModelScope CLI：
+```bash
+modelscope download --model deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B
+```
 
-（待补充，MVP 完成后更新）
+或使用 Python SDK：
+```python
+from modelscope import snapshot_download
+model_dir = snapshot_download('deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B')
+```
+
+支持的模型会自动检测，详见 `config.py` 中的 `ModelConfig` 类。
+
+### 3. 运行测试
+
+**测试所有可用模型**（推荐）：
+```bash
+python examples/test_unified.py
+```
+
+**测试单个模型**：
+```bash
+python examples/test_single_model.py
+```
+编辑脚本中的 `model_name` 变量选择模型（'glm', 'ernie', 'deepseek'）
+
+**编程方式**：
+```python
+from src.test_framework import ModelTestFramework
+
+framework = ModelTestFramework()
+test_texts = ["我今天非常开心！"]
+framework.test_model("glm", test_texts, plot_types=['trajectory'])
+```
+
+### 支持的模型
+
+- **GLM** (ChatGLM3-6B): 单向模型
+- **ERNIE** (ERNIE-4.5-0.3B-PT): 双向模型  
+- **DeepSeek** (DeepSeek-R1-Distill-Qwen-1.5B): 单向模型
+
+模型配置在 `config.py` 中的 `ModelConfig` 类中管理。
 
 ## 开发状态
 

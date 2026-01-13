@@ -55,22 +55,10 @@ class EmotionVisualizer:
             ax.grid(True, alpha=0.3)
             ax.legend()
             
-            # 如果有tokens，在x轴上标注（每隔几个token标注一次）
+            # 如果有tokens，在x轴上标注所有tokens
             if tokens and len(tokens) == len(values):
-                step = max(1, len(tokens) // 10)  # 最多显示10个标注
-                tick_positions = list(range(0, len(tokens), step))
-                tick_labels = []
-                for i in tick_positions:
-                    if i < len(tokens):
-                        token_str = str(tokens[i])
-                        # 限制token显示长度，避免过长
-                        if len(token_str) > 8:
-                            token_str = token_str[:6] + '..'
-                        tick_labels.append(token_str)
-                    else:
-                        tick_labels.append('')
-                ax.set_xticks(tick_positions)
-                ax.set_xticklabels(tick_labels, rotation=45, ha='right', fontsize=8)
+                ax.set_xticks(range(len(tokens)))
+                ax.set_xticklabels(tokens, rotation=45, ha='right', fontsize=9)
         
         if title:
             fig.suptitle(title, fontsize=14, y=1.02)
