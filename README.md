@@ -21,22 +21,27 @@ EmotionManifold 是一个基于大语言模型（LLM）的连续多维情感提�
 
 ```
 EmotionManifold/
-├── src/                    # 核心代码模块
-│   ├── model_loader.py     # 模型加载
+├── src/                        # 核心代码模块
+│   ├── model_loader.py         # 模型加载
 │   ├── dimension_extractor.py  # 情感维度提取
 │   ├── emotion_projector.py   # Token-level情感投影
-│   ├── visualizer.py       # 可视化
-│   └── test_framework.py   # 统一测试框架
-├── data/                   # 数据目录
-│   └── vad_lexicon/        # VAD词库
-├── scripts/                # 脚本工具
-│   ├── download_model.py   # 模型下载脚本
-│   └── install_dependencies.sh  # 依赖安装脚本
-├── examples/               # 示例代码
-│   ├── test_unified.py     # 统一模型测试脚本（推荐）
-│   └── test_single_model.py  # 单模型测试示例
-├── config.py               # 配置文件（包含模型配置管理）
-└── outputs/                # 输出目录（测试结果）
+│   ├── adaptive_scaler.py      # 自适应缩放器
+│   ├── fkcn.py                 # 面部关键点相关
+│   └── visualizer.py          # 可视化
+├── data/                       # 数据目录
+│   └── vad_lexicon/            # VAD词库
+├── scripts/                    # 脚本工具
+│   ├── download_model.py       # 模型下载脚本
+│   ├── install_dependencies.sh # 依赖安装脚本
+│   ├── train_scaler.py         # 训练 Scaler
+│   ├── test_with_scaler.py     # 使用 Scaler 测试情感投影（推荐）
+│   ├── generate_training_corpus.py  # 生成训练语料
+│   └── render_grimace_images.py     # 渲染表情图像
+├── examples/                   # 示例代码
+│   └── test_ernie_chat.py      # ERNIE 对话测试示例
+├── config.py                   # 配置文件（包含模型配置管理）
+├── outputs/                    # 输出目录（测试结果）
+└── logs/                       # 日志目录
 ```
 
 ## 环境要求
@@ -60,6 +65,11 @@ source venv/bin/activate  # macOS/Linux
 pip install -r requirements.txt
 ```
 
+或使用项目脚本：
+```bash
+bash scripts/install_dependencies.sh
+```
+
 ### 2. 下载模型
 
 使用 ModelScope CLI：
@@ -77,24 +87,20 @@ model_dir = snapshot_download('deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B')
 
 ### 3. 运行测试
 
-**测试所有可用模型**（推荐）：
+**使用训练好的 Scaler 测试情感投影**（推荐）：
 ```bash
-python examples/test_unified.py
+python scripts/test_with_scaler.py
+```
+该脚本会加载 ERNIE 模型与 VAD 维度，对示例文本做情感投影并生成可视化结果。
+
+**示例代码**：
+```bash
+python examples/test_ernie_chat.py
 ```
 
-**测试单个模型**：
+**训练 Scaler**（需先准备语料）：
 ```bash
-python examples/test_single_model.py
-```
-编辑脚本中的 `model_name` 变量选择模型（'glm', 'ernie', 'deepseek'）
-
-**编程方式**：
-```python
-from src.test_framework import ModelTestFramework
-
-framework = ModelTestFramework()
-test_texts = ["我今天非常开心！"]
-framework.test_model("glm", test_texts, plot_types=['trajectory'])
+python scripts/train_scaler.py
 ```
 
 ### 支持的模型
