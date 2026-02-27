@@ -46,6 +46,7 @@ models/
 # Outputs
 outputs/
 logs/
+flagged/
 *.log
 
 # Data (if contains large files)

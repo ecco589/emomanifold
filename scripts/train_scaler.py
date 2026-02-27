@@ -10,7 +10,7 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 import config
-from src.model_loader import ModelLoader
+from src.model_loader import ModelLoader, CausalModelLoader
 from src.dimension_extractor import DimensionExtractor
 from src.emotion_projector import EmotionProjector
 from src.adaptive_scaler import AdaptiveScaler
@@ -56,8 +56,13 @@ def train_scaler(model_name='glm', corpus_path=None, output_path=None):
     
     try:
         # 3. 加载模型
+        # ERNIE 在 chat 场景使用 CausalLM，Scaler 需在同一架构上训练以匹配流式投影
         print(f"\n[步骤3] 加载 {model_name.upper()} 模型...")
-        model_loader = ModelLoader()
+        if model_name == "ernie":
+            print("  使用 CausalLM（与 stream_ernie_vad 一致）")
+            model_loader = CausalModelLoader(model_name)
+        else:
+            model_loader = ModelLoader()
         model_loader.load()
         
         # 4. 加载VAD词库

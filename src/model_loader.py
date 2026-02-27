@@ -71,12 +71,19 @@ class ModelLoader:
                 except ImportError:
                     use_device_map = False
             
-            # GLM模型在MPS上内存不足，强制使用CPU
-            if model_config and model_config.model_name == "glm":
-                print("检测到GLM模型，使用CPU模式以避免内存问题...")
+            # GLM 在 MPS 上内存不足；ERNIE 在 MPS 上存在 matmul 维度不兼容
+            force_cpu = False
+            if model_config:
+                if model_config.model_name == "glm":
+                    print("检测到 GLM 模型，使用 CPU 模式以避免内存问题...")
+                    force_cpu = True
+                elif model_config.model_name == "ernie" and self.device == "mps":
+                    print("检测到 ERNIE + MPS，使用 CPU 模式以避免 MPS 兼容性问题...")
+                    force_cpu = True
+            if force_cpu:
                 load_device = "cpu"
                 load_dtype = torch.float32
-                self.device = "cpu"  # 更新设备
+                self.device = "cpu"
             else:
                 load_device = self.device
                 load_dtype = torch.float16 if self.device != "cpu" else torch.float32
@@ -300,4 +307,124 @@ class ModelLoader:
                 except:
                     readable_tokens.append(f"[{token_id}]")
         
+        return readable_tokens
+
+
+class CausalModelLoader:
+    """
+    因果语言模型加载器，用于 Chat 场景的 Scaler 训练与流式投影。
+    与 ModelLoader 提供相同接口，但加载 AutoModelForCausalLM，hidden states 来自因果注意力。
+    适用于 ERNIE 等模型在 chat 模式下的 Scaler 校准。
+    """
+
+    def __init__(self, model_name: str, device: str = "cpu"):
+        self.model_name = model_name
+        self.device = device
+        self.model = None
+        self.tokenizer = None
+        self.output_embedding = None
+        self._model_loaded = False
+
+    def load(self):
+        """加载 CausalLM 和分词器"""
+        if self._model_loaded:
+            print("模型已加载，跳过重复加载")
+            return
+
+        model_config = config.ModelConfig(self.model_name)
+        if not model_config.is_available():
+            raise FileNotFoundError(f"模型不可用: {model_config.local_path}")
+
+        model_path = str(model_config.local_path)
+        # ERNIE 在 MPS 上有兼容问题
+        load_device = "cpu" if self.model_name == "ernie" else self.device
+        self.device = load_device
+
+        print(f"加载 CausalLM: {model_path}")
+        print(f"设备: {load_device}")
+
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            model_path, trust_remote_code=True, local_files_only=True
+        )
+        self.model = AutoModelForCausalLM.from_pretrained(
+            model_path,
+            trust_remote_code=True,
+            dtype=torch.float32,
+            local_files_only=True,
+        ).to(load_device)
+        self.model.eval()
+
+        if hasattr(self.model, "get_input_embeddings"):
+            self.output_embedding = self.model.get_input_embeddings().weight.data
+        elif hasattr(self.model, "lm_head"):
+            self.output_embedding = self.model.lm_head.weight.data
+        else:
+            raise ValueError("无法获取 embedding 矩阵")
+
+        print(f"模型加载成功 (CausalLM)")
+        self._model_loaded = True
+
+    def get_output_embedding_matrix(self):
+        if not self._model_loaded:
+            raise RuntimeError("请先调用 load() 方法加载模型")
+        return self.output_embedding
+
+    def get_hidden_states(self, input_ids, return_dict=True):
+        if not self._model_loaded:
+            raise RuntimeError("请先调用 load() 方法加载模型")
+
+        if not isinstance(input_ids, torch.Tensor):
+            input_ids = torch.tensor(input_ids)
+        if input_ids.dim() == 1:
+            input_ids = input_ids.unsqueeze(0)
+        input_ids = input_ids.to(self.device)
+        attention_mask = torch.ones_like(input_ids)
+
+        with torch.no_grad():
+            outputs = self.model(
+                input_ids=input_ids,
+                attention_mask=attention_mask,
+                output_hidden_states=True,
+                return_dict=True,
+            )
+
+        hidden_states = outputs.hidden_states[-1]
+        if hidden_states.dim() == 3 and hidden_states.shape[0] > hidden_states.shape[1] and hidden_states.shape[1] == 1:
+            hidden_states = hidden_states.transpose(0, 1)
+
+        if return_dict:
+            return {"hidden_states": hidden_states, "last_hidden_state": hidden_states}
+        return hidden_states
+
+    def tokenize(self, text, return_tokens=False):
+        if not self._model_loaded:
+            raise RuntimeError("请先调用 load() 方法加载模型")
+
+        raw_tokens = self.tokenizer.tokenize(text)
+        token_ids = self.tokenizer.convert_tokens_to_ids(raw_tokens)
+
+        if return_tokens:
+            readable_tokens = self._convert_tokens_to_readable(raw_tokens, token_ids)
+            return token_ids, readable_tokens
+        return token_ids
+
+    def _convert_tokens_to_readable(self, raw_tokens, token_ids):
+        readable_tokens = []
+        for raw_token, token_id in zip(raw_tokens, token_ids):
+            try:
+                decoded = self.tokenizer.decode([token_id], skip_special_tokens=False)
+                if decoded and len(decoded.strip()) > 0 and len(decoded.strip()) <= 10:
+                    readable_tokens.append(decoded.strip())
+                    continue
+            except Exception:
+                pass
+            token_clean = raw_token.lstrip("##Ġ▁")
+            if token_clean and (any("\u4e00" <= c <= "\u9fff" for c in token_clean) or token_clean.isprintable()):
+                readable_tokens.append(token_clean[:20])
+            else:
+                try:
+                    decoded = self.tokenizer.decode([token_id], skip_special_tokens=True)
+                    readable_tokens.append(decoded[:10] if decoded else f"[{token_id}]")
+                except Exception:
+                    readable_tokens.append(f"[{token_id}]")
         return readable_tokens

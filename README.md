@@ -14,8 +14,10 @@ EmotionManifold 是一个基于大语言模型（LLM）的连续多维情感提�
 
 1. **维度挖掘**：通过对比情感词簇的向量差值，定义 Valence（效价）和 Arousal（唤醒度）等情感轴
 2. **实时投影**：将每个 Token 的隐藏状态投影到预定义的情感轴上
-3. **平滑处理**：通过滤波器（EMA）将跳动的情感分值转化为平滑轨迹
-4. **物理映射**：将连续坐标映射到面部机器人的控制参数（后续实现）
+3. **Scaler 标定**：使用 `AdaptiveScaler` 在训练语料上拟合 scale/bias，使情感分值落在合理范围
+4. **平滑处理**：通过滤波器（EMA）将跳动的情感分值转化为平滑轨迹
+5. **表情映射**：通过 FKCN 将 VAD 坐标映射到 7 种基本表情的融合权重（neutral, happiness, surprise, fear, sadness, disgust, anger）
+6. **渲染输出**：结合 grimace-main 将情感权重渲染为面部表情图像序列
 
 ## 项目结构
 
@@ -24,23 +26,27 @@ EmotionManifold/
 ├── src/                        # 核心代码模块
 │   ├── model_loader.py         # 模型加载
 │   ├── dimension_extractor.py  # 情感维度提取
-│   ├── emotion_projector.py   # Token-level情感投影
-│   ├── adaptive_scaler.py      # 自适应缩放器
-│   ├── fkcn.py                 # 面部关键点相关
-│   └── visualizer.py          # 可视化
+│   ├── emotion_projector.py    # Token-level 情感投影
+│   ├── adaptive_scaler.py      # 自适应缩放器（VAD 标定）
+│   ├── fkcn.py                 # FKCN 模糊聚类，将 VAD 映射到 7 种基本表情权重
+│   └── visualizer.py           # 情感轨迹可视化
 ├── data/                       # 数据目录
-│   └── vad_lexicon/            # VAD词库
+│   ├── vad_lexicon/            # VAD 词库
+│   └── training_corpus.txt     # Scaler 训练语料
+├── grimace-main/               # 表情渲染子项目（基于 Grimace 引擎）
+│   └── ...                     # 将情感权重渲染为面部表情图像
 ├── scripts/                    # 脚本工具
 │   ├── download_model.py       # 模型下载脚本
 │   ├── install_dependencies.sh # 依赖安装脚本
-│   ├── train_scaler.py         # 训练 Scaler
+│   ├── train_scaler.py         # 训练 AdaptiveScaler
 │   ├── test_with_scaler.py     # 使用 Scaler 测试情感投影（推荐）
 │   ├── generate_training_corpus.py  # 生成训练语料
-│   └── render_grimace_images.py     # 渲染表情图像
+│   └── render_grimace_images.py    # 将情感投影渲染为表情序列图
 ├── examples/                   # 示例代码
-│   └── test_ernie_chat.py      # ERNIE 对话测试示例
-├── config.py                   # 配置文件（包含模型配置管理）
-├── outputs/                    # 输出目录（测试结果）
+│   ├── stream_ernie_vad.py     # M1 终端版
+│   └── stream_ernie_vad_ui.py  # M1 Gradio UI
+├── config.py                   # 配置文件（模型配置、路径、设备）
+├── outputs/                    # 输出目录（Scaler、图表、渲染结果）
 └── logs/                       # 日志目录
 ```
 
@@ -91,34 +97,57 @@ model_dir = snapshot_download('deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B')
 ```bash
 python scripts/test_with_scaler.py
 ```
-该脚本会加载 ERNIE 模型与 VAD 维度，对示例文本做情感投影并生成可视化结果。
+该脚本会加载 ERNIE 模型与 VAD 维度，对四句测试文本做情感投影，并生成可视化图表到 `outputs/ernie/`。
 
-**示例代码**：
-```bash
-python examples/test_ernie_chat.py
-```
-
-**训练 Scaler**（需先准备语料）：
+**训练 Scaler**（需先准备 `data/training_corpus.txt`）：
 ```bash
 python scripts/train_scaler.py
+```
+训练完成后，Scaler 保存至 `outputs/scalers/{model_name}_scaler.json`。
+
+**M1 流式聊天 + VAD（终端）**：
+```bash
+python examples/stream_ernie_vad.py
+```
+
+**M1 流式聊天 + VAD（Gradio UI）**：双击 `启动ERNIE+VAD聊天.command` 或执行
+```bash
+source venv/bin/activate && python examples/stream_ernie_vad_ui.py
+```
+启动后打开浏览器访问 http://127.0.0.1:7860，悬停 token 显示 VAD。
+
+**渲染表情图像**（需配置 grimace-main）：
+```bash
+python scripts/render_grimace_images.py
 ```
 
 ### 支持的模型
 
-- **GLM** (ChatGLM3-6B): 单向模型
-- **ERNIE** (ERNIE-4.5-0.3B-PT): 双向模型  
-- **DeepSeek** (DeepSeek-R1-Distill-Qwen-1.5B): 单向模型
+| 模型 | 配置名 | 类型 |
+|------|--------|------|
+| ChatGLM3-6B | `glm` | 单向 |
+| ERNIE-4.5-0.3B-PT | `ernie` | 双向 |
+| DeepSeek-R1-Distill-Qwen-1.5B | `deepseek` | 单向 |
 
-模型配置在 `config.py` 中的 `ModelConfig` 类中管理。
+模型配置在 `config.py` 的 `ModelConfig` 类中管理，可通过 `config.CURRENT_MODEL` 切换。
+
+## 开发路线图
+
+项目分阶段推进：Mac MVP（文字→流式 VAD/表情）→ 按键录音 + ASR → TTS → 时间对齐 → Linux 迁移 → 实机 30 DOF。详见 **[docs/ROADMAP.md](docs/ROADMAP.md)**。
+
+**M1 已完成**：文字输入 → ERNIE 流式输出 → 逐 token 显示 VAD（终端 + Gradio UI）。
 
 ## 开发状态
 
 - [x] 项目结构搭建
-- [ ] 模型加载模块
-- [ ] 情感维度提取
-- [ ] Token-level 投影
-- [ ] 可视化功能
-- [ ] MVP 验证
+- [x] 模型加载模块（支持 GLM、ERNIE、DeepSeek）
+- [x] 情感维度提取（VAD 词库）
+- [x] Token-level 投影
+- [x] AdaptiveScaler 标定
+- [x] 可视化功能
+- [x] FKCN 表情权重映射
+- [x] Grimace 表情图像渲染
+- [x] M1 流式 ERNIE + VAD（终端 + Gradio UI，token 悬停 tooltip）
 
 ## 参考资料
 
