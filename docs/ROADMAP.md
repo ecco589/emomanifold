@@ -46,6 +46,8 @@
 
 **M1 已完成** ✓ 终端版 `stream_ernie_vad.py`，Gradio UI `stream_ernie_vad_ui.py`（悬停 token 显示 VAD），CausalLM Scaler 校准。
 
+**M2 已完成** ✓ 沿用 M1 的 `stream_ernie_vad.py` / `stream_ernie_vad_ui.py`，新增 `generate_with_face_stream`、`src/grimace_utils.py`、`src/grimace_renderer.py`；UI 右侧逐 token 表情图。
+
 ---
 
 ### M2：逐 token 表情模拟（Grimace 渲染）

@@ -137,6 +137,8 @@ python scripts/render_grimace_images.py
 
 **M1 已完成**：文字输入 → ERNIE 流式输出 → 逐 token 显示 VAD（终端 + Gradio UI）。
 
+**M2 已完成**：沿用 M1 UI，右侧逐 token 表情图（Grimace 渲染）。若表情不显示，运行 `bash scripts/install_face.sh` 安装 Playwright。
+
 ## 开发状态
 
 - [x] 项目结构搭建

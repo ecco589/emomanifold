@@ -5,9 +5,7 @@
 from pathlib import Path
 from typing import List, Dict
 import json
-import math
 import sys
-import urllib.request
 
 # 添加项目根目录到路径
 project_root = Path(__file__).parent.parent
@@ -20,6 +18,8 @@ from src.dimension_extractor import DimensionExtractor
 from src.emotion_projector import EmotionProjector
 from src.adaptive_scaler import AdaptiveScaler
 from src.fkcn import FKCN
+from src.grimace_utils import fkcn_to_grimace_weights, smooth_weights_batch
+from src.grimace_renderer import load_grimace_bundle, PLAYWRIGHT_INIT_JS
 
 
 TEXTS = [
@@ -28,29 +28,6 @@ TEXTS = [
     "这个结果让我既惊讶又兴奋。",
     "我现在很平静，感觉很放松。",
 ]
-
-
-def _smooth_weights(weights: List[List[float]], alpha: float = 0.6) -> List[List[float]]:
-    if not weights:
-        return []
-    smoothed = [weights[0][:]]
-    for idx in range(1, len(weights)):
-        prev = smoothed[-1]
-        cur = weights[idx]
-        blended = [(alpha * c + (1 - alpha) * p) for p, c in zip(prev, cur)]
-        smoothed.append(blended)
-    return smoothed
-
-
-def _fkcn_to_grimace_weights(fkcn_weights: List[List[float]]) -> List[List[float]]:
-    # FKCN顺序: neutral, happiness, surprise, fear, sadness, disgust, anger
-    # grimace顺序: joy, surprise, fear, sadness, disgust, anger
-    grimace = []
-    for w in fkcn_weights:
-        if len(w) < 7:
-            raise ValueError("FKCN权重维度不足")
-        grimace.append([w[1], w[2], w[3], w[4], w[5], w[6]])
-    return grimace
 
 
 def build_sequences(model_name: str) -> List[Dict]:
@@ -88,9 +65,8 @@ def build_sequences(model_name: str) -> List[Dict]:
             arousal = emotion_coords.get("arousal", [])
             points = list(zip(valence, arousal))
             fkcn_weights = fkcn.compute_weights_batch(points)
-
-            grimace_weights = _fkcn_to_grimace_weights(fkcn_weights)
-            grimace_weights = _smooth_weights(grimace_weights, alpha=0.6)
+            grimace_weights = fkcn_to_grimace_weights(fkcn_weights)
+            grimace_weights = smooth_weights_batch(grimace_weights, alpha=0.6)
 
             sequences.append({
                 "text": text,
@@ -179,22 +155,11 @@ def _build_html(sequence: Dict, width: int, height: int) -> str:
 """
 
 
-def _load_grimace_bundle(cache_path: Path) -> str:
-    if cache_path.exists():
-        return cache_path.read_text(encoding="utf-8")
-    cache_path.parent.mkdir(parents=True, exist_ok=True)
-    url = "https://unpkg.com/grimace/dist/index.js"
-    with urllib.request.urlopen(url) as response:
-        content = response.read().decode("utf-8")
-    cache_path.write_text(content, encoding="utf-8")
-    return content
-
-
 def render_images(sequences: List[Dict], output_dir: Path):
     from playwright.sync_api import sync_playwright
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    grimace_js = _load_grimace_bundle(output_dir / "grimace.umd.js")
+    grimace_js = load_grimace_bundle(output_dir / "grimace.umd.js")
 
     width = 600
     height = 740
@@ -208,37 +173,7 @@ def render_images(sequences: List[Dict], output_dir: Path):
             
             html = _build_html(sequence, width=width, height=height)
             page.set_content(html, wait_until="domcontentloaded")
-            
-            # 先设置require和module环境
-            page.evaluate("""
-                window.module = { exports: {} };
-                window.exports = window.module.exports;
-                window.require = (name) => {
-                  if (name && name !== 'ts-deepmerge') {
-                    return {};
-                  }
-                  const isObject = (val) => val && typeof val === 'object' && !Array.isArray(val);
-                  const merge = (target, source) => {
-                    if (Array.isArray(target) && Array.isArray(source)) {
-                      return target.concat(source);
-                    }
-                    if (!isObject(target) || !isObject(source)) {
-                      return source;
-                    }
-                    const out = { ...target };
-                    Object.keys(source).forEach((key) => {
-                      if (key in out) {
-                        out[key] = merge(out[key], source[key]);
-                      } else {
-                        out[key] = source[key];
-                      }
-                    });
-                    return out;
-                  };
-                  return (...items) => items.reduce((acc, item) => merge(acc, item), {});
-                };
-            """)
-            # 加载grimace脚本
+            page.evaluate(PLAYWRIGHT_INIT_JS)
             page.add_script_tag(content=grimace_js)
             # 等待脚本执行完成
             page.wait_for_timeout(800)  # 等待脚本加载和执行

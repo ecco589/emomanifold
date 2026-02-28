@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """
-M1: 流式 ERNIE 聊天 + 逐 token VAD 投影
+M1/M2: 流式 ERNIE 聊天 + 逐 token VAD 投影 + 表情权重
 文字输入 → ERNIE 流式输出 → 终端逐 token 显示 VAD
-
-核心逻辑：generate_with_vad_stream() 可被 UI 等模块复用。
+核心逻辑：generate_with_vad_stream() / generate_with_face_stream() 可被 UI 等复用。
 """
 import sys
 from pathlib import Path
@@ -19,6 +18,8 @@ import config
 from src.dimension_extractor import DimensionExtractor
 from src.emotion_projector import EmotionProjector
 from src.adaptive_scaler import AdaptiveScaler
+from src.fkcn import FKCN
+from src.grimace_utils import fkcn_to_grimace_weights, StreamingEMASmoother
 
 
 # ---------------------------------------------------------------------------
@@ -32,7 +33,7 @@ def generate_with_vad_stream(
     messages: List[Dict[str, str]],
     *,
     max_new_tokens: int = 256,
-    temperature: float = 0.7,
+    temperature: float = 0.4,
     device: str = "cpu",
 ) -> Iterator[Tuple[str, Dict[str, float]]]:
     """
@@ -93,6 +94,36 @@ def generate_with_vad_stream(
         ], dim=1)
 
 
+def generate_with_face_stream(
+    model,
+    tokenizer,
+    projector: EmotionProjector,
+    messages: List[Dict[str, str]],
+    fkcn: FKCN,
+    *,
+    ema_alpha: float = 0.6,
+    max_new_tokens: int = 256,
+    temperature: float = 0.4,
+    device: str = "cpu",
+) -> Iterator[Tuple[str, Dict[str, float], List[float]]]:
+    """
+    流式生成 + 逐 token 表情权重（M2）
+    Yields: (token_str, vad_dict, grimace_weights_6d)
+    """
+    ema = StreamingEMASmoother(alpha=ema_alpha)
+    for token_str, vad in generate_with_vad_stream(
+        model, tokenizer, projector, messages,
+        max_new_tokens=max_new_tokens,
+        temperature=temperature,
+        device=device,
+    ):
+        v, a = vad.get("valence", 0), vad.get("arousal", 0)
+        fkcn_raw = fkcn.compute_weights_batch([(v, a)])[0]
+        grimace_6 = fkcn_to_grimace_weights(fkcn_raw)
+        smoothed = ema.update(grimace_6)
+        yield token_str, vad, smoothed
+
+
 # ---------------------------------------------------------------------------
 # 步骤 2: 模型加载（CausalLM 用于 chat 生成）
 # ---------------------------------------------------------------------------
@@ -151,13 +182,18 @@ def load_chat_model_and_projector(
     return model, tokenizer, projector
 
 
+def load_fkcn(device: str = "cpu") -> FKCN:
+    """加载 FKCN，供 generate_with_face_stream 使用"""
+    return FKCN(device=device)
+
+
 # ---------------------------------------------------------------------------
 # 步骤 3: 终端交互
 # ---------------------------------------------------------------------------
 
 def main():
     print("=" * 60)
-    print("M1: 流式 ERNIE 聊天 + 逐 token VAD 投影")
+    print("M1: 流式 ERNIE 聊天 + 逐 token VAD 投影（终端版）")
     print("=" * 60)
 
     model, tokenizer, projector = load_chat_model_and_projector("ernie")

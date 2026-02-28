@@ -6,6 +6,7 @@ modelscope>=1.9.0
 # Data processing
 numpy>=1.24.0
 pandas>=2.0.0
+Pillow>=10.0.0
 
 # Visualization
 matplotlib>=3.7.0
@@ -16,6 +17,9 @@ tqdm>=4.65.0
 pyyaml>=6.0
 
 gradio>=4.0
+
+# M2: Grimace 表情渲染
+playwright>=1.40.0
 
 # Optional: for better performance on M1 Mac
 # accelerate>=0.24.0  # Uncomment if needed for model optimization

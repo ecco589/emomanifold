@@ -1,3 +1,5 @@
 #!/bin/bash
 cd "$(dirname "$0")"
-source venv/bin/activate && python examples/stream_ernie_vad_ui.py
+export TRANSFORMERS_OFFLINE=1
+export GRADIO_ANALYTICS_ENABLED=false
+exec /Users/eccoliu/miniforge3/bin/python -u examples/stream_ernie_vad_ui.py
