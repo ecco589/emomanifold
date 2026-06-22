@@ -43,8 +43,7 @@ EmotionManifold/
 │   ├── generate_training_corpus.py  # 生成训练语料
 │   └── render_grimace_images.py    # 将情感投影渲染为表情序列图
 ├── examples/                   # 示例代码
-│   ├── stream_ernie_vad.py     # M1 终端版
-│   └── stream_ernie_vad_ui.py  # M1 Gradio UI
+│   └── stream_ernie_vad_ui.py  # Gradio UI（流式 VAD + 表情）
 ├── config.py                   # 配置文件（模型配置、路径、设备）
 ├── outputs/                    # 输出目录（Scaler、图表、渲染结果）
 └── logs/                       # 日志目录
@@ -105,12 +104,7 @@ python scripts/train_scaler.py
 ```
 训练完成后，Scaler 保存至 `outputs/scalers/{model_name}_scaler.json`。
 
-**M1 流式聊天 + VAD（终端）**：
-```bash
-python examples/stream_ernie_vad.py
-```
-
-**M1 流式聊天 + VAD（Gradio UI）**：双击 `启动ERNIE+VAD聊天.command` 或执行
+**流式聊天 + VAD + 表情（Gradio UI）**：双击 `启动ERNIE+VAD聊天.command` 或执行
 ```bash
 source venv/bin/activate && python examples/stream_ernie_vad_ui.py
 ```
@@ -131,13 +125,40 @@ python scripts/render_grimace_images.py
 
 模型配置在 `config.py` 的 `ModelConfig` 类中管理，可通过 `config.CURRENT_MODEL` 切换。
 
+## 版本管理
+
+本地 Git 仓库，无远程。两条分支：
+
+| 分支 | 说明 | 当前里程碑 |
+|------|------|------------|
+| `main` | 工程 demo：M1/M2 仿真 + M3 实机 | **M3**（tag `M3`） |
+| `finalV1` | NeurIPS 2026 论文：VAD 读回、EMA 动力学、残差注入、B1–B5 实验 | **FinalNIPS**（tag `FinalNIPS`） |
+
+`finalV1` 在 `main` 之上继续开发（含 M1/M2 全部历史）。
+
+**主要 tag**：`v0.1.0` → `v3.0`（早期探索）→ `M1`（流式 VAD）→ `M2`（逐 token Grimace）→ **`M3`（VA→实机 29 DOF）** → `FinalNIPS`（论文终稿，finalV1 分支）
+
+```bash
+git checkout main      # demo 开发（当前默认）
+git checkout finalV1   # 论文与实验
+git checkout M2        # 钉在 M2 快照
+git checkout M3        # 钉在 M3 快照（VA→实机）
+git checkout FinalNIPS # 钉在论文终稿
+```
+
+M4–M5 见 [docs/ROADMAP.md](docs/ROADMAP.md)。
+
 ## 开发路线图
 
-项目分阶段推进：Mac MVP（文字→流式 VAD/表情）→ 按键录音 + ASR → TTS → 时间对齐 → Linux 迁移 → 实机 30 DOF。详见 **[docs/ROADMAP.md](docs/ROADMAP.md)**。
+**M1 ✓** 逐 token VAD（`examples/stream_ernie_vad_ui.py`）
 
-**M1 已完成**：文字输入 → ERNIE 流式输出 → 逐 token 显示 VAD（终端 + Gradio UI）。
+**M2 ✓** + Grimace 逐 token 表情
 
-**M2 已完成**：沿用 M1 UI，右侧逐 token 表情图（Grimace 渲染）。若表情不显示，运行 `bash scripts/install_face.sh` 安装 Playwright。
+**M3 ✓** VA → FKCN → 29 DOF 实机（`face/`、`face_m3.zip`）
+
+**M4** 逐 token 实机表情 · **M5** 对话功能
+
+详见 [docs/ROADMAP.md](docs/ROADMAP.md)。
 
 ## 开发状态
 
@@ -150,6 +171,7 @@ python scripts/render_grimace_images.py
 - [x] FKCN 表情权重映射
 - [x] Grimace 表情图像渲染
 - [x] M1 流式 ERNIE + VAD（终端 + Gradio UI，token 悬停 tooltip）
+- [x] M3 VA→实机：FKCN 融合 7 套表情 → 29 DOF（`face/`，工控机 Web 控制）
 
 ## 参考资料
 
