@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""M1/M2: 流式 ERNIE + VAD + 表情，Gradio UI，悬停 token 看 VAD，右侧逐 token 表情"""
+"""M4: 流式 ERNIE + VAD + 表情（10fps）+ 可选实机 29 DOF"""
 import sys
 if hasattr(sys.stdout, "reconfigure"):
     try:
@@ -22,33 +22,37 @@ print("加载依赖库...", flush=True)
 import numpy as np
 from PIL import Image
 
-# 延迟导入：避免阻塞界面显示
+FACE_FPS = 10.0
+
 _model_ready = threading.Event()
 _chat_fn = None
+_robot_sink = None
 
 history = []
 
 
 def _bytes_to_image(img_bytes: bytes):
-    """PNG bytes → numpy array for Gradio Image"""
     return np.array(Image.open(io.BytesIO(img_bytes)))
 
 
-_face_renderer = None
+_face_worker = None
+_face_worker_lock = threading.Lock()
 
 
-def _get_face_renderer():
-    """懒加载 Grimace 渲染器。若 playwright 未安装则返回 None，对话仍可用"""
-    global _face_renderer
-    if _face_renderer is not None:
-        return _face_renderer
-    try:
-        from src.grimace_renderer import GrimaceFrameRenderer
-        _face_renderer = GrimaceFrameRenderer(width=400, height=450)
-        _face_renderer.__enter__()
-        return _face_renderer
-    except Exception:
+def _get_face_worker():
+    global _face_worker
+    with _face_worker_lock:
+        if _face_worker is not None and _face_worker.ok:
+            return _face_worker
+        from src.grimace_renderer import get_render_worker
+        _face_worker = get_render_worker(width=400, height=450)
+        return _face_worker
+
+
+def _render_face(worker, weights):
+    if worker is None:
         return None
+    return worker.render(weights)
 
 
 TOOLTIP_CSS = """
@@ -61,7 +65,6 @@ TOOLTIP_CSS = """
 
 
 def to_html(msg, tokens):
-    """tokens: [(t, vad), ...]，每轮对话独立成块"""
     parts = [f"<div class='round'><b>你:</b> {html.escape(msg)}</div><div class='round'><b>ERNIE:</b> "]
     for t, v in tokens:
         vv, aa = v.get("valence", 0), v.get("arousal", 0)
@@ -70,16 +73,23 @@ def to_html(msg, tokens):
     return TOOLTIP_CSS + "".join(parts)
 
 
-def make_chat_fn(model, tokenizer, projector, fkcn, device):
-    """闭包：显式传入依赖，避免 Gradio worker 中全局变量未定义"""
-    from examples.stream_ernie_vad import generate_with_face_stream
+def make_chat_fn(model, tokenizer, projector, fkcn, device, robot_sink):
+    from src.stream_engine import generate_with_face_stream
+    from src.face_interpolator import FaceFrameInterpolator
+    from src.grimace_utils import fkcn_to_grimace_weights
 
     def chat(msg):
         if not msg.strip():
-            return "", None
+            yield "", None, robot_sink.status
+            return
         tokens = []
-        renderer = _get_face_renderer()
-        # 带历史记忆：将 history 转为多轮 messages
+        worker = _get_face_worker()
+        interpolator = FaceFrameInterpolator(
+            fps=FACE_FPS,
+            n_dims=7,
+            realtime=True,
+            max_settle_frames=2,
+        )
         messages = [
             {"role": "system", "content": "请简洁回复，一两句话即可。不要啰嗦，少用表情符号。"},
         ]
@@ -87,41 +97,38 @@ def make_chat_fn(model, tokenizer, projector, fkcn, device):
             messages.append({"role": "user", "content": m})
             messages.append({"role": "assistant", "content": "".join(t for t, _ in ts)})
         messages.append({"role": "user", "content": msg})
-        for t, v, weights in generate_with_face_stream(
+        html_out = ""
+        for t, v, weights7 in generate_with_face_stream(
             model, tokenizer, projector, messages,
             fkcn, device=device,
             max_new_tokens=96,
             temperature=0.4,
         ):
             tokens.append((t, v))
-            if renderer is not None:
-                try:
-                    img_bytes = renderer.render(weights)
-                    img_arr = _bytes_to_image(img_bytes)
-                except Exception:
-                    img_arr = None
-            else:
+            html_out = "".join(to_html(m, ts) for m, ts in history + [(msg, tokens)])
+            for frame_w7 in interpolator.animate_to(weights7):
+                grimace_6 = fkcn_to_grimace_weights(frame_w7)
                 img_arr = None
-            yield "".join(to_html(m, ts) for m, ts in history + [(msg, tokens)]), img_arr
+                if worker is not None:
+                    img_bytes = _render_face(worker, grimace_6)
+                    if img_bytes:
+                        img_arr = _bytes_to_image(img_bytes)
+                robot_sink.apply_weights7(frame_w7)
+                yield html_out, img_arr, robot_sink.status
         history.append((msg, tokens))
 
     return chat
 
 
-def _load_model_in_background():
-    """后台加载模型，避免阻塞界面"""
+def _load_model_in_background(robot_sink):
     global _chat_fn
     try:
         print("加载模型（约 30 秒）...", flush=True)
-        from examples.stream_ernie_vad import (
-            load_chat_model_and_projector,
-            load_fkcn,
-        )
+        from src.stream_engine import load_chat_model_and_projector, load_fkcn
         model, tokenizer, projector = load_chat_model_and_projector("ernie")
-        print("加载表情模块...", flush=True)
         fkcn = load_fkcn(device="cpu")
         device = str(next(model.parameters()).device)
-        _chat_fn = make_chat_fn(model, tokenizer, projector, fkcn, device)
+        _chat_fn = make_chat_fn(model, tokenizer, projector, fkcn, device, robot_sink)
         _model_ready.set()
         print("模型就绪", flush=True)
     except Exception as e:
@@ -129,60 +136,74 @@ def _load_model_in_background():
 
 
 def chat_wrapper(msg):
-    """等待模型就绪后调用实际 chat"""
     if not msg.strip():
-        return "", None
+        yield "", None, _robot_sink.status if _robot_sink else "实机: 关"
+        return
     _model_ready.wait(timeout=300)
     if _chat_fn is None:
-        yield "模型加载失败，请刷新重试", None
+        yield "模型加载失败，请刷新重试", None, _robot_sink.status if _robot_sink else ""
         return
-    for h, img in _chat_fn(msg):
-        yield h, img
+    for h, img, st in _chat_fn(msg):
+        yield h, img, st
+
+
+def on_robot_toggle(enabled):
+    return _robot_sink.set_enabled(enabled)
 
 
 if __name__ == "__main__":
     import os
+    import time
+
+    from src.robot_face_sink import RobotFaceSink
+
     print("加载 Gradio...", flush=True)
     import gradio as gr
     print("准备界面...", flush=True)
 
     port = int(os.environ.get("GRADIO_SERVER_PORT", "7860"))
+    _robot_sink = RobotFaceSink()
 
-    # 跳过 Gradio 启动时的 url 检测（慢机上易超时导致启动失败，服务器实际已启动）
     try:
         import gradio.networking as net
         net.url_ok = lambda url: True
     except Exception:
         pass
 
-    # 界面先启动，模型延迟 5 秒后台加载（避免与服务器争抢资源）
     def _delayed_load():
-        import time
-        time.sleep(5)
-        _load_model_in_background()
-    t = threading.Thread(target=_delayed_load, daemon=True)
-    t.start()
+        time.sleep(2)
+        threading.Thread(target=_get_face_worker, daemon=True).start()
+        time.sleep(3)
+        _load_model_in_background(_robot_sink)
 
-    with gr.Blocks(title="ERNIE + VAD + 表情") as demo:
-        gr.Markdown("## ERNIE 流式对话 · 悬停 token 查看 VAD · 右侧逐 token 表情")
+    threading.Thread(target=_delayed_load, daemon=True).start()
+
+    with gr.Blocks(title="ERNIE + VAD + 表情 + 实机") as demo:
+        gr.Markdown(
+            "## ERNIE 流式对话 · 悬停 token 查看 VAD · "
+            f"右侧逐 token 表情（{int(FACE_FPS)}fps，与实机同步）"
+        )
         gr.Markdown("*模型加载中，就绪后可发送消息*")
         with gr.Row():
             with gr.Column(scale=2):
                 inp = gr.Textbox(placeholder="输入消息，按回车或点击发送", label="消息", lines=2)
                 with gr.Row():
                     btn = gr.Button("发送", variant="primary")
+                    robot_cb = gr.Checkbox(label="实机", value=False)
+                robot_status = gr.Textbox(label="实机状态", value="实机: 关", interactive=False)
                 chat_out = gr.HTML(label="对话")
             with gr.Column(scale=1):
                 face_out = gr.Image(label="表情", height=400)
+
         def on_load():
-            """每次打开/刷新页面时清空历史（仅清空对话区，避免影响表情渲染）"""
             global history
             history.clear()
             return ""
 
-        inp.submit(chat_wrapper, inputs=[inp], outputs=[chat_out, face_out])
-        btn.click(chat_wrapper, inputs=[inp], outputs=[chat_out, face_out])
+        robot_cb.change(on_robot_toggle, inputs=[robot_cb], outputs=[robot_status])
+        inp.submit(chat_wrapper, inputs=[inp], outputs=[chat_out, face_out, robot_status])
+        btn.click(chat_wrapper, inputs=[inp], outputs=[chat_out, face_out, robot_status])
         demo.load(on_load, outputs=[chat_out])
 
     print(f"请打开 http://127.0.0.1:{port}", flush=True)
-    demo.launch(server_name="127.0.0.1", server_port=port, inbrowser=False)
+    demo.launch(server_name="0.0.0.0", server_port=port, inbrowser=False)

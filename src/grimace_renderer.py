@@ -3,6 +3,8 @@ Grimace 单帧渲染器：给定 6 维表情权重，渲染为 PNG 图像
 供 stream_ernie_vad_ui、render_grimace_images 复用
 """
 import json
+import queue
+import threading
 import urllib.request
 from pathlib import Path
 from typing import List, Optional
@@ -161,5 +163,91 @@ class GrimaceFrameRenderer:
             weights = (weights + [0.0] * 6)[:6]
         w_json = json.dumps(weights)
         self._page.evaluate(f"setWeights({w_json})")
-        self._page.wait_for_timeout(200)
+        self._page.wait_for_timeout(80)
         return self._page.screenshot(type="png")
+
+
+class GrimaceRenderWorker:
+    """
+    Playwright 同步 API 必须在固定线程内使用。
+    Gradio 会在 asyncio / 线程池间切换，因此用独立渲染线程 + 队列转发请求。
+    """
+
+    def __init__(self, width: int = 400, height: int = 450):
+        self._width = width
+        self._height = height
+        self._req_q: "queue.Queue" = queue.Queue()
+        self._ready = threading.Event()
+        self._stop = threading.Event()
+        self._error: Optional[str] = None
+        self._thread = threading.Thread(
+            target=self._loop, name="grimace-render", daemon=True
+        )
+        self._thread.start()
+        if not self._ready.wait(timeout=90):
+            raise TimeoutError("Grimace 渲染线程启动超时")
+
+    def _loop(self) -> None:
+        try:
+            with GrimaceFrameRenderer(self._width, self._height) as renderer:
+                self._ready.set()
+                while not self._stop.is_set():
+                    try:
+                        item = self._req_q.get(timeout=0.2)
+                    except queue.Empty:
+                        continue
+                    if item is None:
+                        break
+                    weights, done_q = item
+                    try:
+                        done_q.put(("ok", renderer.render(weights)))
+                    except Exception as e:
+                        done_q.put(("err", e))
+        except Exception as e:
+            self._error = str(e)
+            print(f"表情渲染器初始化失败: {e}", flush=True)
+        finally:
+            self._ready.set()
+
+    @property
+    def ok(self) -> bool:
+        return self._error is None
+
+    def render(self, weights: List[float], timeout: float = 15.0) -> Optional[bytes]:
+        if not self.ok:
+            return None
+        done_q: "queue.Queue" = queue.Queue(maxsize=1)
+        self._req_q.put((weights, done_q))
+        try:
+            status, payload = done_q.get(timeout=timeout)
+        except queue.Empty:
+            print("[grimace] render timeout", flush=True)
+            return None
+        if status == "err":
+            print(f"[grimace] render error: {payload}", flush=True)
+            return None
+        return payload
+
+    def close(self) -> None:
+        self._stop.set()
+        self._req_q.put(None)
+        self._thread.join(timeout=5)
+
+
+_worker: Optional[GrimaceRenderWorker] = None
+_worker_lock = threading.Lock()
+
+
+def get_render_worker(width: int = 400, height: int = 450) -> Optional[GrimaceRenderWorker]:
+    """懒加载全局渲染 worker（单例）。"""
+    global _worker
+    with _worker_lock:
+        if _worker is not None:
+            return _worker if _worker.ok else None
+        try:
+            _worker = GrimaceRenderWorker(width, height)
+            print("表情渲染器就绪（独立线程）", flush=True)
+            return _worker
+        except Exception as e:
+            print(f"表情渲染器初始化失败: {e}", flush=True)
+            return None

@@ -59,7 +59,7 @@ def train_scaler(model_name='glm', corpus_path=None, output_path=None):
         # ERNIE 在 chat 场景使用 CausalLM，Scaler 需在同一架构上训练以匹配流式投影
         print(f"\n[步骤3] 加载 {model_name.upper()} 模型...")
         if model_name == "ernie":
-            print("  使用 CausalLM（与 stream_ernie_vad 一致）")
+            print("  使用 CausalLM（与 stream_engine 一致）")
             model_loader = CausalModelLoader(model_name)
         else:
             model_loader = ModelLoader()

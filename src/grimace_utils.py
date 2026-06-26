@@ -1,6 +1,6 @@
 """
 Grimace 表情权重工具：FKCN→Grimace 转换、EMA 平滑
-供 stream_ernie_vad、render_grimace_images 等复用
+供 stream_engine、render_grimace_images 等复用
 """
 from typing import List, Union, Optional
 

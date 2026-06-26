@@ -40,7 +40,12 @@ class ModelConfig:
         },
         "ernie": {
             "model_name": "PaddlePaddle/ERNIE-4.5-0.3B-PT",
-            "local_path": Path.home() / ".cache" / "modelscope" / "hub" / "models" / "PaddlePaddle" / "ERNIE-4.5-0.3B-PT",
+            # 优先用仓库内 models/（部署包自带），否则回退到 modelscope home 缓存
+            "local_path": (
+                MODEL_CACHE_DIR / "PaddlePaddle" / "ERNIE-4.5-0.3B-PT"
+                if (MODEL_CACHE_DIR / "PaddlePaddle" / "ERNIE-4.5-0.3B-PT").exists()
+                else Path.home() / ".cache" / "modelscope" / "hub" / "models" / "PaddlePaddle" / "ERNIE-4.5-0.3B-PT"
+            ),
             "is_bidirectional": True,
         },
         "glm": {

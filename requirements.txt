@@ -18,6 +18,9 @@ pyyaml>=6.0
 
 gradio>=4.0
 
+# M4: 实机串口（Linux 工控机）
+pyserial>=3.5
+
 # M2: Grimace 表情渲染
 playwright>=1.40.0
 

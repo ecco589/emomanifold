@@ -10,12 +10,19 @@
 - `29_servo_config.yaml`、`expression29/*.yaml`  舵机配置与 7 套表情（未改动）
 
 ## 工控机（Linux）运行
+
+与 M4 共用仓库根目录 `venv`（勿在 `face/` 下另建环境）：
+
 ```bash
+cd ..                    # 仓库根目录
+source venv/bin/activate
+pip install -r requirements.txt   # 首次（含 pyserial）
 cd face
-pip install -r requirements.txt          # pyserial, PyYAML
 # 如串口需要权限：sudo chmod 777 /dev/usb_face
 python -u server.py
 ```
+
+M4 整仓 UI：`python examples/stream_ernie_vad_ui.py`（同一 venv，勾选「实机」）。
 浏览器打开 `http://127.0.0.1:8770/`，勾选「Robot mode」后改 VA 即下发实机。
 
 ## 配置（face_driver.py 顶部）

@@ -1,30 +1,19 @@
-#!/usr/bin/env python3
 """
-M1/M2: 流式 ERNIE 聊天 + 逐 token VAD 投影 + 表情权重
-文字输入 → ERNIE 流式输出 → 终端逐 token 显示 VAD
-核心逻辑：generate_with_vad_stream() / generate_with_face_stream() 可被 UI 等复用。
+流式 ERNIE 聊天 + 逐 token VAD 投影 + 表情权重。
+供 stream_ernie_vad_ui 等复用。
 """
-import sys
-from pathlib import Path
 from typing import Iterator, Tuple, Dict, List, Optional
-
-project_root = Path(__file__).parent.parent
-sys.path.insert(0, str(project_root))
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
-import config
 
+import config
+from src.adaptive_scaler import AdaptiveScaler
 from src.dimension_extractor import DimensionExtractor
 from src.emotion_projector import EmotionProjector
-from src.adaptive_scaler import AdaptiveScaler
 from src.fkcn import FKCN
-from src.grimace_utils import fkcn_to_grimace_weights, StreamingEMASmoother
+from src.grimace_utils import StreamingEMASmoother
 
-
-# ---------------------------------------------------------------------------
-# 步骤 1: 流式生成核心逻辑
-# ---------------------------------------------------------------------------
 
 def generate_with_vad_stream(
     model,
@@ -39,11 +28,7 @@ def generate_with_vad_stream(
     """
     流式生成，每产生一个内容 token 就 yield (token_str, vad_dict)。
     使用因果 LM：hidden_states[:, -1] 是预测下一个 token 的上下文表示，用于该 token 的 VAD。
-
-    Yields:
-        (token_str, vad_dict): token_str 为解码后的字符串，vad_dict 为 {"valence": v, "arousal": a}
     """
-    # 构建 chat prompt
     text = tokenizer.apply_chat_template(
         messages, tokenize=False, add_generation_prompt=True
     )
@@ -68,7 +53,6 @@ def generate_with_vad_stream(
         logits = outputs.logits[:, -1, :]
         last_hidden = outputs.hidden_states[-1][:, -1, :]
 
-        # 采样
         if temperature > 0:
             probs = torch.softmax(logits / temperature, dim=-1)
             next_token_id = torch.multinomial(probs, num_samples=1).item()
@@ -78,14 +62,12 @@ def generate_with_vad_stream(
         if next_token_id == eos_id:
             break
 
-        # 投影到 VAD（使用预测该 token 的 hidden state）
         hidden_np = last_hidden[0].float().cpu()
         vad = projector.project_hidden_state(hidden_np, apply_scaling=True)
         token_str = tokenizer.decode([next_token_id], skip_special_tokens=False)
 
         yield token_str, vad
 
-        # 拼接到序列
         next_tensor = torch.tensor([[next_token_id]], device=device, dtype=input_ids.dtype)
         input_ids = torch.cat([input_ids, next_tensor], dim=1)
         attention_mask = torch.cat([
@@ -106,11 +88,8 @@ def generate_with_face_stream(
     temperature: float = 0.4,
     device: str = "cpu",
 ) -> Iterator[Tuple[str, Dict[str, float], List[float]]]:
-    """
-    流式生成 + 逐 token 表情权重（M2）
-    Yields: (token_str, vad_dict, grimace_weights_6d)
-    """
-    ema = StreamingEMASmoother(alpha=ema_alpha)
+    """流式生成 + 逐 token FKCN 7 维权重（EMA 平滑）。Yields: (token_str, vad_dict, fkcn_7d)"""
+    ema = StreamingEMASmoother(alpha=ema_alpha, initial=[0.0] * 7)
     for token_str, vad in generate_with_vad_stream(
         model, tokenizer, projector, messages,
         max_new_tokens=max_new_tokens,
@@ -119,30 +98,22 @@ def generate_with_face_stream(
     ):
         v, a = vad.get("valence", 0), vad.get("arousal", 0)
         fkcn_raw = fkcn.compute_weights_batch([(v, a)])[0]
-        grimace_6 = fkcn_to_grimace_weights(fkcn_raw)
-        smoothed = ema.update(grimace_6)
+        smoothed = ema.update(list(fkcn_raw))
         yield token_str, vad, smoothed
 
-
-# ---------------------------------------------------------------------------
-# 步骤 2: 模型加载（CausalLM 用于 chat 生成）
-# ---------------------------------------------------------------------------
 
 def load_chat_model_and_projector(
     model_name: str = "ernie",
     device: Optional[str] = None,
 ):
-    """
-    加载用于 chat 的 CausalLM 以及 VAD 投影器。
-    ERNIE 在 chat 场景使用 AutoModelForCausalLM，与投影用的 AutoModel 不同。
-    """
+    """加载 CausalLM 以及 VAD 投影器（ERNIE chat 场景）。"""
     model_config = config.ModelConfig(model_name)
     if not model_config.is_available():
         raise FileNotFoundError(f"模型不可用: {model_config.local_path}")
 
     model_path = str(model_config.local_path)
     if device is None:
-        device = "cpu"  # ERNIE 在 MPS 上有兼容问题
+        device = "cpu"
     if device == "mps" and model_name == "ernie":
         device = "cpu"
 
@@ -160,7 +131,6 @@ def load_chat_model_and_projector(
     ).to(device)
     model.eval()
 
-    # 获取 embedding 矩阵用于维度提取（与 ModelLoader 中双向模型逻辑一致）
     if hasattr(model, "get_input_embeddings"):
         output_embedding = model.get_input_embeddings().weight.data
     elif hasattr(model, "lm_head"):
@@ -168,12 +138,11 @@ def load_chat_model_and_projector(
     else:
         raise ValueError("无法获取 embedding 矩阵")
 
-    # 维度提取 + Scaler + 投影器
     dimension_extractor = DimensionExtractor(output_embedding, tokenizer, device=device)
     vad_lexicon = dimension_extractor.load_vad_lexicon()
     dimensions = dimension_extractor.extract_all_dimensions(vad_lexicon)
 
-    scaler_path = project_root / "outputs" / "scalers" / f"{model_name}_scaler.json"
+    scaler_path = config.PROJECT_ROOT / "outputs" / "scalers" / f"{model_name}_scaler.json"
     scaler = AdaptiveScaler(vad_lexicon)
     scaler.load(str(scaler_path))
 
@@ -183,47 +152,4 @@ def load_chat_model_and_projector(
 
 
 def load_fkcn(device: str = "cpu") -> FKCN:
-    """加载 FKCN，供 generate_with_face_stream 使用"""
     return FKCN(device=device)
-
-
-# ---------------------------------------------------------------------------
-# 步骤 3: 终端交互
-# ---------------------------------------------------------------------------
-
-def main():
-    print("=" * 60)
-    print("M1: 流式 ERNIE 聊天 + 逐 token VAD 投影（终端版）")
-    print("=" * 60)
-
-    model, tokenizer, projector = load_chat_model_and_projector("ernie")
-    device = next(model.parameters()).device
-
-    print("\n模型加载完成。输入消息，空行或 q 退出\n")
-
-    while True:
-        user_input = input("你: ").strip()
-        if not user_input or user_input.lower() == "q":
-            break
-
-        messages = [{"role": "user", "content": user_input}]
-
-        print("ERNIE: ", end="", flush=True)
-        vad_parts = []
-
-        for token_str, vad in generate_with_vad_stream(
-            model, tokenizer, projector, messages, device=str(device)
-        ):
-            print(token_str, end="", flush=True)
-            v, a = vad.get("valence", 0), vad.get("arousal", 0)
-            vad_parts.append(f"{token_str}(V:{v:.2f},A:{a:.2f})")
-
-        print()
-        print("  VAD: ", " ".join(vad_parts))
-        print()
-
-    print("退出。")
-
-
-if __name__ == "__main__":
-    main()
