@@ -1,0 +1,87 @@
+{
+  "experiment": "E2",
+  "description": "Cross-model Spearman at pole_n=50 (NIPS Table 1 style). NIPS five models: original B1 hold-out per model. Qwen2.5-0.5B: five-model tokenizer-intersection hold-out (E1).",
+  "pole_n": 50,
+  "nips_source": "RAL/experiment/E1/data/nips_b1_per_model_spearman.json",
+  "qwen05b_source": "RAL/experiment/E1/result/en/pole_50/report.json",
+  "dimensions": [
+    "valence",
+    "arousal",
+    "dominance"
+  ],
+  "rows": [
+    {
+      "model_key": "gemma22_2b",
+      "model": "Gemma-2.2-2B",
+      "source": "NIPS B1_cross_model_spearman",
+      "pole_n": 50,
+      "rho": {
+        "valence": 0.802,
+        "arousal": 0.65,
+        "dominance": 0.598
+      },
+      "mean_rho": 0.683
+    },
+    {
+      "model_key": "llama32_3b",
+      "model": "Llama-3.2-3B",
+      "source": "NIPS B1_cross_model_spearman",
+      "pole_n": 50,
+      "rho": {
+        "valence": 0.8,
+        "arousal": 0.828,
+        "dominance": 0.708
+      },
+      "mean_rho": 0.779
+    },
+    {
+      "model_key": "mistral7b_v03",
+      "model": "Mistral-7B-v0.3",
+      "source": "NIPS B1_cross_model_spearman",
+      "pole_n": 50,
+      "rho": {
+        "valence": 0.794,
+        "arousal": 0.788,
+        "dominance": 0.567
+      },
+      "mean_rho": 0.716
+    },
+    {
+      "model_key": "qwen25_7b",
+      "model": "Qwen2.5-7B",
+      "source": "NIPS B1_cross_model_spearman",
+      "pole_n": 50,
+      "rho": {
+        "valence": 0.755,
+        "arousal": 0.792,
+        "dominance": 0.648
+      },
+      "mean_rho": 0.732
+    },
+    {
+      "model_key": "llama31_8b",
+      "model": "Llama-3.1-8B",
+      "source": "NIPS B1_cross_model_spearman",
+      "pole_n": 50,
+      "rho": {
+        "valence": 0.773,
+        "arousal": 0.788,
+        "dominance": 0.697
+      },
+      "mean_rho": 0.753
+    },
+    {
+      "model_key": "qwen25_0_5b",
+      "model": "Qwen2.5-0.5B",
+      "source": "E1 en/pole_50/report.json",
+      "pole_n": 50,
+      "holdout": "nips_holdout_intersection_en.json",
+      "rho": {
+        "valence": 0.837,
+        "arousal": 0.665,
+        "dominance": 0.663
+      },
+      "mean_rho": 0.722
+    }
+  ]
+}

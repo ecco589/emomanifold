@@ -64,16 +64,21 @@ TOOLTIP_CSS = """
 """
 
 
-def to_html(msg, tokens):
-    parts = [f"<div class='round'><b>你:</b> {html.escape(msg)}</div><div class='round'><b>ERNIE:</b> "]
+def to_html(msg, tokens, model_label="Qwen"):
+    parts = [f"<div class='round'><b>你:</b> {html.escape(msg)}</div><div class='round'><b>{html.escape(model_label)}:</b> "]
     for t, v in tokens:
         vv, aa = v.get("valence", 0), v.get("arousal", 0)
-        parts.append(f'<span class="vad" data-vad="V:{vv:.2f} A:{aa:.2f}">{html.escape(t)}</span>')
+        dd = v.get("dominance")
+        if dd is not None:
+            tip = f"V:{vv:.2f} A:{aa:.2f} D:{dd:.2f}"
+        else:
+            tip = f"V:{vv:.2f} A:{aa:.2f}"
+        parts.append(f'<span class="vad" data-vad="{tip}">{html.escape(t)}</span>')
     parts.append("</div>")
     return TOOLTIP_CSS + "".join(parts)
 
 
-def make_chat_fn(model, tokenizer, projector, fkcn, device, robot_sink):
+def make_chat_fn(model, tokenizer, projector, fkcn, device, robot_sink, model_label="Qwen"):
     from src.stream_engine import generate_with_face_stream
     from src.face_interpolator import FaceFrameInterpolator
     from src.grimace_utils import fkcn_to_grimace_weights
@@ -105,7 +110,7 @@ def make_chat_fn(model, tokenizer, projector, fkcn, device, robot_sink):
             temperature=0.4,
         ):
             tokens.append((t, v))
-            html_out = "".join(to_html(m, ts) for m, ts in history + [(msg, tokens)])
+            html_out = "".join(to_html(m, ts, model_label) for m, ts in history + [(msg, tokens)])
             for frame_w7 in interpolator.animate_to(weights7):
                 grimace_6 = fkcn_to_grimace_weights(frame_w7)
                 img_arr = None
@@ -123,12 +128,15 @@ def make_chat_fn(model, tokenizer, projector, fkcn, device, robot_sink):
 def _load_model_in_background(robot_sink):
     global _chat_fn
     try:
-        print("加载模型（约 30 秒）...", flush=True)
+        import config
+        model_name = config.get_active_model()
+        print(f"加载模型 {model_name}（约 30 秒）...", flush=True)
         from src.stream_engine import load_chat_model_and_projector, load_fkcn
-        model, tokenizer, projector = load_chat_model_and_projector("ernie")
+        model, tokenizer, projector = load_chat_model_and_projector(model_name)
         fkcn = load_fkcn(device="cpu")
         device = str(next(model.parameters()).device)
-        _chat_fn = make_chat_fn(model, tokenizer, projector, fkcn, device, robot_sink)
+        model_label = model_name.upper() if model_name == "ernie" else model_name.capitalize()
+        _chat_fn = make_chat_fn(model, tokenizer, projector, fkcn, device, robot_sink, model_label)
         _model_ready.set()
         print("模型就绪", flush=True)
     except Exception as e:
@@ -178,9 +186,13 @@ if __name__ == "__main__":
 
     threading.Thread(target=_delayed_load, daemon=True).start()
 
-    with gr.Blocks(title="ERNIE + VAD + 表情 + 实机") as demo:
+    import config
+    active_model = config.get_active_model()
+    model_title = active_model.upper() if active_model == "ernie" else active_model.capitalize()
+    vad_dims = "VAD" if active_model == "qwen" else "VA"
+    with gr.Blocks(title=f"{model_title} + {vad_dims} + 表情 + 实机") as demo:
         gr.Markdown(
-            "## ERNIE 流式对话 · 悬停 token 查看 VAD · "
+            f"## {model_title} 流式对话 · 悬停 token 查看 {vad_dims} · "
             f"右侧逐 token 表情（{int(FACE_FPS)}fps，与实机同步）"
         )
         gr.Markdown("*模型加载中，就绪后可发送消息*")

@@ -56,9 +56,10 @@ def train_scaler(model_name='glm', corpus_path=None, output_path=None):
     
     try:
         # 3. 加载模型
-        # ERNIE 在 chat 场景使用 CausalLM，Scaler 需在同一架构上训练以匹配流式投影
+        # ERNIE / Qwen 在 chat 场景使用 CausalLM，Scaler 需在同一架构上训练以匹配流式投影
         print(f"\n[步骤3] 加载 {model_name.upper()} 模型...")
-        if model_name == "ernie":
+        model_cfg = config.ModelConfig(model_name)
+        if model_cfg.use_causal_lm:
             print("  使用 CausalLM（与 stream_engine 一致）")
             model_loader = CausalModelLoader(model_name)
         else:
@@ -71,11 +72,13 @@ def train_scaler(model_name='glm', corpus_path=None, output_path=None):
             model_loader.get_output_embedding_matrix(),
             model_loader.tokenizer
         )
-        vad_lexicon = dimension_extractor.load_vad_lexicon()
+        vad_lexicon = dimension_extractor.load_vad_lexicon(model_name=model_name)
         
         # 5. 提取情感维度
         print(f"\n[步骤5] 提取情感维度...")
-        dimensions = dimension_extractor.extract_all_dimensions(vad_lexicon)
+        dimensions = dimension_extractor.extract_all_dimensions(
+            vad_lexicon, dimensions=model_cfg.emotion_dimensions
+        )
         print(f"  成功提取 {len(dimensions)} 个情感维度: {list(dimensions.keys())}")
         
         # 6. 创建投影器（不集成scaler，用于训练）
@@ -116,7 +119,7 @@ def main():
     
     parser = argparse.ArgumentParser(description='训练AdaptiveScaler')
     parser.add_argument('--model', type=str, default='glm',
-                       choices=['glm', 'deepseek', 'ernie'],
+                       choices=['glm', 'deepseek', 'ernie', 'qwen'],
                        help='模型名称 (默认: glm)')
     parser.add_argument('--corpus', type=str, default=None,
                        help='训练语料库路径 (默认: data/training_corpus.txt)')

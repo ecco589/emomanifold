@@ -55,13 +55,26 @@ Text → LLM stream → VAD(t) → FKCN → 29-DOF face
 
 ## IV. Experiments
 
-### A. 情感子空间可靠性（压缩为 2 图 1 表）
+### A. 情感子空间可靠性
 
-设默认锚点（50 极词 / 英文 / 主模型），一次只动一个变量：
+#### E1（已完成）：极词数 sweep × Spearman
 
-- **图 A（合 1+2）**：small multiples 分面，V/A/D 三栏，每栏 4 条语言线，x=极词数(10–100)、y=Spearman；标注各语言"饱和极词数"以凸显中/日更省
-- **图 B（3）**：跨语言迁移热力图（训练语言 × 测试语言，固定饱和极词数 + 主模型）
-- **表 C（4）**：仅锚点配置下跑 2–3 模型，验证泛化性
+- **设置**：Qwen2.5-0.5B；英文 pole 词 N=10–80；NIPS 五模型交集 hold-out（300 词）；极词与 hold-out **不互斥**（对齐 NIPS B1）。
+- **图**：六模型（NIPS 五模型 + Qwen 0.5B）Spearman **均值实线 + min–max 带**（V/A/D 三栏），见 `RAL/experiment/E1/output/e1_spearman_pole_sweep.pdf`。
+- **结论要点**：修正极词筛选后，0.5B 在 V 维可进入六模型带；A/D 仍偏弱，支持「小模型 + 轴质量」而非流程错误。
+
+#### E2（已完成）：跨模型 Spearman（NIPS Table 1 + Qwen2.5-0.5B）
+
+- **设置**：固定 pole_n=50；英文 NRC-VAD hold-out Spearman（ρ_V, ρ_A, ρ_D）。
+- **数据**：NIPS 五模型来自 `E1/data/nips_b1_per_model_spearman.json`；Qwen2.5-0.5B 来自 `E1/result/en/pole_50`。
+- **表**：`RAL/experiment/E2/output/e2_table.tex`（复现 NIPS Table 1 并加入本模型一行）。
+- **结论要点**：0.5B 与 NIPS 五模型同量级，支持方法跨 backbone 泛化。
+
+#### E3（已完成）：EN vs ZH 极词 × 轴正交 + 跨语聚类
+
+- **两条件**（每极 $N{=}50$，Qwen2.5-0.5B）：EN-only（E1 `en/pole_50`）、ZH-only（E1 `zh/pole_50`）。
+- **指标**：$|\cos(V,A)|, |\cos(A,D)|, |\cos(V,D)|$；5 簇跨语 mean cosine vs **共享**随机 3D 基线（0.410）。
+- **表**：`RAL/experiment/E3/output/e3_table.tex`。
 
 ### B. 投影能力（递进验证）
 

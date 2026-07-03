@@ -337,7 +337,7 @@ class CausalModelLoader:
 
         model_path = str(model_config.local_path)
         # ERNIE 在 MPS 上有兼容问题
-        load_device = "cpu" if self.model_name == "ernie" else self.device
+        load_device = "cpu" if self.model_name in ("ernie",) else self.device
         self.device = load_device
 
         print(f"加载 CausalLM: {model_path}")

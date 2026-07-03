@@ -1,0 +1,65 @@
+{
+  "description": "Five multilingual emotion clusters (EN + ZH + 3 other langs), all Qwen2.5-0.5B single-token.",
+  "clusters": [
+    {
+      "id": "terror",
+      "emotion": "fear / terror",
+      "emotion_zh": "恐惧",
+      "words": {
+        "en": "terror",
+        "zh": "恐怖",
+        "es": "terror",
+        "pl": "terror",
+        "pt": "terror"
+      }
+    },
+    {
+      "id": "comfort",
+      "emotion": "comfort / ease",
+      "emotion_zh": "舒适",
+      "words": {
+        "en": "comfort",
+        "zh": "舒适",
+        "ar": "راحة",
+        "it": "comfort",
+        "nl": "comfort"
+      }
+    },
+    {
+      "id": "boss",
+      "emotion": "dominance / authority",
+      "emotion_zh": "支配",
+      "words": {
+        "en": "boss",
+        "zh": "老板",
+        "ar": "رئيس",
+        "de": "Chef",
+        "fr": "chef"
+      }
+    },
+    {
+      "id": "strength",
+      "emotion": "potency / strength",
+      "emotion_zh": "力量",
+      "words": {
+        "en": "strength",
+        "zh": "力量",
+        "ar": "قوة",
+        "fr": "force",
+        "ja": "力"
+      }
+    },
+    {
+      "id": "zen",
+      "emotion": "calm / zen",
+      "emotion_zh": "平静",
+      "words": {
+        "en": "zen",
+        "zh": "禅",
+        "ar": "زين",
+        "de": "Zen",
+        "es": "zen"
+      }
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "experiment": "E3",
+  "model": "Qwen2.5-0.5B",
+  "pole_n": 50,
+  "n_random_trials": 100,
+  "random_seed": 42,
+  "random_baseline_cluster_cos": {
+    "terror": 0.733202,
+    "comfort": 0.537428,
+    "boss": 0.26343,
+    "strength": 0.258086,
+    "zen": 0.258451,
+    "mean": 0.410119
+  },
+  "conditions": {
+    "en_only": {
+      "name": "en_only",
+      "pole_lexicon": "RAL/experiment/E1/result/en/pole_50/pole_lexicon.json",
+      "scaler": {
+        "valence": {
+          "scale": 13.028734727377696,
+          "bias": -0.07961575256656998
+        },
+        "arousal": {
+          "scale": 11.773643019134528,
+          "bias": 0.27855073650646067
+        },
+        "dominance": {
+          "scale": 11.507297228939551,
+          "bias": 0.024621126666283234
+        }
+      },
+      "orthogonality": {
+        "va": 0.150733,
+        "ad": 0.194099,
+        "vd": 0.153416
+      },
+      "cluster_cos": {
+        "terror": 0.989056,
+        "comfort": 0.874635,
+        "boss": 0.971671,
+        "strength": 0.884863,
+        "zen": 0.843418,
+        "mean": 0.912729
+      },
+      "cluster_skipped": []
+    },
+    "zh_only": {
+      "name": "zh_only",
+      "pole_lexicon": "RAL/experiment/E1/result/zh/pole_50/pole_lexicon.json",
+      "scaler": {
+        "valence": {
+          "scale": 13.99167709018289,
+          "bias": 0.15966531135354217
+        },
+        "arousal": {
+          "scale": 8.163331813133428,
+          "bias": 0.04250401057248886
+        },
+        "dominance": {
+          "scale": 9.261853758170673,
+          "bias": 0.17725303318695448
+        }
+      },
+      "orthogonality": {
+        "va": 0.220047,
+        "ad": 0.115519,
+        "vd": 0.185773
+      },
+      "cluster_cos": {
+        "terror": 0.998916,
+        "comfort": 0.954617,
+        "boss": 0.763072,
+        "strength": 0.846786,
+        "zen": 0.924155,
+        "mean": 0.897509
+      },
+      "cluster_skipped": []
+    }
+  }
+}

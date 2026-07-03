@@ -5,7 +5,7 @@
 import torch
 import json
 import numpy as np
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Any
 from pathlib import Path
 import config
 
@@ -30,27 +30,32 @@ class AdaptiveScaler:
         # 获取词典词列表
         self.lexicon_words = list(self.mapped_lexicon.keys())
         
+        # 从词库推断维度（words 中含 dominance 则启用 3D）
+        sample = next(iter(vad_lexicon.get('words', {}).values()), {})
+        self.dimensions = [
+            d for d in config.EMOTION_DIMENSIONS_3D
+            if d in sample or d in ('valence', 'arousal')
+        ]
+        if 'dominance' not in sample:
+            self.dimensions = [d for d in self.dimensions if d != 'dominance']
+        if not self.dimensions:
+            self.dimensions = list(config.EMOTION_DIMENSIONS)
+        
         # 为每个维度维护累积统计量
         self.stats = {
-            'valence': {
-                'sum_raw': 0.0,
-                'sum_target': 0.0,
-                'sum_raw_squared': 0.0,
-                'sum_raw_target': 0.0,
-                'count': 0
-            },
-            'arousal': {
+            dim: {
                 'sum_raw': 0.0,
                 'sum_target': 0.0,
                 'sum_raw_squared': 0.0,
                 'sum_raw_target': 0.0,
                 'count': 0
             }
+            for dim in self.dimensions
         }
         
         # Scale和bias参数（训练后固定）
-        self.scales = {'valence': 1.0, 'arousal': 1.0}
-        self.biases = {'valence': 0.0, 'arousal': 0.0}
+        self.scales = {dim: 1.0 for dim in self.dimensions}
+        self.biases = {dim: 0.0 for dim in self.dimensions}
         
         # 训练状态
         self.is_trained = False
@@ -69,10 +74,20 @@ class AdaptiveScaler:
         words = lexicon.get('words', {})
         
         for word, values in words.items():
+            if lexicon.get("normalized_to_minus_one_one"):
+                mapped[word] = {
+                    'valence': float(values['valence']),
+                    'arousal': float(values['arousal']),
+                }
+                if 'dominance' in values:
+                    mapped[word]['dominance'] = float(values['dominance'])
+                continue
             mapped[word] = {
                 'valence': 2.0 * values['valence'] - 1.0,
-                'arousal': 2.0 * values['arousal'] - 1.0
+                'arousal': 2.0 * values['arousal'] - 1.0,
             }
+            if 'dominance' in values:
+                mapped[word]['dominance'] = 2.0 * values['dominance'] - 1.0
         
         return mapped
     
@@ -167,7 +182,7 @@ class AdaptiveScaler:
         
         result = {}
         
-        for dim in ['valence', 'arousal']:
+        for dim in self.dimensions:
             max_raw = None
             target_value = None
             
@@ -263,7 +278,7 @@ class AdaptiveScaler:
         """
         print(f"开始训练AdaptiveScaler，语料库大小: {len(corpus)}")
         
-        out_of_range_counts = {'valence': 0, 'arousal': 0}
+        out_of_range_counts = {dim: 0 for dim in self.dimensions}
         processed_count = 0
         
         for i, sentence in enumerate(corpus):
@@ -302,7 +317,7 @@ class AdaptiveScaler:
                 # 每100句打印一次进度
                 if verbose and (i + 1) % 100 == 0:
                     print(f"  已处理 {i+1}/{len(corpus)} 句，有效样本: {processed_count}")
-                    for dim in ['valence', 'arousal']:
+                    for dim in self.dimensions:
                         scale = self.scales[dim]
                         bias = self.biases[dim]
                         count = self.stats[dim]['count']
@@ -319,13 +334,45 @@ class AdaptiveScaler:
         
         print(f"\n训练完成！")
         print(f"  有效样本数: {processed_count}")
-        for dim in ['valence', 'arousal']:
+        for dim in self.dimensions:
             scale = self.scales[dim]
             bias = self.biases[dim]
             count = self.stats[dim]['count']
             out_count = out_of_range_counts[dim]
             print(f"  {dim}: scale={scale:.4f}, bias={bias:.4f}, "
                   f"样本数={count}, 超出范围={out_count} ({out_count/max(count,1)*100:.1f}%)")
+    
+    def enforce_nonnegative_scales(self) -> Dict[str, Any]:
+        """若 scale<0，取绝对值并用累积 stats 重算 bias（与 NIPS B1 一致）。"""
+        per_dim: Dict[str, Any] = {}
+        for dim in self.dimensions:
+            old_s = float(self.scales[dim])
+            old_b = float(self.biases[dim])
+            st = self.stats[dim]
+            count = int(st.get("count", 0))
+            sum_raw = float(st.get("sum_raw", 0.0))
+            sum_target = float(st.get("sum_target", 0.0))
+            if old_s >= 0.0 or count <= 0:
+                per_dim[dim] = {
+                    "adjusted": False,
+                    "scale_before": old_s,
+                    "bias_before": old_b,
+                    "scale_after": old_s,
+                    "bias_after": old_b,
+                }
+                continue
+            new_s = abs(old_s)
+            new_b = (sum_target - new_s * sum_raw) / count
+            self.scales[dim] = new_s
+            self.biases[dim] = new_b
+            per_dim[dim] = {
+                "adjusted": True,
+                "scale_before": old_s,
+                "bias_before": old_b,
+                "scale_after": new_s,
+                "bias_after": new_b,
+            }
+        return per_dim
     
     def apply(self, raw_value: float, dimension: str) -> float:
         """
@@ -363,6 +410,7 @@ class AdaptiveScaler:
             'scales': self.scales,
             'biases': self.biases,
             'stats': self.stats,
+            'dimensions': self.dimensions,
             'is_trained': self.is_trained
         }
         
@@ -392,6 +440,8 @@ class AdaptiveScaler:
         self.scales = data.get('scales', self.scales)
         self.biases = data.get('biases', self.biases)
         self.stats = data.get('stats', self.stats)
+        if 'dimensions' in data:
+            self.dimensions = data['dimensions']
         self.is_trained = data.get('is_trained', False)
         
         print(f"Scaler已从 {path} 加载")

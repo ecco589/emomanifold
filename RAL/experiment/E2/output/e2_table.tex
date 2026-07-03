@@ -1,0 +1,18 @@
+% E2 table (IEEE/RAL style, booktabs; NIPS Table 1 + Qwen2.5-0.5B)
+\begin{table}[t]
+\caption{Cross-model Spearman $\rho$ on English NRC-VAD hold-out words ($N_{\mathrm{pole}}{=}50$ per axis pole). Rows 1--5 reproduce NIPS B1 cross-model results; row 6 adds Qwen2.5-0.5B (this work).}
+\label{tab:e2_cross_model_spearman}
+\centering
+\begin{tabular}{lccc}
+\toprule
+Model & $\rho_V$ & $\rho_A$ & $\rho_D$ \\
+\midrule
+Gemma-2.2-2B & 0.802 & 0.650 & 0.598 \\
+Llama-3.2-3B & 0.800 & 0.828 & 0.708 \\
+Mistral-7B-v0.3 & 0.794 & 0.788 & 0.567 \\
+Qwen2.5-7B & 0.755 & 0.792 & 0.648 \\
+Llama-3.1-8B & 0.773 & 0.788 & 0.697 \\
+Qwen2.5-0.5B (ours) & 0.837 & 0.665 & 0.663 \\
+\bottomrule
+\end{tabular}
+\end{table}

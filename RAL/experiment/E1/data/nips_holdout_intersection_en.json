@@ -1,0 +1,3027 @@
+{
+  "description": "Reform B1: 300 Spearman words (100 per axis), five-model tokenizer intersection. NRC dominant dimension matches axis; tiered relaxation if needed.",
+  "normalized_to_minus_one_one": true,
+  "n_per_axis": 100,
+  "tokenizer_targets": {
+    "gemma22_2b": "google/gemma-2-2b-it",
+    "llama32_3b": "meta-llama/Llama-3.2-3B-Instruct",
+    "mistral7b_v03": "mistralai/Mistral-7B-Instruct-v0.3",
+    "qwen25_7b": "Qwen/Qwen2.5-7B-Instruct",
+    "llama31_8b": "meta-llama/Llama-3.1-8B-Instruct"
+  },
+  "per_axis": {
+    "valence": {
+      "love": {
+        "valence": 0.996,
+        "arousal": 0.334,
+        "dominance": 0.234
+      },
+      "happy": {
+        "valence": 0.985,
+        "arousal": 0.47,
+        "dominance": 0.39
+      },
+      "desired": {
+        "valence": 0.963,
+        "arousal": 0.625,
+        "dominance": 0.476
+      },
+      "liked": {
+        "valence": 0.963,
+        "arousal": -0.074,
+        "dominance": -0.208
+      },
+      "awesome": {
+        "valence": 0.96,
+        "arousal": 0.586,
+        "dominance": 0.782
+      },
+      "hell": {
+        "valence": -0.96,
+        "arousal": 0.615,
+        "dominance": 0.13
+      },
+      "joy": {
+        "valence": 0.96,
+        "arousal": 0.648,
+        "dominance": 0.588
+      },
+      "perfect": {
+        "valence": 0.96,
+        "arousal": -0.058,
+        "dominance": 0.623
+      },
+      "war": {
+        "valence": -0.956,
+        "arousal": 0.784,
+        "dominance": 0.454
+      },
+      "peace": {
+        "valence": 0.939,
+        "arousal": -0.844,
+        "dominance": 0.226
+      },
+      "death": {
+        "valence": -0.938,
+        "arousal": 0.44,
+        "dominance": -0.056
+      },
+      "rot": {
+        "valence": -0.938,
+        "arousal": 0.116,
+        "dominance": -0.398
+      },
+      "family": {
+        "valence": 0.936,
+        "arousal": -0.234,
+        "dominance": 0.286
+      },
+      "respect": {
+        "valence": 0.927,
+        "arousal": -0.49,
+        "dominance": 0.592
+      },
+      "evil": {
+        "valence": -0.92,
+        "arousal": 0.654,
+        "dominance": 0.09
+      },
+      "winner": {
+        "valence": 0.92,
+        "arousal": 0.62,
+        "dominance": 0.772
+      },
+      "confidence": {
+        "valence": 0.918,
+        "arousal": -0.448,
+        "dominance": 0.886
+      },
+      "pain": {
+        "valence": -0.918,
+        "arousal": 0.53,
+        "dominance": -0.351
+      },
+      "great": {
+        "valence": 0.916,
+        "arousal": 0.33,
+        "dominance": 0.62
+      },
+      "destroy": {
+        "valence": -0.908,
+        "arousal": 0.87,
+        "dominance": 0.27
+      },
+      "dead": {
+        "valence": -0.896,
+        "arousal": -0.092,
+        "dominance": -0.612
+      },
+      "holiday": {
+        "valence": 0.896,
+        "arousal": -0.138,
+        "dominance": 0.186
+      },
+      "kill": {
+        "valence": -0.896,
+        "arousal": 0.882,
+        "dominance": 0.472
+      },
+      "party": {
+        "valence": 0.896,
+        "arousal": 0.68,
+        "dominance": 0.094
+      },
+      "hero": {
+        "valence": 0.88,
+        "arousal": 0.612,
+        "dominance": 0.762
+      },
+      "reject": {
+        "valence": -0.88,
+        "arousal": 0.294,
+        "dominance": -0.26
+      },
+      "pleasant": {
+        "valence": 0.878,
+        "arousal": -0.38,
+        "dominance": 0.346
+      },
+      "broken": {
+        "valence": -0.876,
+        "arousal": 0.0,
+        "dominance": -0.414
+      },
+      "good": {
+        "valence": 0.876,
+        "arousal": -0.264,
+        "dominance": 0.068
+      },
+      "loss": {
+        "valence": -0.876,
+        "arousal": 0.134,
+        "dominance": -0.578
+      },
+      "panic": {
+        "valence": -0.876,
+        "arousal": 0.876,
+        "dominance": -0.2
+      },
+      "terror": {
+        "valence": -0.862,
+        "arousal": 0.804,
+        "dominance": -0.17
+      },
+      "nice": {
+        "valence": 0.86,
+        "arousal": -0.116,
+        "dominance": 0.3
+      },
+      "hope": {
+        "valence": 0.854,
+        "arousal": -0.366,
+        "dominance": 0.478
+      },
+      "win": {
+        "valence": 0.854,
+        "arousal": 0.388,
+        "dominance": 0.776
+      },
+      "fortune": {
+        "valence": 0.852,
+        "arousal": 0.462,
+        "dominance": 0.601
+      },
+      "fun": {
+        "valence": 0.836,
+        "arousal": 0.686,
+        "dominance": 0.334
+      },
+      "kind": {
+        "valence": 0.836,
+        "arousal": -0.52,
+        "dominance": 0.236
+      },
+      "rage": {
+        "valence": -0.836,
+        "arousal": 0.776,
+        "dominance": 0.316
+      },
+      "friendly": {
+        "valence": 0.834,
+        "arousal": -0.204,
+        "dominance": 0.196
+      },
+      "threat": {
+        "valence": -0.825,
+        "arousal": 0.73,
+        "dominance": 0.334
+      },
+      "strong": {
+        "valence": 0.824,
+        "arousal": 0.49,
+        "dominance": 0.79
+      },
+      "fresh": {
+        "valence": 0.816,
+        "arousal": -0.416,
+        "dominance": -0.162
+      },
+      "rest": {
+        "valence": 0.814,
+        "arousal": -0.666,
+        "dominance": -0.4
+      },
+      "angel": {
+        "valence": 0.812,
+        "arousal": -0.684,
+        "dominance": 0.408
+      },
+      "rejected": {
+        "valence": -0.796,
+        "arousal": -0.04,
+        "dominance": -0.5
+      },
+      "safe": {
+        "valence": 0.796,
+        "arousal": -0.388,
+        "dominance": 0.518
+      },
+      "resent": {
+        "valence": -0.793,
+        "arousal": 0.106,
+        "dominance": -0.674
+      },
+      "free": {
+        "valence": 0.792,
+        "arousal": 0.0,
+        "dominance": 0.088
+      },
+      "dance": {
+        "valence": 0.788,
+        "arousal": 0.68,
+        "dominance": 0.102
+      },
+      "bright": {
+        "valence": 0.78,
+        "arousal": 0.054,
+        "dominance": 0.624
+      },
+      "trust": {
+        "valence": 0.776,
+        "arousal": 0.094,
+        "dominance": 0.482
+      },
+      "cool": {
+        "valence": 0.77,
+        "arousal": 0.08,
+        "dominance": 0.562
+      },
+      "lose": {
+        "valence": -0.77,
+        "arousal": 0.076,
+        "dominance": -0.648
+      },
+      "unsafe": {
+        "valence": -0.77,
+        "arousal": 0.124,
+        "dominance": -0.631
+      },
+      "victim": {
+        "valence": -0.77,
+        "arousal": 0.352,
+        "dominance": -0.596
+      },
+      "gift": {
+        "valence": 0.76,
+        "arousal": 0.078,
+        "dominance": -0.034
+      },
+      "beautiful": {
+        "valence": 0.75,
+        "arousal": 0.228,
+        "dominance": 0.296
+      },
+      "pretty": {
+        "valence": 0.75,
+        "arousal": 0.032,
+        "dominance": 0.122
+      },
+      "queen": {
+        "valence": 0.75,
+        "arousal": 0.384,
+        "dominance": 0.72
+      },
+      "lie": {
+        "valence": -0.74,
+        "arousal": 0.45,
+        "dominance": -0.456
+      },
+      "cash": {
+        "valence": 0.734,
+        "arousal": 0.104,
+        "dominance": 0.428
+      },
+      "cry": {
+        "valence": -0.734,
+        "arousal": 0.254,
+        "dominance": -0.49
+      },
+      "born": {
+        "valence": 0.73,
+        "arousal": 0.018,
+        "dominance": 0.182
+      },
+      "easy": {
+        "valence": 0.73,
+        "arousal": -0.612,
+        "dominance": -0.254
+      },
+      "enemy": {
+        "valence": -0.73,
+        "arousal": 0.588,
+        "dominance": 0.182
+      },
+      "comfort": {
+        "valence": 0.726,
+        "arousal": -0.538,
+        "dominance": 0.34
+      },
+      "living": {
+        "valence": 0.722,
+        "arousal": 0.442,
+        "dominance": 0.269
+      },
+      "clear": {
+        "valence": 0.714,
+        "arousal": -0.346,
+        "dominance": 0.146
+      },
+      "home": {
+        "valence": 0.708,
+        "arousal": -0.46,
+        "dominance": 0.09
+      },
+      "scar": {
+        "valence": -0.708,
+        "arousal": 0.0,
+        "dominance": -0.206
+      },
+      "song": {
+        "valence": 0.708,
+        "arousal": -0.174,
+        "dominance": 0.0
+      },
+      "accept": {
+        "valence": 0.694,
+        "arousal": -0.428,
+        "dominance": 0.13
+      },
+      "dirty": {
+        "valence": -0.694,
+        "arousal": -0.08,
+        "dominance": -0.66
+      },
+      "grave": {
+        "valence": -0.694,
+        "arousal": -0.23,
+        "dominance": -0.228
+      },
+      "skill": {
+        "valence": 0.694,
+        "arousal": 0.402,
+        "dominance": 0.666
+      },
+      "money": {
+        "valence": 0.688,
+        "arousal": 0.216,
+        "dominance": 0.654
+      },
+      "dismiss": {
+        "valence": -0.666,
+        "arousal": 0.082,
+        "dominance": 0.018
+      },
+      "found": {
+        "valence": 0.666,
+        "arousal": -0.108,
+        "dominance": -0.02
+      },
+      "music": {
+        "valence": 0.666,
+        "arousal": 0.126,
+        "dominance": 0.21
+      },
+      "fine": {
+        "valence": 0.646,
+        "arousal": -0.52,
+        "dominance": 0.294
+      },
+      "protect": {
+        "valence": 0.646,
+        "arousal": 0.428,
+        "dominance": 0.582
+      },
+      "lost": {
+        "valence": -0.635,
+        "arousal": 0.326,
+        "dominance": -0.58
+      },
+      "pure": {
+        "valence": 0.622,
+        "arousal": -0.388,
+        "dominance": 0.304
+      },
+      "dark": {
+        "valence": -0.604,
+        "arousal": -0.204,
+        "dominance": -0.148
+      },
+      "ease": {
+        "valence": 0.592,
+        "arousal": -0.23,
+        "dominance": -0.018
+      },
+      "dire": {
+        "valence": -0.572,
+        "arousal": 0.32,
+        "dominance": -0.482
+      },
+      "total": {
+        "valence": 0.542,
+        "arousal": -0.428,
+        "dominance": 0.428
+      },
+      "save": {
+        "valence": 0.54,
+        "arousal": -0.122,
+        "dominance": 0.364
+      },
+      "content": {
+        "valence": 0.528,
+        "arousal": -0.408,
+        "dominance": 0.118
+      },
+      "top": {
+        "valence": 0.52,
+        "arousal": -0.2,
+        "dominance": 0.108
+      },
+      "warm": {
+        "valence": 0.52,
+        "arousal": -0.376,
+        "dominance": 0.17
+      },
+      "alive": {
+        "valence": 0.511,
+        "arousal": 0.274,
+        "dominance": 0.462
+      },
+      "dependence": {
+        "valence": -0.5,
+        "arousal": -0.098,
+        "dominance": -0.134
+      },
+      "heavy": {
+        "valence": -0.5,
+        "arousal": -0.092,
+        "dominance": 0.2
+      },
+      "yield": {
+        "valence": 0.438,
+        "arousal": 0.156,
+        "dominance": 0.236
+      },
+      "beg": {
+        "valence": -0.416,
+        "arousal": 0.216,
+        "dominance": -0.344
+      },
+      "demand": {
+        "valence": -0.416,
+        "arousal": 0.346,
+        "dominance": 0.0
+      },
+      "sweet": {
+        "valence": 0.336,
+        "arousal": -0.164,
+        "dominance": -0.236
+      },
+      "status": {
+        "valence": 0.316,
+        "arousal": -0.246,
+        "dominance": 0.176
+      }
+    },
+    "arousal": {
+      "ignored": {
+        "valence": -0.667,
+        "arousal": -1.0,
+        "dominance": -0.667
+      },
+      "nothing": {
+        "valence": -0.333,
+        "arousal": -1.0,
+        "dominance": 0.0
+      },
+      "still": {
+        "valence": 0.083,
+        "arousal": -1.0,
+        "dominance": -0.381
+      },
+      "slow": {
+        "valence": -0.286,
+        "arousal": -0.927,
+        "dominance": -0.708
+      },
+      "sleep": {
+        "valence": 0.438,
+        "arousal": -0.91,
+        "dominance": -0.282
+      },
+      "battle": {
+        "valence": -0.27,
+        "arousal": 0.89,
+        "dominance": 0.736
+      },
+      "lust": {
+        "valence": -0.062,
+        "arousal": 0.888,
+        "dominance": 0.036
+      },
+      "crime": {
+        "valence": -0.858,
+        "arousal": 0.886,
+        "dominance": 0.26
+      },
+      "quiet": {
+        "valence": 0.584,
+        "arousal": -0.881,
+        "dominance": -0.167
+      },
+      "storm": {
+        "valence": -0.624,
+        "arousal": 0.88,
+        "dominance": 0.086
+      },
+      "nap": {
+        "valence": 0.32,
+        "arousal": -0.872,
+        "dominance": -0.444
+      },
+      "fight": {
+        "valence": 0.062,
+        "arousal": 0.868,
+        "dominance": 0.618
+      },
+      "danger": {
+        "valence": -0.77,
+        "arousal": 0.846,
+        "dominance": 0.346
+      },
+      "wild": {
+        "valence": -0.376,
+        "arousal": 0.844,
+        "dominance": 0.5
+      },
+      "urgent": {
+        "valence": -0.346,
+        "arousal": 0.836,
+        "dominance": 0.246
+      },
+      "violent": {
+        "valence": -0.776,
+        "arousal": 0.836,
+        "dominance": 0.232
+      },
+      "alarm": {
+        "valence": -0.518,
+        "arousal": 0.764,
+        "dominance": 0.396
+      },
+      "silent": {
+        "valence": -0.062,
+        "arousal": -0.75,
+        "dominance": -0.44
+      },
+      "mad": {
+        "valence": -0.562,
+        "arousal": 0.746,
+        "dominance": -0.446
+      },
+      "smooth": {
+        "valence": 0.646,
+        "arousal": -0.746,
+        "dominance": -0.438
+      },
+      "anger": {
+        "valence": -0.666,
+        "arousal": 0.73,
+        "dominance": 0.314
+      },
+      "minimal": {
+        "valence": -0.104,
+        "arousal": -0.706,
+        "dominance": -0.588
+      },
+      "speed": {
+        "valence": 0.438,
+        "arousal": 0.698,
+        "dominance": 0.316
+      },
+      "stress": {
+        "valence": -0.654,
+        "arousal": 0.686,
+        "dominance": -0.366
+      },
+      "alone": {
+        "valence": -0.334,
+        "arousal": -0.666,
+        "dominance": -0.568
+      },
+      "clean": {
+        "valence": 0.654,
+        "arousal": -0.66,
+        "dominance": 0.0
+      },
+      "soft": {
+        "valence": 0.52,
+        "arousal": -0.642,
+        "dominance": -0.536
+      },
+      "risk": {
+        "valence": -0.315,
+        "arousal": 0.632,
+        "dominance": -0.124
+      },
+      "steady": {
+        "valence": 0.36,
+        "arousal": -0.628,
+        "dominance": 0.541
+      },
+      "rush": {
+        "valence": -0.188,
+        "arousal": 0.618,
+        "dominance": 0.092
+      },
+      "stable": {
+        "valence": 0.45,
+        "arousal": -0.592,
+        "dominance": 0.47
+      },
+      "volatile": {
+        "valence": -0.354,
+        "arousal": 0.572,
+        "dominance": 0.13
+      },
+      "burn": {
+        "valence": -0.562,
+        "arousal": 0.566,
+        "dominance": 0.018
+      },
+      "flat": {
+        "valence": -0.184,
+        "arousal": -0.528,
+        "dominance": -0.394
+      },
+      "static": {
+        "valence": -0.406,
+        "arousal": -0.5,
+        "dominance": -0.268
+      },
+      "spark": {
+        "valence": 0.376,
+        "arousal": 0.49,
+        "dominance": 0.058
+      },
+      "last": {
+        "valence": -0.414,
+        "arousal": -0.474,
+        "dominance": -0.406
+      },
+      "bold": {
+        "valence": -0.02,
+        "arousal": -0.458,
+        "dominance": -0.034
+      },
+      "least": {
+        "valence": -0.366,
+        "arousal": -0.42,
+        "dominance": -0.408
+      },
+      "shake": {
+        "valence": -0.122,
+        "arousal": 0.378,
+        "dominance": 0.078
+      },
+      "buzz": {
+        "valence": -0.334,
+        "arousal": 0.372,
+        "dominance": -0.25
+      },
+      "fast": {
+        "valence": 0.25,
+        "arousal": 0.358,
+        "dominance": 0.29
+      },
+      "own": {
+        "valence": 0.328,
+        "arousal": -0.348,
+        "dominance": 0.192
+      },
+      "peak": {
+        "valence": 0.0,
+        "arousal": -0.31,
+        "dominance": -0.138
+      },
+      "activated": {
+        "valence": 0.667,
+        "arousal": 1.0,
+        "dominance": 0.571
+      },
+      "actively": {
+        "valence": 0.667,
+        "arousal": 1.0,
+        "dominance": 0.667
+      },
+      "activities": {
+        "valence": 0.667,
+        "arousal": 1.0,
+        "dominance": 0.333
+      },
+      "charged": {
+        "valence": 0.0,
+        "arousal": 1.0,
+        "dominance": 0.5
+      },
+      "collapsed": {
+        "valence": -0.667,
+        "arousal": -1.0,
+        "dominance": -0.75
+      },
+      "powered": {
+        "valence": 0.519,
+        "arousal": 1.0,
+        "dominance": 0.905
+      },
+      "stopped": {
+        "valence": 0.0,
+        "arousal": -1.0,
+        "dominance": -0.417
+      },
+      "flies": {
+        "valence": -0.333,
+        "arousal": 0.958,
+        "dominance": 0.0
+      },
+      "tries": {
+        "valence": 0.095,
+        "arousal": 0.958,
+        "dominance": 0.429
+      },
+      "killer": {
+        "valence": -0.918,
+        "arousal": 0.954,
+        "dominance": 0.006
+      },
+      "logger": {
+        "valence": 0.0,
+        "arousal": 0.952,
+        "dominance": 0.571
+      },
+      "sexual": {
+        "valence": 0.168,
+        "arousal": 0.95,
+        "dominance": 0.007
+      },
+      "attack": {
+        "valence": -0.428,
+        "arousal": 0.896,
+        "dominance": 0.34
+      },
+      "sexy": {
+        "valence": 0.73,
+        "arousal": 0.89,
+        "dominance": 0.604
+      },
+      "sex": {
+        "valence": 0.606,
+        "arousal": 0.878,
+        "dominance": 0.408
+      },
+      "monster": {
+        "valence": -0.734,
+        "arousal": 0.87,
+        "dominance": 0.192
+      },
+      "hit": {
+        "valence": -0.53,
+        "arousal": 0.862,
+        "dominance": 0.358
+      },
+      "blast": {
+        "valence": -0.666,
+        "arousal": 0.858,
+        "dominance": 0.554
+      },
+      "shoot": {
+        "valence": -0.816,
+        "arousal": 0.852,
+        "dominance": 0.25
+      },
+      "challenge": {
+        "valence": -0.062,
+        "arousal": 0.844,
+        "dominance": 0.426
+      },
+      "gun": {
+        "valence": -0.706,
+        "arousal": 0.84,
+        "dominance": 0.426
+      },
+      "chair": {
+        "valence": 0.124,
+        "arousal": -0.836,
+        "dominance": -0.448
+      },
+      "porn": {
+        "valence": -0.312,
+        "arousal": 0.83,
+        "dominance": -0.158
+      },
+      "bomb": {
+        "valence": -0.666,
+        "arousal": 0.824,
+        "dominance": 0.5
+      },
+      "canvas": {
+        "valence": 0.438,
+        "arousal": -0.82,
+        "dominance": -0.272
+      },
+      "revolution": {
+        "valence": -0.166,
+        "arousal": 0.804,
+        "dominance": 0.596
+      },
+      "devil": {
+        "valence": -0.678,
+        "arousal": 0.8,
+        "dominance": 0.222
+      },
+      "emergency": {
+        "valence": -0.6,
+        "arousal": 0.8,
+        "dominance": 0.142
+      },
+      "action": {
+        "valence": 0.52,
+        "arousal": 0.796,
+        "dominance": 0.604
+      },
+      "basic": {
+        "valence": 0.286,
+        "arousal": -0.796,
+        "dominance": -0.21
+      },
+      "up": {
+        "valence": 0.63,
+        "arousal": 0.792,
+        "dominance": 0.556
+      },
+      "burst": {
+        "valence": -0.688,
+        "arousal": 0.788,
+        "dominance": 0.69
+      },
+      "books": {
+        "valence": 0.458,
+        "arousal": -0.77,
+        "dominance": -0.14
+      },
+      "explode": {
+        "valence": -0.446,
+        "arousal": 0.77,
+        "dominance": 0.546
+      },
+      "impact": {
+        "valence": -0.062,
+        "arousal": 0.768,
+        "dominance": 0.552
+      },
+      "noise": {
+        "valence": -0.48,
+        "arousal": 0.766,
+        "dominance": -0.224
+      },
+      "natural": {
+        "valence": 0.708,
+        "arousal": -0.764,
+        "dominance": 0.021
+      },
+      "stab": {
+        "valence": -0.666,
+        "arousal": 0.764,
+        "dominance": 0.19
+      },
+      "tree": {
+        "valence": 0.34,
+        "arousal": -0.764,
+        "dominance": -0.116
+      },
+      "library": {
+        "valence": 0.552,
+        "arousal": -0.756,
+        "dominance": 0.098
+      },
+      "comb": {
+        "valence": -0.02,
+        "arousal": -0.754,
+        "dominance": -0.464
+      },
+      "paper": {
+        "valence": 0.04,
+        "arousal": -0.754,
+        "dominance": -0.414
+      },
+      "categories": {
+        "valence": 0.167,
+        "arousal": -0.75,
+        "dominance": 0.519
+      },
+      "under": {
+        "valence": 0.0,
+        "arousal": -0.75,
+        "dominance": -0.5
+      },
+      "vertices": {
+        "valence": 0.0,
+        "arousal": -0.75,
+        "dominance": 0.222
+      },
+      "common": {
+        "valence": 0.2,
+        "arousal": -0.746,
+        "dominance": -0.364
+      },
+      "emotion": {
+        "valence": 0.386,
+        "arousal": 0.746,
+        "dominance": 0.392
+      },
+      "normal": {
+        "valence": 0.48,
+        "arousal": -0.746,
+        "dominance": -0.24
+      },
+      "pray": {
+        "valence": 0.428,
+        "arousal": -0.746,
+        "dominance": 0.254
+      },
+      "simple": {
+        "valence": 0.306,
+        "arousal": -0.74,
+        "dominance": -0.372
+      },
+      "orange": {
+        "valence": 0.292,
+        "arousal": -0.736,
+        "dominance": -0.408
+      },
+      "cloud": {
+        "valence": 0.48,
+        "arousal": -0.734,
+        "dominance": -0.316
+      },
+      "desk": {
+        "valence": 0.02,
+        "arousal": -0.73,
+        "dominance": -0.156
+      },
+      "house": {
+        "valence": 0.174,
+        "arousal": -0.73,
+        "dominance": 0.066
+      },
+      "jump": {
+        "valence": 0.25,
+        "arousal": 0.73,
+        "dominance": 0.222
+      },
+      "seed": {
+        "valence": 0.312,
+        "arousal": -0.73,
+        "dominance": -0.388
+      }
+    },
+    "dominance": {
+      "success": {
+        "valence": 0.918,
+        "arousal": 0.76,
+        "dominance": 0.981
+      },
+      "submitted": {
+        "valence": -0.292,
+        "arousal": -0.5,
+        "dominance": -0.958
+      },
+      "weak": {
+        "valence": -0.64,
+        "arousal": -0.518,
+        "dominance": -0.955
+      },
+      "power": {
+        "valence": 0.438,
+        "arousal": 0.34,
+        "dominance": 0.953
+      },
+      "boss": {
+        "valence": -0.38,
+        "arousal": 0.254,
+        "dominance": 0.932
+      },
+      "empty": {
+        "valence": -0.624,
+        "arousal": -0.634,
+        "dominance": -0.919
+      },
+      "idle": {
+        "valence": -0.642,
+        "arousal": -0.666,
+        "dominance": -0.888
+      },
+      "authority": {
+        "valence": 0.184,
+        "arousal": 0.184,
+        "dominance": 0.868
+      },
+      "leader": {
+        "valence": 0.666,
+        "arousal": 0.164,
+        "dominance": 0.852
+      },
+      "smart": {
+        "valence": 0.812,
+        "arousal": 0.214,
+        "dominance": 0.846
+      },
+      "low": {
+        "valence": -0.416,
+        "arousal": -0.56,
+        "dominance": -0.844
+      },
+      "secure": {
+        "valence": 0.688,
+        "arousal": -0.24,
+        "dominance": 0.828
+      },
+      "expert": {
+        "valence": 0.552,
+        "arousal": 0.292,
+        "dominance": 0.822
+      },
+      "absolute": {
+        "valence": 0.052,
+        "arousal": 0.02,
+        "dominance": 0.82
+      },
+      "force": {
+        "valence": 0.224,
+        "arousal": 0.5,
+        "dominance": 0.81
+      },
+      "rich": {
+        "valence": 0.764,
+        "arousal": 0.254,
+        "dominance": 0.81
+      },
+      "lazy": {
+        "valence": -0.216,
+        "arousal": -0.472,
+        "dominance": -0.808
+      },
+      "fighter": {
+        "valence": 0.274,
+        "arousal": 0.52,
+        "dominance": 0.796
+      },
+      "king": {
+        "valence": 0.354,
+        "arousal": 0.38,
+        "dominance": 0.784
+      },
+      "wise": {
+        "valence": 0.756,
+        "arousal": -0.5,
+        "dominance": 0.769
+      },
+      "small": {
+        "valence": 0.084,
+        "arousal": -0.59,
+        "dominance": -0.76
+      },
+      "tiny": {
+        "valence": -0.042,
+        "arousal": -0.608,
+        "dominance": -0.75
+      },
+      "lowest": {
+        "valence": -0.376,
+        "arousal": -0.392,
+        "dominance": -0.742
+      },
+      "loud": {
+        "valence": 0.146,
+        "arousal": 0.3,
+        "dominance": 0.74
+      },
+      "void": {
+        "valence": -0.73,
+        "arousal": -0.674,
+        "dominance": -0.74
+      },
+      "chief": {
+        "valence": 0.04,
+        "arousal": 0.088,
+        "dominance": 0.738
+      },
+      "failure": {
+        "valence": -0.666,
+        "arousal": 0.15,
+        "dominance": -0.722
+      },
+      "strength": {
+        "valence": 0.604,
+        "arousal": 0.364,
+        "dominance": 0.716
+      },
+      "wealth": {
+        "valence": 0.714,
+        "arousal": 0.274,
+        "dominance": 0.716
+      },
+      "general": {
+        "valence": 0.668,
+        "arousal": -0.032,
+        "dominance": 0.706
+      },
+      "sad": {
+        "valence": -0.55,
+        "arousal": -0.334,
+        "dominance": -0.702
+      },
+      "command": {
+        "valence": -0.146,
+        "arousal": 0.58,
+        "dominance": 0.698
+      },
+      "master": {
+        "valence": 0.388,
+        "arousal": -0.02,
+        "dominance": 0.698
+      },
+      "slave": {
+        "valence": -0.658,
+        "arousal": 0.59,
+        "dominance": -0.698
+      },
+      "fail": {
+        "valence": -0.646,
+        "arousal": 0.156,
+        "dominance": -0.692
+      },
+      "trash": {
+        "valence": -0.674,
+        "arousal": 0.082,
+        "dominance": -0.692
+      },
+      "minor": {
+        "valence": -0.5,
+        "arousal": -0.004,
+        "dominance": -0.65
+      },
+      "assert": {
+        "valence": 0.5,
+        "arousal": 0.238,
+        "dominance": 0.618
+      },
+      "complete": {
+        "valence": 0.5,
+        "arousal": -0.172,
+        "dominance": 0.618
+      },
+      "control": {
+        "valence": 0.458,
+        "arousal": -0.296,
+        "dominance": 0.616
+      },
+      "minimum": {
+        "valence": -0.24,
+        "arousal": -0.604,
+        "dominance": -0.612
+      },
+      "huge": {
+        "valence": 0.146,
+        "arousal": 0.25,
+        "dominance": 0.566
+      },
+      "elite": {
+        "valence": 0.376,
+        "arousal": 0.408,
+        "dominance": 0.474
+      },
+      "spent": {
+        "valence": -0.408,
+        "arousal": -0.408,
+        "dominance": -0.474
+      },
+      "will": {
+        "valence": 0.396,
+        "arousal": -0.184,
+        "dominance": 0.47
+      },
+      "firm": {
+        "valence": 0.27,
+        "arousal": -0.24,
+        "dominance": 0.456
+      },
+      "drive": {
+        "valence": 0.25,
+        "arousal": 0.378,
+        "dominance": 0.426
+      },
+      "bottom": {
+        "valence": -0.166,
+        "arousal": -0.26,
+        "dominance": -0.418
+      },
+      "grim": {
+        "valence": -0.38,
+        "arousal": -0.034,
+        "dominance": -0.404
+      },
+      "rank": {
+        "valence": 0.062,
+        "arousal": -0.24,
+        "dominance": 0.372
+      },
+      "lord": {
+        "valence": 0.236,
+        "arousal": -0.346,
+        "dominance": 0.368
+      },
+      "flash": {
+        "valence": 0.142,
+        "arousal": 0.18,
+        "dominance": 0.314
+      },
+      "submission": {
+        "valence": 0.062,
+        "arousal": 0.16,
+        "dominance": 0.266
+      },
+      "might": {
+        "valence": 0.143,
+        "arousal": 0.963,
+        "dominance": 1.0
+      },
+      "leading": {
+        "valence": 0.646,
+        "arousal": 0.396,
+        "dominance": 0.954
+      },
+      "ax": {
+        "valence": -0.667,
+        "arousal": 0.667,
+        "dominance": 0.952
+      },
+      "capabilities": {
+        "valence": 0.741,
+        "arousal": 0.0,
+        "dominance": 0.952
+      },
+      "companies": {
+        "valence": 0.042,
+        "arousal": 0.619,
+        "dominance": 0.889
+      },
+      "professional": {
+        "valence": 0.666,
+        "arousal": -0.106,
+        "dominance": 0.886
+      },
+      "owner": {
+        "valence": 0.552,
+        "arousal": -0.102,
+        "dominance": 0.84
+      },
+      "strategy": {
+        "valence": 0.408,
+        "arousal": 0.334,
+        "dominance": 0.836
+      },
+      "producer": {
+        "valence": 0.118,
+        "arousal": 0.122,
+        "dominance": 0.834
+      },
+      "director": {
+        "valence": 0.376,
+        "arousal": 0.16,
+        "dominance": 0.824
+      },
+      "competitive": {
+        "valence": -0.106,
+        "arousal": 0.436,
+        "dominance": 0.816
+      },
+      "experience": {
+        "valence": 0.654,
+        "arousal": 0.236,
+        "dominance": 0.81
+      },
+      "manager": {
+        "valence": 0.25,
+        "arousal": 0.098,
+        "dominance": 0.794
+      },
+      "knowledge": {
+        "valence": 0.694,
+        "arousal": -0.14,
+        "dominance": 0.792
+      },
+      "organisation": {
+        "valence": 0.5,
+        "arousal": 0.667,
+        "dominance": 0.792
+      },
+      "approval": {
+        "valence": 0.708,
+        "arousal": -0.08,
+        "dominance": 0.778
+      },
+      "worth": {
+        "valence": 0.744,
+        "arousal": 0.02,
+        "dominance": 0.778
+      },
+      "legal": {
+        "valence": 0.306,
+        "arousal": -0.226,
+        "dominance": 0.774
+      },
+      "forces": {
+        "valence": 0.102,
+        "arousal": 0.372,
+        "dominance": 0.772
+      },
+      "god": {
+        "valence": 0.516,
+        "arousal": 0.036,
+        "dominance": 0.772
+      },
+      "increase": {
+        "valence": 0.62,
+        "arousal": 0.314,
+        "dominance": 0.772
+      },
+      "intelligence": {
+        "valence": 0.666,
+        "arousal": 0.174,
+        "dominance": 0.77
+      },
+      "less": {
+        "valence": -0.47,
+        "arousal": -0.52,
+        "dominance": -0.77
+      },
+      "teacher": {
+        "valence": 0.52,
+        "arousal": -0.192,
+        "dominance": 0.77
+      },
+      "highlight": {
+        "valence": 0.688,
+        "arousal": 0.274,
+        "dominance": 0.764
+      },
+      "realm": {
+        "valence": 0.416,
+        "arousal": 0.018,
+        "dominance": 0.756
+      },
+      "strict": {
+        "valence": 0.0,
+        "arousal": 0.292,
+        "dominance": 0.756
+      },
+      "progress": {
+        "valence": 0.635,
+        "arousal": 0.284,
+        "dominance": 0.754
+      },
+      "political": {
+        "valence": -0.306,
+        "arousal": 0.46,
+        "dominance": 0.75
+      },
+      "precision": {
+        "valence": 0.354,
+        "arousal": -0.138,
+        "dominance": 0.75
+      },
+      "major": {
+        "valence": 0.368,
+        "arousal": 0.076,
+        "dominance": 0.748
+      },
+      "selector": {
+        "valence": 0.0,
+        "arousal": 0.381,
+        "dominance": 0.741
+      },
+      "mission": {
+        "valence": 0.53,
+        "arousal": 0.266,
+        "dominance": 0.74
+      },
+      "controller": {
+        "valence": -0.062,
+        "arousal": 0.424,
+        "dominance": 0.736
+      },
+      "upper": {
+        "valence": 0.48,
+        "arousal": 0.058,
+        "dominance": 0.736
+      },
+      "developer": {
+        "valence": 0.688,
+        "arousal": 0.306,
+        "dominance": 0.728
+      },
+      "generator": {
+        "valence": 0.408,
+        "arousal": 0.136,
+        "dominance": 0.728
+      },
+      "doctor": {
+        "valence": 0.4,
+        "arousal": 0.062,
+        "dominance": 0.722
+      },
+      "guided": {
+        "valence": 0.667,
+        "arousal": 0.667,
+        "dominance": -0.722
+      },
+      "handler": {
+        "valence": -0.122,
+        "arousal": 0.186,
+        "dominance": 0.722
+      },
+      "represent": {
+        "valence": 0.562,
+        "arousal": -0.134,
+        "dominance": 0.722
+      },
+      "us": {
+        "valence": 0.333,
+        "arousal": 0.0,
+        "dominance": 0.722
+      },
+      "fort": {
+        "valence": 0.56,
+        "arousal": 0.346,
+        "dominance": 0.72
+      },
+      "parent": {
+        "valence": 0.624,
+        "arousal": -0.286,
+        "dominance": 0.72
+      },
+      "advance": {
+        "valence": 0.346,
+        "arousal": -0.056,
+        "dominance": 0.716
+      },
+      "judge": {
+        "valence": 0.02,
+        "arousal": 0.208,
+        "dominance": 0.714
+      },
+      "admin": {
+        "valence": 0.376,
+        "arousal": -0.16,
+        "dominance": 0.708
+      }
+    }
+  },
+  "words": {
+    "love": {
+      "valence": 0.996,
+      "arousal": 0.334,
+      "dominance": 0.234
+    },
+    "happy": {
+      "valence": 0.985,
+      "arousal": 0.47,
+      "dominance": 0.39
+    },
+    "desired": {
+      "valence": 0.963,
+      "arousal": 0.625,
+      "dominance": 0.476
+    },
+    "liked": {
+      "valence": 0.963,
+      "arousal": -0.074,
+      "dominance": -0.208
+    },
+    "awesome": {
+      "valence": 0.96,
+      "arousal": 0.586,
+      "dominance": 0.782
+    },
+    "hell": {
+      "valence": -0.96,
+      "arousal": 0.615,
+      "dominance": 0.13
+    },
+    "joy": {
+      "valence": 0.96,
+      "arousal": 0.648,
+      "dominance": 0.588
+    },
+    "perfect": {
+      "valence": 0.96,
+      "arousal": -0.058,
+      "dominance": 0.623
+    },
+    "war": {
+      "valence": -0.956,
+      "arousal": 0.784,
+      "dominance": 0.454
+    },
+    "peace": {
+      "valence": 0.939,
+      "arousal": -0.844,
+      "dominance": 0.226
+    },
+    "death": {
+      "valence": -0.938,
+      "arousal": 0.44,
+      "dominance": -0.056
+    },
+    "rot": {
+      "valence": -0.938,
+      "arousal": 0.116,
+      "dominance": -0.398
+    },
+    "family": {
+      "valence": 0.936,
+      "arousal": -0.234,
+      "dominance": 0.286
+    },
+    "respect": {
+      "valence": 0.927,
+      "arousal": -0.49,
+      "dominance": 0.592
+    },
+    "evil": {
+      "valence": -0.92,
+      "arousal": 0.654,
+      "dominance": 0.09
+    },
+    "winner": {
+      "valence": 0.92,
+      "arousal": 0.62,
+      "dominance": 0.772
+    },
+    "confidence": {
+      "valence": 0.918,
+      "arousal": -0.448,
+      "dominance": 0.886
+    },
+    "pain": {
+      "valence": -0.918,
+      "arousal": 0.53,
+      "dominance": -0.351
+    },
+    "great": {
+      "valence": 0.916,
+      "arousal": 0.33,
+      "dominance": 0.62
+    },
+    "destroy": {
+      "valence": -0.908,
+      "arousal": 0.87,
+      "dominance": 0.27
+    },
+    "dead": {
+      "valence": -0.896,
+      "arousal": -0.092,
+      "dominance": -0.612
+    },
+    "holiday": {
+      "valence": 0.896,
+      "arousal": -0.138,
+      "dominance": 0.186
+    },
+    "kill": {
+      "valence": -0.896,
+      "arousal": 0.882,
+      "dominance": 0.472
+    },
+    "party": {
+      "valence": 0.896,
+      "arousal": 0.68,
+      "dominance": 0.094
+    },
+    "hero": {
+      "valence": 0.88,
+      "arousal": 0.612,
+      "dominance": 0.762
+    },
+    "reject": {
+      "valence": -0.88,
+      "arousal": 0.294,
+      "dominance": -0.26
+    },
+    "pleasant": {
+      "valence": 0.878,
+      "arousal": -0.38,
+      "dominance": 0.346
+    },
+    "broken": {
+      "valence": -0.876,
+      "arousal": 0.0,
+      "dominance": -0.414
+    },
+    "good": {
+      "valence": 0.876,
+      "arousal": -0.264,
+      "dominance": 0.068
+    },
+    "loss": {
+      "valence": -0.876,
+      "arousal": 0.134,
+      "dominance": -0.578
+    },
+    "panic": {
+      "valence": -0.876,
+      "arousal": 0.876,
+      "dominance": -0.2
+    },
+    "terror": {
+      "valence": -0.862,
+      "arousal": 0.804,
+      "dominance": -0.17
+    },
+    "nice": {
+      "valence": 0.86,
+      "arousal": -0.116,
+      "dominance": 0.3
+    },
+    "hope": {
+      "valence": 0.854,
+      "arousal": -0.366,
+      "dominance": 0.478
+    },
+    "win": {
+      "valence": 0.854,
+      "arousal": 0.388,
+      "dominance": 0.776
+    },
+    "fortune": {
+      "valence": 0.852,
+      "arousal": 0.462,
+      "dominance": 0.601
+    },
+    "fun": {
+      "valence": 0.836,
+      "arousal": 0.686,
+      "dominance": 0.334
+    },
+    "kind": {
+      "valence": 0.836,
+      "arousal": -0.52,
+      "dominance": 0.236
+    },
+    "rage": {
+      "valence": -0.836,
+      "arousal": 0.776,
+      "dominance": 0.316
+    },
+    "friendly": {
+      "valence": 0.834,
+      "arousal": -0.204,
+      "dominance": 0.196
+    },
+    "threat": {
+      "valence": -0.825,
+      "arousal": 0.73,
+      "dominance": 0.334
+    },
+    "strong": {
+      "valence": 0.824,
+      "arousal": 0.49,
+      "dominance": 0.79
+    },
+    "fresh": {
+      "valence": 0.816,
+      "arousal": -0.416,
+      "dominance": -0.162
+    },
+    "rest": {
+      "valence": 0.814,
+      "arousal": -0.666,
+      "dominance": -0.4
+    },
+    "angel": {
+      "valence": 0.812,
+      "arousal": -0.684,
+      "dominance": 0.408
+    },
+    "rejected": {
+      "valence": -0.796,
+      "arousal": -0.04,
+      "dominance": -0.5
+    },
+    "safe": {
+      "valence": 0.796,
+      "arousal": -0.388,
+      "dominance": 0.518
+    },
+    "resent": {
+      "valence": -0.793,
+      "arousal": 0.106,
+      "dominance": -0.674
+    },
+    "free": {
+      "valence": 0.792,
+      "arousal": 0.0,
+      "dominance": 0.088
+    },
+    "dance": {
+      "valence": 0.788,
+      "arousal": 0.68,
+      "dominance": 0.102
+    },
+    "bright": {
+      "valence": 0.78,
+      "arousal": 0.054,
+      "dominance": 0.624
+    },
+    "trust": {
+      "valence": 0.776,
+      "arousal": 0.094,
+      "dominance": 0.482
+    },
+    "cool": {
+      "valence": 0.77,
+      "arousal": 0.08,
+      "dominance": 0.562
+    },
+    "lose": {
+      "valence": -0.77,
+      "arousal": 0.076,
+      "dominance": -0.648
+    },
+    "unsafe": {
+      "valence": -0.77,
+      "arousal": 0.124,
+      "dominance": -0.631
+    },
+    "victim": {
+      "valence": -0.77,
+      "arousal": 0.352,
+      "dominance": -0.596
+    },
+    "gift": {
+      "valence": 0.76,
+      "arousal": 0.078,
+      "dominance": -0.034
+    },
+    "beautiful": {
+      "valence": 0.75,
+      "arousal": 0.228,
+      "dominance": 0.296
+    },
+    "pretty": {
+      "valence": 0.75,
+      "arousal": 0.032,
+      "dominance": 0.122
+    },
+    "queen": {
+      "valence": 0.75,
+      "arousal": 0.384,
+      "dominance": 0.72
+    },
+    "lie": {
+      "valence": -0.74,
+      "arousal": 0.45,
+      "dominance": -0.456
+    },
+    "cash": {
+      "valence": 0.734,
+      "arousal": 0.104,
+      "dominance": 0.428
+    },
+    "cry": {
+      "valence": -0.734,
+      "arousal": 0.254,
+      "dominance": -0.49
+    },
+    "born": {
+      "valence": 0.73,
+      "arousal": 0.018,
+      "dominance": 0.182
+    },
+    "easy": {
+      "valence": 0.73,
+      "arousal": -0.612,
+      "dominance": -0.254
+    },
+    "enemy": {
+      "valence": -0.73,
+      "arousal": 0.588,
+      "dominance": 0.182
+    },
+    "comfort": {
+      "valence": 0.726,
+      "arousal": -0.538,
+      "dominance": 0.34
+    },
+    "living": {
+      "valence": 0.722,
+      "arousal": 0.442,
+      "dominance": 0.269
+    },
+    "clear": {
+      "valence": 0.714,
+      "arousal": -0.346,
+      "dominance": 0.146
+    },
+    "home": {
+      "valence": 0.708,
+      "arousal": -0.46,
+      "dominance": 0.09
+    },
+    "scar": {
+      "valence": -0.708,
+      "arousal": 0.0,
+      "dominance": -0.206
+    },
+    "song": {
+      "valence": 0.708,
+      "arousal": -0.174,
+      "dominance": 0.0
+    },
+    "accept": {
+      "valence": 0.694,
+      "arousal": -0.428,
+      "dominance": 0.13
+    },
+    "dirty": {
+      "valence": -0.694,
+      "arousal": -0.08,
+      "dominance": -0.66
+    },
+    "grave": {
+      "valence": -0.694,
+      "arousal": -0.23,
+      "dominance": -0.228
+    },
+    "skill": {
+      "valence": 0.694,
+      "arousal": 0.402,
+      "dominance": 0.666
+    },
+    "money": {
+      "valence": 0.688,
+      "arousal": 0.216,
+      "dominance": 0.654
+    },
+    "dismiss": {
+      "valence": -0.666,
+      "arousal": 0.082,
+      "dominance": 0.018
+    },
+    "found": {
+      "valence": 0.666,
+      "arousal": -0.108,
+      "dominance": -0.02
+    },
+    "music": {
+      "valence": 0.666,
+      "arousal": 0.126,
+      "dominance": 0.21
+    },
+    "fine": {
+      "valence": 0.646,
+      "arousal": -0.52,
+      "dominance": 0.294
+    },
+    "protect": {
+      "valence": 0.646,
+      "arousal": 0.428,
+      "dominance": 0.582
+    },
+    "lost": {
+      "valence": -0.635,
+      "arousal": 0.326,
+      "dominance": -0.58
+    },
+    "pure": {
+      "valence": 0.622,
+      "arousal": -0.388,
+      "dominance": 0.304
+    },
+    "dark": {
+      "valence": -0.604,
+      "arousal": -0.204,
+      "dominance": -0.148
+    },
+    "ease": {
+      "valence": 0.592,
+      "arousal": -0.23,
+      "dominance": -0.018
+    },
+    "dire": {
+      "valence": -0.572,
+      "arousal": 0.32,
+      "dominance": -0.482
+    },
+    "total": {
+      "valence": 0.542,
+      "arousal": -0.428,
+      "dominance": 0.428
+    },
+    "save": {
+      "valence": 0.54,
+      "arousal": -0.122,
+      "dominance": 0.364
+    },
+    "content": {
+      "valence": 0.528,
+      "arousal": -0.408,
+      "dominance": 0.118
+    },
+    "top": {
+      "valence": 0.52,
+      "arousal": -0.2,
+      "dominance": 0.108
+    },
+    "warm": {
+      "valence": 0.52,
+      "arousal": -0.376,
+      "dominance": 0.17
+    },
+    "alive": {
+      "valence": 0.511,
+      "arousal": 0.274,
+      "dominance": 0.462
+    },
+    "dependence": {
+      "valence": -0.5,
+      "arousal": -0.098,
+      "dominance": -0.134
+    },
+    "heavy": {
+      "valence": -0.5,
+      "arousal": -0.092,
+      "dominance": 0.2
+    },
+    "yield": {
+      "valence": 0.438,
+      "arousal": 0.156,
+      "dominance": 0.236
+    },
+    "beg": {
+      "valence": -0.416,
+      "arousal": 0.216,
+      "dominance": -0.344
+    },
+    "demand": {
+      "valence": -0.416,
+      "arousal": 0.346,
+      "dominance": 0.0
+    },
+    "sweet": {
+      "valence": 0.336,
+      "arousal": -0.164,
+      "dominance": -0.236
+    },
+    "status": {
+      "valence": 0.316,
+      "arousal": -0.246,
+      "dominance": 0.176
+    },
+    "ignored": {
+      "valence": -0.667,
+      "arousal": -1.0,
+      "dominance": -0.667
+    },
+    "nothing": {
+      "valence": -0.333,
+      "arousal": -1.0,
+      "dominance": 0.0
+    },
+    "still": {
+      "valence": 0.083,
+      "arousal": -1.0,
+      "dominance": -0.381
+    },
+    "slow": {
+      "valence": -0.286,
+      "arousal": -0.927,
+      "dominance": -0.708
+    },
+    "sleep": {
+      "valence": 0.438,
+      "arousal": -0.91,
+      "dominance": -0.282
+    },
+    "battle": {
+      "valence": -0.27,
+      "arousal": 0.89,
+      "dominance": 0.736
+    },
+    "lust": {
+      "valence": -0.062,
+      "arousal": 0.888,
+      "dominance": 0.036
+    },
+    "crime": {
+      "valence": -0.858,
+      "arousal": 0.886,
+      "dominance": 0.26
+    },
+    "quiet": {
+      "valence": 0.584,
+      "arousal": -0.881,
+      "dominance": -0.167
+    },
+    "storm": {
+      "valence": -0.624,
+      "arousal": 0.88,
+      "dominance": 0.086
+    },
+    "nap": {
+      "valence": 0.32,
+      "arousal": -0.872,
+      "dominance": -0.444
+    },
+    "fight": {
+      "valence": 0.062,
+      "arousal": 0.868,
+      "dominance": 0.618
+    },
+    "danger": {
+      "valence": -0.77,
+      "arousal": 0.846,
+      "dominance": 0.346
+    },
+    "wild": {
+      "valence": -0.376,
+      "arousal": 0.844,
+      "dominance": 0.5
+    },
+    "urgent": {
+      "valence": -0.346,
+      "arousal": 0.836,
+      "dominance": 0.246
+    },
+    "violent": {
+      "valence": -0.776,
+      "arousal": 0.836,
+      "dominance": 0.232
+    },
+    "alarm": {
+      "valence": -0.518,
+      "arousal": 0.764,
+      "dominance": 0.396
+    },
+    "silent": {
+      "valence": -0.062,
+      "arousal": -0.75,
+      "dominance": -0.44
+    },
+    "mad": {
+      "valence": -0.562,
+      "arousal": 0.746,
+      "dominance": -0.446
+    },
+    "smooth": {
+      "valence": 0.646,
+      "arousal": -0.746,
+      "dominance": -0.438
+    },
+    "anger": {
+      "valence": -0.666,
+      "arousal": 0.73,
+      "dominance": 0.314
+    },
+    "minimal": {
+      "valence": -0.104,
+      "arousal": -0.706,
+      "dominance": -0.588
+    },
+    "speed": {
+      "valence": 0.438,
+      "arousal": 0.698,
+      "dominance": 0.316
+    },
+    "stress": {
+      "valence": -0.654,
+      "arousal": 0.686,
+      "dominance": -0.366
+    },
+    "alone": {
+      "valence": -0.334,
+      "arousal": -0.666,
+      "dominance": -0.568
+    },
+    "clean": {
+      "valence": 0.654,
+      "arousal": -0.66,
+      "dominance": 0.0
+    },
+    "soft": {
+      "valence": 0.52,
+      "arousal": -0.642,
+      "dominance": -0.536
+    },
+    "risk": {
+      "valence": -0.315,
+      "arousal": 0.632,
+      "dominance": -0.124
+    },
+    "steady": {
+      "valence": 0.36,
+      "arousal": -0.628,
+      "dominance": 0.541
+    },
+    "rush": {
+      "valence": -0.188,
+      "arousal": 0.618,
+      "dominance": 0.092
+    },
+    "stable": {
+      "valence": 0.45,
+      "arousal": -0.592,
+      "dominance": 0.47
+    },
+    "volatile": {
+      "valence": -0.354,
+      "arousal": 0.572,
+      "dominance": 0.13
+    },
+    "burn": {
+      "valence": -0.562,
+      "arousal": 0.566,
+      "dominance": 0.018
+    },
+    "flat": {
+      "valence": -0.184,
+      "arousal": -0.528,
+      "dominance": -0.394
+    },
+    "static": {
+      "valence": -0.406,
+      "arousal": -0.5,
+      "dominance": -0.268
+    },
+    "spark": {
+      "valence": 0.376,
+      "arousal": 0.49,
+      "dominance": 0.058
+    },
+    "last": {
+      "valence": -0.414,
+      "arousal": -0.474,
+      "dominance": -0.406
+    },
+    "bold": {
+      "valence": -0.02,
+      "arousal": -0.458,
+      "dominance": -0.034
+    },
+    "least": {
+      "valence": -0.366,
+      "arousal": -0.42,
+      "dominance": -0.408
+    },
+    "shake": {
+      "valence": -0.122,
+      "arousal": 0.378,
+      "dominance": 0.078
+    },
+    "buzz": {
+      "valence": -0.334,
+      "arousal": 0.372,
+      "dominance": -0.25
+    },
+    "fast": {
+      "valence": 0.25,
+      "arousal": 0.358,
+      "dominance": 0.29
+    },
+    "own": {
+      "valence": 0.328,
+      "arousal": -0.348,
+      "dominance": 0.192
+    },
+    "peak": {
+      "valence": 0.0,
+      "arousal": -0.31,
+      "dominance": -0.138
+    },
+    "activated": {
+      "valence": 0.667,
+      "arousal": 1.0,
+      "dominance": 0.571
+    },
+    "actively": {
+      "valence": 0.667,
+      "arousal": 1.0,
+      "dominance": 0.667
+    },
+    "activities": {
+      "valence": 0.667,
+      "arousal": 1.0,
+      "dominance": 0.333
+    },
+    "charged": {
+      "valence": 0.0,
+      "arousal": 1.0,
+      "dominance": 0.5
+    },
+    "collapsed": {
+      "valence": -0.667,
+      "arousal": -1.0,
+      "dominance": -0.75
+    },
+    "powered": {
+      "valence": 0.519,
+      "arousal": 1.0,
+      "dominance": 0.905
+    },
+    "stopped": {
+      "valence": 0.0,
+      "arousal": -1.0,
+      "dominance": -0.417
+    },
+    "flies": {
+      "valence": -0.333,
+      "arousal": 0.958,
+      "dominance": 0.0
+    },
+    "tries": {
+      "valence": 0.095,
+      "arousal": 0.958,
+      "dominance": 0.429
+    },
+    "killer": {
+      "valence": -0.918,
+      "arousal": 0.954,
+      "dominance": 0.006
+    },
+    "logger": {
+      "valence": 0.0,
+      "arousal": 0.952,
+      "dominance": 0.571
+    },
+    "sexual": {
+      "valence": 0.168,
+      "arousal": 0.95,
+      "dominance": 0.007
+    },
+    "attack": {
+      "valence": -0.428,
+      "arousal": 0.896,
+      "dominance": 0.34
+    },
+    "sexy": {
+      "valence": 0.73,
+      "arousal": 0.89,
+      "dominance": 0.604
+    },
+    "sex": {
+      "valence": 0.606,
+      "arousal": 0.878,
+      "dominance": 0.408
+    },
+    "monster": {
+      "valence": -0.734,
+      "arousal": 0.87,
+      "dominance": 0.192
+    },
+    "hit": {
+      "valence": -0.53,
+      "arousal": 0.862,
+      "dominance": 0.358
+    },
+    "blast": {
+      "valence": -0.666,
+      "arousal": 0.858,
+      "dominance": 0.554
+    },
+    "shoot": {
+      "valence": -0.816,
+      "arousal": 0.852,
+      "dominance": 0.25
+    },
+    "challenge": {
+      "valence": -0.062,
+      "arousal": 0.844,
+      "dominance": 0.426
+    },
+    "gun": {
+      "valence": -0.706,
+      "arousal": 0.84,
+      "dominance": 0.426
+    },
+    "chair": {
+      "valence": 0.124,
+      "arousal": -0.836,
+      "dominance": -0.448
+    },
+    "porn": {
+      "valence": -0.312,
+      "arousal": 0.83,
+      "dominance": -0.158
+    },
+    "bomb": {
+      "valence": -0.666,
+      "arousal": 0.824,
+      "dominance": 0.5
+    },
+    "canvas": {
+      "valence": 0.438,
+      "arousal": -0.82,
+      "dominance": -0.272
+    },
+    "revolution": {
+      "valence": -0.166,
+      "arousal": 0.804,
+      "dominance": 0.596
+    },
+    "devil": {
+      "valence": -0.678,
+      "arousal": 0.8,
+      "dominance": 0.222
+    },
+    "emergency": {
+      "valence": -0.6,
+      "arousal": 0.8,
+      "dominance": 0.142
+    },
+    "action": {
+      "valence": 0.52,
+      "arousal": 0.796,
+      "dominance": 0.604
+    },
+    "basic": {
+      "valence": 0.286,
+      "arousal": -0.796,
+      "dominance": -0.21
+    },
+    "up": {
+      "valence": 0.63,
+      "arousal": 0.792,
+      "dominance": 0.556
+    },
+    "burst": {
+      "valence": -0.688,
+      "arousal": 0.788,
+      "dominance": 0.69
+    },
+    "books": {
+      "valence": 0.458,
+      "arousal": -0.77,
+      "dominance": -0.14
+    },
+    "explode": {
+      "valence": -0.446,
+      "arousal": 0.77,
+      "dominance": 0.546
+    },
+    "impact": {
+      "valence": -0.062,
+      "arousal": 0.768,
+      "dominance": 0.552
+    },
+    "noise": {
+      "valence": -0.48,
+      "arousal": 0.766,
+      "dominance": -0.224
+    },
+    "natural": {
+      "valence": 0.708,
+      "arousal": -0.764,
+      "dominance": 0.021
+    },
+    "stab": {
+      "valence": -0.666,
+      "arousal": 0.764,
+      "dominance": 0.19
+    },
+    "tree": {
+      "valence": 0.34,
+      "arousal": -0.764,
+      "dominance": -0.116
+    },
+    "library": {
+      "valence": 0.552,
+      "arousal": -0.756,
+      "dominance": 0.098
+    },
+    "comb": {
+      "valence": -0.02,
+      "arousal": -0.754,
+      "dominance": -0.464
+    },
+    "paper": {
+      "valence": 0.04,
+      "arousal": -0.754,
+      "dominance": -0.414
+    },
+    "categories": {
+      "valence": 0.167,
+      "arousal": -0.75,
+      "dominance": 0.519
+    },
+    "under": {
+      "valence": 0.0,
+      "arousal": -0.75,
+      "dominance": -0.5
+    },
+    "vertices": {
+      "valence": 0.0,
+      "arousal": -0.75,
+      "dominance": 0.222
+    },
+    "common": {
+      "valence": 0.2,
+      "arousal": -0.746,
+      "dominance": -0.364
+    },
+    "emotion": {
+      "valence": 0.386,
+      "arousal": 0.746,
+      "dominance": 0.392
+    },
+    "normal": {
+      "valence": 0.48,
+      "arousal": -0.746,
+      "dominance": -0.24
+    },
+    "pray": {
+      "valence": 0.428,
+      "arousal": -0.746,
+      "dominance": 0.254
+    },
+    "simple": {
+      "valence": 0.306,
+      "arousal": -0.74,
+      "dominance": -0.372
+    },
+    "orange": {
+      "valence": 0.292,
+      "arousal": -0.736,
+      "dominance": -0.408
+    },
+    "cloud": {
+      "valence": 0.48,
+      "arousal": -0.734,
+      "dominance": -0.316
+    },
+    "desk": {
+      "valence": 0.02,
+      "arousal": -0.73,
+      "dominance": -0.156
+    },
+    "house": {
+      "valence": 0.174,
+      "arousal": -0.73,
+      "dominance": 0.066
+    },
+    "jump": {
+      "valence": 0.25,
+      "arousal": 0.73,
+      "dominance": 0.222
+    },
+    "seed": {
+      "valence": 0.312,
+      "arousal": -0.73,
+      "dominance": -0.388
+    },
+    "success": {
+      "valence": 0.918,
+      "arousal": 0.76,
+      "dominance": 0.981
+    },
+    "submitted": {
+      "valence": -0.292,
+      "arousal": -0.5,
+      "dominance": -0.958
+    },
+    "weak": {
+      "valence": -0.64,
+      "arousal": -0.518,
+      "dominance": -0.955
+    },
+    "power": {
+      "valence": 0.438,
+      "arousal": 0.34,
+      "dominance": 0.953
+    },
+    "boss": {
+      "valence": -0.38,
+      "arousal": 0.254,
+      "dominance": 0.932
+    },
+    "empty": {
+      "valence": -0.624,
+      "arousal": -0.634,
+      "dominance": -0.919
+    },
+    "idle": {
+      "valence": -0.642,
+      "arousal": -0.666,
+      "dominance": -0.888
+    },
+    "authority": {
+      "valence": 0.184,
+      "arousal": 0.184,
+      "dominance": 0.868
+    },
+    "leader": {
+      "valence": 0.666,
+      "arousal": 0.164,
+      "dominance": 0.852
+    },
+    "smart": {
+      "valence": 0.812,
+      "arousal": 0.214,
+      "dominance": 0.846
+    },
+    "low": {
+      "valence": -0.416,
+      "arousal": -0.56,
+      "dominance": -0.844
+    },
+    "secure": {
+      "valence": 0.688,
+      "arousal": -0.24,
+      "dominance": 0.828
+    },
+    "expert": {
+      "valence": 0.552,
+      "arousal": 0.292,
+      "dominance": 0.822
+    },
+    "absolute": {
+      "valence": 0.052,
+      "arousal": 0.02,
+      "dominance": 0.82
+    },
+    "force": {
+      "valence": 0.224,
+      "arousal": 0.5,
+      "dominance": 0.81
+    },
+    "rich": {
+      "valence": 0.764,
+      "arousal": 0.254,
+      "dominance": 0.81
+    },
+    "lazy": {
+      "valence": -0.216,
+      "arousal": -0.472,
+      "dominance": -0.808
+    },
+    "fighter": {
+      "valence": 0.274,
+      "arousal": 0.52,
+      "dominance": 0.796
+    },
+    "king": {
+      "valence": 0.354,
+      "arousal": 0.38,
+      "dominance": 0.784
+    },
+    "wise": {
+      "valence": 0.756,
+      "arousal": -0.5,
+      "dominance": 0.769
+    },
+    "small": {
+      "valence": 0.084,
+      "arousal": -0.59,
+      "dominance": -0.76
+    },
+    "tiny": {
+      "valence": -0.042,
+      "arousal": -0.608,
+      "dominance": -0.75
+    },
+    "lowest": {
+      "valence": -0.376,
+      "arousal": -0.392,
+      "dominance": -0.742
+    },
+    "loud": {
+      "valence": 0.146,
+      "arousal": 0.3,
+      "dominance": 0.74
+    },
+    "void": {
+      "valence": -0.73,
+      "arousal": -0.674,
+      "dominance": -0.74
+    },
+    "chief": {
+      "valence": 0.04,
+      "arousal": 0.088,
+      "dominance": 0.738
+    },
+    "failure": {
+      "valence": -0.666,
+      "arousal": 0.15,
+      "dominance": -0.722
+    },
+    "strength": {
+      "valence": 0.604,
+      "arousal": 0.364,
+      "dominance": 0.716
+    },
+    "wealth": {
+      "valence": 0.714,
+      "arousal": 0.274,
+      "dominance": 0.716
+    },
+    "general": {
+      "valence": 0.668,
+      "arousal": -0.032,
+      "dominance": 0.706
+    },
+    "sad": {
+      "valence": -0.55,
+      "arousal": -0.334,
+      "dominance": -0.702
+    },
+    "command": {
+      "valence": -0.146,
+      "arousal": 0.58,
+      "dominance": 0.698
+    },
+    "master": {
+      "valence": 0.388,
+      "arousal": -0.02,
+      "dominance": 0.698
+    },
+    "slave": {
+      "valence": -0.658,
+      "arousal": 0.59,
+      "dominance": -0.698
+    },
+    "fail": {
+      "valence": -0.646,
+      "arousal": 0.156,
+      "dominance": -0.692
+    },
+    "trash": {
+      "valence": -0.674,
+      "arousal": 0.082,
+      "dominance": -0.692
+    },
+    "minor": {
+      "valence": -0.5,
+      "arousal": -0.004,
+      "dominance": -0.65
+    },
+    "assert": {
+      "valence": 0.5,
+      "arousal": 0.238,
+      "dominance": 0.618
+    },
+    "complete": {
+      "valence": 0.5,
+      "arousal": -0.172,
+      "dominance": 0.618
+    },
+    "control": {
+      "valence": 0.458,
+      "arousal": -0.296,
+      "dominance": 0.616
+    },
+    "minimum": {
+      "valence": -0.24,
+      "arousal": -0.604,
+      "dominance": -0.612
+    },
+    "huge": {
+      "valence": 0.146,
+      "arousal": 0.25,
+      "dominance": 0.566
+    },
+    "elite": {
+      "valence": 0.376,
+      "arousal": 0.408,
+      "dominance": 0.474
+    },
+    "spent": {
+      "valence": -0.408,
+      "arousal": -0.408,
+      "dominance": -0.474
+    },
+    "will": {
+      "valence": 0.396,
+      "arousal": -0.184,
+      "dominance": 0.47
+    },
+    "firm": {
+      "valence": 0.27,
+      "arousal": -0.24,
+      "dominance": 0.456
+    },
+    "drive": {
+      "valence": 0.25,
+      "arousal": 0.378,
+      "dominance": 0.426
+    },
+    "bottom": {
+      "valence": -0.166,
+      "arousal": -0.26,
+      "dominance": -0.418
+    },
+    "grim": {
+      "valence": -0.38,
+      "arousal": -0.034,
+      "dominance": -0.404
+    },
+    "rank": {
+      "valence": 0.062,
+      "arousal": -0.24,
+      "dominance": 0.372
+    },
+    "lord": {
+      "valence": 0.236,
+      "arousal": -0.346,
+      "dominance": 0.368
+    },
+    "flash": {
+      "valence": 0.142,
+      "arousal": 0.18,
+      "dominance": 0.314
+    },
+    "submission": {
+      "valence": 0.062,
+      "arousal": 0.16,
+      "dominance": 0.266
+    },
+    "might": {
+      "valence": 0.143,
+      "arousal": 0.963,
+      "dominance": 1.0
+    },
+    "leading": {
+      "valence": 0.646,
+      "arousal": 0.396,
+      "dominance": 0.954
+    },
+    "ax": {
+      "valence": -0.667,
+      "arousal": 0.667,
+      "dominance": 0.952
+    },
+    "capabilities": {
+      "valence": 0.741,
+      "arousal": 0.0,
+      "dominance": 0.952
+    },
+    "companies": {
+      "valence": 0.042,
+      "arousal": 0.619,
+      "dominance": 0.889
+    },
+    "professional": {
+      "valence": 0.666,
+      "arousal": -0.106,
+      "dominance": 0.886
+    },
+    "owner": {
+      "valence": 0.552,
+      "arousal": -0.102,
+      "dominance": 0.84
+    },
+    "strategy": {
+      "valence": 0.408,
+      "arousal": 0.334,
+      "dominance": 0.836
+    },
+    "producer": {
+      "valence": 0.118,
+      "arousal": 0.122,
+      "dominance": 0.834
+    },
+    "director": {
+      "valence": 0.376,
+      "arousal": 0.16,
+      "dominance": 0.824
+    },
+    "competitive": {
+      "valence": -0.106,
+      "arousal": 0.436,
+      "dominance": 0.816
+    },
+    "experience": {
+      "valence": 0.654,
+      "arousal": 0.236,
+      "dominance": 0.81
+    },
+    "manager": {
+      "valence": 0.25,
+      "arousal": 0.098,
+      "dominance": 0.794
+    },
+    "knowledge": {
+      "valence": 0.694,
+      "arousal": -0.14,
+      "dominance": 0.792
+    },
+    "organisation": {
+      "valence": 0.5,
+      "arousal": 0.667,
+      "dominance": 0.792
+    },
+    "approval": {
+      "valence": 0.708,
+      "arousal": -0.08,
+      "dominance": 0.778
+    },
+    "worth": {
+      "valence": 0.744,
+      "arousal": 0.02,
+      "dominance": 0.778
+    },
+    "legal": {
+      "valence": 0.306,
+      "arousal": -0.226,
+      "dominance": 0.774
+    },
+    "forces": {
+      "valence": 0.102,
+      "arousal": 0.372,
+      "dominance": 0.772
+    },
+    "god": {
+      "valence": 0.516,
+      "arousal": 0.036,
+      "dominance": 0.772
+    },
+    "increase": {
+      "valence": 0.62,
+      "arousal": 0.314,
+      "dominance": 0.772
+    },
+    "intelligence": {
+      "valence": 0.666,
+      "arousal": 0.174,
+      "dominance": 0.77
+    },
+    "less": {
+      "valence": -0.47,
+      "arousal": -0.52,
+      "dominance": -0.77
+    },
+    "teacher": {
+      "valence": 0.52,
+      "arousal": -0.192,
+      "dominance": 0.77
+    },
+    "highlight": {
+      "valence": 0.688,
+      "arousal": 0.274,
+      "dominance": 0.764
+    },
+    "realm": {
+      "valence": 0.416,
+      "arousal": 0.018,
+      "dominance": 0.756
+    },
+    "strict": {
+      "valence": 0.0,
+      "arousal": 0.292,
+      "dominance": 0.756
+    },
+    "progress": {
+      "valence": 0.635,
+      "arousal": 0.284,
+      "dominance": 0.754
+    },
+    "political": {
+      "valence": -0.306,
+      "arousal": 0.46,
+      "dominance": 0.75
+    },
+    "precision": {
+      "valence": 0.354,
+      "arousal": -0.138,
+      "dominance": 0.75
+    },
+    "major": {
+      "valence": 0.368,
+      "arousal": 0.076,
+      "dominance": 0.748
+    },
+    "selector": {
+      "valence": 0.0,
+      "arousal": 0.381,
+      "dominance": 0.741
+    },
+    "mission": {
+      "valence": 0.53,
+      "arousal": 0.266,
+      "dominance": 0.74
+    },
+    "controller": {
+      "valence": -0.062,
+      "arousal": 0.424,
+      "dominance": 0.736
+    },
+    "upper": {
+      "valence": 0.48,
+      "arousal": 0.058,
+      "dominance": 0.736
+    },
+    "developer": {
+      "valence": 0.688,
+      "arousal": 0.306,
+      "dominance": 0.728
+    },
+    "generator": {
+      "valence": 0.408,
+      "arousal": 0.136,
+      "dominance": 0.728
+    },
+    "doctor": {
+      "valence": 0.4,
+      "arousal": 0.062,
+      "dominance": 0.722
+    },
+    "guided": {
+      "valence": 0.667,
+      "arousal": 0.667,
+      "dominance": -0.722
+    },
+    "handler": {
+      "valence": -0.122,
+      "arousal": 0.186,
+      "dominance": 0.722
+    },
+    "represent": {
+      "valence": 0.562,
+      "arousal": -0.134,
+      "dominance": 0.722
+    },
+    "us": {
+      "valence": 0.333,
+      "arousal": 0.0,
+      "dominance": 0.722
+    },
+    "fort": {
+      "valence": 0.56,
+      "arousal": 0.346,
+      "dominance": 0.72
+    },
+    "parent": {
+      "valence": 0.624,
+      "arousal": -0.286,
+      "dominance": 0.72
+    },
+    "advance": {
+      "valence": 0.346,
+      "arousal": -0.056,
+      "dominance": 0.716
+    },
+    "judge": {
+      "valence": 0.02,
+      "arousal": 0.208,
+      "dominance": 0.714
+    },
+    "admin": {
+      "valence": 0.376,
+      "arousal": -0.16,
+      "dominance": 0.708
+    }
+  },
+  "axis_names": [
+    "valence",
+    "arousal",
+    "dominance"
+  ]
+}

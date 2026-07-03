@@ -1,0 +1,37 @@
+E3 Experiment: VAD Axis Geometry and Cross-Lingual Emotion Clustering
+================================================================================
+
+Purpose
+-------
+Compare English-only vs Chinese-only pole lexicons (N=50 words per pole, six poles)
+on: (1) axis orthogonality; (2) cross-lingual emotion-cluster cohesion vs a
+shared random 3-D baseline.
+
+Model and projection
+--------------------
+- Model: Qwen2.5-0.5B (same as E1)
+- Axes: axis_d = normalize(mean(pos_pole) - mean(neg_pole)) for V/A/D
+- Scaled coordinate: raw = normalize(emb) · axis; score = raw × scale + bias
+- Random baseline (shared): per cluster, 100 trials; one random 3-D orthonormal
+  basis per trial; no AdaptiveScaler. Same value for both rows.
+
+Conditions
+----------
+1. EN-only: E1 English B1 pole_50 + scaler from E1 report.
+2. ZH-only: E1 Chinese B1 pole_50 + scaler from E1 report.
+
+Emotion clusters (5 × 5 languages, all single-token)
+------------------------------------------------------
+terror, comfort, boss, strength, zen — see E3/data/clusters.json.
+
+Results summary
+---------------
+                    |cos(V,A)| |cos(A,D)| |cos(V,D)| cluster cos (rand.)
+EN-only             0.151      0.194      0.153      0.913 (0.410)
+ZH-only             0.220      0.116      0.186      0.898 (0.410)
+
+Interpretation
+--------------
+Both monolingual pole constructions yield cluster cohesion well above the shared
+random baseline, supporting that mined VAD subspaces capture cross-lingual
+emotion structure under either English or Chinese pole anchors.

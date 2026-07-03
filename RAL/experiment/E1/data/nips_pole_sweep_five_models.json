@@ -1,0 +1,36 @@
+{
+  "source": "NIPS2026/appendix_nrc_readout.tex (Fig. nrc_pole_sweep); chart/B1/data/pole_sweep_mean_rho.json @ finalV1",
+  "description": "Five-model Spearman min/mean/max vs pole_n (Gemma2.2-2B, Llama3.2-3B, Mistral-7B-v0.3, Qwen2.5-7B, Llama3.1-8B). Band only; excludes Qwen2.5-0.5B E1 model.",
+  "dimensions": {
+    "valence": [
+      {"pole_n": 10, "mean_rho": 0.7314, "min_rho": 0.6832, "max_rho": 0.7898},
+      {"pole_n": 20, "mean_rho": 0.7407, "min_rho": 0.7031, "max_rho": 0.7699},
+      {"pole_n": 30, "mean_rho": 0.7641, "min_rho": 0.7519, "max_rho": 0.7861},
+      {"pole_n": 40, "mean_rho": 0.7686, "min_rho": 0.7544, "max_rho": 0.7945},
+      {"pole_n": 50, "mean_rho": 0.7848, "min_rho": 0.7552, "max_rho": 0.8023},
+      {"pole_n": 60, "mean_rho": 0.7873, "min_rho": 0.7592, "max_rho": 0.8038},
+      {"pole_n": 70, "mean_rho": 0.7907, "min_rho": 0.7519, "max_rho": 0.811},
+      {"pole_n": 80, "mean_rho": 0.782, "min_rho": 0.7467, "max_rho": 0.8134}
+    ],
+    "arousal": [
+      {"pole_n": 10, "mean_rho": 0.4922, "min_rho": 0.37, "max_rho": 0.611},
+      {"pole_n": 20, "mean_rho": 0.5478, "min_rho": 0.4587, "max_rho": 0.614},
+      {"pole_n": 30, "mean_rho": 0.6708, "min_rho": 0.5952, "max_rho": 0.7073},
+      {"pole_n": 40, "mean_rho": 0.749, "min_rho": 0.6364, "max_rho": 0.8047},
+      {"pole_n": 50, "mean_rho": 0.7692, "min_rho": 0.6504, "max_rho": 0.8278},
+      {"pole_n": 60, "mean_rho": 0.7899, "min_rho": 0.7419, "max_rho": 0.8197},
+      {"pole_n": 70, "mean_rho": 0.7827, "min_rho": 0.7628, "max_rho": 0.8114},
+      {"pole_n": 80, "mean_rho": 0.7798, "min_rho": 0.7528, "max_rho": 0.8084}
+    ],
+    "dominance": [
+      {"pole_n": 10, "mean_rho": 0.4764, "min_rho": 0.4409, "max_rho": 0.5442},
+      {"pole_n": 20, "mean_rho": 0.4948, "min_rho": 0.3951, "max_rho": 0.5759},
+      {"pole_n": 30, "mean_rho": 0.5277, "min_rho": 0.4958, "max_rho": 0.5562},
+      {"pole_n": 40, "mean_rho": 0.5989, "min_rho": 0.5482, "max_rho": 0.6543},
+      {"pole_n": 50, "mean_rho": 0.6435, "min_rho": 0.5674, "max_rho": 0.7081},
+      {"pole_n": 60, "mean_rho": 0.6578, "min_rho": 0.5725, "max_rho": 0.7291},
+      {"pole_n": 70, "mean_rho": 0.6862, "min_rho": 0.6019, "max_rho": 0.7517},
+      {"pole_n": 80, "mean_rho": 0.6852, "min_rho": 0.6297, "max_rho": 0.7295}
+    ]
+  }
+}

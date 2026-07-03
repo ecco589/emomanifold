@@ -24,8 +24,12 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 LOG_DIR = PROJECT_ROOT / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 
-# 情感维度配置
+# 情感维度配置（默认 2D；qwen 使用 3D VAD）
 EMOTION_DIMENSIONS = ["valence", "arousal"]
+EMOTION_DIMENSIONS_3D = ["valence", "arousal", "dominance"]
+
+# 流式/默认主模型（可通过环境变量 EMOTION_MODEL 覆盖）
+DEFAULT_STREAM_MODEL = "qwen"
 
 
 class ModelConfig:
@@ -47,6 +51,21 @@ class ModelConfig:
                 else Path.home() / ".cache" / "modelscope" / "hub" / "models" / "PaddlePaddle" / "ERNIE-4.5-0.3B-PT"
             ),
             "is_bidirectional": True,
+            "emotion_dimensions": ["valence", "arousal"],
+            "vad_lexicon": VAD_LEXICON_DIR / "vad_lexicon_chinese_ernie.json",
+            "use_causal_lm": True,
+        },
+        "qwen": {
+            "model_name": "Qwen/Qwen2.5-0.5B",
+            "local_path": (
+                MODEL_CACHE_DIR / "Qwen" / "Qwen2.5-0.5B"
+                if (MODEL_CACHE_DIR / "Qwen" / "Qwen2.5-0.5B").exists()
+                else Path.home() / ".cache" / "modelscope" / "hub" / "models" / "Qwen" / "Qwen2.5-0.5B"
+            ),
+            "is_bidirectional": False,
+            "emotion_dimensions": ["valence", "arousal", "dominance"],
+            "vad_lexicon": VAD_LEXICON_DIR / "vad_lexicon_chinese_qwen.json",
+            "use_causal_lm": True,
         },
         "glm": {
             "model_name": "ZhipuAI/chatglm3-6b",
@@ -60,7 +79,7 @@ class ModelConfig:
         初始化模型配置
         
         Args:
-            model_name: 模型名称 ('deepseek', 'ernie', 'glm')
+            model_name: 模型名称 ('deepseek', 'ernie', 'qwen', 'glm')
         """
         if model_name not in self.MODELS:
             raise ValueError(f"不支持的模型: {model_name}，支持的模型: {list(self.MODELS.keys())}")
@@ -82,6 +101,21 @@ class ModelConfig:
     def is_bidirectional(self) -> bool:
         """是否为双向模型"""
         return self.config["is_bidirectional"]
+
+    @property
+    def emotion_dimensions(self) -> list:
+        """该模型使用的情感维度列表"""
+        return self.config.get("emotion_dimensions", EMOTION_DIMENSIONS)
+
+    @property
+    def vad_lexicon_path(self) -> Path:
+        """模型对应的 VAD 词库路径"""
+        return self.config.get("vad_lexicon", VAD_LEXICON_DIR / "vad_lexicon_chinese.json")
+
+    @property
+    def use_causal_lm(self) -> bool:
+        """流式/chat 场景是否使用 CausalLM"""
+        return self.config.get("use_causal_lm", not self.is_bidirectional)
     
     def is_available(self) -> bool:
         """检查模型是否可用（路径是否存在）"""
@@ -99,8 +133,13 @@ class ModelConfig:
         return list(cls.MODELS.keys())
 
 
+def get_active_model() -> str:
+    import os
+    return os.environ.get("EMOTION_MODEL", DEFAULT_STREAM_MODEL)
+
+
 # 默认模型配置（向后兼容）
-CURRENT_MODEL = "glm"
+CURRENT_MODEL = get_active_model()
 _default_config = ModelConfig(CURRENT_MODEL)
 MODEL_NAME = _default_config.model_id
 MODEL_LOCAL_PATH = _default_config.local_path

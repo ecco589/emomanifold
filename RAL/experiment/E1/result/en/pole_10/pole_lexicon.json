@@ -1,0 +1,381 @@
+{
+  "description": "E1 pole lexicon (en); NIPS B1 rules; bipolar [-1,1]",
+  "language": "en",
+  "normalized_to_minus_one_one": true,
+  "word_groups": {
+    "valence_positive": [
+      "love",
+      "joy",
+      "happy",
+      "hope",
+      "peace",
+      "great",
+      "fun",
+      "content",
+      "beautiful",
+      "nice"
+    ],
+    "valence_negative": [
+      "pain",
+      "death",
+      "evil",
+      "loss",
+      "war",
+      "hell",
+      "panic",
+      "terror",
+      "destroy",
+      "enemy"
+    ],
+    "arousal_high": [
+      "alarm",
+      "stress",
+      "wild",
+      "violent",
+      "urgent",
+      "rush",
+      "fight",
+      "irate",
+      "killer",
+      "terrorism"
+    ],
+    "arousal_low": [
+      "quiet",
+      "sleep",
+      "soft",
+      "slow",
+      "nap",
+      "stable",
+      "steady",
+      "silent",
+      "chair",
+      "canvas"
+    ],
+    "dominance_high": [
+      "power",
+      "control",
+      "master",
+      "boss",
+      "leader",
+      "command",
+      "authority",
+      "strength",
+      "mighty",
+      "king"
+    ],
+    "dominance_low": [
+      "weak",
+      "small",
+      "slave",
+      "failure",
+      "empty",
+      "low",
+      "lazy",
+      "idle",
+      "less",
+      "chalk"
+    ]
+  },
+  "words": {
+    "love": {
+      "valence": 1.0,
+      "arousal": 0.038,
+      "dominance": 0.346
+    },
+    "joy": {
+      "valence": 0.96,
+      "arousal": 0.648,
+      "dominance": 0.588
+    },
+    "happy": {
+      "valence": 1.0,
+      "arousal": 0.47,
+      "dominance": 0.544
+    },
+    "hope": {
+      "valence": 0.854,
+      "arousal": -0.366,
+      "dominance": 0.478
+    },
+    "peace": {
+      "valence": 0.878,
+      "arousal": -0.688,
+      "dominance": 0.226
+    },
+    "great": {
+      "valence": 0.916,
+      "arousal": 0.33,
+      "dominance": 0.62
+    },
+    "fun": {
+      "valence": 0.836,
+      "arousal": 0.686,
+      "dominance": 0.334
+    },
+    "content": {
+      "valence": 0.528,
+      "arousal": -0.408,
+      "dominance": 0.118
+    },
+    "beautiful": {
+      "valence": 0.75,
+      "arousal": 0.228,
+      "dominance": 0.296
+    },
+    "nice": {
+      "valence": 0.86,
+      "arousal": -0.116,
+      "dominance": 0.3
+    },
+    "pain": {
+      "valence": -0.976,
+      "arousal": 0.53,
+      "dominance": -0.21
+    },
+    "death": {
+      "valence": -0.938,
+      "arousal": 0.44,
+      "dominance": -0.056
+    },
+    "evil": {
+      "valence": -0.92,
+      "arousal": 0.654,
+      "dominance": 0.09
+    },
+    "loss": {
+      "valence": -0.876,
+      "arousal": 0.134,
+      "dominance": -0.578
+    },
+    "war": {
+      "valence": -0.956,
+      "arousal": 0.784,
+      "dominance": 0.454
+    },
+    "hell": {
+      "valence": -0.96,
+      "arousal": 0.836,
+      "dominance": 0.13
+    },
+    "panic": {
+      "valence": -0.876,
+      "arousal": 0.876,
+      "dominance": -0.2
+    },
+    "terror": {
+      "valence": -0.862,
+      "arousal": 0.804,
+      "dominance": -0.17
+    },
+    "destroy": {
+      "valence": -0.908,
+      "arousal": 0.87,
+      "dominance": 0.27
+    },
+    "enemy": {
+      "valence": -0.73,
+      "arousal": 0.588,
+      "dominance": 0.182
+    },
+    "alarm": {
+      "valence": -0.518,
+      "arousal": 0.764,
+      "dominance": 0.396
+    },
+    "stress": {
+      "valence": -0.654,
+      "arousal": 0.686,
+      "dominance": -0.366
+    },
+    "wild": {
+      "valence": -0.376,
+      "arousal": 0.844,
+      "dominance": 0.5
+    },
+    "violent": {
+      "valence": -0.776,
+      "arousal": 0.836,
+      "dominance": 0.232
+    },
+    "urgent": {
+      "valence": -0.346,
+      "arousal": 0.836,
+      "dominance": 0.246
+    },
+    "rush": {
+      "valence": -0.188,
+      "arousal": 0.618,
+      "dominance": 0.092
+    },
+    "fight": {
+      "valence": 0.062,
+      "arousal": 0.736,
+      "dominance": 0.618
+    },
+    "irate": {
+      "valence": -0.624,
+      "arousal": 0.704,
+      "dominance": -0.052
+    },
+    "killer": {
+      "valence": -0.918,
+      "arousal": 0.942,
+      "dominance": 0.086
+    },
+    "terrorism": {
+      "valence": -0.88,
+      "arousal": 0.942,
+      "dominance": 0.346
+    },
+    "quiet": {
+      "valence": 0.584,
+      "arousal": -0.79,
+      "dominance": -0.138
+    },
+    "sleep": {
+      "valence": 0.438,
+      "arousal": -0.82,
+      "dominance": -0.322
+    },
+    "soft": {
+      "valence": 0.52,
+      "arousal": -0.642,
+      "dominance": -0.536
+    },
+    "slow": {
+      "valence": -0.286,
+      "arousal": -0.854,
+      "dominance": -0.738
+    },
+    "nap": {
+      "valence": 0.32,
+      "arousal": -0.804,
+      "dominance": -0.316
+    },
+    "stable": {
+      "valence": 0.45,
+      "arousal": -0.592,
+      "dominance": 0.47
+    },
+    "steady": {
+      "valence": 0.36,
+      "arousal": -0.628,
+      "dominance": 0.526
+    },
+    "silent": {
+      "valence": -0.062,
+      "arousal": -0.75,
+      "dominance": -0.44
+    },
+    "chair": {
+      "valence": 0.124,
+      "arousal": -0.836,
+      "dominance": -0.448
+    },
+    "canvas": {
+      "valence": 0.438,
+      "arousal": -0.82,
+      "dominance": -0.272
+    },
+    "power": {
+      "valence": 0.438,
+      "arousal": 0.34,
+      "dominance": 0.906
+    },
+    "control": {
+      "valence": 0.458,
+      "arousal": -0.296,
+      "dominance": 0.616
+    },
+    "master": {
+      "valence": 0.388,
+      "arousal": -0.02,
+      "dominance": 0.698
+    },
+    "boss": {
+      "valence": -0.38,
+      "arousal": 0.254,
+      "dominance": 0.908
+    },
+    "leader": {
+      "valence": 0.666,
+      "arousal": 0.164,
+      "dominance": 0.852
+    },
+    "command": {
+      "valence": -0.146,
+      "arousal": 0.58,
+      "dominance": 0.698
+    },
+    "authority": {
+      "valence": 0.184,
+      "arousal": 0.184,
+      "dominance": 0.868
+    },
+    "strength": {
+      "valence": 0.604,
+      "arousal": 0.364,
+      "dominance": 0.716
+    },
+    "mighty": {
+      "valence": 0.71,
+      "arousal": 0.674,
+      "dominance": 0.872
+    },
+    "king": {
+      "valence": 0.354,
+      "arousal": 0.38,
+      "dominance": 0.784
+    },
+    "weak": {
+      "valence": -0.64,
+      "arousal": -0.518,
+      "dominance": -0.91
+    },
+    "small": {
+      "valence": 0.084,
+      "arousal": -0.59,
+      "dominance": -0.76
+    },
+    "slave": {
+      "valence": -0.658,
+      "arousal": 0.59,
+      "dominance": -0.698
+    },
+    "failure": {
+      "valence": -0.666,
+      "arousal": 0.15,
+      "dominance": -0.722
+    },
+    "empty": {
+      "valence": -0.624,
+      "arousal": -0.634,
+      "dominance": -0.838
+    },
+    "low": {
+      "valence": -0.416,
+      "arousal": -0.56,
+      "dominance": -0.796
+    },
+    "lazy": {
+      "valence": -0.216,
+      "arousal": -0.472,
+      "dominance": -0.808
+    },
+    "idle": {
+      "valence": -0.642,
+      "arousal": -0.666,
+      "dominance": -0.776
+    },
+    "less": {
+      "valence": -0.47,
+      "arousal": -0.52,
+      "dominance": -0.77
+    },
+    "chalk": {
+      "valence": -0.23,
+      "arousal": -0.63,
+      "dominance": -0.758
+    }
+  }
+}

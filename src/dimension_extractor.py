@@ -30,18 +30,22 @@ class DimensionExtractor:
         if isinstance(self.output_embedding, torch.Tensor):
             self.output_embedding = self.output_embedding.to(self.device)
         
-    def load_vad_lexicon(self, lexicon_path=None):
+    def load_vad_lexicon(self, lexicon_path=None, model_name: Optional[str] = None):
         """
         加载 VAD 词库
         
         Args:
-            lexicon_path: 词库文件路径，默认使用config中的路径
+            lexicon_path: 词库文件路径，默认按 model_name 或 config 选择
+            model_name: 模型名（ernie / qwen），用于选择 model-specific 词库
             
         Returns:
             Dict: 包含正负效价词、高低唤醒度词的字典
         """
         if lexicon_path is None:
-            lexicon_path = config.VAD_LEXICON_DIR / "vad_lexicon_chinese.json"
+            if model_name:
+                lexicon_path = config.ModelConfig(model_name).vad_lexicon_path
+            else:
+                lexicon_path = config.VAD_LEXICON_DIR / "vad_lexicon_chinese.json"
         
         lexicon_path = Path(lexicon_path)
         
@@ -217,30 +221,65 @@ class DimensionExtractor:
         
         return arousal_dim
     
-    def extract_all_dimensions(self, vad_lexicon: Dict) -> Dict[str, torch.Tensor]:
+    def extract_dominance_dimension(self, high_words: List[str],
+                                    low_words: List[str]) -> torch.Tensor:
+        """
+        提取 Dominance（支配度）维度
+        
+        Args:
+            high_words: 高支配度词列表
+            low_words: 低支配度词列表
+            
+        Returns:
+            torch.Tensor: Dominance 维度向量 [hidden_dim]
+        """
+        print(f"提取 Dominance 维度...")
+        print(f"  高支配度词: {len(high_words)} 个")
+        print(f"  低支配度词: {len(low_words)} 个")
+        
+        high_embedding = self.get_word_cluster_embedding(high_words)
+        low_embedding = self.get_word_cluster_embedding(low_words)
+        
+        dominance_dim = high_embedding - low_embedding
+        dominance_dim = dominance_dim / (torch.norm(dominance_dim) + 1e-8)
+        
+        print(f"  Dominance 维度提取完成，向量范数: {torch.norm(dominance_dim):.4f}")
+        
+        return dominance_dim
+    
+    def extract_all_dimensions(self, vad_lexicon: Dict, dimensions: Optional[List[str]] = None) -> Dict[str, torch.Tensor]:
         """
         提取所有情感维度
         
         Args:
             vad_lexicon: VAD 词库字典
+            dimensions: 要提取的维度名列表，默认 valence + arousal
             
         Returns:
             Dict: 包含所有维度向量的字典
         """
         word_groups = vad_lexicon.get('word_groups', {})
+        dims = dimensions or config.EMOTION_DIMENSIONS
         
-        # 提取 Valence 维度
-        valence_dim = self.extract_valence_dimension(
-            word_groups.get('valence_positive', []),
-            word_groups.get('valence_negative', [])
-        )
-        self.dimensions['valence'] = valence_dim
+        if 'valence' in dims:
+            valence_dim = self.extract_valence_dimension(
+                word_groups.get('valence_positive', []),
+                word_groups.get('valence_negative', [])
+            )
+            self.dimensions['valence'] = valence_dim
         
-        # 提取 Arousal 维度
-        arousal_dim = self.extract_arousal_dimension(
-            word_groups.get('arousal_high', []),
-            word_groups.get('arousal_low', [])
-        )
-        self.dimensions['arousal'] = arousal_dim
+        if 'arousal' in dims:
+            arousal_dim = self.extract_arousal_dimension(
+                word_groups.get('arousal_high', []),
+                word_groups.get('arousal_low', [])
+            )
+            self.dimensions['arousal'] = arousal_dim
+        
+        if 'dominance' in dims:
+            dominance_dim = self.extract_dominance_dimension(
+                word_groups.get('dominance_high', []),
+                word_groups.get('dominance_low', [])
+            )
+            self.dimensions['dominance'] = dominance_dim
         
         return self.dimensions

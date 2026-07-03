@@ -1,6 +1,6 @@
 """
-流式 ERNIE 聊天 + 逐 token VAD 投影 + 表情权重。
-供 stream_ernie_vad_ui 等复用。
+流式 Chat LM（ERNIE / Qwen）+ 逐 token VAD 投影 + 表情权重。
+供 stream_ernie_vad_ui 等复用。默认模型见 config.DEFAULT_STREAM_MODEL，可用 EMOTION_MODEL 切换。
 """
 from typing import Iterator, Tuple, Dict, List, Optional
 
@@ -103,10 +103,12 @@ def generate_with_face_stream(
 
 
 def load_chat_model_and_projector(
-    model_name: str = "ernie",
+    model_name: Optional[str] = None,
     device: Optional[str] = None,
 ):
-    """加载 CausalLM 以及 VAD 投影器（ERNIE chat 场景）。"""
+    """加载 CausalLM 以及 VAD 投影器（ERNIE / Qwen chat 场景）。"""
+    if model_name is None:
+        model_name = config.get_active_model()
     model_config = config.ModelConfig(model_name)
     if not model_config.is_available():
         raise FileNotFoundError(f"模型不可用: {model_config.local_path}")
@@ -114,7 +116,7 @@ def load_chat_model_and_projector(
     model_path = str(model_config.local_path)
     if device is None:
         device = "cpu"
-    if device == "mps" and model_name == "ernie":
+    if device == "mps" and model_name in ("ernie",):
         device = "cpu"
 
     print(f"加载模型: {model_path}")
@@ -139,8 +141,10 @@ def load_chat_model_and_projector(
         raise ValueError("无法获取 embedding 矩阵")
 
     dimension_extractor = DimensionExtractor(output_embedding, tokenizer, device=device)
-    vad_lexicon = dimension_extractor.load_vad_lexicon()
-    dimensions = dimension_extractor.extract_all_dimensions(vad_lexicon)
+    vad_lexicon = dimension_extractor.load_vad_lexicon(model_name=model_name)
+    dimensions = dimension_extractor.extract_all_dimensions(
+        vad_lexicon, dimensions=model_config.emotion_dimensions
+    )
 
     scaler_path = config.PROJECT_ROOT / "outputs" / "scalers" / f"{model_name}_scaler.json"
     scaler = AdaptiveScaler(vad_lexicon)

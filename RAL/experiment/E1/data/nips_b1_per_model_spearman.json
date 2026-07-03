@@ -1,0 +1,228 @@
+{
+  "source": "finalV1/results/B1/B1_cross_model_spearman.json",
+  "models": [
+    "gemma22_2b",
+    "llama32_3b",
+    "mistral7b_v03",
+    "qwen25_7b",
+    "llama31_8b"
+  ],
+  "by_pole": {
+    "10": {
+      "gemma22_2b": {
+        "valence": 0.75569,
+        "arousal": 0.580237,
+        "dominance": 0.440948
+      },
+      "llama32_3b": {
+        "valence": 0.72422,
+        "arousal": 0.405929,
+        "dominance": 0.474849
+      },
+      "mistral7b_v03": {
+        "valence": 0.789782,
+        "arousal": 0.611045,
+        "dominance": 0.544175
+      },
+      "qwen25_7b": {
+        "valence": 0.68319,
+        "arousal": 0.493563,
+        "dominance": 0.455867
+      },
+      "llama31_8b": {
+        "valence": 0.704116,
+        "arousal": 0.369977,
+        "dominance": 0.466225
+      }
+    },
+    "20": {
+      "gemma22_2b": {
+        "valence": 0.728283,
+        "arousal": 0.562975,
+        "dominance": 0.575904
+      },
+      "llama32_3b": {
+        "valence": 0.769943,
+        "arousal": 0.508934,
+        "dominance": 0.496027
+      },
+      "mistral7b_v03": {
+        "valence": 0.766264,
+        "arousal": 0.613956,
+        "dominance": 0.561057
+      },
+      "qwen25_7b": {
+        "valence": 0.70312,
+        "arousal": 0.594299,
+        "dominance": 0.395116
+      },
+      "llama31_8b": {
+        "valence": 0.735646,
+        "arousal": 0.458704,
+        "dominance": 0.445725
+      }
+    },
+    "30": {
+      "gemma22_2b": {
+        "valence": 0.752179,
+        "arousal": 0.5952,
+        "dominance": 0.535269
+      },
+      "llama32_3b": {
+        "valence": 0.786128,
+        "arousal": 0.684196,
+        "dominance": 0.556232
+      },
+      "mistral7b_v03": {
+        "valence": 0.751885,
+        "arousal": 0.693451,
+        "dominance": 0.527408
+      },
+      "qwen25_7b": {
+        "valence": 0.761565,
+        "arousal": 0.707328,
+        "dominance": 0.495847
+      },
+      "llama31_8b": {
+        "valence": 0.76864,
+        "arousal": 0.673855,
+        "dominance": 0.523891
+      }
+    },
+    "40": {
+      "gemma22_2b": {
+        "valence": 0.760557,
+        "arousal": 0.636403,
+        "dominance": 0.578622
+      },
+      "llama32_3b": {
+        "valence": 0.794511,
+        "arousal": 0.804673,
+        "dominance": 0.65428
+      },
+      "mistral7b_v03": {
+        "valence": 0.767242,
+        "arousal": 0.738106,
+        "dominance": 0.548226
+      },
+      "qwen25_7b": {
+        "valence": 0.754358,
+        "arousal": 0.780329,
+        "dominance": 0.583999
+      },
+      "llama31_8b": {
+        "valence": 0.76621,
+        "arousal": 0.785353,
+        "dominance": 0.629357
+      }
+    },
+    "50": {
+      "gemma22_2b": {
+        "valence": 0.802325,
+        "arousal": 0.650387,
+        "dominance": 0.59797
+      },
+      "llama32_3b": {
+        "valence": 0.799816,
+        "arousal": 0.827775,
+        "dominance": 0.708135
+      },
+      "mistral7b_v03": {
+        "valence": 0.794253,
+        "arousal": 0.78809,
+        "dominance": 0.567442
+      },
+      "qwen25_7b": {
+        "valence": 0.755216,
+        "arousal": 0.791901,
+        "dominance": 0.647661
+      },
+      "llama31_8b": {
+        "valence": 0.772625,
+        "arousal": 0.787658,
+        "dominance": 0.696523
+      }
+    },
+    "60": {
+      "gemma22_2b": {
+        "valence": 0.796312,
+        "arousal": 0.741875,
+        "dominance": 0.589737
+      },
+      "llama32_3b": {
+        "valence": 0.803771,
+        "arousal": 0.819738,
+        "dominance": 0.729068
+      },
+      "mistral7b_v03": {
+        "valence": 0.790401,
+        "arousal": 0.805033,
+        "dominance": 0.572501
+      },
+      "qwen25_7b": {
+        "valence": 0.759183,
+        "arousal": 0.789182,
+        "dominance": 0.684034
+      },
+      "llama31_8b": {
+        "valence": 0.786794,
+        "arousal": 0.793438,
+        "dominance": 0.713854
+      }
+    },
+    "70": {
+      "gemma22_2b": {
+        "valence": 0.810997,
+        "arousal": 0.782532,
+        "dominance": 0.624874
+      },
+      "llama32_3b": {
+        "valence": 0.808062,
+        "arousal": 0.792771,
+        "dominance": 0.751716
+      },
+      "mistral7b_v03": {
+        "valence": 0.79576,
+        "arousal": 0.811395,
+        "dominance": 0.601943
+      },
+      "qwen25_7b": {
+        "valence": 0.751873,
+        "arousal": 0.764106,
+        "dominance": 0.715037
+      },
+      "llama31_8b": {
+        "valence": 0.786836,
+        "arousal": 0.762804,
+        "dominance": 0.737457
+      }
+    },
+    "80": {
+      "gemma22_2b": {
+        "valence": 0.776478,
+        "arousal": 0.789656,
+        "dominance": 0.656333
+      },
+      "llama32_3b": {
+        "valence": 0.813415,
+        "arousal": 0.789488,
+        "dominance": 0.72953
+      },
+      "mistral7b_v03": {
+        "valence": 0.785672,
+        "arousal": 0.808364,
+        "dominance": 0.629681
+      },
+      "qwen25_7b": {
+        "valence": 0.746748,
+        "arousal": 0.758854,
+        "dominance": 0.68368
+      },
+      "llama31_8b": {
+        "valence": 0.78752,
+        "arousal": 0.75284,
+        "dominance": 0.726997
+      }
+    }
+  }
+}
