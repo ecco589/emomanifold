@@ -1,0 +1,197 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EmotionManifold — RAL / IEEE conference manuscript draft
+% Compile from RAL/:  xelatex emotion_manifold.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf/ieeeconf}
+
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{url}
+\usepackage[UTF8]{ctex}
+
+\title{\LARGE \bf
+Token-Level Continuous Affect for Real-Time Robot Facial Expression
+}
+
+\author{Author Name$^{1}$ and Author Name$^{2}$%
+\thanks{$^{1}$Affiliation TBD. {\tt\small email@domain.edu}}%
+\thanks{$^{2}$Affiliation TBD. {\tt\small email@domain.edu}}%
+}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+面部是人机交互中最自然的情绪入口；随着面部硬件与大模型表征能力成熟，面部机器人已走向落地，但如何让表情随对话快速、灵动地响应并传递可识别的情绪信息，仍缺少可靠路径。
+现有方案依赖 LLM 为每句话输出离散情感标签驱动面部，句级信号无法跟随句内变化，细腻情绪被抹平。
+我们提出 EmotionManifold：不令模型``说出''情绪，而在流式解码中直接读回其内部连续情感空间，投影至 VAD 轴并经 FKCN 映射至 29 自由度面部机器人，使表情与 token 生成同步、信号更为 genuine。
+三组客观实验分别验证情绪子空间可读性（$\rho=0.837$）、同词跨语境效价对照（$\Delta V\approx-0.22$）及实机执行保真度，表明内部表征与面部执行的直接关联可支撑快速、细腻、可验证的交互式情感表达。
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{INTRODUCTION}
+
+在具身智能的发展蓝图中，尽管主流范式侧重于使机器人掌握操纵等实用物理技能，但大语言模型（LLM）强大的表征能力与高自由度面部硬件的同步成熟，正推动面向陪伴与交互的面部机器人（Facial Robots）成为率先落地的核心载体之一（Int. J. Soc. Robot., 2024）。
+在软件端，大语言模型赋予机器人高水平的开放式对话与语义理解能力；而在硬件端，拟人化（Anthropomorphic）面部平台也已具备 20–30 自由度（DoF）量级的连续形变能力（Hu et al., 2024; Li et al., 2025），为驱动高保真、连续的面部运动提供了坚实的物理基础。在工程层面上，语言-表情同步高频微调（Speech-Expression Synchronization）已成为触手可及的重要目标。
+
+``It's written all over your face.''神经科学研究表明，皮层下通路（Subcortical Pathways）可在人类有意识地进行语言表述之前驱动面部表情的变化，使情绪信号往往先于言语显现（LeDoux, 1996; Ekman, 1992）。
+为实现更自然的交互，面部机器人应当复现这一生理机制：即情绪信号应直接从模型内部的认知表征中提取，并流式驱动表情更新。
+然而，无论是早期的预设规则切换，还是近期基于 LLM 的方案（如将情绪推断建模为对话情感识别，由模型按话轮预测离散类别并映射至预设表情（Mishra et al., 2023; Cherakara et al., 2023; Lee et al., 2023; Kang et al., 2024），亦或利用 LLM 生成实时肢体动作但仍按话轮组织非言语输出的方案（Expressive Furhat, 2025））——普遍存在时序粒度错配（Temporal Granularity Mismatch）的问题。这些方案的情感指令均以“话轮”（Turn）为单位进行更新，在生成中被简化为输入端的风格标签（Zhang et al., 2024）。相比之下，语言的流式生成是以 Token 为基本单位推进的，且在单句内部往往包含多次微妙的情感转折（Tam et al., 2024; Abu Farha et al., 2022）。这种粒度上的本底错配，导致机器人面部表情严重滞后于言语流，或者在整句尺度上抹平了本应可辨的动态情感轨迹。
+
+为了解决上述瓶颈，本文提出了 EmotionManifold：一种在流式解码过程中直接从大模型隐状态（Hidden States）中读回连续情感坐标，并实时外显为机器人面部微表情的全新架构。
+在心理学与情感计算领域，通常采用效价-唤醒度-支配度（VAD）等低维连续空间来精确刻画人类情绪（Russell, 1980; Mohammad, 2018）；而近期表征探针研究表明，Transformer 的隐空间中确实存在与这些情感维度高度对齐且可线性探测的流形结构（Tam et al., 2024; Reichman et al., 2026）。
+基于此，我们通过在解嵌入矩阵（Unembedding Matrix）上聚类情感词簇，显式构造出 V/A/D 空间的正交轴线。
+在运行时，每个 Token 的解码步骤都会将当前的隐状态投影至该空间，实时计算出连续情感坐标 $\mathrm{VAD}(t)$。随后，该坐标经由 Han et al. (2013) 提出的模糊 Kohonen 聚类网络（FKCN）映射为七种基础情感的融合权重，进而直接驱动 29 自由度的面部机器人硬件。
+该方案仅依赖轻量级的前向传播与离线词表标定，无需调用任何独立的情感识别 API，因而能够直接挂载于本地开源大模型上高效运行。
+至此，情感驱动与 Token 发射共享同一时钟周期，句内的高频情感波动能够以连续流的形式传递至面部执行端，彻底告别了等待整句结束再切换离散标签的迟滞交互模式。
+
+本文的核心贡献主要体现在以下四个方面：
+（1）提出免训练、可跨模型的 token 级连续情感读回机制：创新性地利用解嵌入矩阵的情感词簇构建 VAD 轴，实现了在 LLM 流式解码过程中对隐状态的高频、低延迟连续投影。
+（2）构建可迁移的实机执行管线：沿用 Han et al. (2013) 的 FKCN 将连续 VAD 映射为七种基元表情融合权重，经离线标定 preset 融合下发至高自由度面部，降低逐关节调试负担。
+（3）递进客观验证读回与映射：情绪子空间可靠性（Spearman $\rho{=}0.837$）、同词跨语境效价对照（$\Delta V{\approx}{-}0.22$），以及 EmoBank 等公开基准上的句级对齐。
+（4）在 29 自由度实机上建立镜像测试：摄像回读闭环检验情感指令是否如实映现在面部。
+第二节回顾相关工作，第三节详述方法，第四节报告实验，第五节讨论局限并结论。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{RELATED WORK}
+\label{sec:related}
+
+% TODO (~0.5 page): expand with targeted citations.
+\textbf{LLM affect and representation geometry.}
+Sentiment and emotion information has been recovered from transformer hidden states via probing, lexicon projection, and difference vectors between word clusters in embedding space.
+Our axis-mining procedure follows this geometric tradition but targets \emph{streaming} token trajectories and couples readout calibration to downstream robot execution.
+
+\textbf{Continuous and dimensional affect.}
+Russell's circumplex and the VAD extensions provide a standard coordinate system for continuous affect.
+Lexica such as NRC-VAD supply word-level norms that we use both to define pole clusters and to score hold-out alignment.
+EmoBank and related corpora offer sentence-level VAD annotations for sentence-aggregated evaluation.
+
+\textbf{Facial expression generation for robots.}
+Prior robot face systems often rely on FACS-inspired action units, blendshape rigs, or a small set of named expressions triggered by dialogue acts.
+High-DOF faces increase expressivity but multiply calibration effort.
+We reduce operator burden by adopting the FKCN fusion scheme of Han et al. (2013) to combine a fixed library of seven calibrated expression presets rather than tuning individual joints per affective intent.
+
+\textbf{Pragmatics and context-sensitive affect.}
+Sarcasm and other figurative language decouple literal wording from intended sentiment.
+iSarcasmEval and similar benchmarks motivate token-level contrasts where the same surface word receives different projected valence under sincere vs.\ sarcastic contexts---a test our readout is designed to expose.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{METHOD}
+\label{sec:method}
+
+Fig.~\ref{fig:architecture} summarizes the pipeline.
+Given streaming text generation from an LLM, each token's hidden state is projected onto mined VAD axes, optionally scaled, converted to seven expression weights, fused into 29 servo targets, and sent to the face controller at 10\,fps.
+
+\begin{figure}[t]
+    \centering
+    \framebox{\parbox{0.92\columnwidth}{\centering\vspace{0.8em}
+    \textbf{[System architecture figure --- TODO]}\\[0.4em]
+    \small
+    Text $\rightarrow$ LLM stream $\rightarrow$ VAD$(t)$ $\rightarrow$ FKCN $\rightarrow$ 29-DOF face
+    \vspace{0.8em}}}
+    \caption{Overview of the EmotionManifold pipeline. Hidden states from streaming decoding are projected to VAD, mapped through FKCN to seven basic-expression weights, and executed on a 29-DOF face via calibrated preset fusion.}
+    \label{fig:architecture}
+\end{figure}
+
+\subsection{Emotion Axis Mining}
+\label{sec:axis_mining}
+
+Let $\mathbf{W}_{\mathrm{out}} \in \mathbb{R}^{|\mathcal{V}| \times d}$ denote the LLM output (unembedding) weight matrix and $\mathbf{h}_t \in \mathbb{R}^d$ the hidden state at decoding step~$t$.
+We build affect axes without fine-tuning by contrasting lexicon-defined \emph{pole word clusters}.
+
+From a VAD lexicon (e.g., NRC-VAD), we select the top-$N$ positive and negative valence words, high- and low-arousal words, and (when supported) high- and low-dominance words, forming clusters $\mathcal{C}^{+}_V, \mathcal{C}^{-}_V$, etc.
+For each cluster $\mathcal{C}$ we compute the mean embedding
+\begin{equation}
+    \bar{\mathbf{e}}_{\mathcal{C}} = \frac{1}{|\mathcal{C}|}\sum_{w \in \mathcal{C}} \mathbf{W}_{\mathrm{out}}[\mathrm{id}(w)] .
+\end{equation}
+Axis directions are difference vectors, e.g.,
+\begin{equation}
+    \mathbf{v}_V = \frac{\bar{\mathbf{e}}_{\mathcal{C}^{+}_V} - \bar{\mathbf{e}}_{\mathcal{C}^{-}_V}}{\|\bar{\mathbf{e}}_{\mathcal{C}^{+}_V} - \bar{\mathbf{e}}_{\mathcal{C}^{-}_V}\|_2},
+    \label{eq:valence_axis}
+\end{equation}
+with analogous definitions for arousal ($\mathbf{v}_A$) and dominance ($\mathbf{v}_D$).
+Pole count $N$ trades axis stability against specificity; we sweep $N \in \{10,\ldots,80\}$ in validation (Section~IV-A).
+
+This construction is \emph{model-specific}---axes are recomputed per backbone---but \emph{training-free}: only lexicon curation and forward access to $\mathbf{W}_{\mathrm{out}}$ are required.
+
+\subsection{Adaptive Scaler Calibration}
+\label{sec:scaler}
+
+Raw dot products $\mathbf{v}_k^\top \hat{\mathbf{h}}_t$ need not match the bounded interval used by downstream modules.
+We apply a per-dimension affine \emph{AdaptiveScaler} fit on a small corpus of sentences that each contain at least one lexicon word.
+For dimension $k \in \{V,A,D\}$, let $r$ denote the raw projection at the lexicon token with maximal $|r|$ in a sentence, and $t$ the lexicon target (mapped linearly to $[-1,1]$).
+Accumulating pairs $(r,t)$ across the corpus yields least-squares scale and bias
+\begin{equation}
+    s_k = \frac{\mathrm{Cov}(r,t)}{\mathrm{Var}(r)}, \qquad b_k = \bar{t} - s_k \bar{r},
+    \label{eq:scaler}
+\end{equation}
+and the calibrated coordinate $\tilde{z}_k = \mathrm{clip}(s_k r + b_k,\,-1,\,1)$.
+Training is a one-time offline step per model--language pair; inference applies Eq.~\eqref{eq:scaler} with fixed $(s_k,b_k)$.
+
+\subsection{Token-Level Streaming Projection}
+\label{sec:projection}
+
+During causal decoding, we L2-normalize each hidden state,
+$\hat{\mathbf{h}}_t = \mathbf{h}_t / \|\mathbf{h}_t\|_2$,
+and project onto the mined axes:
+\begin{equation}
+    z_{t,k} = \mathbf{v}_k^\top \hat{\mathbf{h}}_t, \qquad
+    \tilde{z}_{t,k} = \mathrm{AdaptiveScaler}_k(z_{t,k}).
+    \label{eq:projection}
+\end{equation}
+The result is a continuous VAD trajectory $\{\tilde{\mathbf{z}}_t\}$ synchronized with token emission.
+
+For sentence-level benchmarks we aggregate token projections---by default the \emph{last content token} or, alternatively, length-weighted averaging---and compare against corpus annotations (EmoBank reader VAD, NRC-derived centroids, etc.).
+Token-level analyses retain per-token $\tilde{z}_{t,V}$ at selected content words (e.g., sarcasm triggers) to test context sensitivity within minimal pair designs.
+
+An exponential moving average (EMA) optionally smooths the FKCN input stream for hardware display without altering the underlying readout used in evaluation.
+
+\subsection{FKCN: VAD to Seven-Way Expression Weights}
+\label{sec:fkcn}
+
+Robot faces are easier to calibrate in a \emph{basic-expression} basis than in raw VAD space.
+We map $(V,A)$---dominance modulates prototype layout in 3D extensions but execution here uses the $(V,A)$ plane---to seven weights
+$\boldsymbol{\omega}_t \in \Delta^6$ (nonnegative, sum to one) over
+\{neutral, happiness, surprise, fear, sadness, disgust, anger\}.
+
+FKCN places fuzzy prototypes $\{(\mathbf{c}_j, \mathbf{w}_j)\}_{j=1}^P$ on the affect plane, where $\mathbf{c}_j \in \mathbb{R}^2$ and $\mathbf{w}_j$ is a one-hot basic emotion.
+Given input $\mathbf{p}_t = (V_t, A_t)$, squared distances $d_{tj} = \|\mathbf{p}_t - \mathbf{c}_j\|^2$ induce fuzzy memberships (inverse-distance normalization with hard assignment at $d_{tj}=0$), and the output weights are
+\begin{equation}
+    \boldsymbol{\omega}_t = \sum_{j=1}^{P} \mu_{tj}\, \mathbf{w}_j .
+    \label{eq:fkcn}
+\end{equation}
+Prototypes are anchored to circumplex quadrants so intermediate VAD points become soft blends rather than hard labels, preserving continuity needed for smooth motion.
+Fig.~\ref{fig:fkcn_manifold} (TODO) will illustrate the prototype layout and example trajectories.
+
+\subsection{Actuator Mapping: Seven Expressions to 29 DOF}
+\label{sec:actuator}
+
+Each basic emotion corresponds to a YAML \emph{preset}---a vector of target joint factors in $[0,1]^{29}$ obtained offline by per-joint calibration on the physical face.
+At runtime we fuse presets with FKCN weights:
+\begin{equation}
+    \mathbf{f}_t = \sum_{m=1}^{7} \omega_{t,m}\, \mathbf{p}^{(m)},
+    \label{eq:fusion}
+\end{equation}
+where $\mathbf{p}^{(m)}$ is the factor vector for emotion~$m$, clamped element-wise to $[0,1]$.
+Factors convert to servo angles via per-channel start/end limits in \texttt{29\_servo\_config.yaml}.
+Commands are issued over serial at 10\,fps with 300\,ms move windows and linear interpolation between frames.
+
+Because Eq.~\eqref{eq:fusion} operates entirely in preset space, migrating to another face robot reduces to authoring seven new presets and a joint map while reusing the upstream VAD--FKCN stream.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Section IV. EXPERIMENTS: to be written ---
+%   IV-A  Subspace reliability (E1, E2, E3)
+%   IV-B  Projection validity (B1, B2; EmoBank; GoEmotions)
+%   IV-C  Hardware mirror test
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
