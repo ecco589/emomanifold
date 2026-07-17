@@ -1,0 +1,19 @@
+{
+  "trial_id": "002",
+  "category": "happy",
+  "user_prompt": "This restaurant tastes amazing and I'm very satisfied.",
+  "assistant_text": "That sounds wonderful! I'm glad you enjoyed your dining experience. It's always great to hear that you're satisfied with your meal.",
+  "duration_s": 28.34,
+  "n_tokens": 27,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}

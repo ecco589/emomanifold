@@ -1,0 +1,21 @@
+id,category,user_prompt,notes
+001,happy,I just won the lottery and I'm so excited!,manual: high V
+002,happy,This restaurant tastes amazing and I'm very satisfied.,manual: high V mid A
+003,sad,My pet passed away and I feel heartbroken.,manual: low V
+004,sad,I failed the exam and feel really disappointed.,manual: low V low A
+005,angry,That person bullied me and I'm furious!,manual: low V high A
+006,fear,The thunder outside is so loud and I'm a bit scared.,manual: low V high A
+007,surprise,What? You actually remembered my birthday!,manual: mid V high A
+008,disgust,That smell is disgusting and I can't stand it.,manual: low V
+009,neutral,The weather is okay today nothing special.,manual: near neutral
+010,neutral,Okay I understand.,manual: near neutral
+011,sarcasm_pos,"Great another late night at work truly ""blissful"".",manual: sarcasm
+012,sarcasm_neg,Thanks for deleting the file really helpful.,manual: sarcasm
+013,turn_pos,I was worried at first but the result was much better than I expected.,manual: turn
+014,turn_neg,I was really looking forward to it but ended up so disappointed.,manual: turn
+015,emobank_hv,I feel very happy and satisfied.,EmoBank style
+016,emobank_lv,This makes me feel very sad and hopeless.,EmoBank style
+017,emobank_ha,I'm so nervous my heart is racing!,EmoBank style
+018,emobank_la,I feel calm and everything is peaceful.,EmoBank style
+019,goemo_joy,I am absolutely thrilled to hear this news!,GoEmo style
+020,goemo_sad,Losing this opportunity feels like a knife in my heart.,GoEmo style

@@ -1,0 +1,19 @@
+{
+  "trial_id": "005",
+  "category": "angry",
+  "user_prompt": "That person bullied me and I'm furious!",
+  "assistant_text": "It sounds like you're experiencing a strong reaction to a bully. It's important to address the issue and seek support if needed. Let's talk about what happened and how you're feeling, and find a way to move forward together.",
+  "duration_s": 46.281,
+  "n_tokens": 47,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}

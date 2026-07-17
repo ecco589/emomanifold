@@ -57,3 +57,11 @@ data/*.json
 # OS
 .DS_Store
 Thumbs.db
+
+# C1 / mirror bulky artifacts (keep csv summaries + analysis outputs)
+*.mp4
+**/video_va_full.csv
+**/video_va_report.xlsx
+C1_mirror_results.zip
+video_va_system.zip
+**/pyfeat_models/

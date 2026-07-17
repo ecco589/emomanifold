@@ -1,0 +1,19 @@
+{
+  "trial_id": "020",
+  "category": "goemo_sad",
+  "user_prompt": "Losing this opportunity feels like a knife in my heart.",
+  "assistant_text": "It sounds like you're experiencing a significant emotional burden. Losing this opportunity can certainly feel like a knife in your heart, especially if it's something you value deeply. It's important to acknowledge and process this feeling, as it's a common experience.",
+  "duration_s": 46.488,
+  "n_tokens": 50,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}

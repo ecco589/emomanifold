@@ -1,0 +1,19 @@
+{
+  "trial_id": "018",
+  "category": "emobank_la",
+  "user_prompt": "I feel calm and everything is peaceful.",
+  "assistant_text": "You must feel calm because you described yourself as \"peaceful\" when you said \"I feel calm and everything is peaceful.\" This suggests you are in a state of inner peace and calmness.",
+  "duration_s": 39.219,
+  "n_tokens": 39,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}

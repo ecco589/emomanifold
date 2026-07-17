@@ -1,0 +1,19 @@
+{
+  "trial_id": "019",
+  "category": "goemo_joy",
+  "user_prompt": "I am absolutely thrilled to hear this news!",
+  "assistant_text": "I'm glad to hear that! It's always exciting to hear good news.",
+  "duration_s": 21.834,
+  "n_tokens": 16,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}

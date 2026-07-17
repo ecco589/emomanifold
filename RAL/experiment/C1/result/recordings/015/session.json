@@ -1,0 +1,19 @@
+{
+  "trial_id": "015",
+  "category": "emobank_hv",
+  "user_prompt": "I feel very happy and satisfied.",
+  "assistant_text": "That sounds great! It's wonderful to feel happy and satisfied. Is there anything specific you'd like to talk about or share?",
+  "duration_s": 28.783,
+  "n_tokens": 26,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}

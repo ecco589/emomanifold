@@ -1,6 +1,6 @@
 # EmotionManifold → RAL 投稿大纲
 
-**标题暂定**：*Token-Level Continuous Affect from LLMs for Real-Time Robot Facial Expression*
+**标题暂定**：*"Written All Over the Face": Driving Facial Robots via LLM Internal Emotion Manifolds*
 
 **定位**：以**客观指标**为主，强调逐 token 连续情感的**提取精度、时序同步性、执行保真度**；不做主观偏好实验，不声明"更自然"等人机交互常见的主观化措辞。
 
@@ -26,6 +26,8 @@
 
 ---
 
+
+
 ## II. Related Work（精简 ~0.5 页）
 
 暂略
@@ -35,16 +37,26 @@
 System Architecture（核心图）以及总体概述
 
 ### A. Emotion Axis Mining
+
 - 解嵌入矩阵 + 情感词簇 → Valence / Arousal（/ Dominance）轴
 - AdaptiveScaler 标定（正文一笔带过）
 
+
+
 ### B. Token-Level Streaming Projection
+
 - 流式 hidden state 投影；句级聚合（末 token / 加权平均）用于与句级标注对比
 
+
+
 ### C. FKCN: VAD → 7-Way Expression Weights
+
 - 模糊 Kohonen 原型 → 7 基元权重融合（含 VAD 流形几何解释，1 图）
 
+
+
 ### D. Actuator Mapping: 7 Expressions → 29 DOF
+
 - YAML factor 融合，约束 [0,1]；10 fps 帧插值
 
 ```
@@ -53,15 +65,23 @@ Text → LLM stream → VAD(t) → FKCN → 29-DOF face
 
 ---
 
+
+
 ## IV. Experiments
 
+
+
 ### A. 情感子空间可靠性
+
+
 
 #### E1（已完成）：极词数 sweep × Spearman
 
 - **设置**：Qwen2.5-0.5B；英文 pole 词 N=10–80；NIPS 五模型交集 hold-out（300 词）；极词与 hold-out **不互斥**（对齐 NIPS B1）。
 - **图**：六模型（NIPS 五模型 + Qwen 0.5B）Spearman **均值实线 + min–max 带**（V/A/D 三栏），见 `RAL/experiment/E1/output/e1_spearman_pole_sweep.pdf`。
 - **结论要点**：修正极词筛选后，0.5B 在 V 维可进入六模型带；A/D 仍偏弱，支持「小模型 + 轴质量」而非流程错误。
+
+
 
 #### E2（已完成）：跨模型 Spearman（NIPS Table 1 + Qwen2.5-0.5B）
 
@@ -70,11 +90,15 @@ Text → LLM stream → VAD(t) → FKCN → 29-DOF face
 - **表**：`RAL/experiment/E2/output/e2_table.tex`（复现 NIPS Table 1 并加入本模型一行）。
 - **结论要点**：0.5B 与 NIPS 五模型同量级，支持方法跨 backbone 泛化。
 
+
+
 #### E3（已完成）：EN vs ZH 极词 × 轴正交 + 跨语聚类
 
 - **两条件**（每极 $N{=}50$，Qwen2.5-0.5B）：EN-only（E1 `en/pole_50`）、ZH-only（E1 `zh/pole_50`）。
 - **指标**：$|\cos(V,A)|, |\cos(A,D)|, |\cos(V,D)|$；5 簇跨语 mean cosine vs **共享**随机 3D 基线（0.410）。
 - **表**：`RAL/experiment/E3/output/e3_table.tex`。
+
+
 
 ### B. 投影能力（递进验证）
 
@@ -82,38 +106,48 @@ Text → LLM stream → VAD(t) → FKCN → 29-DOF face
 
 #### 标签 → VAD 的权威参照（Ground Truth 构造）
 
-| 数据源 | 标签类型 | VAD 参照 | 依据 |
-|---|---|---|---|
-| **EmoBank** (~10k 句) | 原生 VAD (V/A/D, 1–5) | 直接用 reader 视角标注，线性归一化至与投影同尺度 | Bostan et al. 2017；Russell & Mehrabian 1977 |
-| **GoEmotions** (~58k 句, 27 类) | 细粒度离散情感 | 各类别 → NRC-VAD 词表质心（或 Büchel et al. 2016 BE↔VAD 回归映射） | Mohammad 2018；Demszky et al. 2020 |
-| **iSarcasmEval** (Subtask C) | 讽刺 vs 非讽刺改写对 | 改写句（rephrase）的句级 VAD 作"真实意图"；讽刺句表面 VAD 作对照 | Abu Farha et al. 2022；Leggitt & Gibbs 2000 |
+
+| 数据源                           | 标签类型                | VAD 参照                                               | 依据                                          |
+| ----------------------------- | ------------------- | ---------------------------------------------------- | ------------------------------------------- |
+| **EmoBank** (~10k 句)          | 原生 VAD (V/A/D, 1–5) | 直接用 reader 视角标注，线性归一化至与投影同尺度                         | Bostan et al. 2017；Russell & Mehrabian 1977 |
+| **GoEmotions** (~58k 句, 27 类) | 细粒度离散情感             | 各类别 → NRC-VAD 词表质心（或 Büchel et al. 2016 BE↔VAD 回归映射） | Mohammad 2018；Demszky et al. 2020           |
+| **iSarcasmEval** (Subtask C)  | 讽刺 vs 非讽刺改写对        | 改写句（rephrase）的句级 VAD 作"真实意图"；讽刺句表面 VAD 作对照           | Abu Farha et al. 2022；Leggitt & Gibbs 2000  |
+
 
 > EmoBank 为**主评测**（原生 VAD，无映射误差）；GoEmotions 验证跨 taxonomy 泛化；iSarcasmEval 专测复杂情感。
 
-#### B1. 句级投影对齐（整体合理性）
 
-- **数据**：EmoBank reader VAD（主）；GoEmotions 高置信子集（辅，≥2 rater 一致）
+
+#### B1. 句级投影对齐，复杂情感投影对齐（整体合理性）
+
+- **数据1**： **iSarcasmEval Subtask C**：讽刺句 vs 同义非讽刺改写，天然最小对立对
+- **数据2**：**Emobank reader VAD**
 - **流程**：句子前向传播 → 句级聚合 VAD → 与 GT 对比
+
+
 
 #### B2. 复杂情感：关键情绪词 token 级对照（上下文敏感性）
 
 - **数据**（按优先级）：
-   **iSarcasmEval Subtask C**：讽刺句 vs 同义非讽刺改写，天然最小对立对
+ **iSarcasmEval Subtask C**：讽刺句 vs 同义非讽刺改写，天然最小对立对
 - **方法**：
   1. 定位**关键情绪词/讽刺触发词**
   2. **对照 A**：同词在 iSarcasmEval 非讽刺改写句 / 其他中性句中的 VAD（词典先验或简单句投影）
   3. **对照 B**：讽刺句 vs 改写句的**句级 VAD 差向量**（意图方向）
 
+
+
 ### C. 实机实验（RAL 重点，三层客观证据，无主观偏好）
 
 1. **镜像测试 Mirror Test（主打，带独立参照）**
-   `文本 VAD → 实机 → 摄像头 → FER/OpenFace AU（或 VLM 裁判）→ 还原 VAD → 与原始 VAD 相关`
+  `文本 VAD → 实机 → 摄像头 → FER/OpenFace AU（或 VLM 裁判）→ 还原 VAD → 与原始 VAD 相关`
    全自动 round-trip：检验「情感指令是否如实映现在脸上」
-
 2. **人类识别准确率（客观，非主观偏好；低成本 N≈15–20）**
-   仅看机器人脸（去文字/语音）→ Geneva Emotion Wheel 选情感 / VA 平面标点 → 与意图 VAD 算**准确率/误差**；
+  仅看机器人脸（去文字/语音）→ Geneva Emotion Wheel 选情感 / VA 平面标点 → 与意图 VAD 算**准确率/误差**；
 
 ---
+
+
 
 ## V. Discussion & Limitations
 
@@ -123,5 +157,8 @@ Text → LLM stream → VAD(t) → FKCN → 29-DOF face
 
 ---
 
+
+
 ## VI. Conclusion
+
 暂略

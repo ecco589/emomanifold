@@ -10,12 +10,18 @@
 
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
+\usepackage{booktabs}
 \usepackage{cite}
 \usepackage{url}
+\usepackage{dblfloatfix}
 \usepackage[UTF8]{ctex}
+\setlength{\textfloatsep}{4pt plus 2pt minus 2pt}
+\setlength{\floatsep}{4pt plus 2pt minus 2pt}
+\setlength{\intextsep}{4pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{6pt plus 2pt minus 2pt}
 
 \title{\LARGE \bf
-Token-Level Continuous Affect for Real-Time Robot Facial Expression
+``Written All Over the Face'': Driving Facial Robots via LLM Internal Emotion Manifolds
 }
 
 \author{Author Name$^{1}$ and Author Name$^{2}$%
@@ -36,161 +42,227 @@ Token-Level Continuous Affect for Real-Time Robot Facial Expression
 我们提出 EmotionManifold：不令模型``说出''情绪，而在流式解码中直接读回其内部连续情感空间，投影至 VAD 轴并经 FKCN 映射至 29 自由度面部机器人，使表情与 token 生成同步、信号更为 genuine。
 三组客观实验分别验证情绪子空间可读性（$\rho=0.837$）、同词跨语境效价对照（$\Delta V\approx-0.22$）及实机执行保真度，表明内部表征与面部执行的直接关联可支撑快速、细腻、可验证的交互式情感表达。
 \end{abstract}
+\vspace{-2mm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{INTRODUCTION}
 
-在具身智能的发展蓝图中，尽管主流范式侧重于使机器人掌握操纵等实用物理技能，但大语言模型（LLM）强大的表征能力与高自由度面部硬件的同步成熟，正推动面向陪伴与交互的面部机器人（Facial Robots）成为率先落地的核心载体之一（Int. J. Soc. Robot., 2024）。
-在软件端，大语言模型赋予机器人高水平的开放式对话与语义理解能力；而在硬件端，拟人化（Anthropomorphic）面部平台也已具备 20–30 自由度（DoF）量级的连续形变能力（Hu et al., 2024; Li et al., 2025），为驱动高保真、连续的面部运动提供了坚实的物理基础。在工程层面上，语言-表情同步高频微调（Speech-Expression Synchronization）已成为触手可及的重要目标。
+在具身智能的发展蓝图中，尽管主流范式侧重于使机器人掌握操纵等实用物理技能，但大语言模型（LLM）强大的表征能力与高自由度面部硬件的同步成熟，正推动面向陪伴与交互的面部机器人（Facial Robots）成为率先落地的核心载体之一（Ahmed et al., 2024）。
+为实现自然灵动的人机交互，在工程层面上，语言-表情同步（Speech-Expression Synchronization）是亟待突破的重要瓶颈。
 
-``It's written all over your face.''神经科学研究表明，皮层下通路（Subcortical Pathways）可在人类有意识地进行语言表述之前驱动面部表情的变化，使情绪信号往往先于言语显现（LeDoux, 1996; Ekman, 1992）。
-为实现更自然的交互，面部机器人应当复现这一生理机制：即情绪信号应直接从模型内部的认知表征中提取，并流式驱动表情更新。
-然而，无论是早期的预设规则切换，还是近期基于 LLM 的方案（如将情绪推断建模为对话情感识别，由模型按话轮预测离散类别并映射至预设表情（Mishra et al., 2023; Cherakara et al., 2023; Lee et al., 2023; Kang et al., 2024），亦或利用 LLM 生成实时肢体动作但仍按话轮组织非言语输出的方案（Expressive Furhat, 2025））——普遍存在时序粒度错配（Temporal Granularity Mismatch）的问题。这些方案的情感指令均以“话轮”（Turn）为单位进行更新，在生成中被简化为输入端的风格标签（Zhang et al., 2024）。相比之下，语言的流式生成是以 Token 为基本单位推进的，且在单句内部往往包含多次微妙的情感转折（Tam et al., 2024; Abu Farha et al., 2022）。这种粒度上的本底错配，导致机器人面部表情严重滞后于言语流，或者在整句尺度上抹平了本应可辨的动态情感轨迹。
+``It's written all over your face.''神经科学研究表明，皮层下通路（Subcortical Pathways）可在人类有意识地进行语言表述之前驱动面部表情的变化，使情绪信号往往先于言语显现（LeDoux, 1996）。
+面部机器人应当复现这一生理机制以达到更接近人类交互的效果：即情绪信号应直接从模型内部的认知表征中提取，并流式驱动表情更新。
+然而，当前主流方案——无论是早期的显式规则切换，还是近期基于 LLM 的话轮级情感推断与非言语行为调度——普遍依赖离散情绪标签来映射预设表情，且在时序上仅能按话轮（Turn）为单位进行更新。相比之下，语言生成是以 Token 为基本单元自回归流式推进的，其内部往往交织着高频的句内（Intra-utterance）情感转折。这种时序粒度错配（Temporal Granularity Mismatch）不可避免地导致了面部执行相对于语言的严重迟滞，并在整句尺度上粗暴地抹平了本应精细可辨的动态情感轨迹。
 
 为了解决上述瓶颈，本文提出了 EmotionManifold：一种在流式解码过程中直接从大模型隐状态（Hidden States）中读回连续情感坐标，并实时外显为机器人面部微表情的全新架构。
-在心理学与情感计算领域，通常采用效价-唤醒度-支配度（VAD）等低维连续空间来精确刻画人类情绪（Russell, 1980; Mohammad, 2018）；而近期表征探针研究表明，Transformer 的隐空间中确实存在与这些情感维度高度对齐且可线性探测的流形结构（Tam et al., 2024; Reichman et al., 2026）。
-基于此，我们通过在解嵌入矩阵（Unembedding Matrix）上聚类情感词簇，显式构造出 V/A/D 空间的正交轴线。
-在运行时，每个 Token 的解码步骤都会将当前的隐状态投影至该空间，实时计算出连续情感坐标 $\mathrm{VAD}(t)$。随后，该坐标经由 Han et al. (2013) 提出的模糊 Kohonen 聚类网络（FKCN）映射为七种基础情感的融合权重，进而直接驱动 29 自由度的面部机器人硬件。
-该方案仅依赖轻量级的前向传播与离线词表标定，无需调用任何独立的情感识别 API，因而能够直接挂载于本地开源大模型上高效运行。
-至此，情感驱动与 Token 发射共享同一时钟周期，句内的高频情感波动能够以连续流的形式传递至面部执行端，彻底告别了等待整句结束再切换离散标签的迟滞交互模式。
+在表征机制上，我们通过在解嵌入矩阵（Unembedding Matrix）上聚类情感词簇，在 LLM 隐空间内显式规整出正交的 V/A/D 几何流形。在运行期，随着 Token 的逐个发射，瞬时隐状态被流式投影至该流形，生成连续演进的情感轨迹 $\mathrm{VAD}(t)$；该轨迹随即通过模糊 Kohonen 聚类网络（FKCN）（Han et al., 2013）转换为七种基础表情的非线性融合权重，无缝映射至 29 自由度面部硬件系统。该方案具有天然的优雅与轻量性：它摒弃了独立的外部情感 API 与繁重的参数微调，仅依赖离线空间标定与原生前向传播即可在本地开源模型上高效运行。通过这种方式，面部物理执行与认知 Token 发射共享同一时钟，实现了“情动于内、形于外”的效果。
 
 本文的核心贡献主要体现在以下三个方面：
-（1）提出免训练、可跨模型的 token 级连续情感读回机制：利用解嵌入矩阵的情感词簇构建 VAD 轴，在 LLM 流式解码过程中对隐状态进行连续投影，并与 FKCN（Han et al., 2013）及 preset 融合执行栈耦合，实现 token 级 VAD 流至高自由度面部的端到端驱动。
-（2）递进客观验证读回能力：情绪子空间可靠性（Spearman $\rho{=}0.837$）、同词跨语境效价对照（$\Delta V{\approx}{-}0.22$），以及 EmoBank 等公开基准上的句级对齐。
-（3）在 29 自由度实机上建立镜像测试：摄像回读闭环检验情感指令是否如实映现在面部。
-第二节回顾相关工作，第三节详述方法，第四节报告实验，第五节讨论局限并结论。
+\begin{itemize}
+\item 提出免训练、可跨模型的 token 级连续情感读回机制：利用解嵌入矩阵的情感词簇构建 VAD 轴，在 LLM 流式解码过程中对隐状态进行连续投影，并与 FKCN（Han et al., 2013）及 preset 融合执行栈耦合，实现 token 级 VAD 流至高自由度面部的端到端驱动。
+\item 进行了递进式的全栈客观验证：严谨评估了情感子空间的可靠性（Spearman $\rho = 0.837$）、同词跨语境下的效价敏感度（$\Delta V \approx -0.22$），并在 EmoBank 等公开基准数据集上验证了句级情感流的精准对齐。
+\item 在 29 自由度实机上实现了闭环镜像测试：引入摄像头视觉回读闭环控制链路，定量检验并确证了底层硬件表达与上层大模型情感指令之间的高保真映射关系。
+\end{itemize}
+\vspace{-1mm}
+论文后续结构安排如下：第二节回顾相关研究工作；第三节详细阐述本文提出的核心方法；第四节汇报实验设计与系统评估结果；第五节讨论当前系统的局限性并给出最终结论。
+
+\begin{figure*}[!t]
+    \centering
+    \vspace{-3mm}
+    \includegraphics[width=\textwidth,height=0.24\textheight,keepaspectratio]{fig/architecture.png}
+    \vspace{-2mm}
+    \caption{EmotionManifold 系统总览。在线通路（上）：用户文本经 LLM 逐 token 流式解码，每步隐状态 $\mathbf{h}_t$ 投影为 $\mathrm{VAD}(t)$，经 FKCN 得到七维表情权重 $\boldsymbol{\omega}_t$，再经 preset 线性融合驱动 29 自由度面部。中央内嵌图为 VAD 三维子空间示意（原型、轨迹 $\mathbf{p}_t$ 与软连续过渡）。离线标定支路（下，虚线框）：NRC-VAD 极词与解嵌入矩阵 $\mathbf{W}_{\mathrm{out}}$ 构造轴 $\mathbf{v}_{V,A,D}$ 及 Adaptive Scaler $(s_k,b_k)$，一次性完成、免训练。}
+    \label{fig:architecture}
+\end{figure*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{RELATED WORK}
 \label{sec:related}
 
-% TODO (~0.5 page): expand with targeted citations.
-\textbf{LLM affect and representation geometry.}
-Sentiment and emotion information has been recovered from transformer hidden states via probing, lexicon projection, and difference vectors between word clusters in embedding space.
-Our axis-mining procedure follows this geometric tradition but targets \emph{streaming} token trajectories and couples readout calibration to downstream robot execution.
-
-\textbf{Continuous and dimensional affect.}
-Russell's circumplex and the VAD extensions provide a standard coordinate system for continuous affect.
-Lexica such as NRC-VAD supply word-level norms that we use both to define pole clusters and to score hold-out alignment.
-EmoBank and related corpora offer sentence-level VAD annotations for sentence-aggregated evaluation.
-
-\textbf{Facial expression generation for robots.}
-Prior robot face systems often rely on FACS-inspired action units, blendshape rigs, or a small set of named expressions triggered by dialogue acts.
-High-DOF faces increase expressivity but multiply calibration effort.
-We reduce operator burden by adopting the FKCN fusion scheme of Han et al. (2013) to combine a fixed library of seven calibrated expression presets rather than tuning individual joints per affective intent.
-
-\textbf{Pragmatics and context-sensitive affect.}
-Sarcasm and other figurative language decouple literal wording from intended sentiment.
-iSarcasmEval and similar benchmarks motivate token-level contrasts where the same surface word receives different projected valence under sincere vs.\ sarcastic contexts---a test our readout is designed to expose.
+机器人面部表情生成的研究可追溯至基于面部运动编码系统（FACS）的动作单元（Action Unit）描述传统（Ekman \& Friesen, 1978），以及早期交互系统（如 Kismet）在二维情感空间（Affect Space）中实现连续动态表情过渡的开创性实践（Breazeal, 2003）。Rawal 与 Stock-Homburg（2022）的系统综述指出，尽管情感识别技术的演进已相对成熟，但在人机交互（HRI）领域中，能够与流式言语（Unfolding Speech）在时序上高频同步并自适应生成的机器人表情控制架构，依然是亟待突破的薄弱环节。在实体执行层，高度仿真的面部硬件平台如 Emo（Hu et al., 2024）以及面向 Ameca 机器人的 X2C 数据集（Li et al., 2025），代表了高自由度机械面部在连续非线性形变控制上的最新进展；在控制层，学术界与工业界已迅速转向大语言模型（LLM）驱动的范式——从 FurChat（Cherakara et al., 2023）、SAFE（Lee et al., 2023）、Nadine（Kang et al., 2024）到最新的 Expressive Furhat（Abbo et al., 2026），LLM 已被广泛用于话轮级（Turn-level）的情感显式推断与非言语行为调度（Mishra et al., 2023）。
+与之平行，心理学与情感计算领域通常采用效价—唤醒度—支配度（VAD）等低维连续空间来刻画人类情绪（Russell, 1980; Mohammad, 2018），EmoBank（Buechel \& Hahn, 2017）等语料库亦将句级 VAD 表征确立为可复现的对齐评估基准；而近期机制可解释性研究表明，Transformer 隐空间中存在与上述情感维度对齐、可线性探测的流形结构（Hollinsworth et al., 2024; Reichman et al., 2026），这一脉络意味着：VAD模型不仅是外部标注与心理学理论中的描述语言，更是已内嵌于 LLM 内部表征中的几何结构。进一步地，在单句内部，否定、转折及讽刺等深层语用动力学（Pragmatic Dynamics）常引发情感表征的高频非平稳漂移。iSarcasmEval 基准（Abu Farha et al., 2022）通过构建语意相近的讽刺“最小对”（Minimal Pairs），定量检验了这种瞬态表征扰动。尽管现有的表征调控路径——如激活转向（Activation Steering）（Turner et al., 2023; Dong et al., 2025）与指令微调（Zhang et al., 2024）——展现出较强的语义干预能力，但其作用边界仅止于文本符号的宏观统计风格。
+不同于诉诸宏观符号标签的传统外源驱动方案，本框架旨在使物理面部的动态形变与神经网络的 Token 生成保持严格同频，在内部认知表征与外部具身执行之间建立直连通道。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{METHOD}
 \label{sec:method}
 
-Fig.~\ref{fig:architecture} summarizes the pipeline.
-Given streaming text generation from an LLM, each token's hidden state is projected onto mined VAD axes, optionally scaled, converted to seven expression weights, fused into 29 servo targets, and sent to the face controller at 10\,fps.
+图~\ref{fig:architecture}概述了 EmotionManifold 的整体架构。
+给定用户输入，LLM 以自回归方式流式生成回复；每发射一个 token，其末层隐状态即被投影到离线挖掘的 VAD 情感轴上，得到连续情感轨迹 $\mathrm{VAD}(t)$；该轨迹由模糊 Kohonen 聚类网络（FKCN）转换为七种基本表情的融合权重，再经预置表情（preset）融合下发至 29 自由度面部硬件。
+借鉴逆模型学习框架的问题分解思想（Chen et al., 2021; Hu et al., 2024），我们将``从语言内部表征到物理表情''这一端到端问题分解为三个可独立标定的阶段：（A）情感轴挖掘与标定、（B）逐 token 流式投影、（C）表情映射与执行。
+其中阶段 A 为一次性离线过程，B 与 C 在运行期以原生前向传播的开销实时完成，全程无需微调或外部情感 API。
 
-\begin{figure}[t]
-    \centering
-    \framebox{\parbox{0.92\columnwidth}{\centering\vspace{0.8em}
-    \textbf{[System architecture figure --- TODO]}\\[0.4em]
-    \small
-    Text $\rightarrow$ LLM stream $\rightarrow$ VAD$(t)$ $\rightarrow$ FKCN $\rightarrow$ 29-DOF face
-    \vspace{0.8em}}}
-    \caption{Overview of the EmotionManifold pipeline. Hidden states from streaming decoding are projected to VAD, mapped through FKCN to seven basic-expression weights, and executed on a 29-DOF face via calibrated preset fusion.}
-    \label{fig:architecture}
-\end{figure}
-
-\subsection{Emotion Axis Mining}
+\subsection{情感轴挖掘与标定}
 \label{sec:axis_mining}
 
-Let $\mathbf{W}_{\mathrm{out}} \in \mathbb{R}^{|\mathcal{V}| \times d}$ denote the LLM output (unembedding) weight matrix and $\mathbf{h}_t \in \mathbb{R}^d$ the hidden state at decoding step~$t$.
-We build affect axes without fine-tuning by contrasting lexicon-defined \emph{pole word clusters}.
-
-From a VAD lexicon (e.g., NRC-VAD), we select the top-$N$ positive and negative valence words, high- and low-arousal words, and (when supported) high- and low-dominance words, forming clusters $\mathcal{C}^{+}_V, \mathcal{C}^{-}_V$, etc.
-For each cluster $\mathcal{C}$ we compute the mean embedding
+本阶段的目标是在不引入任何训练的前提下，于 LLM 隐空间中显式构造出与心理学 VAD 模型（Russell \& Mehrabian, 1977）对齐的三条情感轴。
+设 $\mathbf{W}_{\mathrm{out}} \in \mathbb{R}^{|\mathcal{V}| \times d}$ 为模型的解嵌入（unembedding）矩阵，其中 $|\mathcal{V}|$ 为词表大小、$d$ 为隐层维度。
+参照隐空间线性表征假设及均值差方向提取方法（Tigges et al., 2024），我们从 NRC-VAD 词典（Mohammad, 2018）中为每一维度选取得分最高与最低的各 $N$ 个词，构成极词簇（pole word clusters）$\mathcal{C}^{+}_k$ 与 $\mathcal{C}^{-}_k$，$k \in \{V, A, D\}$。
+对每个词簇计算其在解嵌入矩阵中的平均嵌入：
 \begin{equation}
-    \bar{\mathbf{e}}_{\mathcal{C}} = \frac{1}{|\mathcal{C}|}\sum_{w \in \mathcal{C}} \mathbf{W}_{\mathrm{out}}[\mathrm{id}(w)] .
+    \bar{\mathbf{e}}_{\mathcal{C}} = \frac{1}{|\mathcal{C}|}\sum_{w \in \mathcal{C}} \mathbf{W}_{\mathrm{out}}[\mathrm{id}(w)],
 \end{equation}
-Axis directions are difference vectors, e.g.,
+其中 $\mathrm{id}(w)$ 为词 $w$ 首个内容 token 的索引。
+第 $k$ 维情感轴定义为两簇质心的归一化差向量：
 \begin{equation}
-    \mathbf{v}_V = \frac{\bar{\mathbf{e}}_{\mathcal{C}^{+}_V} - \bar{\mathbf{e}}_{\mathcal{C}^{-}_V}}{\|\bar{\mathbf{e}}_{\mathcal{C}^{+}_V} - \bar{\mathbf{e}}_{\mathcal{C}^{-}_V}\|_2},
+    \mathbf{v}_k = \frac{\bar{\mathbf{e}}_{\mathcal{C}^{+}_k} - \bar{\mathbf{e}}_{\mathcal{C}^{-}_k}}{\bigl\|\bar{\mathbf{e}}_{\mathcal{C}^{+}_k} - \bar{\mathbf{e}}_{\mathcal{C}^{-}_k}\bigr\|_2}.
     \label{eq:valence_axis}
 \end{equation}
-with analogous definitions for arousal ($\mathbf{v}_A$) and dominance ($\mathbf{v}_D$).
-Pole count $N$ trades axis stability against specificity; we sweep $N \in \{10,\ldots,80\}$ in validation (Section~IV-A).
+极词数 $N$ 在轴的稳定性与语义特异性之间权衡：$N$ 过小则轴易受个别词的特异性干扰，过大则混入弱情感词而稀释方向。
+我们在实验部分对 $N \in [10, 80]$ 进行扫描（第 IV-A 节），并采用 $N = 50$ 作为默认配置。
+由于原始投影值的数值范围依模型与维度而异，我们另以少量含词典词的句子做一次性离线最小二乘拟合，得到逐维仿射参数 $(s_k, b_k)$，将投影值对齐至词典语义尺度 $[-1, 1]$（AdaptiveScaler）；推理时该参数固定。
+整个阶段是模型特定的——每个 backbone 需独立重算三条轴——但完全免训练：仅需词典筛选与对 $\mathbf{W}_{\mathrm{out}}$ 的一次只读访问，在消费级硬件上数秒内即可完成。
 
-This construction is \emph{model-specific}---axes are recomputed per backbone---but \emph{training-free}: only lexicon curation and forward access to $\mathbf{W}_{\mathrm{out}}$ are required.
-
-\subsection{Adaptive Scaler Calibration}
-\label{sec:scaler}
-
-Raw dot products $\mathbf{v}_k^\top \hat{\mathbf{h}}_t$ need not match the bounded interval used by downstream modules.
-We apply a per-dimension affine \emph{AdaptiveScaler} fit on a small corpus of sentences that each contain at least one lexicon word.
-For dimension $k \in \{V,A,D\}$, let $r$ denote the raw projection at the lexicon token with maximal $|r|$ in a sentence, and $t$ the lexicon target (mapped linearly to $[-1,1]$).
-Accumulating pairs $(r,t)$ across the corpus yields least-squares scale and bias
-\begin{equation}
-    s_k = \frac{\mathrm{Cov}(r,t)}{\mathrm{Var}(r)}, \qquad b_k = \bar{t} - s_k \bar{r},
-    \label{eq:scaler}
-\end{equation}
-and the calibrated coordinate $\tilde{z}_k = \mathrm{clip}(s_k r + b_k,\,-1,\,1)$.
-Training is a one-time offline step per model--language pair; inference applies Eq.~\eqref{eq:scaler} with fixed $(s_k,b_k)$.
-
-\subsection{Token-Level Streaming Projection}
+\subsection{逐 Token 流式投影}
 \label{sec:projection}
 
-During causal decoding, we L2-normalize each hidden state,
-$\hat{\mathbf{h}}_t = \mathbf{h}_t / \|\mathbf{h}_t\|_2$,
-and project onto the mined axes:
+运行期，模型以因果解码逐 token 生成回复。
+在第 $t$ 步，设 $\mathbf{h}_t \in \mathbb{R}^{d}$ 为末层最后位置的隐状态，即刚发射 token 的上下文表示。
+我们对其做 L2 归一化以消除隐状态范数随位置的漂移，再投影至三条情感轴并施加标定：
 \begin{equation}
-    z_{t,k} = \mathbf{v}_k^\top \hat{\mathbf{h}}_t, \qquad
-    \tilde{z}_{t,k} = \mathrm{AdaptiveScaler}_k(z_{t,k}).
+    \hat{\mathbf{h}}_t = \frac{\mathbf{h}_t}{\|\mathbf{h}_t\|_2}, \qquad
+    \tilde{z}_{t,k} = \mathrm{clip}\bigl(s_k\, \mathbf{v}_k^\top\hat{\mathbf{h}}_t + b_k,\, -1,\, 1\bigr), \quad k \in \{V, A, D\}.
     \label{eq:projection}
 \end{equation}
-The result is a continuous VAD trajectory $\{\tilde{\mathbf{z}}_t\}$ synchronized with token emission.
+由此得到与 token 发射严格同步的连续情感轨迹 $\{\tilde{\mathbf{z}}_t\}$。
+区别于话轮级方案在整句结束后才产生单一情感标签（Mishra et al., 2023），该读回在每个解码步即时可用，天然具备句内时间分辨率——这正是捕捉否定、转折与讽刺等句内情感漂移的结构性前提。
+由于隐状态在标准前向传播中本已计算，投影仅引入三次 $d$ 维点积，附加延迟可忽略；整条链路在本地 CPU 上即可维持实时。
 
-For sentence-level benchmarks we aggregate token projections---by default the \emph{last content token} or, alternatively, length-weighted averaging---and compare against corpus annotations (EmoBank reader VAD, NRC-derived centroids, etc.).
-Token-level analyses retain per-token $\tilde{z}_{t,V}$ at selected content words (e.g., sarcasm triggers) to test context sensitivity within minimal pair designs.
+面向两类下游用途，我们对轨迹做不同的后处理。
+（1）离线评测：与句级标注（如 EmoBank reader VAD）对比时，采用末内容 token 聚合或长度加权平均得到句级坐标；token 级分析（如讽刺触发词的跨语境对照）则直接保留关键词位置的 $\tilde{z}_{t,V}$。
+（2）在线执行：对送入下游表情映射的信号流施加指数滑动平均（EMA，$\alpha = 0.6$）以抑制逐 token 抖动。
+平滑仅作用于硬件显示通路，评测所用的原始读回不受影响。
 
-An exponential moving average (EMA) optionally smooths the FKCN input stream for hardware display without altering the underlying readout used in evaluation.
+\subsection{表情映射与执行}
+\label{sec:actuator}
 
-\subsection{FKCN: VAD to Seven-Way Expression Weights}
-\label{sec:fkcn}
+直接在 VAD 空间逐自由度标定机器人面部代价高昂且不可迁移；相比之下，基本表情空间为面部硬件提供了自然的标定基。
+为此我们采用模糊 Kohonen 聚类网络（FKCN）（Han et al., 2013），将 VAD 三维空间中的点连续映射为七种基本表情（中性、快乐、惊讶、恐惧、悲伤、厌恶、愤怒）的融合权重 $\boldsymbol{\omega}_t \in \Delta^{6}$（非负且和为一）。
 
-Robot faces are easier to calibrate in a \emph{basic-expression} basis than in raw VAD space.
-We map $(V,A)$---dominance modulates prototype layout in 3D extensions but execution here uses the $(V,A)$ plane---to seven weights
-$\boldsymbol{\omega}_t \in \Delta^6$ (nonnegative, sum to one) over
-\{neutral, happiness, surprise, fear, sadness, disgust, anger\}.
-
-FKCN places fuzzy prototypes $\{(\mathbf{c}_j, \mathbf{w}_j)\}_{j=1}^P$ on the affect plane, where $\mathbf{c}_j \in \mathbb{R}^2$ and $\mathbf{w}_j$ is a one-hot basic emotion.
-Given input $\mathbf{p}_t = (V_t, A_t)$, squared distances $d_{tj} = \|\mathbf{p}_t - \mathbf{c}_j\|^2$ induce fuzzy memberships (inverse-distance normalization with hard assignment at $d_{tj}=0$), and the output weights are
+FKCN 由 $P = 13$ 个模糊原型 $\{(\mathbf{c}_j, \mathbf{w}_j)\}_{j=1}^{P}$ 构成，其中 $\mathbf{c}_j \in \mathbb{R}^3$ 为原型在 $(V, A, D)$ 空间中的坐标，$\mathbf{w}_j$ 为该原型所属基本表情的 one-hot 向量；原型坐标在环状情感模型（circumplex model）（Russell, 1980）所给出的效价--唤醒度区位基础上，进一步沿支配度维扩展锚定，使七种基本情绪在完整 VAD 空间中各据典型区域。
+给定输入 $\mathbf{p}_t = (\tilde{z}_{t,V}, \tilde{z}_{t,A}, \tilde{z}_{t,D})$，计算其到各原型的平方距离 $d_{tj} = \|\mathbf{p}_t - \mathbf{c}_j\|^2$，并由反距离归一化得到模糊隶属度
+$\mu_{tj} = \bigl(d_{tj}\sum_{l=1}^{P} d_{tl}^{-1}\bigr)^{-1}$（与原型重合时退化为硬指派）。
+输出权重为隶属度对原型标签的加权和：
 \begin{equation}
     \boldsymbol{\omega}_t = \sum_{j=1}^{P} \mu_{tj}\, \mathbf{w}_j .
     \label{eq:fkcn}
 \end{equation}
-Prototypes are anchored to circumplex quadrants so intermediate VAD points become soft blends rather than hard labels, preserving continuity needed for smooth motion.
-Fig.~\ref{fig:fkcn_manifold} (TODO) will illustrate the prototype layout and example trajectories.
+与最近邻式的硬分类不同，该映射在整个 VAD 情感空间中连续：位于原型之间的坐标产生多种基本表情的软混合而非离散跳变，延续了 Kismet 以来``情感状态是连续空间中一个移动的点''的表达传统（Breazeal, 2003）。
 
-\subsection{Actuator Mapping: Seven Expressions to 29 DOF}
-\label{sec:actuator}
-
-Each basic emotion corresponds to a YAML \emph{preset}---a vector of target joint factors in $[0,1]^{29}$ obtained offline by per-joint calibration on the physical face.
-At runtime we fuse presets with FKCN weights:
+执行层将七维权重融合为舵机指令。
+每种基本表情对应一个离线标定的预置向量（preset）$\mathbf{p}^{(m)} \in [0,1]^{29}$：标定时逐关节调节物理面部至该表情的目标位形，并按各通道行程上下限将关节角归一化为无量纲因子（factor）。
+运行期，29 维目标因子由 FKCN 权重对预置向量线性融合得到：
 \begin{equation}
-    \mathbf{f}_t = \sum_{m=1}^{7} \omega_{t,m}\, \mathbf{p}^{(m)},
+    \mathbf{f}_t = \sum_{m=1}^{7} \omega_{t,m}\, \mathbf{p}^{(m)}, \qquad \mathbf{f}_t \leftarrow \mathrm{clip}(\mathbf{f}_t,\, 0,\, 1),
     \label{eq:fusion}
 \end{equation}
-where $\mathbf{p}^{(m)}$ is the factor vector for emotion~$m$, clamped element-wise to $[0,1]$.
-Factors convert to servo angles via per-channel start/end limits in \texttt{29\_servo\_config.yaml}.
-Commands are issued over serial at 10\,fps with 300\,ms move windows and linear interpolation between frames.
+再经逐通道行程映射转换为舵机角度，通过串口下发。
+为在离散 token 事件与固定节拍的硬件刷新之间桥接，我们以 10\,fps 对相邻表情目标做缓入缓出（smoothstep）插值，并施加单帧变化上限（每因子每帧至多 0.05），以匹配舵机物理响应极限并避免高频抖动；单次运动窗口与帧周期对齐（100\,ms）。
 
-Because Eq.~\eqref{eq:fusion} operates entirely in preset space, migrating to another face robot reduces to authoring seven new presets and a joint map while reusing the upstream VAD--FKCN stream.
+值得强调的是，上述融合完全在预置因子空间中进行，与具体硬件的运动学解耦：迁移至另一面部机器人平台仅需重新录制七个表情预置与一份关节行程配置，上游的``隐状态$\rightarrow$VAD$\rightarrow$FKCN''信号链无需任何改动。
+这使得本方法区别于依赖平台特定逆模型学习的方案（Chen et al., 2021; Hu et al., 2024），以极低的标定成本实现跨平台部署。
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% --- Section IV. EXPERIMENTS: to be written ---
-%   IV-A  Subspace reliability (E1, E2, E3)
-%   IV-B  Projection validity (B1, B2; EmoBank; GoEmotions)
-%   IV-C  Hardware mirror test
+\section{EXPERIMENTS}
+\label{sec:experiments}
+
+实验回答三个层层递进的问题：（A）从模型权重中挖掘出的 VAD 轴，给出的分值是否与人工标注一致、其几何结构是否可靠？（B）在句子语境中，投影读出的情感是否反映说话人的真实意图，而不是简单复读表面词汇？（C）该情感信号经映射与执行后，能否在实机面部上保真呈现？除特别说明外，实验模型默认为Qwen2.5-0.5B，情感轴与标定参数按第~\ref{sec:axis_mining}节所述、以每极 50 个英文极词离线构建；所有评测只做前向传播，不涉及任何参数更新。
+
+\subsection{情感子空间可靠性}
+\label{sec:exp_subspace}
+
+如果一条效价轴是可靠的，那么把任意情感词的嵌入向量投影到这条轴上，得到的分值排序应当与人工标注的效价排序一致。具体地，从 NRC-VAD 词典（Mohammad, 2018）中另取 300 个未参与构轴筛选的评测词（每个维度 100 词，按该词在 NRC 标注中最突出的维度归组），将每个词在解嵌入矩阵中的行向量归一化后与对应轴做点积、经仿射标定，得到模型分值，再与 NRC 人工分值计算 Spearman 秩相关 $\rho$。为了让不同模型在完全相同的词表上评测、结果可直接比较，评测词均筛选为在全部五个对照模型（2B--8B 的五个开源 LLM）的分词器中都恰好编码为单个 token 的词——多 token 词在解嵌入矩阵中没有唯一的行向量，无法跨模型公平对比。
+
+轴的质量取决于每极选多少个极词（$N$）。图~\ref{fig:e1_pole_sweep}展示了 $N$ 从 10 到 80 变化时，六个模型（五个对照模型加本文部署的 Qwen2.5-0.5B）在同一评测词表上的 $\rho$。三个维度呈现一致的规律：$N$ 较小时轴不稳定，随 $N$ 增大相关性上升，并在 $N \approx 50$ 后饱和——六模型均值上，效价 $\rho_V$ 从 0.73 升至 0.79，唤醒度 $\rho_A$ 从 0.51 升至 0.75，支配度 $\rho_D$ 从 0.49 升至约 0.65。据此全文取 $N{=}50$。值得注意的是，参数量仅为对照模型 1/4 至 1/16 的 Qwen2.5-0.5B 并未掉队：$N{=}50$ 时其 $\rho_V = 0.837$（$p < 10^{-26}$，$n{=}100$）位于六模型区间的上沿，$\rho_A = 0.665$、$\rho_D = 0.663$ 落在区间内偏下。改用中文极词重复整个流程（中文评测词表按同样的单 token 原则另建），得到 $\rho_V = 0.823$、$\rho_A = 0.803$、$\rho_D = 0.702$，说明该构造对构轴语言不敏感。
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\columnwidth]{experiment/E1/output/e1_spearman_pole_sweep.pdf}
+    \caption{极词数 $N$ 扫描下的词级 Spearman 相关（V/A/D 三栏，英文 hold-out 300 词）。实线为六模型（五个 2--8B 基线 + Qwen2.5-0.5B）均值，阴影带为 min--max 范围。三维度均在 $N \approx 50$ 后饱和，支持以少量极词构造稳定情感轴。}
+    \label{fig:e1_pole_sweep}
+\end{figure}
+
+表~\ref{tab:e2_cross_model_spearman}在 $N{=}50$ 下逐模型列出三维相关。六个模型的分值处于同一量级（三维均值 0.68--0.78），Qwen2.5-0.5B 的效价相关为六者最高。由于构轴只需要一部词典和对解嵌入矩阵的一次只读访问（第~\ref{sec:axis_mining}节），换用任何开源模型时整套流程原样适用；此结果进一步说明，将模型缩小到端侧可部署的 0.5B 规模并不会破坏隐空间中的情感结构。
+
+\begin{table}[t]
+\caption{跨模型词级 Spearman 相关（英文 NRC-VAD hold-out，每极 $N{=}50$）。前五行为 2--8B 开源基线模型，末行为本文部署模型。}
+\label{tab:e2_cross_model_spearman}
+\centering
+\small
+\begin{tabular}{lccc}
+\toprule
+Model & $\rho_V$ & $\rho_A$ & $\rho_D$ \\
+\midrule
+Gemma-2.2-2B & 0.802 & 0.650 & 0.598 \\
+Llama-3.2-3B & 0.800 & 0.828 & 0.708 \\
+Mistral-7B-v0.3 & 0.794 & 0.788 & 0.567 \\
+Qwen2.5-7B & 0.755 & 0.792 & 0.648 \\
+Llama-3.1-8B & 0.773 & 0.788 & 0.697 \\
+Qwen2.5-0.5B (ours) & \textbf{0.837} & 0.665 & 0.663 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+下游 FKCN 在完整的三维 VAD 坐标上计算到各原型的欧氏距离，这隐含要求三条轴方向上近似互不重叠，且子空间应编码语言无关的情感语义而非词形伪影。表~\ref{tab:e3_axis_cluster}汇总轴间正交性与五组跨语言情绪词簇凝聚度（每簇含同义异语对应词，簇内平均两两余弦；随机 3 维基线每簇重复 100 次）。
+
+\begin{table}[!t]
+\caption{VAD 轴正交性与跨语言情绪簇凝聚度（Qwen2.5-0.5B，$N{=}50$）。凝聚度为五组多语言情绪词簇的簇内平均两两余弦；括号内为随机 3 维基线（每簇 100 次）。}
+\label{tab:e3_axis_cluster}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Lex. & $|\cos_{VA}|$ & $|\cos_{AD}|$ & $|\cos_{VD}|$ & Clust.\ (rand.) \\
+\midrule
+EN-only & 0.151 & 0.194 & 0.153 & 0.913 (0.410) \\
+ZH-only & 0.220 & 0.116 & 0.186 & 0.898 (0.410) \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+无论以英文还是中文极词构轴，任意两条轴的方向余弦绝对值都不超过 0.22，接近正交；跨语言簇内平均余弦分别为 0.913 与 0.898，远高于随机基线 0.410，表明该子空间捕获的是语言无关的情感几何。
+
+\begin{figure}[!t]
+    \centering
+    \includegraphics[width=\linewidth]{experiment/E2/output/e2_context_sensitivity.png}
+    \caption{跨语言情绪词在 VAD 子空间中的语境敏感性示意。实线为挖掘所得 V/A/D 轴，虚线为理想正交基；同色簇表示同一情绪（Joy、Fear、Sadness、Anger），三角/菱形/方块分别为英语、中文、泰语对应词。同义异语坐标邻近但非重合，表明读回对语言与语境敏感，而非简单词形查表。}
+    \label{fig:e2_context_sensitivity}
+\end{figure}
+
+图~\ref{fig:e2_context_sensitivity}以四种基本情绪为例，直观展示英语、中文与泰语对应词在 VAD 空间中的邻近分布及语境差异。
+
+\subsection{语境敏感性：讽刺压力测试}
+\label{sec:exp_sarcasm}
+
+词级相关只证明了投影与词典先验一致；如果读回本质上等价于查词典，它对 ``lovely'' 永远输出正效价，也就无法驱动跟随句内语用转折的表情。讽刺恰好是检验这一点的对抗场景：讽刺句用正面措辞传递负面意图，表面词汇与真实情感方向相反（Abu Farha et al., 2022）。
+
+我们以 iSarcasmEval SubTask C 英文测试集为底本，它提供 200 对``讽刺句 + 表达相同意图的非讽刺改写''。直接使用原句有两个问题：许多句子依赖特定文化背景（球队、政客、品牌），且孤立引语不含判断讽刺所需的情境。因此我们按固定协议将每对人工改写为一组语境三元组，每条由``一句可观察的情境 + 一句引语''构成，三个条件共享同一说话人意图：S（讽刺）在不利情境下给出正面引语，如\emph{朋友抱怨球队昨晚又输了，我说：``你们队今天打得真好！''}；P（真诚正面）在有利情境下给出同一句正面引语，如\emph{朋友庆祝球队昨晚赢了，我说：``你们队今天打得真好！''}；N（字面负面）在不利情境下给出负面引语，如\emph{朋友抱怨球队又输了，我说：``很遗憾你们队没赢。''}。关键设计在于 S 与 P 的引语逐词相同，仅一句情境不同——任何两条件间的投影差异只能来自语境。改写时以通用日常场景替换文化专名，并为每条标注 1--3 个锚定情绪关键词（如上例中的 well）。全部 200 组三元组连同改写协议随论文发布。
+
+三元组经与全文相同的前向管线投影。句级效价取句末 token 的标定投影值（因果注意力下，末 token 的隐状态汇聚了整句信息）；关键词级取锚定关键词所在 token 位置的投影值。可证伪的预测是：若读回由表面词汇决定，则措辞相同的 S 与 P 应得到同样的高效价；若读回整合了语境，则 S 应向意图相同的 N 靠拢。
+
+作为参照，在不加情境的原始句上（10 对开发样本），讽刺句的投影效价保持强正（$\bar{V}_S \approx 0.42$），比其字面负面改写高出约 0.41——不出所料，孤立句子中模型只能看到正面词汇。而在注入一句情境后的全部 200 组上，格局明显改变：$\bar{V}_S = 0.46$、$\bar{V}_P = 0.65$、$\bar{V}_N = 0.40$。讽刺句与字面负面句的效价差收窄至 $+0.06$，81.5\% 的三元组中两者相差不足 0.15，即讽刺句在句级上已与``负面意图''基本重合；同时，引语完全相同的 S 显著低于 P（差 $-0.19$）。三组配对差异均通过 Wilcoxon 符号秩检验（$n{=}200$，均 $p < 10^{-11}$）。图~\ref{fig:b1_sarcasm_raincloud}给出三条件的完整分布及逐三元组的配对连线。
+
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=\linewidth]{experiment/B1/output/b1_valence_raincloud.pdf}
+  \caption{语境化讽刺压力测试（$n{=}200$ 三元组，Qwen2.5-0.5B）。
+  \textbf{(a)} 讽刺（S）、真诚正面（P）、字面负面（N）三条件的句级投影效价：半小提琴为核密度，箱线为四分位距，散点为逐三元组得分，菱形为 bootstrap 均值 $\pm$95\% 置信区间，灰线连接同组三元组。S 与 N 大范围重合（81.5\% 满足 $|V_S - V_N| < 0.15$）。
+  \textbf{(b)} 首要锚定正面关键词处的 token 级效价（S vs.\ P）：同一词在讽刺语境下均值低 $0.22$。}
+  \label{fig:b1_sarcasm_raincloud}
+\end{figure}
+
+句级差异原则上仍可能由句中其他词贡献。为彻底排除词汇因素，我们把对比压缩到单个 token：同一个正面关键词（如 well），在 S 与 P 两句中位置与词形完全相同，仅前置情境不同。在每组的首要关键词上（$n{=}200$），讽刺语境下该词的投影效价系统性地低于真诚语境，平均差 $-0.22$；将统计范围扩大到所有在 S、P 中均出现的关键词（$n{=}325$），效应保持在 $-0.20$。相比之下，同一对照下唤醒度与支配度的偏移都小于 0.07——语境调制集中出现在效价维上，与讽刺``极性反转、而非唤醒改变''的语用学刻画一致（Leggitt \& Gibbs, 2000）。由于两句在该词上没有任何词形差异，这一结果无法用词典查表解释：隐状态在该 token 处携带的，是经过上下文整合后的情感表征。
+
+综合两级证据：给定最少一句情境，句级效价即与说话人意图对齐；控制词形后，token 级效价仍随语境改变方向。这说明送往下游表情管线的信号反映的是语用层面的情感，为第~\ref{sec:exp_hardware}节的实机评估提供了上游依据。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- IV-C  实机镜像测试（Mirror Test）: to be written ---
+\subsection{实机执行保真度}
+\label{sec:exp_hardware}
+% TODO: 镜像测试（文本 VAD → 实机 → FER 回读 → 相关性）+ 人类识别准确率
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}

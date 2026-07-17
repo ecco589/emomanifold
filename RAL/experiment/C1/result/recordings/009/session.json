@@ -1,0 +1,19 @@
+{
+  "trial_id": "009",
+  "category": "neutral",
+  "user_prompt": "The weather is okay today nothing special.",
+  "assistant_text": "The weather today is okay, with clear skies and mild temperatures.",
+  "duration_s": 14.46,
+  "n_tokens": 13,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}

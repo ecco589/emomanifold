@@ -1,0 +1,19 @@
+{
+  "trial_id": "013",
+  "category": "turn_pos",
+  "user_prompt": "I was worried at first but the result was much better than I expected.",
+  "assistant_text": "That's great to hear! You're right, the outcome exceeded your expectations. Keep pushing and you'll see great things happen.",
+  "duration_s": 26.774,
+  "n_tokens": 26,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}

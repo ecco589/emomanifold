@@ -1,0 +1,128 @@
+B1 — Recommended figure v2 (single panel, S/P/N, top-venue style)
+==================================================================
+
+Primary recommendation: ONE raincloud panel + paired spaghetti
+-----------------------------------------------------------------
+Reference style: raincloud plots (Allen et al., Wellcome Open Research 2019;
+now standard in Nature Human Behaviour, NeurIPS behavioural splits, ACL human
+eval figures); paired within-item lines (Psychological Science / JASA repeated-
+measures).
+
+Why this beats the old two-panel plan
+-------------------------------------
+  • All three conditions (S, P, N) visible in ONE glance
+  • Shows both population distribution AND per-triplet pairing (200 lines)
+  • No need to split "sentence story" and "keyword story" into separate panels
+  • Matches top-venue convention: raw data + summary + effect size in one axis
+
+Figure layout (single column or full width, ~3.4 in × 2.6 in)
+--------------------------------------------------------------
+
+  Y-axis: Projected valence V (calibrated, last-token sentence level)
+  X-axis: Three categorical positions — S | P | N
+
+  Layer 1 (back, alpha ≈ 0.06–0.10, grey):
+    For each of 200 triplets, draw ONE polyline connecting
+      (S_valence, P_valence, N_valence)
+    → 200 faint spaghetti lines; reader sees S and N cluster together,
+      P pulls upward on the same items.
+
+  Layer 2 (middle, raincloud per condition):
+    At each x-position, draw (left to right at each column):
+      • Mirrored half-violin (KDE of 200 scores) — show shape, not just mean
+      • Thin boxplot (25–75% IQR, whiskers to 5–95% or min/max)
+    Colors (match E1):
+      S  #0072B2  (blue)
+      P  #009E73  (green)
+      N  #D55E00  (orange)
+
+  Layer 3 (front):
+    • Jittered strip of 200 individual points (alpha ≈ 0.35, small dots)
+    • Bold diamond or thick horizontal bar = mean ± 95% bootstrap CI
+
+  Layer 4 (annotations):
+    • Brackets above columns with paired tests (Wilcoxon signed-rank, n=200):
+        S vs N:  Δ = +0.06, p = …  (label "overlap" if ns)
+        S vs P:  Δ = −0.19, p < …
+        P vs N:  Δ = +0.25, p < …
+    • Text box: "81.5% |V_S − V_N| < 0.15"
+    • Optional shaded band on y-axis: [-0.15, +0.15] around mean(V_N) to
+      highlight S–N co-location region
+
+What the reader learns in 5 seconds
+-----------------------------------
+  1. P cloud sits RIGHT (most positive) — sincere praise works as expected
+  2. S and N clouds LARGELY OVERLAP — sarcasm reads like literal negativity
+  3. Grey lines mostly go UP from S→P and DOWN from P→N — consistent within-item
+  4. Raw points visible — no "chartjunk", reproducible science
+
+Caption one-liner
+-----------------
+Sentence-level valence under contextual rewrite (n=200 triplets): sarcastic (S)
+and literal-negative (N) distributions overlap (81.5% within ±0.15), while
+sincere-positive (P) remains higher; faint lines connect matched triplets.
+
+
+Alternative A — Ridge joyplot (even cleaner, slightly less pairing info)
+---------------------------------------------------------------------------
+  Three horizontal KDE ridges stacked vertically:
+    row 1: S (blue)
+    row 2: P (green)
+    row 3: N (orange)
+  Vertical dashed lines at mean V for each row.
+  Shade overlap between S and N ridges.
+
+  Pros: extremely clean (Nature Comms / Science Advances aesthetic)
+  Cons: hides per-triplet pairing; harder to show 81.5% pair-wise statistic
+
+  Use when page space is tight and pairing is described in text only.
+
+
+Alternative B — Paired dumbbell only (minimalist NeurIPS poster)
+-----------------------------------------------------------------
+  Three vertical axes at x = 0, 1, 2 (S, P, N).
+  Each triplet: two segments or one polyline S–P–N.
+  Thick black dot = grand mean at each axis.
+
+  Pros: maximum pairing visibility
+  Cons: 200 lines can look noisy without raincloud context
+
+
+Keyword-level in the SAME figure (optional inset, not second full panel)
+------------------------------------------------------------------------
+  Bottom-right inset (≈ 1.2 in × 1.0 in):
+    Same raincloud schema but ONLY S and P at keyword token V (n≈200 primary
+    keywords); omit N (different lexemes).
+    Title: "Anchored keyword V"
+    Annotate mean ΔV(S−P) = −0.20
+
+  Main panel = sentence story; inset = token story. Still ONE figure file.
+
+
+Implementation notes (matplotlib, RAL/ieeeconf)
+-----------------------------------------------
+  • Use sns.violinplot(cut=0, inner=None) + stripplot, or ptitprince RainCloud
+  • Spaghetti: plot [0,1,2] x [v_s, v_p, v_n] with zorder=1
+  • Y-axis limits: symmetric around data (e.g. [−0.3, 1.0] or data-driven)
+  • Font: match E1 plots (sans-serif, 8–9 pt axis labels)
+  • Export: PDF vector + 300 dpi PNG; no 3D, no pie charts
+
+Statistical tests to report in caption
+--------------------------------------
+  Wilcoxon signed-rank (paired, n=200):
+    V_S vs V_N  (expect non-significant or small)
+    V_S vs V_P  (expect significant, negative)
+    V_P vs V_N  (expect significant, positive)
+
+What NOT to use
+---------------
+  • Grouped bar chart of three means only — hides 81.5% overlap finding
+  • Separate KDE figure for S vs N only — drops P, incomplete story
+  • Heatmap 200×3 — unreadable
+  • t-SNE of hidden states — indirect
+
+Recommended final choice
+------------------------
+  **Raincloud + paired spaghetti (primary v2)** for main paper figure.
+  Add keyword inset if reviewers ask for token-level evidence in same fig;
+  otherwise cite ΔV(S−P)=−0.20 in caption text and Table B1.

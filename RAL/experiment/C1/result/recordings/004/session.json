@@ -1,0 +1,19 @@
+{
+  "trial_id": "004",
+  "category": "sad",
+  "user_prompt": "I failed the exam and feel really disappointed.",
+  "assistant_text": "It sounds like you're going through a tough time. It's okay to feel disappointed after failing an exam. Try to focus on what you can control, such as your study habits and preparation. Sometimes, it might take more time to get back on track, but don't give up hope. Remember, you're not alone in this, and there are always ways to improve.",
+  "duration_s": 73.014,
+  "n_tokens": 76,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}

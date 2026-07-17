@@ -1,0 +1,19 @@
+{
+  "trial_id": "014",
+  "category": "turn_neg",
+  "user_prompt": "I was really looking forward to it but ended up so disappointed.",
+  "assistant_text": "I'm sorry to hear that you were looking forward to it but ended up so disappointed. It's important to be open to new experiences and not to judge others based on your own expectations.",
+  "duration_s": 38.487,
+  "n_tokens": 38,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}

@@ -1,0 +1,6 @@
+py-feat
+opencv-python
+pandas
+numpy
+matplotlib
+openpyxl

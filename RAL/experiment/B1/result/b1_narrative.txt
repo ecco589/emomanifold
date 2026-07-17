@@ -1,0 +1,83 @@
+B1 — Paper narrative draft (Methods + Results)
+==============================================
+Copy/edit into RAL §IV.B1. Not LaTeX; plain prose for integration.
+
+-----------------------------------------------------------------------------
+METHODS — Adversarial sarcasm stress test (contextual rewrite)
+-----------------------------------------------------------------------------
+
+To test whether valence readout reflects pragmatic intent rather than shallow
+lexical statistics, we construct an adversarial stress test from iSarcasmEval
+SubTask C (200 English sarcasm–rephrase pairs). Each original pair is manually
+rewritten into a contextual triplet under a six-step protocol
+(see rewrite_protocol.md):
+
+  (1) Intent extraction — identify the shared speaker attitude (e.g., frustration
+      at bad weather) and hold it fixed across all three sentences.
+  (2) De-culturation — replace culture-bound references (named politicians,
+      sports teams, brands, local institutions) with generic roles and settings
+      understandable at CEFR B1 English without domain knowledge.
+  (3) Context injection — prepend one situational sentence (setting + observable
+      trigger) before the quoted utterance so the model receives enough
+      pragmatics to disambiguate sarcasm.
+  (4) Triplet construction — three surface forms with controlled polarity:
+        S (sarcastic):  positive wording, negative intent, adverse trigger;
+        P (positive):   positive wording, positive intent, favourable trigger;
+        N (negative):   negative wording, negative intent, adverse trigger.
+      Sarcastic and sincere-positive sentences maximise lexical overlap on
+      emotion-bearing tokens (e.g., both contain “lovely”) so that token-level
+      comparisons isolate context from vocabulary change.
+  (5) Keyword anchoring — annotate 1–3 emotion keywords per item for token-level
+      V/A/D readout.
+  (6) Quality control — verify intent consistency, absence of proper names, and
+      positive surface on S relative to N.
+
+All 200 rewritten triplets are released as context_triplets_en.json. Projection
+uses the same forward pipeline as the rest of the paper: Qwen2.5-0.5B hidden
+states, E1 English pole-50 valence/arousal/dominance axes, and AdaptiveScaler
+parameters fit on the E1 training corpus. Sentence-level scores use the final
+token; keyword scores use the hidden state at the anchored token.
+
+-----------------------------------------------------------------------------
+RESULTS — Sentence-level decoupling from surface positivity
+-----------------------------------------------------------------------------
+
+On the bare source sentences (without contextual rewrite), a 10-pair development
+sample showed sarcastic utterances projecting strongly positive mean valence
+(V̄_S ≈ 0.42) and remaining well above their literal-negative rephrases
+(Δ(S−N) ≈ +0.41), indicating sensitivity to surface-positive words.
+
+After applying the contextual rewrite to all 200 pairs, sentence-level valence
+readout shifts markedly toward pragmatic alignment. Mean projected valence is
+V̄_S = 0.46, V̄_P = 0.65, and V̄_N = 0.40. The sarcastic–negative gap collapses
+to Δ(S−N) = +0.06, and in 81.5% of triplets the two conditions differ by less
+than 0.15 in valence. Sarcastic sentences therefore co-locate with literal-negative
+paraphrases at the sentence level once situational context is provided, while
+remaining below sincere-positive counterparts (Δ(S−P) = −0.19).
+
+-----------------------------------------------------------------------------
+RESULTS — Token-level context sensitivity at anchored keywords
+-----------------------------------------------------------------------------
+
+To separate lexical lookup from contextual modulation, we compare valence at the
+same emotion keyword across conditions. For keywords appearing in both sarcastic
+and sincere-positive sentences (n = 325 token hits), mean valence is lower in
+sarcastic context than in sincere-positive context: ΔV(S−P) = −0.20. The effect
+is consistent for the primary keyword of each triplet (ΔV = −0.22, n = 200).
+Arousal and dominance show smaller shifts (|Δ| < 0.07), supporting valence as
+the primary axis for this pragmatics test.
+
+Taken together, the stress test shows two complementary findings: (i) with brief
+situational context, sentence-level valence of sarcastic text aligns with
+literal-negative intent rather than with surface positivity; and (ii) at matched
+positive lexemes, hidden-state projection encodes context-dependent valence
+reduction, arguing against a pure dictionary-statistics explanation of the readout.
+
+-----------------------------------------------------------------------------
+Suggested one-sentence result line for Abstract / Introduction
+-----------------------------------------------------------------------------
+
+On 200 contextually rewritten sarcasm triplets, sarcastic and literal-negative
+sentences yield overlapping valence (81.5% within ±0.15), while identical
+positive keywords project lower valence under sarcastic than under sincere
+context (ΔV = −0.20), demonstrating context-sensitive affect readout.

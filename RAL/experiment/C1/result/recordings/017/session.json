@@ -1,0 +1,19 @@
+{
+  "trial_id": "017",
+  "category": "emobank_ha",
+  "user_prompt": "I'm so nervous my heart is racing!",
+  "assistant_text": "It sounds like you're feeling anxious. It's normal to feel this way sometimes, especially before important events or presentations. Try taking deep breaths, counting to 5, or practicing some relaxation techniques like meditation or yoga. If your anxiety persists, consider talking to a trusted friend or family member who can offer support.",
+  "duration_s": 61.08,
+  "n_tokens": 64,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}

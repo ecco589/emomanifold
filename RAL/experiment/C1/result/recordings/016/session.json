@@ -1,0 +1,19 @@
+{
+  "trial_id": "016",
+  "category": "emobank_lv",
+  "user_prompt": "This makes me feel very sad and hopeless.",
+  "assistant_text": "It sounds like you're experiencing a lot of sadness and hopelessness. It's important to acknowledge and express these feelings. If you need help or support, consider reaching out to a therapist or counselor who can provide guidance and support.",
+  "duration_s": 45.366,
+  "n_tokens": 46,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "capture_resolution": [
+    1920,
+    1080
+  ],
+  "crop_ratio": 1.0
+}
