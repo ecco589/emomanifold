@@ -1,0 +1,26 @@
+{
+  "phase": "c1",
+  "trial_id": "005",
+  "category": "angry",
+  "user_prompt": "That person bullied me and I'm furious!",
+  "assistant_text": "It sounds like you're experiencing a difficult situation. It's important to address the issue and seek support. You might consider talking to a trusted friend or family member, or reaching out to a counselor or therapist for guidance. Let's work together to find a solution that feels right for you.",
+  "n_tokens": 58,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 13789.44,
+    "ours_per_token_mean_ms": 0.6202,
+    "ours_ttff_ms": 894.78
+  },
+  "condition": "ours",
+  "duration_s": 14.074,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

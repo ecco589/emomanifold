@@ -1,0 +1,27 @@
+{
+  "phase": "c1",
+  "trial_id": "012",
+  "category": "sarcasm_neg",
+  "user_prompt": "Thanks for deleting the file really helpful.",
+  "assistant_text": "You're welcome! It was helpful, and I'm glad I could assist you.",
+  "n_tokens": 17,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 4654.43,
+    "ours_per_token_mean_ms": 0.6165,
+    "ours_ttff_ms": 932.28
+  },
+  "condition": "random",
+  "duration_s": 4.938,
+  "shuffle_seed": 20260742,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

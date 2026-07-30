@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'happy', intensity: 'high'} The user has shared some positive sentiments such as \"I'm glad to hear that you remembered my birthday!\" and \"It's always nice to know how much you care about me.\" These",
+  "emotion_raw": "happy",
+  "emotion_name": "happiness",
+  "intensity": "high",
+  "valence": 0.85,
+  "arousal": 0.6199999999999999,
+  "latency_ms": 17078.081734944135,
+  "backend": "qwen_local"
+}

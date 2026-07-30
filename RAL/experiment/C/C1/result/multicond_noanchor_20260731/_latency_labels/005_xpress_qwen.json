@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'confused', intensity: 'medium'} The conversation seems to have wandered off topic. Perhaps we could continue discussing something more relevant to your experience. How can I assist you today? Please let me know if there's anything",
+  "emotion_raw": "confused",
+  "emotion_name": "neutral",
+  "intensity": "high",
+  "valence": 0.61,
+  "arousal": -0.47,
+  "latency_ms": 18120.6188891083,
+  "backend": "qwen_local"
+}

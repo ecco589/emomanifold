@@ -1,0 +1,201 @@
+phase,id,condition,latency_ms,error,note
+c1,001,ours_per_token,1.31,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,001,ours_ttff,1720.04,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,001,mishra_gpt,6679.72,,turn classify only
+c1,001,mishra_gpt_ttff,19036.10,,gen_wall+classify (first semantic face update)
+c1,001,mishra_qwen,2128.06,,turn classify only
+c1,001,mishra_qwen_ttff,14484.44,,gen_wall+classify
+c1,001,xpress_gpt,1509.23,,turn classify only
+c1,001,xpress_gpt_ttff,13865.61,,gen_wall+classify (first semantic face update)
+c1,001,xpress_qwen,31839.38,,turn classify only
+c1,001,xpress_qwen_ttff,44195.76,,gen_wall+classify
+c1,002,ours_per_token,0.61,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,002,ours_ttff,960.45,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,002,mishra_gpt,1677.38,,turn classify only
+c1,002,mishra_gpt_ttff,8682.62,,gen_wall+classify (first semantic face update)
+c1,002,mishra_qwen,1340.88,,turn classify only
+c1,002,mishra_qwen_ttff,8346.12,,gen_wall+classify
+c1,002,xpress_gpt,1612.01,,turn classify only
+c1,002,xpress_gpt_ttff,8617.25,,gen_wall+classify (first semantic face update)
+c1,002,xpress_qwen,19224.70,,turn classify only
+c1,002,xpress_qwen_ttff,26229.93,,gen_wall+classify
+c1,003,ours_per_token,0.60,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,003,ours_ttff,1033.56,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,003,mishra_gpt,1577.32,,turn classify only
+c1,003,mishra_gpt_ttff,16585.93,,gen_wall+classify (first semantic face update)
+c1,003,mishra_qwen,1706.96,,turn classify only
+c1,003,mishra_qwen_ttff,16715.57,,gen_wall+classify
+c1,003,xpress_gpt,1208.89,,turn classify only
+c1,003,xpress_gpt_ttff,16217.51,,gen_wall+classify (first semantic face update)
+c1,003,xpress_qwen,17498.95,,turn classify only
+c1,003,xpress_qwen_ttff,32507.57,,gen_wall+classify
+c1,004,ours_per_token,0.65,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,004,ours_ttff,955.81,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,004,mishra_gpt,1755.13,,turn classify only
+c1,004,mishra_gpt_ttff,11662.72,,gen_wall+classify (first semantic face update)
+c1,004,mishra_qwen,1487.09,,turn classify only
+c1,004,mishra_qwen_ttff,11394.68,,gen_wall+classify
+c1,004,xpress_gpt,1461.59,,turn classify only
+c1,004,xpress_gpt_ttff,11369.19,,gen_wall+classify (first semantic face update)
+c1,004,xpress_qwen,17380.23,,turn classify only
+c1,004,xpress_qwen_ttff,27287.82,,gen_wall+classify
+c1,005,ours_per_token,0.62,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,005,ours_ttff,894.78,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,005,mishra_gpt,1390.78,,turn classify only
+c1,005,mishra_gpt_ttff,15180.22,,gen_wall+classify (first semantic face update)
+c1,005,mishra_qwen,1680.41,,turn classify only
+c1,005,mishra_qwen_ttff,15469.86,,gen_wall+classify
+c1,005,xpress_gpt,1570.15,,turn classify only
+c1,005,xpress_gpt_ttff,15359.59,,gen_wall+classify (first semantic face update)
+c1,005,xpress_qwen,18120.62,,turn classify only
+c1,005,xpress_qwen_ttff,31910.06,,gen_wall+classify
+c1,006,ours_per_token,0.61,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,006,ours_ttff,872.94,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,006,mishra_gpt,2195.21,,turn classify only
+c1,006,mishra_gpt_ttff,12902.56,,gen_wall+classify (first semantic face update)
+c1,006,mishra_qwen,1650.68,,turn classify only
+c1,006,mishra_qwen_ttff,12358.03,,gen_wall+classify
+c1,006,xpress_gpt,1433.48,,turn classify only
+c1,006,xpress_gpt_ttff,12140.83,,gen_wall+classify (first semantic face update)
+c1,006,xpress_qwen,17294.17,,turn classify only
+c1,006,xpress_qwen_ttff,28001.52,,gen_wall+classify
+c1,007,ours_per_token,0.90,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,007,ours_ttff,918.12,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,007,mishra_gpt,1448.68,,turn classify only
+c1,007,mishra_gpt_ttff,8020.75,,gen_wall+classify (first semantic face update)
+c1,007,mishra_qwen,1328.29,,turn classify only
+c1,007,mishra_qwen_ttff,7900.36,,gen_wall+classify
+c1,007,xpress_gpt,1310.69,,turn classify only
+c1,007,xpress_gpt_ttff,7882.77,,gen_wall+classify (first semantic face update)
+c1,007,xpress_qwen,17078.08,,turn classify only
+c1,007,xpress_qwen_ttff,23650.16,,gen_wall+classify
+c1,008,ours_per_token,0.59,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,008,ours_ttff,836.85,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,008,mishra_gpt,1504.05,,turn classify only
+c1,008,mishra_gpt_ttff,7952.58,,gen_wall+classify (first semantic face update)
+c1,008,mishra_qwen,1311.63,,turn classify only
+c1,008,mishra_qwen_ttff,7760.17,,gen_wall+classify
+c1,008,xpress_gpt,1533.64,,turn classify only
+c1,008,xpress_gpt_ttff,7982.18,,gen_wall+classify (first semantic face update)
+c1,008,xpress_qwen,17125.33,,turn classify only
+c1,008,xpress_qwen_ttff,23573.87,,gen_wall+classify
+c1,009,ours_per_token,0.68,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,009,ours_ttff,942.90,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,009,mishra_gpt,1725.25,,turn classify only
+c1,009,mishra_gpt_ttff,4868.67,,gen_wall+classify (first semantic face update)
+c1,009,mishra_qwen,1181.80,,turn classify only
+c1,009,mishra_qwen_ttff,4325.23,,gen_wall+classify
+c1,009,xpress_gpt,1359.50,,turn classify only
+c1,009,xpress_gpt_ttff,4502.92,,gen_wall+classify (first semantic face update)
+c1,009,xpress_qwen,17434.77,,turn classify only
+c1,009,xpress_qwen_ttff,20578.19,,gen_wall+classify
+c1,010,ours_per_token,0.94,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,010,ours_ttff,987.96,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,010,mishra_gpt,1678.07,,turn classify only
+c1,010,mishra_gpt_ttff,6545.13,,gen_wall+classify (first semantic face update)
+c1,010,mishra_qwen,1272.48,,turn classify only
+c1,010,mishra_qwen_ttff,6139.55,,gen_wall+classify
+c1,010,xpress_gpt,1356.49,,turn classify only
+c1,010,xpress_gpt_ttff,6223.56,,gen_wall+classify (first semantic face update)
+c1,010,xpress_qwen,17212.48,,turn classify only
+c1,010,xpress_qwen_ttff,22079.55,,gen_wall+classify
+c1,011,ours_per_token,0.62,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,011,ours_ttff,851.24,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,011,mishra_gpt,1322.67,,turn classify only
+c1,011,mishra_gpt_ttff,8671.75,,gen_wall+classify (first semantic face update)
+c1,011,mishra_qwen,1378.67,,turn classify only
+c1,011,mishra_qwen_ttff,8727.75,,gen_wall+classify
+c1,011,xpress_gpt,1879.13,,turn classify only
+c1,011,xpress_gpt_ttff,9228.21,,gen_wall+classify (first semantic face update)
+c1,011,xpress_qwen,17910.80,,turn classify only
+c1,011,xpress_qwen_ttff,25259.87,,gen_wall+classify
+c1,012,ours_per_token,0.62,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,012,ours_ttff,932.28,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,012,mishra_gpt,1447.04,,turn classify only
+c1,012,mishra_gpt_ttff,6101.47,,gen_wall+classify (first semantic face update)
+c1,012,mishra_qwen,1242.14,,turn classify only
+c1,012,mishra_qwen_ttff,5896.57,,gen_wall+classify
+c1,012,xpress_gpt,1499.20,,turn classify only
+c1,012,xpress_gpt_ttff,6153.63,,gen_wall+classify (first semantic face update)
+c1,012,xpress_qwen,17119.75,,turn classify only
+c1,012,xpress_qwen_ttff,21774.18,,gen_wall+classify
+c1,013,ours_per_token,0.81,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,013,ours_ttff,900.47,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,013,mishra_gpt,1185.38,,turn classify only
+c1,013,mishra_gpt_ttff,8165.78,,gen_wall+classify (first semantic face update)
+c1,013,mishra_qwen,1700.40,,turn classify only
+c1,013,mishra_qwen_ttff,8680.80,,gen_wall+classify
+c1,013,xpress_gpt,1558.04,,turn classify only
+c1,013,xpress_gpt_ttff,8538.43,,gen_wall+classify (first semantic face update)
+c1,013,xpress_qwen,17149.55,,turn classify only
+c1,013,xpress_qwen_ttff,24129.94,,gen_wall+classify
+c1,014,ours_per_token,0.60,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,014,ours_ttff,877.80,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,014,mishra_gpt,1617.11,,turn classify only
+c1,014,mishra_gpt_ttff,9998.63,,gen_wall+classify (first semantic face update)
+c1,014,mishra_qwen,1429.97,,turn classify only
+c1,014,mishra_qwen_ttff,9811.49,,gen_wall+classify
+c1,014,xpress_gpt,1724.47,,turn classify only
+c1,014,xpress_gpt_ttff,10105.98,,gen_wall+classify (first semantic face update)
+c1,014,xpress_qwen,17426.31,,turn classify only
+c1,014,xpress_qwen_ttff,25807.83,,gen_wall+classify
+c1,015,ours_per_token,0.95,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,015,ours_ttff,879.52,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,015,mishra_gpt,1264.00,,turn classify only
+c1,015,mishra_gpt_ttff,5908.96,,gen_wall+classify (first semantic face update)
+c1,015,mishra_qwen,1619.39,,turn classify only
+c1,015,mishra_qwen_ttff,6264.35,,gen_wall+classify
+c1,015,xpress_gpt,1464.96,,turn classify only
+c1,015,xpress_gpt_ttff,6109.92,,gen_wall+classify (first semantic face update)
+c1,015,xpress_qwen,17237.14,,turn classify only
+c1,015,xpress_qwen_ttff,21882.10,,gen_wall+classify
+c1,016,ours_per_token,0.67,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,016,ours_ttff,916.56,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,016,mishra_gpt,2060.86,,turn classify only
+c1,016,mishra_gpt_ttff,11131.92,,gen_wall+classify (first semantic face update)
+c1,016,mishra_qwen,1444.34,,turn classify only
+c1,016,mishra_qwen_ttff,10515.41,,gen_wall+classify
+c1,016,xpress_gpt,1416.36,,turn classify only
+c1,016,xpress_gpt_ttff,10487.42,,gen_wall+classify (first semantic face update)
+c1,016,xpress_qwen,15934.90,,turn classify only
+c1,016,xpress_qwen_ttff,25005.96,,gen_wall+classify
+c1,017,ours_per_token,0.62,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,017,ours_ttff,923.26,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,017,mishra_gpt,2171.87,,turn classify only
+c1,017,mishra_gpt_ttff,19610.38,,gen_wall+classify (first semantic face update)
+c1,017,mishra_qwen,2145.28,,turn classify only
+c1,017,mishra_qwen_ttff,19583.79,,gen_wall+classify
+c1,017,xpress_gpt,1740.49,,turn classify only
+c1,017,xpress_gpt_ttff,19179.00,,gen_wall+classify (first semantic face update)
+c1,017,xpress_qwen,17703.25,,turn classify only
+c1,017,xpress_qwen_ttff,35141.76,,gen_wall+classify
+c1,018,ours_per_token,0.61,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,018,ours_ttff,922.00,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,018,mishra_gpt,1549.95,,turn classify only
+c1,018,mishra_gpt_ttff,8856.31,,gen_wall+classify (first semantic face update)
+c1,018,mishra_qwen,1372.98,,turn classify only
+c1,018,mishra_qwen_ttff,8679.34,,gen_wall+classify
+c1,018,xpress_gpt,1745.81,,turn classify only
+c1,018,xpress_gpt_ttff,9052.16,,gen_wall+classify (first semantic face update)
+c1,018,xpress_qwen,17175.81,,turn classify only
+c1,018,xpress_qwen_ttff,24482.17,,gen_wall+classify
+c1,019,ours_per_token,0.73,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,019,ours_ttff,943.88,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,019,mishra_gpt,1546.83,,turn classify only
+c1,019,mishra_gpt_ttff,6015.39,,gen_wall+classify (first semantic face update)
+c1,019,mishra_qwen,1229.91,,turn classify only
+c1,019,mishra_qwen_ttff,5698.47,,gen_wall+classify
+c1,019,xpress_gpt,1308.11,,turn classify only
+c1,019,xpress_gpt_ttff,5776.67,,gen_wall+classify (first semantic face update)
+c1,019,xpress_qwen,17039.78,,turn classify only
+c1,019,xpress_qwen_ttff,21508.34,,gen_wall+classify
+c1,020,ours_per_token,0.62,,mean(project_hidden+FKCN+EMA) per token; excludes LM forward
+c1,020,ours_ttff,851.97,,gen_start→first_token_ctrl_ready (includes first-token LM step)
+c1,020,mishra_gpt,1621.79,,turn classify only
+c1,020,mishra_gpt_ttff,9089.65,,gen_wall+classify (first semantic face update)
+c1,020,mishra_qwen,1360.74,,turn classify only
+c1,020,mishra_qwen_ttff,8828.60,,gen_wall+classify
+c1,020,xpress_gpt,1347.63,,turn classify only
+c1,020,xpress_gpt_ttff,8815.50,,gen_wall+classify (first semantic face update)
+c1,020,xpress_qwen,17162.81,,turn classify only
+c1,020,xpress_qwen_ttff,24630.68,,gen_wall+classify

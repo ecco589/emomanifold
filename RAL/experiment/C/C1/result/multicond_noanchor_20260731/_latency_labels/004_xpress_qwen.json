@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'confused', intensity: 'medium'} The user is expressing disappointment after failing an exam. They seem to be struggling with their academic performance. I'm here to listen and offer support. How can I assist you today?",
+  "emotion_raw": "confused",
+  "emotion_name": "neutral",
+  "intensity": "high",
+  "valence": 0.61,
+  "arousal": -0.47,
+  "latency_ms": 17380.22672687657,
+  "backend": "qwen_local"
+}

@@ -1,0 +1,36 @@
+{
+  "phase": "c1",
+  "trial_id": "017",
+  "category": "emobank_ha",
+  "user_prompt": "I'm so nervous my heart is racing!",
+  "assistant_text": "It sounds like you're experiencing some anxiety. It's normal to feel this way sometimes, especially when facing a big test or meeting someone you don't know well. Try taking deep breaths, counting to 5, or practicing visualization techniques to help calm your nerves. If you're feeling overwhelmed, consider speaking with a trusted friend or family member to share your feelings.",
+  "n_tokens": 74,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 17438.51,
+    "ours_per_token_mean_ms": 0.6212,
+    "ours_ttff_ms": 923.26
+  },
+  "condition": "mishra_gpt",
+  "duration_s": 17.743,
+  "label": {
+    "raw": "6",
+    "emotion_id": 6,
+    "emotion_name": "neutral",
+    "valence": 0.61,
+    "arousal": -0.47,
+    "latency_ms": 2171.866098884493,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

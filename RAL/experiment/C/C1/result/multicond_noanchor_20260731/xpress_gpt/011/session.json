@@ -1,0 +1,37 @@
+{
+  "phase": "c1",
+  "trial_id": "011",
+  "category": "sarcasm_pos",
+  "user_prompt": "Great another late night at work truly \"blissful\".",
+  "assistant_text": "That sounds like a delightful experience at work! It's great to hear about the \"blissful\" nature of your late-night workday.",
+  "n_tokens": 29,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 7349.08,
+    "ours_per_token_mean_ms": 0.6233,
+    "ours_ttff_ms": 851.24
+  },
+  "condition": "xpress_gpt",
+  "duration_s": 7.633,
+  "label": {
+    "raw": "{ \"emotion\": \"happy\", \"intensity\": \"low\" }",
+    "emotion_raw": "happy",
+    "emotion_name": "happiness",
+    "intensity": "low",
+    "valence": 0.73,
+    "arousal": 0.07499999999999996,
+    "latency_ms": 1879.1340219322592,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

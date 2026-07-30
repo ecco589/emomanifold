@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'happy', intensity: 'high'} The user's message indicates they are expressing happiness after receiving positive feedback. Therefore, the most suitable emotion to express would be \"happy\". The intensity should be high as the user seems pleased",
+  "emotion_raw": "happy",
+  "emotion_name": "happiness",
+  "intensity": "high",
+  "valence": 0.85,
+  "arousal": 0.6199999999999999,
+  "latency_ms": 17119.74895489402,
+  "backend": "qwen_local"
+}

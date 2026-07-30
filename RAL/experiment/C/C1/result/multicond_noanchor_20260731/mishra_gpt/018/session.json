@@ -1,0 +1,36 @@
+{
+  "phase": "c1",
+  "trial_id": "018",
+  "category": "emobank_la",
+  "user_prompt": "I feel calm and everything is peaceful.",
+  "assistant_text": "That sounds like you're experiencing a state of calm and peace. It's wonderful to feel this way after a busy day or a stressful period.",
+  "n_tokens": 29,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 7306.36,
+    "ours_per_token_mean_ms": 0.6146,
+    "ours_ttff_ms": 922.0
+  },
+  "condition": "mishra_gpt",
+  "duration_s": 7.593,
+  "label": {
+    "raw": "1",
+    "emotion_id": 1,
+    "emotion_name": "happiness",
+    "valence": 0.85,
+    "arousal": 0.62,
+    "latency_ms": 1549.951892113313,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

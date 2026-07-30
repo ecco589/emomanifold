@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'calm', intensity: 'high'} The user seems to be expressing a sense of calmness and contentment after a busy day or stressful period. Based on the provided information, I would choose the emotion \"calm",
+  "emotion_raw": "calm",
+  "emotion_name": "neutral",
+  "intensity": "high",
+  "valence": 0.61,
+  "arousal": -0.47,
+  "latency_ms": 17175.808291882277,
+  "backend": "qwen_local"
+}

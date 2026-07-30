@@ -1,0 +1,9 @@
+{
+  "raw": "3",
+  "emotion_id": 3,
+  "emotion_name": "fear",
+  "valence": -0.87,
+  "arousal": 0.53,
+  "latency_ms": 2195.2058791648597,
+  "gpt_model": "gpt-4o-mini"
+}

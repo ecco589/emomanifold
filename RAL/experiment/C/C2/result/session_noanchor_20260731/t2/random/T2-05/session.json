@@ -1,0 +1,27 @@
+{
+  "phase": "c2t2",
+  "trial_id": "T2-05",
+  "category": "sad",
+  "user_prompt": "I opened the admission email with my heart pounding. I was so ready to celebrate. It was a rejection. I closed the laptop and didn't know what to do next.",
+  "assistant_text": "It sounds like you're feeling overwhelmed after receiving a rejection email. It's understandable to feel anxious or disappointed. Here are a few steps you might consider:\n\n1. **Reflect on the Email**: Try to understand the reasons behind the rejection. Was it a misunderstanding, a lack of interest, or a mistake in your application?\n\n2. **Take a Break**: Sometimes taking a break can help clear your mind and reduce stress.\n\n3. **Review Your Application**: Check your application for",
+  "n_tokens": 96,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 22063.7,
+    "ours_per_token_mean_ms": 0.6071,
+    "ours_ttff_ms": 1137.27
+  },
+  "condition": "random",
+  "duration_s": 22.565,
+  "shuffle_seed": 20261010,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

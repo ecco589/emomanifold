@@ -1,0 +1,36 @@
+{
+  "phase": "c1",
+  "trial_id": "019",
+  "category": "goemo_joy",
+  "user_prompt": "I am absolutely thrilled to hear this news!",
+  "assistant_text": "That's great to hear! I'm glad to hear about the exciting news.",
+  "n_tokens": 16,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 4468.56,
+    "ours_per_token_mean_ms": 0.733,
+    "ours_ttff_ms": 943.88
+  },
+  "condition": "mishra_gpt",
+  "duration_s": 4.759,
+  "label": {
+    "raw": "1",
+    "emotion_id": 1,
+    "emotion_name": "happiness",
+    "valence": 0.85,
+    "arousal": 0.62,
+    "latency_ms": 1546.829137019813,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'confused', intensity: 'medium'} The conversation seems to have wandered off topic without providing a clear request or prompt. Could you please provide more context or clarify what you'd like to discuss or talk about? This will",
+  "emotion_raw": "confused",
+  "emotion_name": "neutral",
+  "intensity": "high",
+  "valence": 0.61,
+  "arousal": -0.47,
+  "latency_ms": 17125.32971589826,
+  "backend": "qwen_local"
+}

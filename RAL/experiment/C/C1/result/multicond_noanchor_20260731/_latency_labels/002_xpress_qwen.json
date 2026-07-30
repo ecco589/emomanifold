@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'happy', intensity: 'high'} The user seems to be expressing satisfaction with the restaurant they recently visited. Based on the context, I would choose the emotion \"happy\" as the most appropriate choice. The intensity level remains",
+  "emotion_raw": "happy",
+  "emotion_name": "happiness",
+  "intensity": "high",
+  "valence": 0.85,
+  "arousal": 0.6199999999999999,
+  "latency_ms": 19224.69674097374,
+  "backend": "qwen_local"
+}

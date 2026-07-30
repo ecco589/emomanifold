@@ -1,0 +1,22 @@
+{
+  "video": {
+    "path": "/__modal/volumes/vo-xVhgs9NxSl9e2LNUBoyIHv/c1/mishra_gpt/003/video.mp4",
+    "fps": 30.0,
+    "total_frames": 457,
+    "width": 1920,
+    "height": 1080,
+    "duration_s": 15.233333333333333
+  },
+  "device": "cuda",
+  "batch_size": 8,
+  "frame_step": 1,
+  "face_threshold": 0.7,
+  "smooth_ms": 200,
+  "interpolate_limit_ms": 250,
+  "total_output_rows": 457,
+  "detected_rows": 457,
+  "valid_rows": 457,
+  "valid_ratio": 1.0,
+  "output_dir": "/__modal/volumes/vo-xVhgs9NxSl9e2LNUBoyIHv/c1/mishra_gpt/003/mirror/video_20260730_170443",
+  "created_at": "2026-07-30T17:05:17"
+}

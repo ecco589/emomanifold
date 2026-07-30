@@ -1,0 +1,11 @@
+id,source_id,target_emotion,user_prompt,notes
+T1-01,S01,happy,I am absolutely thrilled and overjoyed about winning the championship!,forward+proto-anchor beta=0.8; from S01
+T1-02,S18,happy,I feel ecstatic and grateful that all my hard work finally paid off!,forward+proto-anchor beta=0.8; from S18
+T1-03,S04,sad,I am heartbroken and utterly devastated by this terrible loss.,forward+proto-anchor beta=0.8; from S04
+T1-04,S19,sad,I am crushed with sorrow and grief after hearing the tragic news.,forward+proto-anchor beta=0.8; from S19
+T1-05,S07,angry,I am furious and outraged that they betrayed me so shamelessly!,forward+proto-anchor beta=0.8; from S07
+T1-06,S20,angry,I hate this and I am boiling with resentment toward those people!,forward+proto-anchor beta=0.8; from S20
+T1-07,S10,fear,I am terrified and panicked that something horrible is about to happen!,forward+proto-anchor beta=0.8; from S10
+T1-08,S12,surprise,I am completely shocked and astonished by this unbelievable news!,forward+proto-anchor beta=0.8; from S12
+T1-09,S14,disgust,This is revolting and disgusting and it makes me feel sick!,forward+proto-anchor beta=0.8; from S14
+T1-10,S16,neutral,The meeting is scheduled for three o'clock tomorrow afternoon.,forward+proto-anchor beta=0.8; from S16

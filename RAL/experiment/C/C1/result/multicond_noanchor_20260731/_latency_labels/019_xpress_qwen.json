@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'happy', intensity: 'high'} The user has shared some positive sentiments such as \"That's great to hear!\" and \"I'm glad to hear about the exciting news.\" These indicate a positive emotional state. Therefore,",
+  "emotion_raw": "happy",
+  "emotion_name": "happiness",
+  "intensity": "high",
+  "valence": 0.85,
+  "arousal": 0.6199999999999999,
+  "latency_ms": 17039.782729931176,
+  "backend": "qwen_local"
+}

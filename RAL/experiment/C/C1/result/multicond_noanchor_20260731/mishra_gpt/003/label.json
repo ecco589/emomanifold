@@ -1,0 +1,9 @@
+{
+  "raw": "2",
+  "emotion_id": 2,
+  "emotion_name": "sadness",
+  "valence": -0.5,
+  "arousal": -0.57,
+  "latency_ms": 1577.3153889458627,
+  "gpt_model": "gpt-4o-mini"
+}

@@ -1,0 +1,37 @@
+{
+  "phase": "c1",
+  "trial_id": "014",
+  "category": "turn_neg",
+  "user_prompt": "I was really looking forward to it but ended up so disappointed.",
+  "assistant_text": "I'm sorry to hear that. It sounds like you had a disappointing experience. Perhaps we could talk about what you were looking forward to and how it turned out instead.",
+  "n_tokens": 34,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 8381.52,
+    "ours_per_token_mean_ms": 0.5952,
+    "ours_ttff_ms": 877.8
+  },
+  "condition": "xpress_gpt",
+  "duration_s": 8.668,
+  "label": {
+    "raw": "{ \"emotion\": \"interest\", \"intensity\": \"low\" }",
+    "emotion_raw": "interest",
+    "emotion_name": "neutral",
+    "intensity": "low",
+    "valence": 0.61,
+    "arousal": -0.47,
+    "latency_ms": 1724.4677259586751,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

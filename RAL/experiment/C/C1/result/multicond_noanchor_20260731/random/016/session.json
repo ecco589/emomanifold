@@ -1,0 +1,27 @@
+{
+  "phase": "c1",
+  "trial_id": "016",
+  "category": "emobank_lv",
+  "user_prompt": "This makes me feel very sad and hopeless.",
+  "assistant_text": "It sounds like you're experiencing a lot of sadness and despair. It's important to acknowledge these feelings and seek support from friends, family, or professionals who can provide comfort and help.",
+  "n_tokens": 37,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 9071.06,
+    "ours_per_token_mean_ms": 0.6709,
+    "ours_ttff_ms": 916.56
+  },
+  "condition": "random",
+  "duration_s": 9.354,
+  "shuffle_seed": 20260746,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

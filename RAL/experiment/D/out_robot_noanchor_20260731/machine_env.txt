@@ -1,0 +1,11 @@
+platform: Linux-5.15.0-139-generic-x86_64-with-glibc2.31
+machine: x86_64
+python: 3.10.16
+device_arg: cpu
+http_proxy_set: True
+torch: 2.12.1+cu130
+cpu_cores_or_logical: 4
+threads_per_core: 1
+cpu_model: Intel(R) N100
+cpu_mhz_max: 3400.0000
+gpu_nvidia: none

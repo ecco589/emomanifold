@@ -1,0 +1,36 @@
+{
+  "phase": "c2t2",
+  "trial_id": "T2-06",
+  "category": "sad",
+  "user_prompt": "I dressed up, got to the cafe early, and kept checking the door every time it opened. She never showed up. No message. The coffee went cold.",
+  "assistant_text": "It seems like the person you're describing is having trouble contacting you at the cafe. They've been checking the door every time, but haven't received a response. The coffee has also become cold, indicating they might have left the door unlocked or closed.",
+  "n_tokens": 51,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 12343.58,
+    "ours_per_token_mean_ms": 0.6278,
+    "ours_ttff_ms": 1219.27
+  },
+  "condition": "mishra_gpt",
+  "duration_s": 12.633,
+  "label": {
+    "raw": "2",
+    "emotion_id": 2,
+    "emotion_name": "sadness",
+    "valence": -0.5,
+    "arousal": -0.57,
+    "latency_ms": 1551.332294009626,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "raw": "{ \"emotion\": \"happy\", \"intensity\": \"high\" }",
+  "emotion_raw": "happy",
+  "emotion_name": "happiness",
+  "intensity": "high",
+  "valence": 0.85,
+  "arousal": 0.6199999999999999,
+  "latency_ms": 1308.1120229326189,
+  "gpt_model": "gpt-4o-mini"
+}

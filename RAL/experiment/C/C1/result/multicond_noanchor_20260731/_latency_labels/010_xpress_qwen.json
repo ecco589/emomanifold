@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'happy', intensity: 'high'} The user has responded by saying \"You're welcome! Let me know if there's anything else I can help with.\" This indicates they are expressing happiness and satisfaction with the interaction. Therefore",
+  "emotion_raw": "happy",
+  "emotion_name": "happiness",
+  "intensity": "high",
+  "valence": 0.85,
+  "arousal": 0.6199999999999999,
+  "latency_ms": 17212.484913878143,
+  "backend": "qwen_local"
+}

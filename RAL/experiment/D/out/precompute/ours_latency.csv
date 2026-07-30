@@ -1,0 +1,21 @@
+id,category,n_tokens,sentence_ms,mean_token_ms,user_prompt
+001,happy,11,612.32,55.67,I just won the lottery and I'm so excited!
+002,happy,10,190.55,19.05,This restaurant tastes amazing and I'm very satisfied.
+003,sad,10,198.90,19.89,My pet passed away and I feel heartbroken.
+004,sad,9,213.71,23.75,I failed the exam and feel really disappointed.
+005,angry,9,204.28,22.70,That person bullied me and I'm furious!
+006,fear,13,221.34,17.03,The thunder outside is so loud and I'm a bit scared.
+007,surprise,8,219.36,27.42,What? You actually remembered my birthday!
+008,disgust,11,216.41,19.67,That smell is disgusting and I can't stand it.
+009,neutral,8,227.43,28.43,The weather is okay today nothing special.
+010,neutral,4,161.02,40.26,Okay I understand.
+011,sarcasm_pos,12,351.48,29.29,"Great another late night at work truly ""blissful""."
+012,sarcasm_neg,8,201.54,25.19,Thanks for deleting the file really helpful.
+013,turn_pos,15,218.45,14.56,I was worried at first but the result was much better than I expected.
+014,turn_neg,13,205.23,15.79,I was really looking forward to it but ended up so disappointed.
+015,emobank_hv,7,184.03,26.29,I feel very happy and satisfied.
+016,emobank_lv,9,195.54,21.73,This makes me feel very sad and hopeless.
+017,emobank_ha,9,217.82,24.20,I'm so nervous my heart is racing!
+018,emobank_la,8,209.57,26.20,I feel calm and everything is peaceful.
+019,goemo_joy,9,213.11,23.68,I am absolutely thrilled to hear this news!
+020,goemo_sad,12,222.98,18.58,Losing this opportunity feels like a knife in my heart.

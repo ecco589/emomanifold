@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'happy', intensity: 'high'} The user seems to be expressing happiness after hearing something positive. Therefore, I will express happiness as the emotion and maintain a high intensity level. This ensures that the user feels heard and appreciated",
+  "emotion_raw": "happy",
+  "emotion_name": "happiness",
+  "intensity": "high",
+  "valence": 0.85,
+  "arousal": 0.6199999999999999,
+  "latency_ms": 17237.14015702717,
+  "backend": "qwen_local"
+}

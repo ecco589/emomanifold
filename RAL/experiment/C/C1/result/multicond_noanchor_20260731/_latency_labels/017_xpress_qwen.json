@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'concerned', intensity: 'high'} \n\nI'm here to listen and support you. How can I assist you today? Let me know if there's anything specific you'd like to talk about or if you need",
+  "emotion_raw": "concerned",
+  "emotion_name": "fear",
+  "intensity": "high",
+  "valence": -0.87,
+  "arousal": 0.53,
+  "latency_ms": 17703.24687194079,
+  "backend": "qwen_local"
+}

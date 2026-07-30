@@ -1,0 +1,9 @@
+{
+  "raw": "1",
+  "emotion_id": 1,
+  "emotion_name": "happiness",
+  "valence": 0.85,
+  "arousal": 0.62,
+  "latency_ms": 1242.1408011578023,
+  "backend": "qwen_local"
+}

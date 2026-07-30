@@ -1,0 +1,37 @@
+{
+  "phase": "c2t2",
+  "trial_id": "T2-02",
+  "category": "happy",
+  "user_prompt": "The doctor looked at my report for a long time without saying anything. My mind went blank. Then he said everything is normal. I almost cried from relief.",
+  "assistant_text": "The doctor's response was unexpected, but it helped alleviate the patient's anxiety and provided a sense of normalcy.",
+  "n_tokens": 23,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 9319.94,
+    "ours_per_token_mean_ms": 0.7214,
+    "ours_ttff_ms": 1788.88
+  },
+  "condition": "xpress_gpt",
+  "duration_s": 9.588,
+  "label": {
+    "raw": "{ \"emotion\": \"interest\", \"intensity\": \"low\" }",
+    "emotion_raw": "interest",
+    "emotion_name": "neutral",
+    "intensity": "low",
+    "valence": 0.61,
+    "arousal": -0.47,
+    "latency_ms": 1512.9780198913068,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

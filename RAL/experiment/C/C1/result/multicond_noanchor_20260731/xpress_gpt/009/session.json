@@ -1,0 +1,37 @@
+{
+  "phase": "c1",
+  "trial_id": "009",
+  "category": "neutral",
+  "user_prompt": "The weather is okay today nothing special.",
+  "assistant_text": "It sounds like the weather is good for today.",
+  "n_tokens": 10,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 3143.42,
+    "ours_per_token_mean_ms": 0.6833,
+    "ours_ttff_ms": 942.9
+  },
+  "condition": "xpress_gpt",
+  "duration_s": 3.428,
+  "label": {
+    "raw": "{ \"emotion\": \"interest\", \"intensity\": \"low\" }",
+    "emotion_raw": "interest",
+    "emotion_name": "neutral",
+    "intensity": "low",
+    "valence": 0.61,
+    "arousal": -0.47,
+    "latency_ms": 1359.4982631038874,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

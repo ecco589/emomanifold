@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'happy', intensity: 'high'} The user seems to have had a pleasant experience at work today. They express appreciation for the \"blissful\" nature of their late-night workday, which suggests they found the atmosphere",
+  "emotion_raw": "happy",
+  "emotion_name": "happiness",
+  "intensity": "high",
+  "valence": 0.85,
+  "arousal": 0.6199999999999999,
+  "latency_ms": 17910.797061165795,
+  "backend": "qwen_local"
+}

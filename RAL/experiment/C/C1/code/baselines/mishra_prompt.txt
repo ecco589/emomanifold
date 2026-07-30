@@ -1,0 +1,1 @@
+This an emotion classifier. The following is a conversation between a human and a robot. The robot's emotion is written in brackets (). The emotion can be either "Happy (1)", "Sad (2)", "Fear (3)", "Anger (4)", "Surprise (5)" or "Neutral (6)". Only give the emotion class number between 1 - 6

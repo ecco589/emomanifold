@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'confused', intensity: 'medium'} The weather report was quite alarming. Thunderstorms are typically associated with lightning strikes, which can cause serious injuries if they occur near power lines. It's always best to stay indoors during",
+  "emotion_raw": "confused",
+  "emotion_name": "neutral",
+  "intensity": "high",
+  "valence": 0.61,
+  "arousal": -0.47,
+  "latency_ms": 17294.168506981805,
+  "backend": "qwen_local"
+}

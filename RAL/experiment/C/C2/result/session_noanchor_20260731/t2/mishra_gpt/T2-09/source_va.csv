@@ -1,0 +1,2 @@
+timestamp_s,valence,arousal,token
+0.0,-0.5,-0.57,LABEL:sadness

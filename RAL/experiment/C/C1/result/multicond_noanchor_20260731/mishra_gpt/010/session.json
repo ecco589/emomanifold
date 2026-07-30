@@ -1,0 +1,36 @@
+{
+  "phase": "c1",
+  "trial_id": "010",
+  "category": "neutral",
+  "user_prompt": "Okay I understand.",
+  "assistant_text": "You're welcome! Let me know if there's anything else I can help with.",
+  "n_tokens": 17,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 4867.07,
+    "ours_per_token_mean_ms": 0.937,
+    "ours_ttff_ms": 987.96
+  },
+  "condition": "mishra_gpt",
+  "duration_s": 5.147,
+  "label": {
+    "raw": "1",
+    "emotion_id": 1,
+    "emotion_name": "happiness",
+    "valence": 0.85,
+    "arousal": 0.62,
+    "latency_ms": 1678.0657500494272,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

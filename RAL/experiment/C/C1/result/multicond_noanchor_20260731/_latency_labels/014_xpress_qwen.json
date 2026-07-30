@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'confused', intensity: 'medium'} The user's message indicates they are experiencing disappointment after a negative experience. To respond appropriately, I would choose a mix of sadness and confusion as the emotions to convey. Since the user",
+  "emotion_raw": "confused",
+  "emotion_name": "neutral",
+  "intensity": "high",
+  "valence": 0.61,
+  "arousal": -0.47,
+  "latency_ms": 17426.30927101709,
+  "backend": "qwen_local"
+}

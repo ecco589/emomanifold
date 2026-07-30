@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'happy', intensity: 'high'} The weather seems nice today! </format> \n\nI'm glad to hear that! Let me know if there's anything else I can assist you with. 😊😊😊\n\n{",
+  "emotion_raw": "happy",
+  "emotion_name": "happiness",
+  "intensity": "high",
+  "valence": 0.85,
+  "arousal": 0.6199999999999999,
+  "latency_ms": 17434.771726140752,
+  "backend": "qwen_local"
+}

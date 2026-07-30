@@ -1,0 +1,27 @@
+{
+  "phase": "c1",
+  "trial_id": "004",
+  "category": "sad",
+  "user_prompt": "I failed the exam and feel really disappointed.",
+  "assistant_text": "It sounds like you're going through a tough time. It's okay to feel disappointed after failing an exam. Remember, failure is a part of the learning process. Keep trying and don't give up.",
+  "n_tokens": 41,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 9907.59,
+    "ours_per_token_mean_ms": 0.6508,
+    "ours_ttff_ms": 955.81
+  },
+  "condition": "random",
+  "duration_s": 10.185,
+  "shuffle_seed": 20260734,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

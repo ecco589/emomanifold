@@ -1,0 +1,26 @@
+{
+  "phase": "c2t2",
+  "trial_id": "T2-03",
+  "category": "happy",
+  "user_prompt": "At the airport I couldn't find my passport. My hands were shaking and I thought the trip was over. It was in the other pocket the whole time. I feel so stupid—and so lucky.",
+  "assistant_text": "It sounds like you're experiencing a common situation at airports. Shaking hands can be uncomfortable, especially in crowded areas. It's understandable that you felt like your trip was over, but it's important to remember that you're lucky to have a passport. The airport staff should be able to help you find it.",
+  "n_tokens": 63,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 15055.58,
+    "ours_per_token_mean_ms": 0.6875,
+    "ours_ttff_ms": 1230.35
+  },
+  "condition": "ours",
+  "duration_s": 15.334,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

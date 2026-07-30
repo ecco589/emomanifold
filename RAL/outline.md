@@ -75,32 +75,32 @@ Text → LLM stream → VAD(t) → FKCN → 29-DOF face
 
 
 
-#### E1（已完成）：极词数 sweep × Spearman
+#### A1（已完成）：极词数 sweep × Spearman
 
 - **设置**：Qwen2.5-0.5B；英文 pole 词 N=10–80；NIPS 五模型交集 hold-out（300 词）；极词与 hold-out **不互斥**（对齐 NIPS B1）。
-- **图**：六模型（NIPS 五模型 + Qwen 0.5B）Spearman **均值实线 + min–max 带**（V/A/D 三栏），见 `RAL/experiment/E1/output/e1_spearman_pole_sweep.pdf`。
+- **图**：六模型（NIPS 五模型 + Qwen 0.5B）Spearman **均值实线 + min–max 带**（V/A/D 三栏），见 `RAL/experiment/A/A1/output/e1_spearman_pole_sweep.pdf`。
 - **结论要点**：修正极词筛选后，0.5B 在 V 维可进入六模型带；A/D 仍偏弱，支持「小模型 + 轴质量」而非流程错误。
 
 
 
-#### E2（已完成）：跨模型 Spearman（NIPS Table 1 + Qwen2.5-0.5B）
+#### A2（已完成）：跨模型 Spearman（NIPS Table 1 + Qwen2.5-0.5B）
 
 - **设置**：固定 pole_n=50；英文 NRC-VAD hold-out Spearman（ρ_V, ρ_A, ρ_D）。
-- **数据**：NIPS 五模型来自 `E1/data/nips_b1_per_model_spearman.json`；Qwen2.5-0.5B 来自 `E1/result/en/pole_50`。
-- **表**：`RAL/experiment/E2/output/e2_table.tex`（复现 NIPS Table 1 并加入本模型一行）。
+- **数据**：NIPS 五模型来自 `A1/data/nips_b1_per_model_spearman.json`；Qwen2.5-0.5B 来自 `A1/result/en/pole_50`。
+- **表**：`RAL/experiment/A/A2/output/e2_table.tex`（复现 NIPS Table 1 并加入本模型一行）。
 - **结论要点**：0.5B 与 NIPS 五模型同量级，支持方法跨 backbone 泛化。
 
 
 
-#### E3（已完成）：EN vs ZH 极词 × 轴正交 + 跨语聚类
+#### A3（已完成）：EN vs ZH 极词 × 轴正交 + 跨语聚类
 
-- **两条件**（每极 $N{=}50$，Qwen2.5-0.5B）：EN-only（E1 `en/pole_50`）、ZH-only（E1 `zh/pole_50`）。
+- **两条件**（每极 $N{=}50$，Qwen2.5-0.5B）：EN-only（A1 `en/pole_50`）、ZH-only（A1 `zh/pole_50`）。
 - **指标**：$|\cos(V,A)|, |\cos(A,D)|, |\cos(V,D)|$；5 簇跨语 mean cosine vs **共享**随机 3D 基线（0.410）。
-- **表**：`RAL/experiment/E3/output/e3_table.tex`。
+- **表**：`RAL/experiment/A/A3/output/e3_table.tex`。
 
 
 
-### B. 投影能力（递进验证）
+### B. 情感细节追踪（递进验证）
 
 **设计原则**：先用**句级 VAD 金标准**证明整体映射合理，再用**同词跨语境 token 对照**证明复杂情感（讽刺等）的上下文敏感性。两层共用同一前向管线，指标随层级递进。
 
@@ -137,13 +137,13 @@ Text → LLM stream → VAD(t) → FKCN → 29-DOF face
 
 
 
-### C. 实机实验（RAL 重点，三层客观证据，无主观偏好）
+### C. 实机实验（RAL 重点，客观证据；目录 `RAL/experiment/C/`）
 
-1. **镜像测试 Mirror Test（主打，带独立参照）**
-  `文本 VAD → 实机 → 摄像头 → FER/OpenFace AU（或 VLM 裁判）→ 还原 VAD → 与原始 VAD 相关`
-   全自动 round-trip：检验「情感指令是否如实映现在脸上」
-2. **人类识别准确率（客观，非主观偏好；低成本 N≈15–20）**
-  仅看机器人脸（去文字/语音）→ Geneva Emotion Wheel 选情感 / VA 平面标点 → 与意图 VAD 算**准确率/误差**；
+1. **C1 Mirror Test（主打）**
+  `文本 VAD → 实机 → 摄像头 → FER → 还原 VAD`；事件级方向命中 + token vs 话轮级方差分解。
+2. **C2 人因（人类作裁判，非 Likert；方案见 `C/C2/`）**
+  - Task1：无声脸 → 7 类识别准确率
+  - Task2：Token vs 话轮级 2AFC（“哪张脸更匹配情感变化”）
 
 ---
 

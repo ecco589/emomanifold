@@ -1,0 +1,26 @@
+{
+  "phase": "c1",
+  "trial_id": "001",
+  "category": "happy",
+  "user_prompt": "I just won the lottery and I'm so excited!",
+  "assistant_text": "Winning the lottery is an incredible feeling! Congratulations on your victory. Keep your spirits high and stay positive.",
+  "n_tokens": 22,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 12356.38,
+    "ours_per_token_mean_ms": 1.3083,
+    "ours_ttff_ms": 1720.04
+  },
+  "condition": "ours",
+  "duration_s": 12.355,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

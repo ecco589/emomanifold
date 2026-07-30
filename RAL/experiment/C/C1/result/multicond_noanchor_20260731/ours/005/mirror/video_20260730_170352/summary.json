@@ -1,0 +1,22 @@
+{
+  "video": {
+    "path": "/__modal/volumes/vo-xVhgs9NxSl9e2LNUBoyIHv/c1/ours/005/video.mp4",
+    "fps": 30.0,
+    "total_frames": 421,
+    "width": 1920,
+    "height": 1080,
+    "duration_s": 14.033333333333333
+  },
+  "device": "cuda",
+  "batch_size": 8,
+  "frame_step": 1,
+  "face_threshold": 0.7,
+  "smooth_ms": 200,
+  "interpolate_limit_ms": 250,
+  "total_output_rows": 421,
+  "detected_rows": 421,
+  "valid_rows": 421,
+  "valid_ratio": 1.0,
+  "output_dir": "/__modal/volumes/vo-xVhgs9NxSl9e2LNUBoyIHv/c1/ours/005/mirror/video_20260730_170352",
+  "created_at": "2026-07-30T17:04:33"
+}

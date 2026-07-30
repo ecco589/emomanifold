@@ -1,0 +1,26 @@
+{
+  "phase": "c1",
+  "trial_id": "006",
+  "category": "fear",
+  "user_prompt": "The thunder outside is so loud and I'm a bit scared.",
+  "assistant_text": "It sounds like you're experiencing a loud thunderstorm outside. It can be scary, especially if you're not used to the sound of thunder. It's important to stay indoors and avoid getting outside until the storm has passed.",
+  "n_tokens": 45,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 10707.35,
+    "ours_per_token_mean_ms": 0.6093,
+    "ours_ttff_ms": 872.94
+  },
+  "condition": "ours",
+  "duration_s": 10.987,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

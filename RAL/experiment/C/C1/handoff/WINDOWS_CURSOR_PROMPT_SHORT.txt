@@ -1,0 +1,3 @@
+解压 ipc_bundle_out_20260730_180409.zip。只用里面的 out/c1/（ours、mishra_gpt、xpress_gpt、random 各编号目录），不要跑 out/c2/，也不要动 out/latency/。
+
+对本机已有 Mirror 环境（C1/code/mirror/.venv）批处理：每个 trial 的 video.mp4 + 同目录 source_va.csv，--device cuda --batch-size 8，结果写到该 trial 的 mirror/。先冒烟 ours/013，再全量；失败记 log。完成后把带 mirror 的 out/c1 打包传回。

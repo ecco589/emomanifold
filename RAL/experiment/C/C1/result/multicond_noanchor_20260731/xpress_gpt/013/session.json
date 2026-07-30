@@ -1,0 +1,37 @@
+{
+  "phase": "c1",
+  "trial_id": "013",
+  "category": "turn_pos",
+  "user_prompt": "I was worried at first but the result was much better than I expected.",
+  "assistant_text": "That's great to hear! It's important to be cautious and not to be overly optimistic, especially when results are better than expected.",
+  "n_tokens": 27,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 6980.39,
+    "ours_per_token_mean_ms": 0.8072,
+    "ours_ttff_ms": 900.47
+  },
+  "condition": "xpress_gpt",
+  "duration_s": 7.268,
+  "label": {
+    "raw": "{ \"emotion\": \"interest\", \"intensity\": \"low\" }",
+    "emotion_raw": "interest",
+    "emotion_name": "neutral",
+    "intensity": "low",
+    "valence": 0.61,
+    "arousal": -0.47,
+    "latency_ms": 1558.041573036462,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

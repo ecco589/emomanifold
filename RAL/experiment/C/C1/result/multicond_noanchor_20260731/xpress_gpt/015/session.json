@@ -1,0 +1,37 @@
+{
+  "phase": "c1",
+  "trial_id": "015",
+  "category": "emobank_hv",
+  "user_prompt": "I feel very happy and satisfied.",
+  "assistant_text": "That sounds wonderful! It's great to hear that you're feeling happy and satisfied.",
+  "n_tokens": 17,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 4644.96,
+    "ours_per_token_mean_ms": 0.9502,
+    "ours_ttff_ms": 879.52
+  },
+  "condition": "xpress_gpt",
+  "duration_s": 4.918,
+  "label": {
+    "raw": "{ \"emotion\": \"happy\", \"intensity\": \"low\" }",
+    "emotion_raw": "happy",
+    "emotion_name": "happiness",
+    "intensity": "low",
+    "valence": 0.73,
+    "arousal": 0.07499999999999996,
+    "latency_ms": 1464.959466131404,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

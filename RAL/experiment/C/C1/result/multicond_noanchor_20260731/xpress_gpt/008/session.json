@@ -1,0 +1,37 @@
+{
+  "phase": "c1",
+  "trial_id": "008",
+  "category": "disgust",
+  "user_prompt": "That smell is disgusting and I can't stand it.",
+  "assistant_text": "I understand your discomfort. It's important to address this issue. Is there anything specific you would like to discuss or talk about?",
+  "n_tokens": 26,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 6448.54,
+    "ours_per_token_mean_ms": 0.5917,
+    "ours_ttff_ms": 836.85
+  },
+  "condition": "xpress_gpt",
+  "duration_s": 6.732,
+  "label": {
+    "raw": "{ \"emotion\": \"calm\", \"intensity\": \"low\" }",
+    "emotion_raw": "calm",
+    "emotion_name": "neutral",
+    "intensity": "low",
+    "valence": 0.61,
+    "arousal": -0.47,
+    "latency_ms": 1533.6441481485963,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

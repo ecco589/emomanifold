@@ -1,0 +1,26 @@
+{
+  "phase": "c1",
+  "trial_id": "007",
+  "category": "surprise",
+  "user_prompt": "What? You actually remembered my birthday!",
+  "assistant_text": "I'm glad to hear that you remembered my birthday! It's always nice to know how much you care about me.",
+  "n_tokens": 24,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 6572.08,
+    "ours_per_token_mean_ms": 0.9025,
+    "ours_ttff_ms": 918.12
+  },
+  "condition": "ours",
+  "duration_s": 6.855,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

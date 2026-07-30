@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'happy', intensity: 'high'} The user's message indicates they are currently experiencing happiness due to winning the lottery. Based on the provided options, I have chosen the emotion \"happy\" as it aligns well with the",
+  "emotion_raw": "happy",
+  "emotion_name": "happiness",
+  "intensity": "high",
+  "valence": 0.85,
+  "arousal": 0.6199999999999999,
+  "latency_ms": 31839.38061213121,
+  "backend": "qwen_local"
+}

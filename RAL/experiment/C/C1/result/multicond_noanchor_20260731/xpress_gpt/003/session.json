@@ -1,0 +1,37 @@
+{
+  "phase": "c1",
+  "trial_id": "003",
+  "category": "sad",
+  "user_prompt": "My pet passed away and I feel heartbroken.",
+  "assistant_text": "It's very hard to grieve the loss of a loved one. It's important to take time to process your feelings and allow yourself to feel all the emotions you have. You might also consider reaching out to friends and family for support. Remember, it's okay to grieve and to seek help if needed.",
+  "n_tokens": 63,
+  "proto_beta": 0.0,
+  "pipeline": "old_stream+raw_passthrough",
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "post_token_delay_s": 0.5,
+  "latency_timing": {
+    "gen_wall_ms": 15008.62,
+    "ours_per_token_mean_ms": 0.6006,
+    "ours_ttff_ms": 1033.56
+  },
+  "condition": "xpress_gpt",
+  "duration_s": 15.302,
+  "label": {
+    "raw": "{ \"emotion\": \"concern\", \"intensity\": \"high\" }",
+    "emotion_raw": "concern",
+    "emotion_name": "fear",
+    "intensity": "high",
+    "valence": -0.87,
+    "arousal": 0.53,
+    "latency_ms": 1208.8924911804497,
+    "gpt_model": "gpt-4o-mini"
+  },
+  "error": "",
+  "video_fps": 30.0,
+  "camera_device": "/dev/video0",
+  "video_resolution": [
+    1920,
+    1080
+  ]
+}

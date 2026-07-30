@@ -7,9 +7,9 @@
 | M1 | 文字 → ERNIE 流式 → 逐 token VAD | ✓ |
 | M2 | + Grimace 逐 token 表情 | ✓ |
 | M3 | VA → FKCN → 29 DOF 实机表情 | ✓ |
-| M4.0_RAL | Qwen 管线 + RAL 第一阶段实验（E1–E3） | ✓ |
-| M4.1_RAL | 第二阶段实验（句级/token 投影）+ 撰稿 | 待做 |
-| M4.2_RAL | 第三阶段（实机镜像测试）+ 定稿 | 待做 |
+| M4.0_RAL | Qwen 管线 + RAL 子空间实验（A1–A3） | ✓ |
+| M4.1_RAL | 情感细节追踪（B1）+ 撰稿 | 进行中 |
+| M4.2_RAL | 实机 C1 Mirror + C2 人因 + 定稿 | 待做 |
 | M5 | 加入对话功能 | 待做 |
 
 ## M3（已完成，回溯见 tag `M3`）
@@ -26,24 +26,24 @@
 
 **RAL 投稿准备**：`RAL/ieeeconf/` 模板 + `RAL/outline.md` 实验大纲。
 
-**§IV.A 情感子空间可靠性（已完成）**
+**§IV.A 子空间提取（已完成）** — 目录 `RAL/experiment/A/`
 
 | 实验 | 内容 | 产出 |
 |------|------|------|
-| **E1** | 极词 N=10–80 sweep × Spearman（六模型 mean + min–max 带） | `RAL/experiment/E1/output/e1_spearman_pole_sweep.pdf` |
-| **E2** | 跨模型 Spearman（NIPS Table 1 五模型 + Qwen 0.5B，pole=50） | `RAL/experiment/E2/output/e2_table.tex` |
-| **E3** | EN / ZH 极词 × 轴正交 + 跨语情绪簇 vs 随机 3D 基线 | `RAL/experiment/E3/output/e3_table.tex` |
+| **A1** | 极词 N=10–80 sweep × Spearman（六模型 mean + min–max 带） | `RAL/experiment/A/A1/output/e1_spearman_pole_sweep.pdf` |
+| **A2** | 跨模型 Spearman（NIPS Table 1 五模型 + Qwen 0.5B，pole=50） | `RAL/experiment/A/A2/output/e2_table.tex` |
+| **A3** | EN / ZH 极词 × 轴正交 + 跨语情绪簇 vs 随机 3D 基线 | `RAL/experiment/A/A3/output/e3_table.tex` |
 
-复现：`python RAL/experiment/E1/code/run_e1.py` → `export_pole_sweep_series.py` → `plot_e1.py`；E2/E3 见各目录 `README.md`。
+复现：`python RAL/experiment/A/A1/code/run_e1.py` → `export_pole_sweep_series.py` → `plot_e1.py`；A2/A3 见各目录 `README.md`。
 
-## M4.1_RAL（下一步）
+## M4.1_RAL
 
-- §IV.B：EmoBank / GoEmotions / iSarcasmEval 句级与 token 级投影验证
-- 正文 Methods + Experiments A 撰写
+- §IV.B 情感细节追踪：`RAL/experiment/B/B1`（语境化讽刺）
+- 正文 Methods + Experiments 撰写
 
 ## M4.2_RAL
 
-- §IV.C：实机镜像测试与人脸识别 round-trip
+- §IV.C：`C/C1` Mirror Test + `C/C2` 人因（识别 + 2AFC）
 - 全文定稿投稿
 
 ## M5

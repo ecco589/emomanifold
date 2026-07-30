@@ -1,0 +1,10 @@
+{
+  "raw": "{ \"emotion\": \"interest\", \"intensity\": \"low\" }",
+  "emotion_raw": "interest",
+  "emotion_name": "neutral",
+  "intensity": "low",
+  "valence": 0.61,
+  "arousal": -0.47,
+  "latency_ms": 1724.4677259586751,
+  "gpt_model": "gpt-4o-mini"
+}

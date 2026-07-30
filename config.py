@@ -56,11 +56,21 @@ class ModelConfig:
             "use_causal_lm": True,
         },
         "qwen": {
-            "model_name": "Qwen/Qwen2.5-0.5B",
+            "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
             "local_path": (
-                MODEL_CACHE_DIR / "Qwen" / "Qwen2.5-0.5B"
-                if (MODEL_CACHE_DIR / "Qwen" / "Qwen2.5-0.5B").exists()
-                else Path.home() / ".cache" / "modelscope" / "hub" / "models" / "Qwen" / "Qwen2.5-0.5B"
+                MODEL_CACHE_DIR / "Qwen" / "Qwen2.5-0.5B-Instruct"
+                if (MODEL_CACHE_DIR / "Qwen" / "Qwen2.5-0.5B-Instruct").exists()
+                else (
+                    MODEL_CACHE_DIR / "Qwen" / "Qwen2___5-0___5B-Instruct"
+                    if (MODEL_CACHE_DIR / "Qwen" / "Qwen2___5-0___5B-Instruct").exists()
+                    else Path.home()
+                    / ".cache"
+                    / "modelscope"
+                    / "hub"
+                    / "models"
+                    / "Qwen"
+                    / "Qwen2.5-0.5B-Instruct"
+                )
             ),
             "is_bidirectional": False,
             "emotion_dimensions": ["valence", "arousal", "dominance"],

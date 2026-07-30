@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'confused', intensity: 'medium'} The conversation seems to be about grief and seeking support after losing someone. The user is expressing confusion as they mention taking time to process their feelings and seeking support. This indicates that they",
+  "emotion_raw": "confused",
+  "emotion_name": "neutral",
+  "intensity": "high",
+  "valence": 0.61,
+  "arousal": -0.47,
+  "latency_ms": 17498.953429050744,
+  "backend": "qwen_local"
+}

@@ -65,3 +65,6 @@ Thumbs.db
 C1_mirror_results.zip
 video_va_system.zip
 **/pyfeat_models/
+
+# local archive of superseded experiment data (kept on disk only)
+RAL/experiment/_archive_obsolete_20260731/

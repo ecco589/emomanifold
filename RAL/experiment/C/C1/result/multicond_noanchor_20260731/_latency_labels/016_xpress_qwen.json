@@ -1,0 +1,10 @@
+{
+  "raw": "{emotion: 'sad', intensity: 'high'} The intensity of the emotion is high as the user is expressing deep sadness and despair. This indicates they are dealing with significant emotional distress. </format>",
+  "emotion_raw": "sad",
+  "emotion_name": "sadness",
+  "intensity": "high",
+  "valence": -0.4999999999999999,
+  "arousal": -0.57,
+  "latency_ms": 15934.896463062614,
+  "backend": "qwen_local"
+}

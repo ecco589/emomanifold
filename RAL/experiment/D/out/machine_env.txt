@@ -1,0 +1,9 @@
+platform: macOS-26.6-arm64-arm-64bit
+machine: arm64
+processor: arm
+python: 3.12.9 (/Users/eccoliu/miniforge3/bin/python)
+torch: 2.5.1
+mps_available: True
+cpu: Apple M1
+device_arg: cpu
+proxy: ALL_PROXY=socks5h://127.0.0.1:9099
