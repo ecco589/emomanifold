@@ -1,0 +1,61 @@
+{
+  "n_participants": 20,
+  "protocol_note": "T2 is single-choice among token/turn/random per item (not multi-select). T1 gold = instructed target emotion of the reply (model prompted to respond in that emotion).",
+  "T1": {
+    "ours_per10": {
+      "n": 20,
+      "mean": 8.55,
+      "std": 1.0500626547722611,
+      "median": 9.0,
+      "min": 7.0,
+      "max": 10.0
+    },
+    "preset_per10": {
+      "n": 20,
+      "mean": 9.05,
+      "std": 1.0500626547722611,
+      "median": 9.0,
+      "min": 7.0,
+      "max": 10.0
+    },
+    "ours_accuracy": 0.8550000000000001,
+    "preset_accuracy": 0.905,
+    "wilcoxon_ours_vs_preset_ twosided_p": 0.01293409326524844,
+    "confusions_noted": "fear↔surprise, sad↔disgust (also present for presets, slightly less)"
+  },
+  "T2": {
+    "n_items": 10,
+    "choice": "single (token vs turn vs random)",
+    "ours_selected_per10": {
+      "n": 20,
+      "mean": 8.35,
+      "std": 1.1821033884786183,
+      "median": 8.0,
+      "min": 6.0,
+      "max": 10.0
+    },
+    "random_selected_per10": {
+      "n": 20,
+      "mean": 1.15,
+      "std": 0.7451598203705947,
+      "median": 1.0,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "turn_selected_per10": {
+      "n": 20,
+      "mean": 0.5,
+      "std": 0.6882472016116853,
+      "median": 0.0,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "ours_select_rate": 0.835,
+    "random_select_rate": 0.11499999999999999,
+    "turn_select_rate": 0.05,
+    "subjects_ours_gt_random": 20,
+    "subjects_ours_gt_turn": 20,
+    "wilcoxon_ours_gt_random_p": 9.5367431640625e-07,
+    "wilcoxon_ours_gt_turn_p": 9.5367431640625e-07
+  }
+}

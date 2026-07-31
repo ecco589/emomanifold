@@ -68,7 +68,7 @@
 
 ---
 
-## 第七步 + 第八步：实机 C1/C2 同场重跑 ✅（无锚定重录完成；C2 问卷待裁切发放）
+## 第七步 + 第八步：实机 C1/C2 ✅（C1 无锚定全量；C2 人因另卷完成）
 
 **交接文档：** `C/C1/handoff/`；**论文主数据 = 20260731 无锚定场**：
 `C/C1/result/multicond_noanchor_20260731/`（80/80 含 Mirror，30fps）。
@@ -83,7 +83,9 @@
    - **结论**：ours 效价 87.5%（CI [76.7, 96.0]，p<1e-4）、唤醒 69.6%（p=0.001）、R² 增益 +0.22/+0.19；
      三基线两维度全机会水平、增益 ≈0。**单场即可支撑 C1，不再分旧场/新场两套口径。**
    - 主图：`C1/code/plot_c1_multicond_paper.py` → `C1/output/multicond_noanchor_20260731/paper/`。
-3. ⏳ C2 问卷：从 `C2/result/session_noanchor_20260731/` 裁切打包。
+3. ✅ C2 人因（重做口径：按目标情绪回复；T2 单选 token/turn/random；n=20）：
+   结果 → `C2/output/human_study_20260731/`（T1 85.5% vs 预设 90.5%；T2 ours 83.5% / turn 5% / random 11.5%）；
+   已写入正文 `tab:c2_human`（无独立大图）。本机 `session_noanchor` / survey 包未用于终稿问卷，已删。
 4. 历史数据（20260717 旧场、20260730 锚定场、试录、旧延迟）→ `_archive_obsolete_20260731/`。
 
 ---

@@ -1,9 +1,0 @@
-{
-  "raw": "6",
-  "emotion_id": 6,
-  "emotion_name": "neutral",
-  "valence": 0.61,
-  "arousal": -0.47,
-  "latency_ms": 1706.5523290075362,
-  "gpt_model": "gpt-4o-mini"
-}

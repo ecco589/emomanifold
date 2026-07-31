@@ -1,9 +1,0 @@
-{
-  "raw": "1",
-  "emotion_id": 1,
-  "emotion_name": "happiness",
-  "valence": 0.85,
-  "arousal": 0.62,
-  "latency_ms": 1367.1881360933185,
-  "gpt_model": "gpt-4o-mini"
-}

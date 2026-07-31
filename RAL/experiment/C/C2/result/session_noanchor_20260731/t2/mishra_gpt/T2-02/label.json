@@ -1,9 +1,0 @@
-{
-  "raw": "5",
-  "emotion_id": 5,
-  "emotion_name": "surprise",
-  "valence": -0.73,
-  "arousal": 0.6,
-  "latency_ms": 1372.6919230539352,
-  "gpt_model": "gpt-4o-mini"
-}

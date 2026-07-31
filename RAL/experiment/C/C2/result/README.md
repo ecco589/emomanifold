@@ -1,7 +1,5 @@
-# C2 实机录像
+# C2 result/
 
-`session_20260730/`：T1×10 + T2×10×4 条件，共 50 段。
+最终人因未使用本机 session 录像；`session_noanchor_20260731` 已删除。
 
-每条保留：`video.mp4`、`session.json`、`source_va.csv`（静脸条件常为常数）。
-
-问卷发材料 → 裁切后放 `../output/survey/`（尚未生成）。
+打分与汇总见 `../output/human_study_20260731/`。
