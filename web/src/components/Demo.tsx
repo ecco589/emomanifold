@@ -52,7 +52,7 @@ export function Demo({ lang }: { lang: Lang }) {
   const [busy, setBusy] = useState(false);
   const [face, setFace] = useState(REST_FACE);
   const abortRef = useRef<AbortController | null>(null);
-  const animator = useMemo(() => new FaceAnimator(0.42, 6), []);
+  const animator = useMemo(() => new FaceAnimator(10, 200, 0.05, 6, 6), []);
   const emaRef = useRef<number[]>([0, 0, 0, 0, 0, 0, 0]);
   const historyRef = useRef<Round[]>([]);
   const tokenQueueRef = useRef<TokenSpan[]>([]);
@@ -112,10 +112,9 @@ export function Demo({ lang }: { lang: Lang }) {
 
       if (span.valence != null && span.arousal != null) {
         const raw = fkcnWeights(span.valence, span.arousal);
-        emaRef.current = emaBlend(emaRef.current, raw, 0.78);
+        emaRef.current = emaBlend(emaRef.current, raw, 0.65);
         const g = fkcnToGrimace(emaRef.current);
-        animator.setTarget([g.joy, g.surprise, g.fear, g.sadness, g.disgust, g.anger]);
-        await animator.waitUntilSettled({ threshold: 0.055, timeoutMs: 120 });
+        await animator.animateTo([g.joy, g.surprise, g.fear, g.sadness, g.disgust, g.anger]);
       }
 
       setRounds((prev) => {
