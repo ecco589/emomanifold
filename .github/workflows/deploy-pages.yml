@@ -33,7 +33,7 @@ jobs:
       - name: Install & build
         working-directory: web
         env:
-          VITE_API_URL: ${{ vars.VITE_API_URL || 'https://blackjack-lenders-diff-instruments.trycloudflare.com' }}
+          VITE_API_URL: ${{ vars.VITE_API_URL || 'https://api.imcrl.com' }}
           VITE_BASE: /emomanifold/
         run: |
           npm ci
