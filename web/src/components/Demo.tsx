@@ -192,7 +192,10 @@ export function Demo({ lang }: { lang: Lang }) {
   return (
     <section className="demo" id="demo">
       <div className="section-head">
-        <h2>{t.demoTitle}</h2>
+        <h2>
+          {t.demoTitle}
+          <span className="demo-tag">{t.demoTagline}</span>
+        </h2>
         <p className="muted">{t.demoHint}</p>
       </div>
       {conn === "loading" ? <p className="status muted">{t.loadConnecting}</p> : null}
@@ -240,7 +243,7 @@ export function Demo({ lang }: { lang: Lang }) {
             }}
           >
             <textarea
-              rows={2}
+              rows={1}
               value={input}
               placeholder={canSend ? t.placeholder : t.placeholderLoading}
               disabled={conn !== "ready" || busy}

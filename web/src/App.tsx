@@ -44,11 +44,6 @@ export function App() {
         {t.authors ? <p className="authors">{t.authors}</p> : null}
       </section>
 
-      <div className="notice">
-        <p>{t.notice}</p>
-        <p className="notice-local">{t.noticeLocal}</p>
-      </div>
-
       <Demo lang={lang} />
 
       <section className="method">
