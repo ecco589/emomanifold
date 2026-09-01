@@ -54,6 +54,11 @@ data/*.csv
 data/*.json
 !data/vad_lexicon/
 
+# Web (GitHub Pages MVP)
+web/node_modules/
+web/dist/
+web/{{*/
+
 # OS
 .DS_Store
 Thumbs.db
