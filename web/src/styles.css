@@ -312,10 +312,13 @@ button.linkish {
   background: var(--face);
   min-height: 360px;
   display: flex;
+  flex-direction: column;
 }
 
 .face-canvas {
+  flex: 1;
   width: 100%;
+  min-width: 200px;
   height: 420px;
 }
 
