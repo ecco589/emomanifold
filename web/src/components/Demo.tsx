@@ -52,9 +52,11 @@ export function Demo({ lang }: { lang: Lang }) {
   const [busy, setBusy] = useState(false);
   const [face, setFace] = useState(REST_FACE);
   const abortRef = useRef<AbortController | null>(null);
-  const animator = useMemo(() => new FaceAnimator(10, 0.08, 6), []);
+  const animator = useMemo(() => new FaceAnimator(0.42, 6), []);
   const emaRef = useRef<number[]>([0, 0, 0, 0, 0, 0, 0]);
   const historyRef = useRef<Round[]>([]);
+  const tokenQueueRef = useRef<TokenSpan[]>([]);
+  const drainTokensRef = useRef<Promise<void>>(Promise.resolve());
 
   useEffect(() => {
     historyRef.current = rounds;
@@ -79,8 +81,8 @@ export function Demo({ lang }: { lang: Lang }) {
 
   useEffect(() => {
     let raf = 0;
-    const tick = (now: number) => {
-      const stepped = animator.step(now);
+    const tick = () => {
+      const stepped = animator.step();
       if (stepped) {
         setFace({
           joy: stepped[0],
@@ -103,12 +105,45 @@ export function Demo({ lang }: { lang: Lang }) {
     setAttempt((n) => n + 1);
   }
 
+  async function drainTokenQueue() {
+    while (tokenQueueRef.current.length > 0) {
+      const span = tokenQueueRef.current.shift();
+      if (!span) break;
+
+      if (span.valence != null && span.arousal != null) {
+        const raw = fkcnWeights(span.valence, span.arousal);
+        emaRef.current = emaBlend(emaRef.current, raw, 0.78);
+        const g = fkcnToGrimace(emaRef.current);
+        animator.setTarget([g.joy, g.surprise, g.fear, g.sadness, g.disgust, g.anger]);
+        await animator.waitUntilSettled({ threshold: 0.055, timeoutMs: 120 });
+      }
+
+      setRounds((prev) => {
+        const copyRounds = prev.map((round) => ({
+          ...round,
+          tokens: [...round.tokens],
+        }));
+        const last = copyRounds[copyRounds.length - 1];
+        last.tokens.push(span);
+        return copyRounds;
+      });
+    }
+  }
+
+  function enqueueToken(span: TokenSpan) {
+    tokenQueueRef.current.push(span);
+    drainTokensRef.current = drainTokensRef.current.then(() => drainTokenQueue());
+  }
+
   async function send(text: string) {
     const msg = text.trim();
     if (!msg || busy || conn !== "ready") return;
     setInput("");
     setBusy(true);
+    tokenQueueRef.current = [];
+    drainTokensRef.current = Promise.resolve();
     emaRef.current = [0, 0, 0, 0, 0, 0, 0];
+    animator.snapToTarget();
     setRounds((prev) => [...prev, { user: msg, tokens: [] }]);
 
     const messages: ChatTurn[] = [{ role: "system", content: systemPrompt(lang) }];
@@ -128,29 +163,16 @@ export function Demo({ lang }: { lang: Lang }) {
         messages,
         { maxNewTokens: 64, temperature: 0.4, signal: controller.signal },
         (piece) => {
-          const span: TokenSpan = {
+          enqueueToken({
             text: piece.text,
             valence: piece.valence,
             arousal: piece.arousal,
             dominance: piece.dominance,
-          };
-          if (piece.valence != null && piece.arousal != null) {
-            const raw = fkcnWeights(piece.valence, piece.arousal);
-            emaRef.current = emaBlend(emaRef.current, raw, 0.6);
-            const g = fkcnToGrimace(emaRef.current);
-            animator.setTarget([g.joy, g.surprise, g.fear, g.sadness, g.disgust, g.anger]);
-          }
-          setRounds((prev) => {
-            const copyRounds = prev.map((round) => ({
-              ...round,
-              tokens: [...round.tokens],
-            }));
-            const last = copyRounds[copyRounds.length - 1];
-            last.tokens.push(span);
-            return copyRounds;
           });
         },
       );
+      await drainTokensRef.current;
+      animator.snapToTarget();
     } catch (err) {
       if (!controller.signal.aborted) {
         setConn("error");
