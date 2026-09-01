@@ -2,7 +2,8 @@
 /// <reference path="../../grimace-main/src/facedata.d.ts" />
 
 interface ImportMetaEnv {
-  readonly VITE_MODEL_HOST?: string;
+  readonly VITE_API_URL?: string;
+  readonly VITE_BASE?: string;
 }
 
 declare module "grimace" {

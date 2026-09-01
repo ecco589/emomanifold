@@ -2,16 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { copy, type Lang } from "../i18n";
 import { emaBlend, fkcnToGrimace, fkcnWeights } from "../emotion/fkcn";
 import { FaceAnimator } from "../emotion/interpolator";
-import { projectHidden, type PipelineConfig } from "../emotion/projector";
-import {
-  didExposeHiddenStates,
-  generateStream,
-  isModelReady,
-  loadOnDeviceModel,
-  resetModelLoad,
-  type ChatTurn,
-  type LoadProgress,
-} from "../engine/model";
+import { apiBase, checkApi, streamChat, type ChatTurn } from "../engine/api";
 import { GrimaceFace } from "./GrimaceFace";
 
 type TokenSpan = {
@@ -25,6 +16,8 @@ type Round = {
   user: string;
   tokens: TokenSpan[];
 };
+
+type ConnStatus = "loading" | "ready" | "error";
 
 const REST_FACE = {
   joy: 0,
@@ -51,14 +44,13 @@ function systemPrompt(lang: Lang): string {
 
 export function Demo({ lang }: { lang: Lang }) {
   const t = copy[lang];
-  const [load, setLoad] = useState<LoadProgress>({ status: "loading", progress: 0 });
-  const [loadAttempt, setLoadAttempt] = useState(0);
-  const [pipeline, setPipeline] = useState<PipelineConfig | null>(null);
+  const [conn, setConn] = useState<ConnStatus>("loading");
+  const [connErr, setConnErr] = useState("");
+  const [attempt, setAttempt] = useState(0);
   const [input, setInput] = useState("");
   const [rounds, setRounds] = useState<Round[]>([]);
   const [busy, setBusy] = useState(false);
   const [face, setFace] = useState(REST_FACE);
-  const [hiddenWarning, setHiddenWarning] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
   const animator = useMemo(() => new FaceAnimator(10, 0.08, 6), []);
   const emaRef = useRef<number[]>([0, 0, 0, 0, 0, 0, 0]);
@@ -67,6 +59,23 @@ export function Demo({ lang }: { lang: Lang }) {
   useEffect(() => {
     historyRef.current = rounds;
   }, [rounds]);
+
+  useEffect(() => {
+    let cancelled = false;
+    void checkApi().then((ok) => {
+      if (cancelled) return;
+      if (ok) {
+        setConn("ready");
+        setConnErr("");
+      } else {
+        setConn("error");
+        setConnErr(`${apiBase()} unreachable`);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [attempt]);
 
   useEffect(() => {
     let raf = 0;
@@ -88,69 +97,19 @@ export function Demo({ lang }: { lang: Lang }) {
     return () => cancelAnimationFrame(raf);
   }, [animator]);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    fetch("./pipeline/pipeline.json")
-      .then((r) => r.json())
-      .then((data: PipelineConfig) => {
-        if (!cancelled) setPipeline(data);
-      })
-      .catch(() => {
-        if (!cancelled) setLoad({ status: "error", message: "Missing pipeline.json" });
-      });
-
-    void loadOnDeviceModel((p) => {
-      if (cancelled) return;
-      setLoad(p);
-    })
-      .then(() => {
-        if (!cancelled && isModelReady()) {
-          setLoad({ status: "ready", progress: 100 });
-        }
-      })
-      .catch((err: unknown) => {
-        if (!cancelled) {
-          setLoad({
-            status: "error",
-            message: err instanceof Error ? err.message : String(err),
-          });
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [loadAttempt]);
-
-  function retryLoad() {
-    resetModelLoad();
-    setLoad({ status: "loading", progress: 0 });
-    setLoadAttempt((n) => n + 1);
+  function retryConn() {
+    setConn("loading");
+    setConnErr("");
+    setAttempt((n) => n + 1);
   }
-
-  const loadPct =
-    load.status === "loading"
-      ? Math.min(90, Math.max(0, Math.round(load.progress ?? 0)))
-      : null;
-  const loadHint =
-    load.status === "loading" && (load.progress ?? 0) >= 85
-      ? t.loadInitializing
-      : load.phase === "tokenizer"
-        ? t.loadPhaseTokenizer
-        : load.phase === "onnx"
-          ? t.loadPhaseOnnx
-          : null;
 
   async function send(text: string) {
     const msg = text.trim();
-    if (!msg || busy || !(load.status === "ready" || isModelReady())) return;
+    if (!msg || busy || conn !== "ready") return;
     setInput("");
     setBusy(true);
-    setHiddenWarning(false);
     emaRef.current = [0, 0, 0, 0, 0, 0, 0];
-    const nextRounds: Round[] = [...historyRef.current, { user: msg, tokens: [] }];
-    setRounds(nextRounds);
+    setRounds((prev) => [...prev, { user: msg, tokens: [] }]);
 
     const messages: ChatTurn[] = [{ role: "system", content: systemPrompt(lang) }];
     for (const round of historyRef.current) {
@@ -165,17 +124,18 @@ export function Demo({ lang }: { lang: Lang }) {
     const controller = new AbortController();
     abortRef.current = controller;
     try {
-      await generateStream(
+      await streamChat(
         messages,
         { maxNewTokens: 64, temperature: 0.4, signal: controller.signal },
         (piece) => {
-          const span: TokenSpan = { text: piece.text };
-          if (piece.hidden && pipeline) {
-            const vad = projectHidden(piece.hidden, pipeline);
-            span.valence = vad.valence;
-            span.arousal = vad.arousal;
-            span.dominance = vad.dominance;
-            const raw = fkcnWeights(vad.valence, vad.arousal);
+          const span: TokenSpan = {
+            text: piece.text,
+            valence: piece.valence,
+            arousal: piece.arousal,
+            dominance: piece.dominance,
+          };
+          if (piece.valence != null && piece.arousal != null) {
+            const raw = fkcnWeights(piece.valence, piece.arousal);
             emaRef.current = emaBlend(emaRef.current, raw, 0.6);
             const g = fkcnToGrimace(emaRef.current);
             animator.setTarget([g.joy, g.surprise, g.fear, g.sadness, g.disgust, g.anger]);
@@ -191,12 +151,11 @@ export function Demo({ lang }: { lang: Lang }) {
           });
         },
       );
-      if (didExposeHiddenStates() === false) setHiddenWarning(true);
     } catch (err) {
-      setLoad({
-        status: "error",
-        message: err instanceof Error ? err.message : String(err),
-      });
+      if (!controller.signal.aborted) {
+        setConn("error");
+        setConnErr(err instanceof Error ? err.message : String(err));
+      }
     } finally {
       abortRef.current = null;
       setBusy(false);
@@ -207,9 +166,7 @@ export function Demo({ lang }: { lang: Lang }) {
     abortRef.current?.abort();
   }
 
-  const canSend = (load.status === "ready" || isModelReady()) && !busy;
-  const canType = load.status === "loading" || load.status === "ready";
-  const inputPlaceholder = canSend ? t.placeholder : t.placeholderLoading;
+  const canSend = conn === "ready" && !busy;
 
   return (
     <section className="demo" id="demo">
@@ -217,20 +174,11 @@ export function Demo({ lang }: { lang: Lang }) {
         <h2>{t.demoTitle}</h2>
         <p className="muted">{t.demoHint}</p>
       </div>
-      {loadPct !== null ? (
-        <div className="load-bar" aria-label={`${loadPct}%`}>
-          <div className="load-bar-track">
-            <div className="load-bar-fill" style={{ width: `${loadPct}%` }} />
-          </div>
-          <span className="load-bar-pct">{loadPct}%</span>
-          {loadHint ? <span className="load-bar-hint muted">{loadHint}</span> : null}
-        </div>
-      ) : null}
-      {load.status === "need-gpu" ? <p className="status status-need-gpu">{t.loadNeedGpu}</p> : null}
-      {load.status === "error" ? (
+      {conn === "loading" ? <p className="status muted">{t.loadConnecting}</p> : null}
+      {conn === "error" ? (
         <p className="status status-error">
-          {`${t.loadError} ${load.message ?? ""}`.trim()}{" "}
-          <button type="button" className="linkish" onClick={retryLoad}>
+          {`${t.loadError} ${connErr}`.trim()}{" "}
+          <button type="button" className="linkish" onClick={retryConn}>
             {t.loadRetry}
           </button>
         </p>
@@ -273,8 +221,8 @@ export function Demo({ lang }: { lang: Lang }) {
             <textarea
               rows={2}
               value={input}
-              placeholder={inputPlaceholder}
-              disabled={!canType}
+              placeholder={canSend ? t.placeholder : t.placeholderLoading}
+              disabled={conn !== "ready" || busy}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
@@ -306,7 +254,6 @@ export function Demo({ lang }: { lang: Lang }) {
           <GrimaceFace weights={face} />
         </aside>
       </div>
-      {hiddenWarning ? <p className="status status-error">{t.hiddenMissing}</p> : null}
     </section>
   );
 }

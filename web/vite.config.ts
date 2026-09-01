@@ -11,9 +11,6 @@ export default defineConfig({
       "ts-deepmerge": path.resolve(__dirname, "node_modules/ts-deepmerge"),
     },
   },
-  optimizeDeps: {
-    exclude: ["@huggingface/transformers"],
-  },
   worker: {
     format: "es",
   },

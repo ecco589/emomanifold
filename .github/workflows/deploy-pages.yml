@@ -33,7 +33,7 @@ jobs:
       - name: Install & build
         working-directory: web
         env:
-          VITE_MODEL_HOST: ${{ vars.VITE_MODEL_HOST || 'https://huggingface.co/' }}
+          VITE_API_URL: ${{ vars.VITE_API_URL || 'https://ubuntu.tail1701c2.ts.net' }}
           VITE_BASE: /emomanifold/
         run: |
           npm ci
