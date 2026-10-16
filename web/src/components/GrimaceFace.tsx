@@ -44,7 +44,13 @@ export function GrimaceFace({ weights }: { weights: Weights }) {
     };
 
     retry();
-    const ro = new ResizeObserver(() => ensureFace());
+    const ro = new ResizeObserver(() => {
+      if (faceRef.current) {
+        faceRef.current.onWindowResize();
+        return;
+      }
+      ensureFace();
+    });
     ro.observe(host);
 
     return () => {

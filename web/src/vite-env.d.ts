@@ -19,6 +19,7 @@ declare module "grimace" {
 
   export default class Grimace {
     constructor(container: HTMLElement);
+    onWindowResize(): void;
     setEmotionSet(emotionSet: EmotionSet, duration?: number): void;
     setEmotion(emotion: string, value: number, duration?: number): void;
   }

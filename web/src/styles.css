@@ -301,6 +301,9 @@ button.linkish {
   font-size: 12px;
   padding: 6px 10px;
   text-align: left;
+  white-space: normal;
+  max-width: 100%;
+  height: auto;
 }
 
 .face-card {
@@ -311,10 +314,15 @@ button.linkish {
 }
 
 .face-canvas {
-  flex: 1;
+  flex: 1 1 auto;
   width: 100%;
-  min-width: 200px;
-  height: 248px;
+  min-width: 0;
+  height: 280px;
+  min-height: 280px;
+}
+
+.face-canvas canvas {
+  display: block;
 }
 
 .method {
@@ -370,11 +378,68 @@ footer {
 }
 
 @media (max-width: 800px) {
+  .page {
+    padding: 14px 16px 40px;
+    overflow-x: clip;
+  }
+
+  .top {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+  }
+
+  nav {
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px 14px;
+  }
+
+  .hero {
+    margin: 22px 0 14px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+    overflow-wrap: anywhere;
+  }
+
   .demo-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .face-card {
+    order: -1;
+    min-height: auto;
   }
 
   .face-canvas {
-    height: 220px;
+    flex: none;
+    height: min(78vw, 340px);
+    min-height: 260px;
+  }
+
+  .composer textarea {
+    min-width: 0;
+  }
+
+  .composer button,
+  .examples button {
+    min-height: 44px;
+  }
+
+  .composer button {
+    flex-shrink: 0;
+  }
+
+  .transcript {
+    max-height: 132px;
+  }
+
+  .method figure {
+    padding: 8px;
   }
 }
