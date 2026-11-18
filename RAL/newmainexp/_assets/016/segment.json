@@ -1,0 +1,10 @@
+{
+  "set": "#1E3A5F, #F2A65A, #F7E7CE",
+  "explanation": "The color #1E3A5F, a deep blue, is chosen to represent the sadness and hopelessness mentioned in the story, as blue is often associated with these emotions. #F2A65A, a warm orange, is selected to convey the warmth and trust needed when talking to someone you trust, as well as the hope and support offered by friends, family, or professionals. #F7E7CE, a soft cream, is used to provide a sense of calm and reassurance, reflecting the message that it is okay to feel this way and that help is available.",
+  "chunks": [
+    "It <0.00> sounds <0.36> like <0.41> you're <0.63> experiencing <0.83> a <1.25> lot <1.46> of <1.55> sadness <2.24> and <2.24> hopelessness <2.70>",
+    "It's <3.92> important <4.07> to <4.34> acknowledge <5.03> and <5.03> process <5.57> these <5.82> feelings <6.17>",
+    "You <7.05> might <7.13> find <7.32> it <7.51> helpful <7.73> to <7.90> talk <8.23> to <8.38> someone <8.60> you <8.80> trust <9.03> such <9.85> as <9.93> a <10.14> friend <10.64> family <11.39> member <11.43> or <11.92> a <12.34> professional <12.97> counselor <12.97>",
+    "Remember <14.42> it's <14.72> okay <14.89> to <15.06> feel <15.35> this <15.38> way <15.64> and <16.26> there <16.36> are <16.47> many <16.73> resources <17.07> available <17.62> to <18.02> help <18.34> you <18.50>"
+  ]
+}

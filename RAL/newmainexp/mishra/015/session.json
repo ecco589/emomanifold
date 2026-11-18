@@ -1,0 +1,26 @@
+{
+  "condition": "mishra",
+  "trial_id": "015",
+  "category": "emobank_hv",
+  "user_prompt": "I feel very happy and satisfied.",
+  "assistant_text": "That sounds great! It's wonderful to feel so content and fulfilled.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "classify_gpt_ms": 1063.26,
+    "classify_local_ms": 910.2,
+    "ttff_gpt_ms": 4953.16,
+    "ttff_local_ms": 4800.1,
+    "gen_wall_ms": 3889.9,
+    "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+  }
+}

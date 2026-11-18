@@ -1,0 +1,28 @@
+{
+  "condition": "xpress_story",
+  "trial_id": "008",
+  "category": "disgust",
+  "user_prompt": "That smell is disgusting and I can't stand it.",
+  "assistant_text": "I'm sorry to hear that you're feeling uncomfortable. It's important to address this issue, as it can affect your overall health and well-being. Please let me know if there's anything specific you'd like to talk about or if you need help with something.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "program": "precomputed timestamped keyframes",
+    "n_keyframes": 3,
+    "build_ms": {
+      "segment_and_emotion_ms": 5912.0,
+      "tts_ms": 2307.61,
+      "n_keyframes": 3
+    },
+    "note": "The paper latency table has no TTFF for the timestamped program. Keyframes play from their start times."
+  }
+}

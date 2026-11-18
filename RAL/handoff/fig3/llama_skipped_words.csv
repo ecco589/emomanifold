@@ -1,0 +1,17 @@
+model,pole_language,cluster_id,word,reason
+Llama-3.2-3B,English,terror,恐怖,not a single token
+Llama-3.2-3B,English,comfort,舒适,not a single token
+Llama-3.2-3B,English,comfort,راحة,not a single token
+Llama-3.2-3B,English,boss,老板,not a single token
+Llama-3.2-3B,English,boss,رئيس,not a single token
+Llama-3.2-3B,English,strength,قوة,not a single token
+Llama-3.2-3B,English,zen,禅,not a single token
+Llama-3.2-3B,English,zen,زين,not a single token
+Llama-3.2-3B,Chinese,terror,恐怖,not a single token
+Llama-3.2-3B,Chinese,comfort,舒适,not a single token
+Llama-3.2-3B,Chinese,comfort,راحة,not a single token
+Llama-3.2-3B,Chinese,boss,老板,not a single token
+Llama-3.2-3B,Chinese,boss,رئيس,not a single token
+Llama-3.2-3B,Chinese,strength,قوة,not a single token
+Llama-3.2-3B,Chinese,zen,禅,not a single token
+Llama-3.2-3B,Chinese,zen,زين,not a single token

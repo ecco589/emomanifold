@@ -1,0 +1,60 @@
+{
+  "phase": "c1",
+  "trial_id": "008",
+  "condition": "xpress_story",
+  "assistant_text": "I understand your discomfort. It's important to address this issue. Is there anything specific you would like to discuss or talk about?",
+  "n_keyframes": 5,
+  "audio_duration_s": 7.480000019073486,
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "duration_s": 7.981,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "keyframes": [
+    {
+      "scene": "scene_1",
+      "timestamp_s": 0.0,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_2",
+      "timestamp_s": 0.89,
+      "emotion_raw": "stressed",
+      "emotion_name": "fear",
+      "valence": -0.87,
+      "arousal": 0.53
+    },
+    {
+      "scene": "scene_3",
+      "timestamp_s": 1.84,
+      "emotion_raw": "interested",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_4",
+      "timestamp_s": 4.13,
+      "emotion_raw": "neutral",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_5",
+      "timestamp_s": 6.76,
+      "emotion_raw": "interested",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    }
+  ]
+}

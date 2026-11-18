@@ -1,0 +1,9 @@
+timestamp_s,valence,arousal,token
+0.00,0.10,-0.20,start
+0.40,0.81,0.66,happy
+0.80,0.88,0.59,happy
+1.20,0.20,0.80,up
+1.60,-0.75,0.61,surprise
+2.00,-0.90,0.20,anger
+2.40,-0.50,-0.55,sad
+2.80,0.00,0.00,settle

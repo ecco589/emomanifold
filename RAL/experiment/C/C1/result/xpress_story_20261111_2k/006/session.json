@@ -1,0 +1,44 @@
+{
+  "phase": "c1",
+  "trial_id": "006",
+  "condition": "xpress_story",
+  "assistant_text": "It sounds like you're experiencing a loud thunderstorm outside. It can be scary, especially if you're not used to the sound of thunder. It's important to stay indoors and avoid getting outside until the storm has passed.",
+  "n_keyframes": 3,
+  "audio_duration_s": 11.84000015258789,
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "duration_s": 12.344,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "keyframes": [
+    {
+      "scene": "scene_1",
+      "timestamp_s": 0.0,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_2",
+      "timestamp_s": 2.0,
+      "emotion_raw": "fear",
+      "emotion_name": "fear",
+      "valence": -0.87,
+      "arousal": 0.53
+    },
+    {
+      "scene": "scene_3",
+      "timestamp_s": 8.0,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    }
+  ]
+}

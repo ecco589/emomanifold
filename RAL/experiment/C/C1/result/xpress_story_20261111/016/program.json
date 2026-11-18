@@ -1,0 +1,64 @@
+{
+  "trial_id": "016",
+  "assistant_text": "It sounds like you're experiencing a lot of sadness and despair. It's important to acknowledge these feelings and seek support from friends, family, or professionals who can provide comfort and help.",
+  "tts_model": "tts-1",
+  "tts_note": "OpenAI tts-1 stands in for the original Google TTS",
+  "whisper_model": "whisper-1",
+  "segment_model": "gpt-4o",
+  "segment_model_note": "gpt-4-turbo is retired; gpt-4o at the original temperature",
+  "segment_temperature": 0.1,
+  "emotion_model": "gpt-4o",
+  "emotion_temperature": 0.3,
+  "audio_duration_s": 11.399999618530273,
+  "n_keyframes": 6,
+  "keyframes": [
+    {
+      "scene": "scene_1",
+      "timestamp_s": 0.0,
+      "emotion_raw": "neutral",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_2",
+      "timestamp_s": 2.0,
+      "emotion_raw": "sad",
+      "emotion_name": "sadness",
+      "valence": -0.5,
+      "arousal": -0.57
+    },
+    {
+      "scene": "scene_3",
+      "timestamp_s": 4.0,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_4",
+      "timestamp_s": 6.0,
+      "emotion_raw": "interested",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_5",
+      "timestamp_s": 9.0,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_6",
+      "timestamp_s": 10.0,
+      "emotion_raw": "happy",
+      "emotion_name": "happiness",
+      "valence": 0.85,
+      "arousal": 0.62
+    }
+  ]
+}

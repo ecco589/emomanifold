@@ -1,0 +1,6 @@
+{
+  "shuffle_seed": 20261121,
+  "per_token_control_ms_mean": 0.613,
+  "ttff_s": 0.624,
+  "note": "Temporal shuffle of the EmoManifold commands. No separate classifier; control latency is the EmoManifold path."
+}

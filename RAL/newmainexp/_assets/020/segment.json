@@ -1,0 +1,8 @@
+{
+  "set": "#FF6347, #4682B4, #FFD700",
+  "explanation": "The color #FF6347 (Tomato Red) is chosen to express the intense emotion of loss and heartache, as it is a warm color that can convey feelings of pain and urgency. #4682B4 (Steel Blue) is selected for its calming and soothing qualities, which are appropriate for the transition to discussing needs and offering help. #FFD700 (Gold) is used to symbolize hope and positivity, encouraging a sense of support and understanding.",
+  "chunks": [
+    "It <0.00> sounds <0.25> like <0.56> you're <0.95> experiencing <1.17> a <1.72> significant <2.05> loss <2.68> and <3.33> it <3.42> can <3.50> feel <3.74> like <3.92> a <4.07> knife <4.38> in <4.38> your <4.53> heart <4.76>",
+    "Let's <5.65> talk <5.90> about <6.00> what <6.23> you <6.42> need <6.59> help <6.76> with <7.00> or <7.42> if <7.63> you'd <7.94> like <8.10> to <8.26> discuss <8.57> this <8.80> in <9.10> more <9.23> detail <9.46>"
+  ]
+}

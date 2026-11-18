@@ -1,0 +1,217 @@
+:root {
+  font-family: "Source Sans 3", "Noto Sans SC", system-ui, sans-serif;
+  color: #1f2328;
+  background: #f7f6f3;
+}
+
+body {
+  margin: 0;
+}
+
+.va-editor {
+  padding: 16px 20px;
+}
+
+.muted {
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.va-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.va-head h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.va-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+.va-editor button {
+  font: inherit;
+  padding: 5px 12px;
+  border: 1px solid #c9c6bf;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.va-editor button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.va-editor button.primary {
+  background: #1f2328;
+  border-color: #1f2328;
+  color: #fff;
+}
+
+.va-status {
+  font-size: 13px;
+  margin: 8px 0 12px;
+}
+
+.va-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+}
+
+.va-chart {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid #e3e0d9;
+  border-radius: 8px;
+}
+
+.va-chart svg {
+  display: block;
+  user-select: none;
+}
+
+.grid {
+  stroke: #ece9e2;
+}
+
+.grid.zero {
+  stroke: #b9b5ac;
+  stroke-dasharray: 4 3;
+}
+
+.axis {
+  font-size: 11px;
+  fill: #6b7280;
+}
+
+.sel-band {
+  fill: #f1c40f;
+  opacity: 0.15;
+}
+
+.line {
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.line.original {
+  stroke-width: 1.2;
+  stroke-dasharray: 3 3;
+  opacity: 0.45;
+}
+
+.pt {
+  cursor: ns-resize;
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.pt.edited {
+  stroke: #1f2328;
+  stroke-width: 2;
+}
+
+.pt.sel {
+  stroke: #f1c40f;
+  stroke-width: 2.5;
+}
+
+.tok-label {
+  font-size: 11px;
+  fill: #374151;
+  cursor: pointer;
+}
+
+.tok-label.sel {
+  fill: #b7791f;
+  font-weight: 600;
+}
+
+.va-side {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.va-face {
+  background: #fff;
+  border: 1px solid #e3e0d9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.va-face .face-canvas {
+  width: 100%;
+  height: 300px;
+}
+
+.va-face .face-canvas canvas {
+  display: block;
+}
+
+.va-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+}
+
+.va-legend i {
+  display: inline-block;
+  width: 14px;
+  height: 3px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.va-inspector {
+  background: #fff;
+  border: 1px solid #e3e0d9;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.va-field {
+  display: grid;
+  grid-template-columns: 64px 1fr 72px;
+  align-items: center;
+  gap: 8px;
+}
+
+.va-field input[type="number"] {
+  font: inherit;
+  width: 100%;
+}
+
+.va-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+@media (max-width: 900px) {
+  .va-main {
+    grid-template-columns: 1fr;
+  }
+
+  .va-side {
+    position: static;
+  }
+}

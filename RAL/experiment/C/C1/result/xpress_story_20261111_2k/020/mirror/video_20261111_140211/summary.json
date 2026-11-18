@@ -1,0 +1,18 @@
+{
+  "video": {
+    "path": "/home/user/xpress_story_va/videos/020/video.mp4",
+    "fps": 30.0,
+    "total_frames": 245,
+    "width": 2560,
+    "height": 1440,
+    "duration_s": 8.166666666666666
+  },
+  "device": "cuda",
+  "batch_size": 8,
+  "frame_step": 1,
+  "face_threshold": 0.7,
+  "smooth_ms": 200,
+  "interpolate_limit_ms": 250,
+  "valid_rows": 245,
+  "total_output_rows": 245
+}

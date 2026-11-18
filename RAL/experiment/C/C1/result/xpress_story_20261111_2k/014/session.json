@@ -1,0 +1,44 @@
+{
+  "phase": "c1",
+  "trial_id": "014",
+  "condition": "xpress_story",
+  "assistant_text": "I'm sorry to hear that. It sounds like you had a disappointing experience. Perhaps we could talk about what you were looking forward to and how it turned out instead.",
+  "n_keyframes": 3,
+  "audio_duration_s": 8.880000114440918,
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "duration_s": 9.381,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "keyframes": [
+    {
+      "scene": "scene_1",
+      "timestamp_s": 0.0,
+      "emotion_raw": "sad",
+      "emotion_name": "sadness",
+      "valence": -0.5,
+      "arousal": -0.57
+    },
+    {
+      "scene": "scene_2",
+      "timestamp_s": 1.86,
+      "emotion_raw": "interested",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_3",
+      "timestamp_s": 4.92,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    }
+  ]
+}

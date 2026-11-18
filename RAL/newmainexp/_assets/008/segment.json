@@ -1,0 +1,9 @@
+{
+  "set": "#FFCCCB, #FFD700, #ADD8E6",
+  "explanation": "The color #FFCCCB (light red) is chosen to express empathy and concern, as it is often associated with warmth and care. #FFD700 (gold) is used to convey importance and urgency, reflecting the need to address the issue. #ADD8E6 (light blue) is selected to evoke calmness and reassurance, providing a sense of support and understanding.",
+  "chunks": [
+    "I'm <0.00> sorry <0.30> to <0.57> hear <0.83> that <0.92> you're <1.13> feeling <1.27> uncomfortable <1.65>",
+    "It's <3.46> important <3.64> to <3.88> address <4.42> this <4.42> issue <4.82> as <5.44> it <5.59> can <5.78> affect <6.03> your <6.34> overall <6.59> health <7.00> and <7.48> well <8.00> being <8.30>",
+    "Please <9.15> let <9.35> me <9.50> know <9.73> if <9.84> there's <9.97> anything <10.19> specific <10.57> you'd <11.15> like <11.43> to <11.52> talk <11.93> about <11.93> or <12.69> if <12.96> you <13.34> need <13.52> help <13.64> with <13.92> something <14.22>"
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "experiment": "E3",
+  "model": "meta-llama/Llama-3.2-3B-Instruct",
+  "pole_n": 50,
+  "random_baseline_cluster_cos": {
+    "terror": 0.732165,
+    "comfort": 0.440945,
+    "boss": 0.199729,
+    "strength": 0.180976,
+    "zen": 0.271091,
+    "mean": 0.364981
+  },
+  "conditions": {
+    "en_only": {
+      "name": "en_only",
+      "pole_lexicon": "/root/llama_en_pole50/pole_lexicon.json",
+      "scaler": {
+        "valence": {
+          "scale": 10.113199100423657,
+          "bias": -0.2696340862380392
+        },
+        "arousal": {
+          "scale": 8.150127773784979,
+          "bias": -0.04694942863662255
+        },
+        "dominance": {
+          "scale": 2.9359553159556797,
+          "bias": 0.07732377287959308
+        }
+      },
+      "orthogonality": {
+        "va": 0.158112,
+        "ad": 0.071394,
+        "vd": 0.12121
+      },
+      "cluster_cos": {
+        "terror": 1.0,
+        "comfort": 1.0,
+        "boss": 0.941498,
+        "strength": 0.930245,
+        "zen": 0.943946,
+        "mean": 0.963138
+      },
+      "cluster_skipped": [
+        "terror:恐怖",
+        "comfort:舒适",
+        "comfort:راحة",
+        "boss:老板",
+        "boss:رئيس",
+        "strength:قوة",
+        "zen:禅",
+        "zen:زين"
+      ]
+    },
+    "zh_only": {
+      "name": "zh_only",
+      "pole_lexicon": "/tmp/zh_pole_lexicon.json",
+      "scaler": {
+        "valence": {
+          "scale": 10.791775800420332,
+          "bias": 0.07741377735467102
+        },
+        "arousal": {
+          "scale": 5.486470738685428,
+          "bias": 0.17004984413133586
+        },
+        "dominance": {
+          "scale": 7.107503115476535,
+          "bias": 0.39950303065832077
+        }
+      },
+      "orthogonality": {
+        "va": 0.16083,
+        "ad": 0.210385,
+        "vd": 0.282131
+      },
+      "cluster_cos": {
+        "terror": 1.0,
+        "comfort": 1.0,
+        "boss": 0.993981,
+        "strength": 0.865191,
+        "zen": 0.967609,
+        "mean": 0.965356
+      },
+      "cluster_skipped": [
+        "terror:恐怖",
+        "comfort:舒适",
+        "comfort:راحة",
+        "boss:老板",
+        "boss:رئيس",
+        "strength:قوة",
+        "zen:禅",
+        "zen:زين"
+      ]
+    }
+  }
+}

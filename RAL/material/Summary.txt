@@ -1,0 +1,24 @@
+Summary of multimedia objects
+=============================
+
+b1_sarcasm_triplets/context_triplets_en.json
+  - 200 contextual sarcasm triplets (S / P / N) used in
+    Experiment B (valence stress test).
+  - Each item: intent, keywords, sarcastic, positive, negative
+    texts; aligned with iSarcasmEval SubTask C English test
+    after human rewrite.
+  - Usage: reproduce sentence-level and keyword-level valence
+    projections reported in the paper.
+
+b1_sarcasm_triplets/rewrite_protocol.md
+  - Human rewrite protocol for building the 200 triplets from
+    the original sarcasm–rephrase pairs (de-culturation, shared
+    intent, S/P identical quote, keyword annotation).
+  - Usage: understand how the released JSON was constructed;
+    not required to read the main PDF results.
+
+Value
+-----
+Enables independent re-running of Experiment B projections on
+the exact stimuli used in the paper, without requesting data
+from the authors during review.

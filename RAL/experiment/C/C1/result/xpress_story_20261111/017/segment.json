@@ -1,0 +1,10 @@
+{
+  "set": "#FFCCCB, #FFD700, #ADD8E6",
+  "explanation": "The color #FFCCCB (light red) is chosen to represent anxiety and stress, as red is often associated with heightened emotions. #FFD700 (gold) is used to convey warmth and encouragement, symbolizing the supportive advice being given. #ADD8E6 (light blue) is selected for its calming and soothing qualities, reflecting the techniques suggested to alleviate anxiety.",
+  "chunks": [
+    "It <0.00> sounds <0.41> like <0.41> you're <0.63> experiencing <0.92> some <1.44> anxiety <1.98>",
+    "It's <3.27> normal <3.50> to <3.70> feel <4.05> this <4.07> way <4.32> sometimes <4.59> especially <5.34> when <5.90> facing <6.34> a <6.63> big <7.03> test <7.26> or <7.63> meeting <8.23> someone <8.46> you <8.81> don't <9.00> know <9.18> well <9.38>",
+    "Try <10.65> taking <10.80> deep <11.11> breaths <11.46> counting <12.61> to <12.61> five <12.88> or <13.42> practicing <13.97> visualization <14.38> techniques <15.18> to <15.65> help <15.93> calm <16.28> your <16.29> nerves <16.89>",
+    "If <17.68> you're <17.92> feeling <18.12> overwhelmed <18.47> consider <19.73> speaking <19.79> with <20.18> a <20.39> trusted <20.94> friend <20.94> or <21.29> family <21.57> member <21.89> to <22.15> share <22.52> your <22.68> feelings <23.42>"
+  ]
+}

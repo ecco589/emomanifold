@@ -54,9 +54,12 @@ YLIMS = {
     "dominance": (0.36, 0.80),
 }
 
-IEEE_TEXTWIDTH_IN = 7.0
-FIG_HEIGHT_IN = IEEE_TEXTWIDTH_IN * 0.34
+# Half-column asset (paper: width=\columnwidth). Keep stroke weights close to the
+# old on-page look (previously drawn at 7in then scaled ~0.5x into the column).
+IEEE_COLUMNWIDTH_IN = 3.45
+FIG_HEIGHT_IN = 1.65
 IEEE_FONT_SIZE = 8
+LINE_WIDTH = 1.25  # was 2.5 at 7in ≈ 1.25 after column shrink
 
 
 def _setup_ieee_rcparams():
@@ -64,8 +67,8 @@ def _setup_ieee_rcparams():
 
     mpl.rcParams.update(
         {
-            "font.family": "serif",
-            "font.serif": ["Times New Roman", "Times", "DejaVu Serif"],
+            "font.family": "sans-serif",
+            "font.sans-serif": ["Helvetica", "Arial", "DejaVu Sans"],
             "font.size": IEEE_FONT_SIZE,
             "axes.labelsize": IEEE_FONT_SIZE,
             "axes.titlesize": IEEE_FONT_SIZE,
@@ -74,9 +77,9 @@ def _setup_ieee_rcparams():
             "pdf.fonttype": 42,
             "ps.fonttype": 42,
             "savefig.dpi": 300,
-            "axes.linewidth": 0.6,
-            "grid.linewidth": 0.4,
-            "lines.linewidth": 2.0,
+            "axes.linewidth": 0.55,
+            "grid.linewidth": 0.35,
+            "lines.linewidth": LINE_WIDTH,
         }
     )
 
@@ -95,20 +98,21 @@ def _plot_panel(ax, dim: str, pts: list[dict], *, show_ylabel: bool) -> None:
 
     fill_color = _blend_on_white(color, FILL_ALPHA[dim])
     ax.fill_between(xs, lo, hi, color=fill_color, linewidth=0, zorder=1)
-    ax.plot(xs, mu, color=color, linewidth=2.5, solid_capstyle="round", zorder=3)
+    ax.plot(xs, mu, color=color, linewidth=LINE_WIDTH, solid_capstyle="round", zorder=3)
 
     ax.set_title(TITLES[dim])
     ax.set_xlabel("$N$")
     if show_ylabel:
         ax.set_ylabel("Spearman $\\rho$")
     ax.set_xlim(8, 82)
-    ax.set_xticks(POLE_NS)
+    ax.set_xticks([20, 40, 60, 80])
     ax.set_ylim(*YLIMS[dim])
-    ax.grid(True, linestyle="--", linewidth=0.4, color="0.85", zorder=0)
+    ax.grid(True, linestyle="--", linewidth=0.35, color="0.85", zorder=0)
     ax.tick_params(
         direction="in",
-        length=3,
-        width=0.6,
+        length=2.5,
+        width=0.55,
+        labelsize=IEEE_FONT_SIZE - 0.5,
         labelleft=show_ylabel,
         left=show_ylabel,
     )
@@ -133,11 +137,11 @@ def main() -> int:
     fig, axes = plt.subplots(
         1,
         3,
-        figsize=(IEEE_TEXTWIDTH_IN, FIG_HEIGHT_IN),
+        figsize=(IEEE_COLUMNWIDTH_IN, FIG_HEIGHT_IN),
         sharex=True,
         constrained_layout=False,
     )
-    fig.subplots_adjust(left=0.09, right=0.99, bottom=0.14, top=0.88, wspace=0.10)
+    fig.subplots_adjust(left=0.14, right=0.99, bottom=0.20, top=0.86, wspace=0.12)
 
     for i, (ax, dim) in enumerate(zip(axes, DIMS)):
         _plot_panel(ax, dim, series.get(dim, []), show_ylabel=(i == 0))

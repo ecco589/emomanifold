@@ -1,5 +1,5 @@
 """
-Export EmotionManifold (ours) per-token 7-D FKCN weights for C1 stimuli.
+Export EmoManifold (ours) per-token 7-D FKCN weights for C1 stimuli.
 
 Pipeline (aligned with B1 / paper axes):
   Qwen2.5-0.5B CausalLM hidden states

@@ -1,0 +1,60 @@
+{
+  "phase": "c1",
+  "trial_id": "017",
+  "condition": "xpress_story",
+  "assistant_text": "It sounds like you're experiencing some anxiety. It's normal to feel this way sometimes, especially when facing a big test or meeting someone you don't know well. Try taking deep breaths, counting to 5, or practicing visualization techniques to help calm your nerves. If you're feeling overwhelmed, consider speaking with a trusted friend or family member to share your feelings.",
+  "n_keyframes": 5,
+  "audio_duration_s": 23.420000076293945,
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "duration_s": 23.922,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "keyframes": [
+    {
+      "scene": "scene_1",
+      "timestamp_s": 0.0,
+      "emotion_raw": "stressed",
+      "emotion_name": "fear",
+      "valence": -0.87,
+      "arousal": 0.53
+    },
+    {
+      "scene": "scene_2",
+      "timestamp_s": 3.0,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_3",
+      "timestamp_s": 10.0,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_4",
+      "timestamp_s": 17.0,
+      "emotion_raw": "stressed",
+      "emotion_name": "fear",
+      "valence": -0.87,
+      "arousal": 0.53
+    },
+    {
+      "scene": "scene_5",
+      "timestamp_s": 19.0,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "task": "transcribe",
+  "language": "english",
+  "duration": 9.720000267028809,
+  "text": "It sounds like you're experiencing a significant loss, possibly a significant opportunity. It's understandable to feel that way, given the nature of the situation.",
+  "words": [
+    {
+      "word": "It",
+      "start": 0.0,
+      "end": 0.25999999046325684
+    },
+    {
+      "word": "sounds",
+      "start": 0.25999999046325684,
+      "end": 0.5400000214576721
+    },
+    {
+      "word": "like",
+      "start": 0.5400000214576721,
+      "end": 0.8199999928474426
+    },
+    {
+      "word": "you're",
+      "start": 0.8199999928474426,
+      "end": 1.0199999809265137
+    },
+    {
+      "word": "experiencing",
+      "start": 1.0199999809265137,
+      "end": 1.5199999809265137
+    },
+    {
+      "word": "a",
+      "start": 1.5199999809265137,
+      "end": 1.940000057220459
+    },
+    {
+      "word": "significant",
+      "start": 1.940000057220459,
+      "end": 2.4600000381469727
+    },
+    {
+      "word": "loss",
+      "start": 2.4600000381469727,
+      "end": 2.9600000381469727
+    },
+    {
+      "word": "possibly",
+      "start": 3.4800000190734863,
+      "end": 3.6600000858306885
+    },
+    {
+      "word": "a",
+      "start": 3.6600000858306885,
+      "end": 4.480000019073486
+    },
+    {
+      "word": "significant",
+      "start": 4.480000019073486,
+      "end": 4.480000019073486
+    },
+    {
+      "word": "opportunity",
+      "start": 4.480000019073486,
+      "end": 5.099999904632568
+    },
+    {
+      "word": "It's",
+      "start": 6.0,
+      "end": 6.440000057220459
+    },
+    {
+      "word": "understandable",
+      "start": 6.440000057220459,
+      "end": 6.880000114440918
+    },
+    {
+      "word": "to",
+      "start": 6.880000114440918,
+      "end": 7.260000228881836
+    },
+    {
+      "word": "feel",
+      "start": 7.260000228881836,
+      "end": 7.400000095367432
+    },
+    {
+      "word": "that",
+      "start": 7.400000095367432,
+      "end": 7.619999885559082
+    },
+    {
+      "word": "way",
+      "start": 7.619999885559082,
+      "end": 7.920000076293945
+    },
+    {
+      "word": "given",
+      "start": 8.119999885559082,
+      "end": 8.15999984741211
+    },
+    {
+      "word": "the",
+      "start": 8.15999984741211,
+      "end": 8.579999923706055
+    },
+    {
+      "word": "nature",
+      "start": 8.579999923706055,
+      "end": 8.640000343322754
+    },
+    {
+      "word": "of",
+      "start": 8.640000343322754,
+      "end": 8.800000190734863
+    },
+    {
+      "word": "the",
+      "start": 8.800000190734863,
+      "end": 9.020000457763672
+    },
+    {
+      "word": "situation",
+      "start": 9.020000457763672,
+      "end": 9.399999618530273
+    }
+  ],
+  "usage": {
+    "type": "duration",
+    "seconds": 10
+  }
+}

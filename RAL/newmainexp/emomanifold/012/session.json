@@ -1,0 +1,46 @@
+{
+  "condition": "emomanifold",
+  "trial_id": "012",
+  "category": "sarcasm_neg",
+  "user_prompt": "Thanks for deleting the file really helpful.",
+  "assistant_text": "You're welcome! It was helpful to know you found the file useful.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "ttff_s": 0.6718,
+    "ttff_ms": 671.81,
+    "gen_wall_s": 4.0205,
+    "gen_wall_ms": 4020.5,
+    "per_token_control_ms_mean": 0.595,
+    "per_token_control_ms_std": 0.037,
+    "per_token_control_n": 15,
+    "per_token_control_ms": [
+      0.57,
+      0.622,
+      0.542,
+      0.598,
+      0.594,
+      0.658,
+      0.661,
+      0.612,
+      0.626,
+      0.568,
+      0.594,
+      0.58,
+      0.604,
+      0.545,
+      0.546
+    ],
+    "inter_token_wall_ms_mean": 239.19,
+    "note": "per_token_control_ms is projection plus FKCN blend, excluding the language-model forward. ttff_s includes that forward, to the first token. gen_wall_s is the last token."
+  }
+}

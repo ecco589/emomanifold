@@ -1,0 +1,8 @@
+{
+  "set": "#FFD700, #FF4500, #FFFFFF",
+  "explanation": "The color #FFD700 (gold) is chosen for the eyes to express warmth and happiness, reflecting the joy of being remembered. The color #FF4500 (orange-red) is used for the mouth to convey a sense of excitement and appreciation. The color #FFFFFF (white) is used for the face to provide a neutral background that highlights the expressions.",
+  "chunks": [
+    "I'm <0.00> glad <0.28> to <0.47> hear <0.69> that <0.89> you <1.13> remembered <1.32> my <1.63> birthday <1.96>",
+    "It's <3.24> always <3.38> nice <3.68> to <3.94> know <4.17> how <4.28> much <4.50> you <4.65> care <4.86> about <5.07> me <5.34>"
+  ]
+}

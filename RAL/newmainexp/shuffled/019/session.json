@@ -1,0 +1,24 @@
+{
+  "condition": "shuffled",
+  "trial_id": "019",
+  "category": "goemo_joy",
+  "user_prompt": "I am absolutely thrilled to hear this news!",
+  "assistant_text": "I'm glad to hear about the exciting news!",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "shuffle_seed": 20261130,
+    "per_token_control_ms_mean": 0.638,
+    "ttff_s": 0.6632,
+    "note": "Temporal shuffle of the EmoManifold commands. No separate classifier; control latency is the EmoManifold path."
+  }
+}

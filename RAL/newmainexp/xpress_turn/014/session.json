@@ -1,0 +1,26 @@
+{
+  "condition": "xpress_turn",
+  "trial_id": "014",
+  "category": "turn_neg",
+  "user_prompt": "I was really looking forward to it but ended up so disappointed.",
+  "assistant_text": "I'm sorry to hear that you were looking forward to something, but disappointing can be a part of life. It's okay to feel that way, and it's normal to want things to be better. Maybe try looking for something else that might be more enjoyable or satisfying.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "classify_gpt_ms": 1126.76,
+    "classify_local_ms": 14257.52,
+    "ttff_gpt_ms": 12253.36,
+    "ttff_local_ms": 25384.12,
+    "gen_wall_ms": 11126.6,
+    "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+  }
+}

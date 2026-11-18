@@ -1,0 +1,26 @@
+{
+  "condition": "mishra",
+  "trial_id": "006",
+  "category": "fear",
+  "user_prompt": "The thunder outside is so loud and I'm a bit scared.",
+  "assistant_text": "It sounds like you're experiencing a thunderstorm outside. Be careful and stay indoors if possible.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "classify_gpt_ms": 2503.88,
+    "classify_local_ms": 943.32,
+    "ttff_gpt_ms": 6947.58,
+    "ttff_local_ms": 5387.02,
+    "gen_wall_ms": 4443.7,
+    "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+  }
+}

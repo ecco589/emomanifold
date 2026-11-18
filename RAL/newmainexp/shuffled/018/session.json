@@ -1,0 +1,24 @@
+{
+  "condition": "shuffled",
+  "trial_id": "018",
+  "category": "emobank_la",
+  "user_prompt": "I feel calm and everything is peaceful.",
+  "assistant_text": "That sounds like you're experiencing a peaceful and calm state of mind. It's wonderful to feel calm and peaceful, especially when surrounded by nature or a quiet place.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "shuffle_seed": 20261129,
+    "per_token_control_ms_mean": 0.7,
+    "ttff_s": 0.6721,
+    "note": "Temporal shuffle of the EmoManifold commands. No separate classifier; control latency is the EmoManifold path."
+  }
+}

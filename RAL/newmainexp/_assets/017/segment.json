@@ -1,0 +1,10 @@
+{
+  "set": "#FFCCCB, #ADD8E6, #FFFFFF",
+  "explanation": "The color #FFCCCB (light red) is chosen to represent the initial feeling of anxiety and nervousness, as red is often associated with heightened emotions. #ADD8E6 (light blue) is used to convey calmness and reassurance, as blue is known for its calming effect. #FFFFFF (white) is used to represent clarity and focus, symbolizing a clear mind and peacefulness.",
+  "chunks": [
+    "It <0.00> sounds <0.36> like <0.43> you're <0.68> feeling <0.86> anxious <1.17> It's <2.64> normal <2.79> to <3.03> feel <3.35> this <3.42> way <3.66> when <3.92> you're <4.07> nervous <4.69>",
+    "but <5.11> it's <5.21> important <5.48> to <5.76> take <6.07> a <6.19> deep <6.44> breath <6.65> and <6.96> focus <7.28> on <7.51> the <7.71> situation <8.02> at <8.31> hand <9.02>",
+    "Try <10.10> to <10.10> visualize <10.42> a <10.69> calm <11.42> and <11.42> reassuring <11.76> image <12.19> such <13.14> as <13.23> a <13.43> peaceful <13.92> beach <13.92> or <14.34> a <14.84> serene <15.30> mountain <15.30>",
+    "This <16.29> can <16.54> help <16.73> calm <16.95> your <17.10> mind <17.60> and <17.60> reduce <17.92> the <18.13> feeling <18.50> of <18.60> racing <18.89> heart <19.10>"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "set": "#2E4053, #A93226, #F1C40F, #1ABC9C",
+  "explanation": "The color #2E4053 (a deep blue-gray) is chosen to represent the somber and reflective mood of grief, as it conveys a sense of calm and introspection. #A93226 (a deep red) is used to express the intense emotions and heartache associated with loss. #F1C40F (a warm yellow) symbolizes hope and the importance of processing emotions, as it brings a sense of warmth and light. #1ABC9C (a teal) represents the support and comfort from friends and family, as it is a soothing and reassuring color.",
+  "chunks": [
+    "It's <0.00> very <0.25> hard <0.54> to <0.72> grieve <1.27> the <1.27> loss <1.58> of <1.82> a <2.00> loved <2.27> one <2.27>",
+    "It's <3.35> important <3.53> to <3.74> take <4.01> time <4.07> to <4.50> process <5.28> your <5.28> feelings <5.57> and <5.96> allow <6.53> yourself <6.78> to <7.19> feel <7.48> all <7.63> the <7.96> emotions <8.19> you <8.43> have <8.76>",
+    "You <10.06> might <10.14> also <10.30> consider <10.64> reaching <11.02> out <11.35> to <11.68> friends <12.07> and <12.07> family <12.38> for <12.56> support <12.97>",
+    "Remember <14.35> it's <14.80> okay <15.11> to <15.39> grieve <15.93> and <15.93> to <16.42> seek <16.79> help <16.79> if <17.05> needed <17.36>"
+  ]
+}

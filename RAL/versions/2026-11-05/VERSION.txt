@@ -1,0 +1,4 @@
+2026-11-05
+从 2026-10-30-prose 分出的当天稿。
+摘要为 DexViTac 句式定稿；引言第一段改为 “When a robot talks...”，并接上 11 月 4 日 PDF 中从 However 起的后文。
+新增 Chovil (1991) 与 Bavelas and Chovil (2000)。

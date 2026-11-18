@@ -1,0 +1,22 @@
+{
+  "scene_1": {
+    "start_time": 0,
+    "emotion": "calm"
+  },
+  "scene_2": {
+    "start_time": 0.89,
+    "emotion": "stressed"
+  },
+  "scene_3": {
+    "start_time": 1.84,
+    "emotion": "interested"
+  },
+  "scene_4": {
+    "start_time": 4.13,
+    "emotion": "neutral"
+  },
+  "scene_5": {
+    "start_time": 6.76,
+    "emotion": "interested"
+  }
+}

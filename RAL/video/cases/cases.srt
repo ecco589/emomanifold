@@ -1,0 +1,24 @@
+1
+00:00:25,794 --> 00:00:29,612
+Here is the same reply, driven five different ways.
+
+2
+00:00:41,962 --> 00:00:46,969
+How soon does the face react? EmoManifold moves in under one second.
+
+3
+00:00:47,482 --> 00:00:51,108
+Turn-level systems wait for the whole reply, then for a label.
+
+4
+00:00:52,909 --> 00:00:57,825
+Xpress-Story plans the whole reply first: over ninety seconds.
+
+5
+00:01:00,612 --> 00:01:08,938
+Emo-H2A needs no training, follows the reply token by token, and observers preferred it in 83.5% of trials.
+
+6
+00:01:09,788 --> 00:01:12,915
+Let the face move with what the robot says.
+

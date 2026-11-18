@@ -1,0 +1,26 @@
+{
+  "condition": "mishra",
+  "trial_id": "016",
+  "category": "emobank_lv",
+  "user_prompt": "This makes me feel very sad and hopeless.",
+  "assistant_text": "It sounds like you're experiencing a lot of sadness and hopelessness. It's important to acknowledge and process these feelings. You might find it helpful to talk to someone you trust, such as a friend, family member, or a professional counselor. Remember, it's okay to feel this way, and there are many resources available to help you.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "classify_gpt_ms": 1060.8,
+    "classify_local_ms": 1341.65,
+    "ttff_gpt_ms": 15123.6,
+    "ttff_local_ms": 15404.45,
+    "gen_wall_ms": 14062.8,
+    "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+  }
+}

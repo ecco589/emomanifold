@@ -1,0 +1,28 @@
+{
+  "condition": "xpress_story",
+  "trial_id": "001",
+  "category": "happy",
+  "user_prompt": "I just won the lottery and I'm so excited!",
+  "assistant_text": "Congratulations on winning the lottery! It's a wonderful feeling to feel so lucky and excited about your financial success.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "program": "precomputed timestamped keyframes",
+    "n_keyframes": 4,
+    "build_ms": {
+      "segment_and_emotion_ms": 6530.55,
+      "tts_ms": 0.85,
+      "n_keyframes": 4
+    },
+    "note": "The paper latency table has no TTFF for the timestamped program. Keyframes play from their start times."
+  }
+}

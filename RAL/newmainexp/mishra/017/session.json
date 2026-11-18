@@ -1,0 +1,26 @@
+{
+  "condition": "mishra",
+  "trial_id": "017",
+  "category": "emobank_ha",
+  "user_prompt": "I'm so nervous my heart is racing!",
+  "assistant_text": "It sounds like you're feeling anxious. It's normal to feel this way when you're nervous, but it's important to take a deep breath and focus on the situation at hand. Try to visualize a calm and reassuring image, such as a peaceful beach or a serene mountain. This can help calm your mind and reduce the feeling of racing heart.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "classify_gpt_ms": 1281.15,
+    "classify_local_ms": 1471.78,
+    "ttff_gpt_ms": 16112.55,
+    "ttff_local_ms": 16303.18,
+    "gen_wall_ms": 14831.4,
+    "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+  }
+}

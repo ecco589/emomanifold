@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "latex-paper-en": {
+      "source": "bahayonghang/academic-writing-skills",
+      "sourceType": "github",
+      "skillPath": "academic-writing-skills/latex-paper-en/SKILL.md",
+      "computedHash": "c1ca54bd7c9896b273cdf44b2b6fb30b242369c12d63d9d678b420512348e2c9"
+    },
+    "paper-audit": {
+      "source": "bahayonghang/academic-writing-skills",
+      "sourceType": "github",
+      "skillPath": "academic-writing-skills/paper-audit/SKILL.md",
+      "computedHash": "2ad8fc34a1ee0495f457169c8ce08bd7704af15a5806eb3ebb42b67427bc9a97"
+    }
+  }
+}

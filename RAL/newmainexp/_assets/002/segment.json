@@ -1,0 +1,10 @@
+{
+  "set": "#FFD700, #FF4500, #32CD32",
+  "explanation": "The color #FFD700 (gold) is chosen to express warmth and satisfaction, reflecting the positive experience of enjoying a meal. #FF4500 (orange-red) is used to convey enthusiasm and excitement, capturing the joy of a delightful dining experience. #32CD32 (lime green) represents contentment and satisfaction, aligning with the feeling of being pleased with the food.",
+  "chunks": [
+    "That <0.00> sounds <0.23> great <0.51>",
+    "I'm <1.32> glad <1.53> you <1.67> enjoyed <1.87> your <2.16> meal <2.40>",
+    "It's <3.05> always <3.18> nice <3.44> to <3.66> have <3.81> a <3.94> positive <4.13> experience <4.51>",
+    "and <5.67> I'm <5.73> glad <5.98> you're <6.11> satisfied <6.44> with <6.84> the <7.15> food <7.40>"
+  ]
+}

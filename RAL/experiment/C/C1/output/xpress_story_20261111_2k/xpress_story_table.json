@@ -1,0 +1,9 @@
+{
+  "system": "xpress_story",
+  "n_trials": 20,
+  "V_direction_agreement_pct": 49.4,
+  "A_direction_agreement_pct": 34.0,
+  "V_R2_gain_pp": 7.5,
+  "A_R2_gain_pp": 5.9,
+  "detector": "vlico A100, py-feat 2.1.5"
+}

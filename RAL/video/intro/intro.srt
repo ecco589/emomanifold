@@ -1,0 +1,32 @@
+1
+00:00:01,600 --> 00:00:05,252
+When a robot talks, its face should move with what it says.
+
+2
+00:00:05,952 --> 00:00:09,449
+Try it yourself: the live demo runs in your browser.
+
+3
+00:00:09,799 --> 00:00:17,035
+LLM-driven robot faces wait for the whole reply, then show one emotion label for the entire turn.
+
+4
+00:00:17,285 --> 00:00:24,184
+Emo-H2A removes the label, and drives the face from the model's hidden states, token by token.
+
+5
+00:00:24,434 --> 00:00:29,493
+Affective axes are built once from the model's own vocabulary, with no training.
+
+6
+00:00:29,743 --> 00:00:36,364
+At every token, the hidden state is projected onto valence, arousal, and dominance.
+
+7
+00:00:36,614 --> 00:00:42,957
+A fuzzy mapping turns this continuous affect into smoothly blended expressions across 29 actuators.
+
+8
+00:00:43,207 --> 00:00:48,448
+The face follows the turns inside a reply, and first moves in under one second.
+

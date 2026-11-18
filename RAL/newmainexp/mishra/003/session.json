@@ -1,0 +1,26 @@
+{
+  "condition": "mishra",
+  "trial_id": "003",
+  "category": "sad",
+  "user_prompt": "My pet passed away and I feel heartbroken.",
+  "assistant_text": "It's completely normal to feel heartbroken after losing a pet. It's important to allow yourself to grieve and take time to process your emotions. You can also consider seeking support from friends, family, or a professional therapist.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "classify_gpt_ms": 2222.14,
+    "classify_local_ms": 1161.88,
+    "ttff_gpt_ms": 12668.14,
+    "ttff_local_ms": 11607.88,
+    "gen_wall_ms": 10446.0,
+    "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+  }
+}

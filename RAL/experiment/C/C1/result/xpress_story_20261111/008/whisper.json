@@ -1,0 +1,122 @@
+{
+  "task": "transcribe",
+  "language": "english",
+  "duration": 8.470000267028809,
+  "text": "I understand your discomfort. It's important to address this issue. Is there anything specific you would like to discuss or talk about?",
+  "words": [
+    {
+      "word": "I",
+      "start": 0.0,
+      "end": 0.25999999046325684
+    },
+    {
+      "word": "understand",
+      "start": 0.25999999046325684,
+      "end": 0.6399999856948853
+    },
+    {
+      "word": "your",
+      "start": 0.6399999856948853,
+      "end": 0.8999999761581421
+    },
+    {
+      "word": "discomfort",
+      "start": 0.8999999761581421,
+      "end": 1.3200000524520874
+    },
+    {
+      "word": "It's",
+      "start": 1.840000033378601,
+      "end": 2.0
+    },
+    {
+      "word": "important",
+      "start": 2.0,
+      "end": 2.240000009536743
+    },
+    {
+      "word": "to",
+      "start": 2.240000009536743,
+      "end": 2.799999952316284
+    },
+    {
+      "word": "address",
+      "start": 2.799999952316284,
+      "end": 2.799999952316284
+    },
+    {
+      "word": "this",
+      "start": 2.799999952316284,
+      "end": 3.180000066757202
+    },
+    {
+      "word": "issue",
+      "start": 3.180000066757202,
+      "end": 3.4200000762939453
+    },
+    {
+      "word": "Is",
+      "start": 4.139999866485596,
+      "end": 4.380000114440918
+    },
+    {
+      "word": "there",
+      "start": 4.380000114440918,
+      "end": 4.519999980926514
+    },
+    {
+      "word": "anything",
+      "start": 4.519999980926514,
+      "end": 4.820000171661377
+    },
+    {
+      "word": "specific",
+      "start": 4.820000171661377,
+      "end": 5.480000019073486
+    },
+    {
+      "word": "you",
+      "start": 5.480000019073486,
+      "end": 5.960000038146973
+    },
+    {
+      "word": "would",
+      "start": 5.960000038146973,
+      "end": 6.099999904632568
+    },
+    {
+      "word": "like",
+      "start": 6.099999904632568,
+      "end": 6.260000228881836
+    },
+    {
+      "word": "to",
+      "start": 6.260000228881836,
+      "end": 6.760000228881836
+    },
+    {
+      "word": "discuss",
+      "start": 6.760000228881836,
+      "end": 6.760000228881836
+    },
+    {
+      "word": "or",
+      "start": 6.760000228881836,
+      "end": 7.019999980926514
+    },
+    {
+      "word": "talk",
+      "start": 7.019999980926514,
+      "end": 7.21999979019165
+    },
+    {
+      "word": "about",
+      "start": 7.21999979019165,
+      "end": 7.480000019073486
+    }
+  ],
+  "usage": {
+    "type": "duration",
+    "seconds": 9
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "set": "#1E90FF, #FFD700, #FF4500",
+  "explanation": "The color #1E90FF (Dodger Blue) is chosen to represent the calm and safety of being indoors during a storm, providing a soothing and reassuring presence. #FFD700 (Gold) is used to convey the warmth and security of being safe inside, contrasting with the storm outside. #FF4500 (Orange Red) is selected to express the intensity and fear associated with the thunderstorm, capturing the dramatic and potentially frightening nature of the event.",
+  "chunks": [
+    "It <0.00> sounds <0.25> like <0.43> you're <0.66> experiencing <0.86> a <1.36> loud <1.67> thunderstorm <2.03> outside <2.53>",
+    "It <3.70> can <3.74> be <3.88> scary <4.51> especially <4.82> if <5.32> you're <5.53> not <5.67> used <5.96> to <6.17> the <6.38> sound <6.61> of <6.76> thunder <7.21>",
+    "It's <7.61> important <7.80> to <8.00> stay <8.34> indoors <8.53> and <9.02> avoid <9.42> getting <9.64> outside <9.89> until <10.34> the <10.68> storm <10.97> has <11.10> passed <11.84>"
+  ]
+}

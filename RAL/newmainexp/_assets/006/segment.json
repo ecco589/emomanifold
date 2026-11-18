@@ -1,0 +1,8 @@
+{
+  "set": "#1E90FF, #FFD700, #FF4500",
+  "explanation": "The color #1E90FF (Dodger Blue) is chosen for the eyes to convey a sense of calm and alertness, reflecting the need to stay cautious during a thunderstorm. #FFD700 (Gold) is used for the face to provide a warm and comforting presence, reassuring the listener. #FF4500 (Orange Red) is selected for the mouth to express urgency and concern, emphasizing the importance of staying indoors.",
+  "chunks": [
+    "It <0.00> sounds <0.23> like <0.56> you're <0.92> experiencing <1.12> a <1.67> thunderstorm <2.01> outside <2.59>",
+    "Be <4.00> careful <4.03> and <4.46> stay <4.76> indoors <4.98> if <5.32> possible <5.53>"
+  ]
+}

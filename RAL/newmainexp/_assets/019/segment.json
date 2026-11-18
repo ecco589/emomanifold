@@ -1,0 +1,7 @@
+{
+  "set": "#FFD700, #FF4500, #FFFFFF",
+  "explanation": "The color #FFD700 (gold) is chosen to express happiness and excitement, reflecting the positive tone of the news. #FF4500 (orange-red) is used to convey enthusiasm and energy, enhancing the sense of excitement. #FFFFFF (white) is used for the eyes to provide a neutral and clear contrast, ensuring the expressions are easily readable.",
+  "chunks": [
+    "I'm <0.00> glad <0.21> to <0.43> hear <0.57> about <0.77> the <1.01> exciting <1.13> news <1.60>"
+  ]
+}

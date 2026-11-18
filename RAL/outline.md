@@ -1,4 +1,4 @@
-# EmotionManifold → RAL 投稿大纲
+# EmoManifold → RAL 投稿大纲
 
 **标题暂定**：*"Written All Over the Face": Driving Facial Robots via LLM Internal Emotion Manifolds*
 

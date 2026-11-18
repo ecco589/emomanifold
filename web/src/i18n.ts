@@ -4,7 +4,7 @@ export const copy = {
   en: {
     brand: "EmoManifold",
     paperTitle:
-      "“Written All Over the Face”: Driving Facial Robots via LLM Internal Emotion Manifolds",
+      "Emo-H2A: Driving a Facial Robot Directly from LLM Hidden States at Token Rate",
     authors: "",
     links: {
       github: "GitHub",
@@ -55,7 +55,7 @@ export const copy = {
   zh: {
     brand: "EmoManifold",
     paperTitle:
-      "“Written All Over the Face”: Driving Facial Robots via LLM Internal Emotion Manifolds",
+      "Emo-H2A: Driving a Facial Robot Directly from LLM Hidden States at Token Rate",
     authors: "",
     links: {
       github: "GitHub",

@@ -1,0 +1,22 @@
+{
+  "video": {
+    "path": "D:\\Downloads\\C1\\grimace_pyfeat_smoke\\grimace_pyfeat_smoke_pkg\\videos\\ours\\013.mp4",
+    "fps": 10.0,
+    "total_frames": 75,
+    "width": 640,
+    "height": 640,
+    "duration_s": 7.5
+  },
+  "device": "cuda",
+  "batch_size": 8,
+  "frame_step": 1,
+  "face_threshold": 0.7,
+  "smooth_ms": 200,
+  "interpolate_limit_ms": 250,
+  "total_output_rows": 75,
+  "detected_rows": 75,
+  "valid_rows": 75,
+  "valid_ratio": 1.0,
+  "output_dir": "D:\\Downloads\\C1\\grimace_pyfeat_smoke\\grimace_pyfeat_smoke_pkg\\out\\ours\\013\\013_20260804_145957",
+  "created_at": "2026-08-04T15:00:09"
+}

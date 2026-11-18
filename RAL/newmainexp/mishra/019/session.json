@@ -1,0 +1,26 @@
+{
+  "condition": "mishra",
+  "trial_id": "019",
+  "category": "goemo_joy",
+  "user_prompt": "I am absolutely thrilled to hear this news!",
+  "assistant_text": "I'm glad to hear about the exciting news!",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "classify_gpt_ms": 954.82,
+    "classify_local_ms": 882.03,
+    "ttff_gpt_ms": 4247.42,
+    "ttff_local_ms": 4174.63,
+    "gen_wall_ms": 3292.6,
+    "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+  }
+}

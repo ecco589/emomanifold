@@ -1,0 +1,28 @@
+{
+  "condition": "xpress_story",
+  "trial_id": "007",
+  "category": "surprise",
+  "user_prompt": "What? You actually remembered my birthday!",
+  "assistant_text": "I'm glad to hear that! It's great to hear from you. How can I assist you with your birthday?",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "program": "precomputed timestamped keyframes",
+    "n_keyframes": 2,
+    "build_ms": {
+      "segment_and_emotion_ms": 5090.9,
+      "tts_ms": 2194.27,
+      "n_keyframes": 2
+    },
+    "note": "The paper latency table has no TTFF for the timestamped program. Keyframes play from their start times."
+  }
+}

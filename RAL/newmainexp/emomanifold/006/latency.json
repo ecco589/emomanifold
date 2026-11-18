@@ -1,0 +1,32 @@
+{
+  "ttff_s": 0.645,
+  "ttff_ms": 644.96,
+  "gen_wall_s": 4.4437,
+  "gen_wall_ms": 4443.7,
+  "per_token_control_ms_mean": 0.571,
+  "per_token_control_ms_std": 0.042,
+  "per_token_control_n": 19,
+  "per_token_control_ms": [
+    0.585,
+    0.574,
+    0.524,
+    0.54,
+    0.574,
+    0.579,
+    0.598,
+    0.521,
+    0.687,
+    0.639,
+    0.539,
+    0.568,
+    0.596,
+    0.568,
+    0.595,
+    0.57,
+    0.534,
+    0.528,
+    0.524
+  ],
+  "inter_token_wall_ms_mean": 211.04,
+  "note": "per_token_control_ms is projection plus FKCN blend, excluding the language-model forward. ttff_s includes that forward, to the first token. gen_wall_s is the last token."
+}

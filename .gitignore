@@ -73,3 +73,29 @@ video_va_system.zip
 
 # local archive of superseded experiment data (kept on disk only)
 RAL/experiment/_archive_obsolete_20260731/
+
+# API keys
+RAL/openai_key
+
+
+# secrets / local agent
+web/.env
+.env
+.agents/
+
+# LaTeX build junk
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.xdv
+
+# bulky media already covered by *.mp4; also skip speech dumps in experiment trees
+*.wav
+RAL/experiment/C/C1/output/grimace_pyfeat_smoke_pkg.zip
+RAL/experiment/C/C1/output/grimace_pyfeat_smoke_pkg/
+RAL/experiment/C/C1/output/grimace_smoke/
+RAL/fig/Fig4_editable.pptx
+RAL/fig/draft_ef/

@@ -1,0 +1,10 @@
+{
+  "set": "#FFCCCB, #FFD700, #ADD8E6, #FFFFFF",
+  "explanation": "The color #FFCCCB (light red) is chosen to express empathy and understanding for the tough time being described. #FFD700 (gold) represents hope and encouragement, aligning with the message of growth and learning from failure. #ADD8E6 (light blue) is calming and supportive, suitable for the advice to take a break and reflect. #FFFFFF (white) is neutral and can be used for transitions or when the expression is more neutral or contemplative.",
+  "chunks": [
+    "It <0.00> sounds <0.23> like <0.43> you're <0.66> going <0.81> through <0.98> a <1.15> tough <1.48> time <1.48> It's <2.61> okay <2.77> to <2.98> feel <3.20> disappointed <3.38> after <3.85> failing <4.26> an <4.51> exam <5.19>",
+    "Remember <6.05> failure <6.78> is <6.78> a <7.07> part <7.36> of <7.36> the <7.53> learning <7.69> process <7.94> and <8.47> can <8.72> help <8.88> you <9.06> grow <9.34>",
+    "Take <10.35> a <10.38> break <10.81> reflect <11.61> on <11.61> what <11.81> went <11.97> wrong <12.14> and <12.81> try <13.10> to <13.22> learn <13.57> from <13.57> it <13.80>",
+    "If <14.73> you <15.22> need <15.39> support <15.53> consider <16.45> talking <16.62> to <16.92> a <17.13> friend <17.71> family <18.44> member <18.44> or <18.86> a <19.37> tutor <19.70>"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "classify_gpt_ms": 1417.84,
+  "classify_local_ms": 13951.1,
+  "ttff_gpt_ms": 10335.94,
+  "ttff_local_ms": 22869.2,
+  "gen_wall_ms": 8918.1,
+  "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+}

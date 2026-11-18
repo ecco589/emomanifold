@@ -1,0 +1,45 @@
+{
+  "condition": "emomanifold",
+  "trial_id": "015",
+  "category": "emobank_hv",
+  "user_prompt": "I feel very happy and satisfied.",
+  "assistant_text": "That sounds great! It's wonderful to feel so content and fulfilled.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "ttff_s": 0.6479,
+    "ttff_ms": 647.86,
+    "gen_wall_s": 3.8899,
+    "gen_wall_ms": 3889.9,
+    "per_token_control_ms_mean": 0.574,
+    "per_token_control_ms_std": 0.051,
+    "per_token_control_n": 14,
+    "per_token_control_ms": [
+      0.533,
+      0.608,
+      0.575,
+      0.544,
+      0.547,
+      0.692,
+      0.603,
+      0.536,
+      0.611,
+      0.55,
+      0.526,
+      0.529,
+      0.541,
+      0.646
+    ],
+    "inter_token_wall_ms_mean": 249.38,
+    "note": "per_token_control_ms is projection plus FKCN blend, excluding the language-model forward. ttff_s includes that forward, to the first token. gen_wall_s is the last token."
+  }
+}

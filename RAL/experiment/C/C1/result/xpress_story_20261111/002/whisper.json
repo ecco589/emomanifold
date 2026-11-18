@@ -1,0 +1,122 @@
+{
+  "task": "transcribe",
+  "language": "english",
+  "duration": 7.889999866485596,
+  "text": "That sounds great. I'm glad to hear that you're satisfied with the restaurant. It's always exciting to hear about your positive experiences.",
+  "words": [
+    {
+      "word": "That",
+      "start": 0.0,
+      "end": 0.25999999046325684
+    },
+    {
+      "word": "sounds",
+      "start": 0.25999999046325684,
+      "end": 0.5
+    },
+    {
+      "word": "great",
+      "start": 0.5,
+      "end": 0.9399999976158142
+    },
+    {
+      "word": "I'm",
+      "start": 1.4199999570846558,
+      "end": 1.6200000047683716
+    },
+    {
+      "word": "glad",
+      "start": 1.6200000047683716,
+      "end": 1.7599999904632568
+    },
+    {
+      "word": "to",
+      "start": 1.7599999904632568,
+      "end": 1.9600000381469727
+    },
+    {
+      "word": "hear",
+      "start": 1.9600000381469727,
+      "end": 2.0399999618530273
+    },
+    {
+      "word": "that",
+      "start": 2.0399999618530273,
+      "end": 2.240000009536743
+    },
+    {
+      "word": "you're",
+      "start": 2.240000009536743,
+      "end": 2.5
+    },
+    {
+      "word": "satisfied",
+      "start": 2.5,
+      "end": 2.799999952316284
+    },
+    {
+      "word": "with",
+      "start": 2.799999952316284,
+      "end": 3.0399999618530273
+    },
+    {
+      "word": "the",
+      "start": 3.0399999618530273,
+      "end": 3.299999952316284
+    },
+    {
+      "word": "restaurant",
+      "start": 3.299999952316284,
+      "end": 3.640000104904175
+    },
+    {
+      "word": "It's",
+      "start": 4.360000133514404,
+      "end": 4.599999904632568
+    },
+    {
+      "word": "always",
+      "start": 4.599999904632568,
+      "end": 4.980000019073486
+    },
+    {
+      "word": "exciting",
+      "start": 4.980000019073486,
+      "end": 5.420000076293945
+    },
+    {
+      "word": "to",
+      "start": 5.420000076293945,
+      "end": 5.739999771118164
+    },
+    {
+      "word": "hear",
+      "start": 5.739999771118164,
+      "end": 5.860000133514404
+    },
+    {
+      "word": "about",
+      "start": 5.860000133514404,
+      "end": 6.079999923706055
+    },
+    {
+      "word": "your",
+      "start": 6.079999923706055,
+      "end": 6.320000171661377
+    },
+    {
+      "word": "positive",
+      "start": 6.320000171661377,
+      "end": 6.760000228881836
+    },
+    {
+      "word": "experiences",
+      "start": 6.760000228881836,
+      "end": 7.400000095367432
+    }
+  ],
+  "usage": {
+    "type": "duration",
+    "seconds": 8
+  }
+}

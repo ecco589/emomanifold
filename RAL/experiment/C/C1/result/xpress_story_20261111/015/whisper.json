@@ -1,0 +1,77 @@
+{
+  "task": "transcribe",
+  "language": "english",
+  "duration": 5.079999923706055,
+  "text": "That sounds wonderful. It's great to hear that you're feeling happy and satisfied.",
+  "words": [
+    {
+      "word": "That",
+      "start": 0.0,
+      "end": 0.25999999046325684
+    },
+    {
+      "word": "sounds",
+      "start": 0.25999999046325684,
+      "end": 0.5199999809265137
+    },
+    {
+      "word": "wonderful",
+      "start": 0.5199999809265137,
+      "end": 1.0
+    },
+    {
+      "word": "It's",
+      "start": 1.7999999523162842,
+      "end": 1.9600000381469727
+    },
+    {
+      "word": "great",
+      "start": 1.9600000381469727,
+      "end": 2.140000104904175
+    },
+    {
+      "word": "to",
+      "start": 2.140000104904175,
+      "end": 2.4200000762939453
+    },
+    {
+      "word": "hear",
+      "start": 2.4200000762939453,
+      "end": 2.5199999809265137
+    },
+    {
+      "word": "that",
+      "start": 2.5199999809265137,
+      "end": 2.7799999713897705
+    },
+    {
+      "word": "you're",
+      "start": 2.7799999713897705,
+      "end": 2.9800000190734863
+    },
+    {
+      "word": "feeling",
+      "start": 2.9800000190734863,
+      "end": 3.2799999713897705
+    },
+    {
+      "word": "happy",
+      "start": 3.2799999713897705,
+      "end": 3.640000104904175
+    },
+    {
+      "word": "and",
+      "start": 3.640000104904175,
+      "end": 4.079999923706055
+    },
+    {
+      "word": "satisfied",
+      "start": 4.079999923706055,
+      "end": 4.380000114440918
+    }
+  ],
+  "usage": {
+    "type": "duration",
+    "seconds": 6
+  }
+}

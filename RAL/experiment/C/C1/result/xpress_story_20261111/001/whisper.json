@@ -1,0 +1,102 @@
+{
+  "task": "transcribe",
+  "language": "english",
+  "duration": 7.460000038146973,
+  "text": "Winning the lottery is an incredible feeling. Congratulations on your victory. Keep your spirits high and stay positive.",
+  "words": [
+    {
+      "word": "Winning",
+      "start": 0.0,
+      "end": 0.3199999928474426
+    },
+    {
+      "word": "the",
+      "start": 0.3199999928474426,
+      "end": 0.5199999809265137
+    },
+    {
+      "word": "lottery",
+      "start": 0.5199999809265137,
+      "end": 0.7799999713897705
+    },
+    {
+      "word": "is",
+      "start": 0.7799999713897705,
+      "end": 1.159999966621399
+    },
+    {
+      "word": "an",
+      "start": 1.159999966621399,
+      "end": 1.399999976158142
+    },
+    {
+      "word": "incredible",
+      "start": 1.399999976158142,
+      "end": 1.7999999523162842
+    },
+    {
+      "word": "feeling",
+      "start": 1.7999999523162842,
+      "end": 2.359999895095825
+    },
+    {
+      "word": "Congratulations",
+      "start": 3.319999933242798,
+      "end": 3.4200000762939453
+    },
+    {
+      "word": "on",
+      "start": 3.4200000762939453,
+      "end": 3.940000057220459
+    },
+    {
+      "word": "your",
+      "start": 3.940000057220459,
+      "end": 4.119999885559082
+    },
+    {
+      "word": "victory",
+      "start": 4.119999885559082,
+      "end": 4.440000057220459
+    },
+    {
+      "word": "Keep",
+      "start": 5.039999961853027,
+      "end": 5.059999942779541
+    },
+    {
+      "word": "your",
+      "start": 5.059999942779541,
+      "end": 5.28000020980835
+    },
+    {
+      "word": "spirits",
+      "start": 5.28000020980835,
+      "end": 5.559999942779541
+    },
+    {
+      "word": "high",
+      "start": 5.559999942779541,
+      "end": 5.960000038146973
+    },
+    {
+      "word": "and",
+      "start": 5.960000038146973,
+      "end": 6.320000171661377
+    },
+    {
+      "word": "stay",
+      "start": 6.320000171661377,
+      "end": 6.519999980926514
+    },
+    {
+      "word": "positive",
+      "start": 6.519999980926514,
+      "end": 6.920000076293945
+    }
+  ],
+  "usage": {
+    "type": "duration",
+    "seconds": 8
+  }
+}

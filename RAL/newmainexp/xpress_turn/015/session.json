@@ -1,0 +1,26 @@
+{
+  "condition": "xpress_turn",
+  "trial_id": "015",
+  "category": "emobank_hv",
+  "user_prompt": "I feel very happy and satisfied.",
+  "assistant_text": "That sounds great! It's wonderful to feel so content and fulfilled.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "classify_gpt_ms": 1205.58,
+    "classify_local_ms": 14018.94,
+    "ttff_gpt_ms": 5095.48,
+    "ttff_local_ms": 17908.84,
+    "gen_wall_ms": 3889.9,
+    "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+  }
+}

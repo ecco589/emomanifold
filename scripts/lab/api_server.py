@@ -11,6 +11,7 @@ from typing import AsyncIterator
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -77,6 +78,11 @@ async def _sse_stream(req: ChatRequest) -> AsyncIterator[str]:
 @app.post("/v1/chat/stream")
 async def chat_stream(req: ChatRequest):
     return StreamingResponse(_sse_stream(req), media_type="text/event-stream")
+
+
+WEB_DIST = Path(os.environ.get("EMO_WEB_DIST", ROOT / "web" / "dist"))
+if WEB_DIST.is_dir():
+    app.mount("/", StaticFiles(directory=str(WEB_DIST), html=True), name="web")
 
 
 if __name__ == "__main__":

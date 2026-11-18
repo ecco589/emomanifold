@@ -1,0 +1,11 @@
+model,column_header,pole_language,metric,value_3dp,better_direction,in_current_figure
+Qwen2.5-0.5B,Qwen 0.5B,English,abs_cos_VA,0.151,lower,yes
+Qwen2.5-0.5B,Qwen 0.5B,English,abs_cos_AD,0.194,lower,yes
+Qwen2.5-0.5B,Qwen 0.5B,English,abs_cos_VD,0.153,lower,yes
+Qwen2.5-0.5B,Qwen 0.5B,English,cohesion,0.913,higher,yes
+Qwen2.5-0.5B,Qwen 0.5B,English,random_baseline,0.410,reference,yes
+Llama-3.2-3B,Llama 3B,English,abs_cos_VA,0.158,lower,yes
+Llama-3.2-3B,Llama 3B,English,abs_cos_AD,0.071,lower,yes
+Llama-3.2-3B,Llama 3B,English,abs_cos_VD,0.121,lower,yes
+Llama-3.2-3B,Llama 3B,English,cohesion,0.963,higher,yes
+Llama-3.2-3B,Llama 3B,English,random_baseline,0.365,reference,yes

@@ -1,0 +1,28 @@
+{
+  "phase": "c1",
+  "trial_id": "015",
+  "condition": "xpress_story",
+  "assistant_text": "That sounds wonderful! It's great to hear that you're feeling happy and satisfied.",
+  "n_keyframes": 1,
+  "audio_duration_s": 4.380000114440918,
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "duration_s": 4.884,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "keyframes": [
+    {
+      "scene": "scene_1",
+      "timestamp_s": 0.0,
+      "emotion_raw": "happy",
+      "emotion_name": "happiness",
+      "valence": 0.85,
+      "arousal": 0.62
+    }
+  ]
+}

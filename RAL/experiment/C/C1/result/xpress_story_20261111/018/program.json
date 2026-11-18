@@ -1,0 +1,48 @@
+{
+  "trial_id": "018",
+  "assistant_text": "That sounds like you're experiencing a state of calm and peace. It's wonderful to feel this way after a busy day or a stressful period.",
+  "tts_model": "tts-1",
+  "tts_note": "OpenAI tts-1 stands in for the original Google TTS",
+  "whisper_model": "whisper-1",
+  "segment_model": "gpt-4o",
+  "segment_model_note": "gpt-4-turbo is retired; gpt-4o at the original temperature",
+  "segment_temperature": 0.1,
+  "emotion_model": "gpt-4o",
+  "emotion_temperature": 0.3,
+  "audio_duration_s": 8.279999732971191,
+  "n_keyframes": 4,
+  "keyframes": [
+    {
+      "scene": "scene_1",
+      "timestamp_s": 0.0,
+      "emotion_raw": "neutral",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_2",
+      "timestamp_s": 2.0,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_3",
+      "timestamp_s": 5.0,
+      "emotion_raw": "happy",
+      "emotion_name": "happiness",
+      "valence": 0.85,
+      "arousal": 0.62
+    },
+    {
+      "scene": "scene_4",
+      "timestamp_s": 7.0,
+      "emotion_raw": "stressed",
+      "emotion_name": "fear",
+      "valence": -0.87,
+      "arousal": 0.53
+    }
+  ]
+}

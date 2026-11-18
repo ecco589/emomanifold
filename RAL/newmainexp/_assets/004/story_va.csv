@@ -1,0 +1,8 @@
+timestamp_s,valence,arousal,dominance,token
+0.0000,0.61,-0.47,,LABEL:neutral:calm
+1.4800,-0.5,-0.57,,LABEL:sadness:sad
+5.1900,-0.5,-0.57,,LABEL:sadness:sorrow
+7.9400,0.61,-0.47,,LABEL:neutral:calm
+10.8100,0.61,-0.47,,LABEL:neutral:interested
+13.8000,0.61,-0.47,,LABEL:neutral:calm
+19.7000,0.61,-0.47,,LABEL:neutral:interested

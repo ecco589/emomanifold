@@ -1,0 +1,26 @@
+{
+  "condition": "mishra",
+  "trial_id": "010",
+  "category": "neutral",
+  "user_prompt": "Okay I understand.",
+  "assistant_text": "You're welcome! Let me know if there's anything else I can assist you with.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "classify_gpt_ms": 987.09,
+    "classify_local_ms": 948.9,
+    "ttff_gpt_ms": 5973.59,
+    "ttff_local_ms": 5935.4,
+    "gen_wall_ms": 4986.5,
+    "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+  }
+}

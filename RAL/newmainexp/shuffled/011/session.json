@@ -1,0 +1,24 @@
+{
+  "condition": "shuffled",
+  "trial_id": "011",
+  "category": "sarcasm_pos",
+  "user_prompt": "Great another late night at work truly \"blissful\".",
+  "assistant_text": "That sounds like a wonderful experience! It's always nice to end the day with a good night's sleep and a pleasant evening.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "shuffle_seed": 20261122,
+    "per_token_control_ms_mean": 0.584,
+    "ttff_s": 0.64,
+    "note": "Temporal shuffle of the EmoManifold commands. No separate classifier; control latency is the EmoManifold path."
+  }
+}

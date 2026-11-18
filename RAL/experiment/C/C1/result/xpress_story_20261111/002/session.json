@@ -1,0 +1,52 @@
+{
+  "phase": "c1",
+  "trial_id": "002",
+  "condition": "xpress_story",
+  "assistant_text": "That sounds great! I'm glad to hear that you're satisfied with the restaurant. It's always exciting to hear about your positive experiences!",
+  "n_keyframes": 4,
+  "audio_duration_s": 7.400000095367432,
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "duration_s": 7.903,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "keyframes": [
+    {
+      "scene": "scene_1",
+      "timestamp_s": 0.0,
+      "emotion_raw": "neutral",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_2",
+      "timestamp_s": 0.25,
+      "emotion_raw": "happy",
+      "emotion_name": "happiness",
+      "valence": 0.85,
+      "arousal": 0.62
+    },
+    {
+      "scene": "scene_3",
+      "timestamp_s": 1.41,
+      "emotion_raw": "glad",
+      "emotion_name": "happiness",
+      "valence": 0.85,
+      "arousal": 0.62
+    },
+    {
+      "scene": "scene_4",
+      "timestamp_s": 4.36,
+      "emotion_raw": "excited",
+      "emotion_name": "happiness",
+      "valence": 0.85,
+      "arousal": 0.62
+    }
+  ]
+}

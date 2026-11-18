@@ -1,0 +1,144 @@
+{
+  "nrc_zh_n": 14478,
+  "single_token_nrc_n": 1089,
+  "thresholds_tried": [
+    {
+      "thresh": 0.45,
+      "reuse": false
+    },
+    {
+      "thresh": 0.45,
+      "reuse": true
+    }
+  ],
+  "filled_with": {
+    "thresh": 0.45,
+    "allow_cross_pole_reuse": true
+  },
+  "valence_positive": {
+    "priority_n": 428,
+    "single_token_n": 40,
+    "strict_predicate_ok_n": 30,
+    "final_n": 50,
+    "final_sample": [
+      "幸福",
+      "成功",
+      "希望",
+      "爱",
+      "自由",
+      "喜",
+      "杯",
+      "英雄",
+      "青年",
+      "好的",
+      "微笑",
+      "母亲"
+    ],
+    "mean_char_len": 1.68
+  },
+  "valence_negative": {
+    "priority_n": 429,
+    "single_token_n": 18,
+    "strict_predicate_ok_n": 13,
+    "final_n": 50,
+    "final_sample": [
+      "失败",
+      "偷",
+      "恨",
+      "死",
+      "战争",
+      "弃",
+      "杀",
+      "错",
+      "输",
+      "尽管",
+      "毒",
+      "事故"
+    ],
+    "mean_char_len": 1.42
+  },
+  "arousal_high": {
+    "priority_n": 425,
+    "single_token_n": 20,
+    "strict_predicate_ok_n": 12,
+    "final_n": 50,
+    "final_sample": [
+      "性",
+      "喊",
+      "枪",
+      "雷",
+      "恶",
+      "革命",
+      "行动",
+      "战斗",
+      "犯",
+      "兽",
+      "开发",
+      "冲"
+    ],
+    "mean_char_len": 1.46
+  },
+  "arousal_low": {
+    "priority_n": 425,
+    "single_token_n": 51,
+    "strict_predicate_ok_n": 43,
+    "final_n": 50,
+    "final_sample": [
+      "树",
+      "纸",
+      "困",
+      "屋",
+      "零",
+      "六",
+      "梨",
+      "茶",
+      "云",
+      "令",
+      "床",
+      "箱"
+    ],
+    "mean_char_len": 1.24
+  },
+  "dominance_high": {
+    "priority_n": 416,
+    "single_token_n": 50,
+    "strict_predicate_ok_n": 43,
+    "final_n": 50,
+    "final_sample": [
+      "控制",
+      "成功",
+      "凯",
+      "领导",
+      "帝国",
+      "力量",
+      "狠",
+      "义",
+      "经理",
+      "王",
+      "自治",
+      "老师"
+    ],
+    "mean_char_len": 1.78
+  },
+  "dominance_low": {
+    "priority_n": 423,
+    "single_token_n": 23,
+    "strict_predicate_ok_n": 17,
+    "final_n": 50,
+    "final_sample": [
+      "失败",
+      "弱",
+      "羊",
+      "尿",
+      "菌",
+      "下",
+      "泥",
+      "灰",
+      "鞋",
+      "东西",
+      "胶",
+      "受到"
+    ],
+    "mean_char_len": 1.26
+  }
+}

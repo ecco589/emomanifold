@@ -1,0 +1,3 @@
+基于 RAL/emotion_manifold_en.tex
+Introduction、Abstract 已定稿；Related Work 已改。
+原文仍在 RAL/emotion_manifold_en.tex。

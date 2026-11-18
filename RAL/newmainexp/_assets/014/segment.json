@@ -1,0 +1,9 @@
+{
+  "set": "#FFCCCB, #FFD700, #ADD8E6",
+  "explanation": "The color #FFCCCB (light red) is chosen to express empathy and understanding, as it is often associated with warmth and compassion. #FFD700 (gold) is used to convey hope and encouragement, symbolizing a brighter outlook and positivity. #ADD8E6 (light blue) represents calmness and reassurance, helping to soothe and comfort the listener.",
+  "chunks": [
+    "I'm <0.00> sorry <0.31> to <0.50> hear <0.80> that <0.92> you <1.24> were <1.41> looking <1.62> forward <1.96> to <2.25> something <2.48> but <3.70> disappointing <3.85> can <4.48> be <4.82> a <4.96> part <5.23> of <5.23> life <5.69>",
+    "It's <6.46> okay <6.63> to <6.84> feel <7.19> that <7.23> way <7.48> and <8.07> it's <8.19> normal <8.46> to <8.65> want <8.96> things <9.10> to <9.31> be <9.50> better <9.72>",
+    "Maybe <11.07> try <11.27> looking <11.61> for <11.84> something <12.15> else <12.47> that <12.81> might <13.06> be <13.27> more <13.47> enjoyable <13.77> or <14.18> satisfying <14.80>"
+  ]
+}

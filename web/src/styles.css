@@ -1,11 +1,11 @@
 :root {
-  --bg: #fbfaf7;
-  --ink: #1c1c1c;
-  --muted: #5c5c5c;
-  --line: #e6e1d6;
-  --card: #ffffff;
-  --accent: #1c1c1c;
-  --face: #f3efe6;
+  --bg: #f9f9fb;
+  --ink: #2e2e38;
+  --muted: #6d6d7c;
+  --line: #e3e3e8;
+  --card: transparent;
+  --accent: #2e2e38;
+  --face: #f3f3f6;
 }
 
 * {
@@ -18,7 +18,7 @@ body {
   padding: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: "IBM Plex Sans", "PingFang SC", "Noto Sans SC", sans-serif;
+  font-family: "Source Sans 3", "Noto Sans SC", sans-serif;
   line-height: 1.55;
 }
 
@@ -76,18 +76,23 @@ nav a,
 .kicker {
   margin: 0 0 10px;
   color: var(--muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 15px;
+}
+
+.hero h1,
+.section-head h2,
+.abstract h2 {
+  font-family: "Gilda Display", "Noto Serif SC", serif;
+  font-weight: 400;
+  letter-spacing: -0.03em;
 }
 
 .hero h1 {
   margin: 0;
-  font-family: "Source Serif 4", "Songti SC", serif;
-  font-weight: 600;
-  font-size: clamp(28px, 4.2vw, 42px);
-  line-height: 1.22;
-  letter-spacing: -0.02em;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.05;
 }
 
 .authors {
@@ -97,16 +102,16 @@ nav a,
 
 .section-head h2 {
   margin: 0;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
 }
 
 .demo-tag {
-  margin-left: 0.4em;
-  font-family: "Source Serif 4", "Songti SC", serif;
-  font-size: 0.78em;
+  margin-left: 0.45em;
+  font-family: "Source Sans 3", "Noto Sans SC", sans-serif;
+  font-size: 0.42em;
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   color: var(--muted);
 }
 
@@ -134,16 +139,16 @@ nav a,
 
 .load-bar-track {
   flex: 1;
-  height: 6px;
+  height: 2px;
   background: var(--line);
-  border-radius: 999px;
+  border-radius: 0;
   overflow: hidden;
 }
 
 .load-bar-fill {
   height: 100%;
   background: var(--accent);
-  border-radius: 999px;
+  border-radius: 0;
   transition: width 0.2s ease;
 }
 
@@ -196,9 +201,9 @@ button.linkish {
 .chat-card,
 .face-card,
 .method figure {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 12px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
 }
 
 .transcript {
@@ -223,15 +228,15 @@ button.linkish {
 
 .who {
   display: block;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--muted);
   margin-bottom: 2px;
 }
 
 .tok {
-  border-bottom: 1px dotted #9a9488;
+  border-bottom: 1px dotted var(--muted);
   cursor: help;
   position: relative;
 }
@@ -259,19 +264,22 @@ button.linkish {
 .composer textarea {
   flex: 1;
   resize: none;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 10px 12px;
-  background: var(--bg);
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 10px 0;
+  background: transparent;
+  color: var(--ink);
 }
 
 .composer button,
 .examples button {
-  border: 0;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 8px;
-  padding: 10px 14px;
+  border: none;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: var(--ink);
+  border-radius: 0;
+  padding: 8px 0;
   cursor: pointer;
 }
 
@@ -283,10 +291,10 @@ button.linkish {
 
 .examples {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 0 14px 12px;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0 0 4px;
 }
 
 .examples span {
@@ -296,10 +304,11 @@ button.linkish {
 
 .examples button {
   background: transparent;
-  color: var(--ink);
-  border: 1px solid var(--line);
-  font-size: 12px;
-  padding: 6px 10px;
+  color: var(--muted);
+  border: none;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  padding: 4px 0;
   text-align: left;
   white-space: normal;
   max-width: 100%;
@@ -326,13 +335,13 @@ button.linkish {
 }
 
 .method {
-  text-align: center;
+  text-align: left;
   margin-bottom: 40px;
 }
 
 .method .section-head {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .method figure {
@@ -347,15 +356,33 @@ button.linkish {
 }
 
 .method figcaption {
-  margin: 10px 4px 4px;
+  margin: 10px 0 4px;
   color: var(--muted);
-  font-size: 13px;
-  text-align: center;
+  font-size: 15px;
+  text-align: left;
 }
 
 .abstract {
-  text-align: center;
+  text-align: left;
   margin-bottom: 40px;
+}
+
+.page.embed {
+  max-width: none;
+  margin: 0;
+  padding: 0 0 8px;
+}
+
+.page.embed .demo {
+  margin: 0;
+}
+
+.page.embed .demo-grid {
+  margin-top: 0;
+}
+
+.page.embed .section-head {
+  display: none;
 }
 
 .abstract h2 {

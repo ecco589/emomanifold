@@ -1,0 +1,24 @@
+{
+  "condition": "shuffled",
+  "trial_id": "012",
+  "category": "sarcasm_neg",
+  "user_prompt": "Thanks for deleting the file really helpful.",
+  "assistant_text": "You're welcome! It was helpful to know you found the file useful.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "shuffle_seed": 20261123,
+    "per_token_control_ms_mean": 0.595,
+    "ttff_s": 0.6718,
+    "note": "Temporal shuffle of the EmoManifold commands. No separate classifier; control latency is the EmoManifold path."
+  }
+}

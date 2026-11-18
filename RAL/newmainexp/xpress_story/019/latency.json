@@ -1,0 +1,10 @@
+{
+  "program": "precomputed timestamped keyframes",
+  "n_keyframes": 2,
+  "build_ms": {
+    "segment_and_emotion_ms": 3907.67,
+    "tts_ms": 2973.22,
+    "n_keyframes": 2
+  },
+  "note": "The paper latency table has no TTFF for the timestamped program. Keyframes play from their start times."
+}

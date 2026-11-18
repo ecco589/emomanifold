@@ -1,0 +1,24 @@
+{
+  "condition": "shuffled",
+  "trial_id": "005",
+  "category": "angry",
+  "user_prompt": "That person bullied me and I'm furious!",
+  "assistant_text": "It sounds like you're experiencing a significant emotional response. It's important to address this situation assertively and calmly. You might consider speaking with someone you trust about what happened, expressing your feelings, and seeking support. Remember, it's okay to feel angry and hurt, but taking steps to address the situation can help you feel more in control and less upset.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "shuffle_seed": 20261116,
+    "per_token_control_ms_mean": 0.563,
+    "ttff_s": 0.6571,
+    "note": "Temporal shuffle of the EmoManifold commands. No separate classifier; control latency is the EmoManifold path."
+  }
+}

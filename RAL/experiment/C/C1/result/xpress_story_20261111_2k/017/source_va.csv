@@ -1,0 +1,6 @@
+timestamp_s,valence,arousal,token
+0.0000,-0.87,0.53,LABEL:fear:stressed
+3.0000,0.61,-0.47,LABEL:neutral:calm
+10.0000,0.61,-0.47,LABEL:neutral:calm
+17.0000,-0.87,0.53,LABEL:fear:stressed
+19.0000,0.61,-0.47,LABEL:neutral:calm

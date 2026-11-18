@@ -1,0 +1,26 @@
+{
+  "scene_1": {
+    "start_time": 0,
+    "emotion": "neutral"
+  },
+  "scene_2": {
+    "start_time": 2,
+    "emotion": "sorrow"
+  },
+  "scene_3": {
+    "start_time": 4,
+    "emotion": "sad"
+  },
+  "scene_4": {
+    "start_time": 6,
+    "emotion": "calm"
+  },
+  "scene_5": {
+    "start_time": 7,
+    "emotion": "sad"
+  },
+  "scene_6": {
+    "start_time": 8,
+    "emotion": "calm"
+  }
+}

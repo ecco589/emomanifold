@@ -1,0 +1,16 @@
+# Paper figure assets — edit/replace files here; keep filenames.
+# Order = appearance / numbering in emotion_manifold.tex
+
+fig1.png  Fig.1  architecture / system overview  (user-replaced, wide)
+fig2.pdf  Fig.2  pole-N Spearman sweep (V/A/D)
+           source script: experiment/A/A1/code/plot_e1.py
+fig3.png  Fig.3  cross-lingual emotion-cluster schematic  (user-replaced)
+fig4.pdf  Fig.4  sarcasm valence raincloud (B1)
+           source script: experiment/B/B1/code/plot_b1.py
+fig5.pdf  Fig.5  C1 multicond mirror-test main figure (A/B/C)
+           source script: experiment/C/C1/code/plot_c1_multicond_paper.py
+fig6.png  Fig.6  cross-platform sync (Grimace + physical robot; transferability)
+
+# Labels in tex: fig:1 ... fig:6
+# Experiment originals kept for regeneration; paper reads only RAL/fig/.
+# When regenerating C1, copy paper/c1_main_figure.pdf → fig/fig5.pdf (and .png).

@@ -1,0 +1,12 @@
+Snapshot date: 2026-11-18
+
+Contents
+- emotion_manifold_en.tex / .pdf : RA-L double-anonymous review copy
+- arxiv/ : named-author arXiv package (emo_h2a.tex, emo_h2a.pdf, emo_h2a_arxiv_source.zip)
+- multimedia/multimedia.zip : promo video package for PaperPlaza
+
+Status at snapshot
+- RA-L: preparation / submission in progress (PaperPlaza)
+- arXiv: submit/8390646 under Min Li account, status on hold; monthly 2-submission limit noted
+- Authors (arXiv): Yige Liu, Jingcheng Huang, Hao Sun, Min Li*, Zhouping Yin
+  Affiliation: Huazhong University of Science and Technology

@@ -1,14 +1,20 @@
-% E3 table (IEEE/RAL style, booktabs)
+% E3 table (IEEE/RAL style, booktabs) — Qwen + Llama
 \begin{table}[t]
-\caption{Orthogonality of mined VAD axes and cross-lingual emotion-cluster cohesion under two pole-lexicon constructions ($N{=}50$ per pole, Qwen2.5-0.5B). Cluster cohesion is the mean intra-cluster pairwise cosine over five predefined multilingual emotion sets (five languages each). The random baseline is shared across rows (100 trials per cluster, no scaler); value shown in parentheses.}
+\caption{Orthogonality of mined VAD axes and cross-lingual emotion-cluster cohesion ($N{=}50$) for two backbones under EN/ZH pole constructions. Cluster cohesion is the mean intra-cluster pairwise cosine over five multilingual emotion sets. Parentheses: random 3-D baseline \emph{on that model} (100 trials per cluster).}
 \label{tab:e3_axis_cluster}
 \centering
-\begin{tabular}{lcccc}
+\footnotesize
+\begin{tabular}{@{}llcccc@{}}
 \toprule
-Pole lexicon & $|\cos(V,A)|$ & $|\cos(A,D)|$ & $|\cos(V,D)|$ & Cluster cos. (rand.) \\
+Model & Pole & $|\cos(V,A)|$ & $|\cos(A,D)|$ & $|\cos(V,D)|$ & Cluster cos. (rand.) \\
 \midrule
-EN-only & 0.151 & 0.194 & 0.153 & 0.913 (0.410) \\
-ZH-only & 0.220 & 0.116 & 0.186 & 0.898 (0.410) \\
+\multirow{2}{*}{Qwen2.5-0.5B}
+ & EN & 0.151 & 0.194 & 0.153 & 0.913 (0.410) \\
+ & ZH & 0.220 & 0.116 & 0.186 & 0.898 (0.410) \\
+\midrule
+\multirow{2}{*}{Llama-3.2-3B}
+ & EN & 0.158 & 0.071 & 0.121 & 0.963 (0.365) \\
+ & ZH & 0.161 & 0.210 & 0.282 & 0.965 (0.365) \\
 \bottomrule
 \end{tabular}
 \end{table}

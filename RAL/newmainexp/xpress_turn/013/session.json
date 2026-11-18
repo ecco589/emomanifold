@@ -1,0 +1,26 @@
+{
+  "condition": "xpress_turn",
+  "trial_id": "013",
+  "category": "turn_pos",
+  "user_prompt": "I was worried at first but the result was much better than I expected.",
+  "assistant_text": "Great to hear that the result was better than expected!",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "classify_gpt_ms": 1245.26,
+    "classify_local_ms": 15042.7,
+    "ttff_gpt_ms": 3748.06,
+    "ttff_local_ms": 17545.5,
+    "gen_wall_ms": 2502.8,
+    "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+  }
+}

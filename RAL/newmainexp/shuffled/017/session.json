@@ -1,0 +1,24 @@
+{
+  "condition": "shuffled",
+  "trial_id": "017",
+  "category": "emobank_ha",
+  "user_prompt": "I'm so nervous my heart is racing!",
+  "assistant_text": "It sounds like you're feeling anxious. It's normal to feel this way when you're nervous, but it's important to take a deep breath and focus on the situation at hand. Try to visualize a calm and reassuring image, such as a peaceful beach or a serene mountain. This can help calm your mind and reduce the feeling of racing heart.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "shuffle_seed": 20261128,
+    "per_token_control_ms_mean": 0.588,
+    "ttff_s": 0.6658,
+    "note": "Temporal shuffle of the EmoManifold commands. No separate classifier; control latency is the EmoManifold path."
+  }
+}

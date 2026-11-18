@@ -1,0 +1,26 @@
+{
+  "condition": "mishra",
+  "trial_id": "009",
+  "category": "neutral",
+  "user_prompt": "The weather is okay today nothing special.",
+  "assistant_text": "The weather is generally good today, with no special conditions noted.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "classify_gpt_ms": 1029.45,
+    "classify_local_ms": 905.52,
+    "ttff_gpt_ms": 5469.45,
+    "ttff_local_ms": 5345.52,
+    "gen_wall_ms": 4440.0,
+    "note": "TTFF is reply generation plus the turn classifier, the paper's first content-driven update."
+  }
+}

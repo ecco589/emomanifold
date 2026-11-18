@@ -1,0 +1,1042 @@
+{
+  "field_root": "/Users/eccoliu/Desktop/EmotionManifold/RAL/experiment/C/C1/result/multicond_noanchor_20260731/ours",
+  "n_trials": 20,
+  "window_s": 2.0,
+  "smooth_tau_s": 0.6,
+  "event_lag_s": 0.0,
+  "n_shuffle": 5,
+  "alphas": [
+    0.3,
+    0.6,
+    0.9
+  ],
+  "prototype_sets": [
+    "13",
+    "7a",
+    "7b"
+  ],
+  "default_condition": {
+    "alpha": 0.6,
+    "prototype_set": "13"
+  },
+  "camera_reference_fig5a": {
+    "valence": 0.875,
+    "arousal": 0.696
+  },
+  "display_path": {
+    "fps": 10.0,
+    "transition_ms": 150.0,
+    "max_delta_per_frame": 0.05,
+    "rate_limit_space": "7-D FKCN weights (29-D presets on robot PC)",
+    "readout_centroids": "P=13 (fixed across conditions)"
+  },
+  "note": "Offline replay of the Sec. III-C display path; VA read out from the frame-rate weight trajectory, NOT camera readback. Event thresholds and window match C1; alignment does not (see event_lag_s). The shuffled floor uses the same chain on time-permuted commands. Condition differences are tested paired over shared trials.",
+  "configs": [
+    {
+      "alpha": 0.3,
+      "prototype_set": "13",
+      "P": 13,
+      "is_default": false,
+      "n_trials": 20,
+      "event_lag_s": 0.0,
+      "mean_token_weight_step": 0.01873987496707556,
+      "mean_frame_weight_step": 0.010406809596793179,
+      "rate_limit_saturation": 0.046804635675696066,
+      "mean_smoothing_lag_s": 0.385,
+      "valence_amp_retention_thr0.3": 0.7942543973035364,
+      "arousal_amp_retention_thr0.2": 0.3505677655033403,
+      "valence_dir_acc_thr0.3": {
+        "threshold": 0.3,
+        "n": 129,
+        "accuracy": 0.8992248062015504,
+        "p_binomial": 3.8868187771535235e-22
+      },
+      "arousal_dir_acc_thr0.2": {
+        "threshold": 0.2,
+        "n": 153,
+        "accuracy": 0.7254901960784313,
+        "p_binomial": 1.1227793763108739e-08
+      },
+      "valence_clustered_thr0.3": {
+        "threshold": 0.3,
+        "n_events": 129,
+        "n_trials": 18,
+        "pooled_accuracy": 0.8992248062015504,
+        "trial_mean_accuracy": 0.8645202020202021,
+        "ci95": [
+          0.7363636363636363,
+          0.9611111111111111
+        ],
+        "p_boot_gt_chance": 0.0
+      },
+      "arousal_clustered_thr0.2": {
+        "threshold": 0.2,
+        "n_events": 153,
+        "n_trials": 17,
+        "pooled_accuracy": 0.7254901960784313,
+        "trial_mean_accuracy": 0.7196566651739066,
+        "ci95": [
+          0.5745708314673831,
+          0.8476454958158812
+        ],
+        "p_boot_gt_chance": 0.0022
+      },
+      "shuffled_floor": {
+        "n_shuffle": 5,
+        "valence_trial_mean_accuracy": 0.4772081930415264,
+        "arousal_trial_mean_accuracy": 0.40522547995164626
+      },
+      "per_trial_valence_acc": {
+        "001": 0.5,
+        "002": 1.0,
+        "003": 1.0,
+        "004": 0.75,
+        "005": 0.8181818181818182,
+        "006": 1.0,
+        "007": 0.8,
+        "008": 1.0,
+        "010": 1.0,
+        "011": 0.875,
+        "012": 1.0,
+        "013": 1.0,
+        "014": 1.0,
+        "016": 1.0,
+        "017": 0.8181818181818182,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "per_trial_arousal_acc": {
+        "001": 0.3333333333333333,
+        "002": 0.75,
+        "003": 0.84,
+        "004": 1.0,
+        "005": 0.8095238095238095,
+        "006": 0.5,
+        "008": 0.9090909090909091,
+        "010": 1.0,
+        "011": 1.0,
+        "013": 0.7272727272727273,
+        "014": 0.8333333333333334,
+        "015": 0.0,
+        "016": 0.75,
+        "017": 0.4482758620689655,
+        "018": 1.0,
+        "019": 0.3333333333333333,
+        "020": 1.0
+      },
+      "paired_valence_vs_default": {
+        "n_trials": 18,
+        "n_nonzero_diffs": 3,
+        "mean_diff_pp": 2.058080808080809,
+        "ci95_pp": [
+          0.0,
+          4.810606060606062
+        ],
+        "wilcoxon_p": 0.10880943004054569
+      },
+      "paired_arousal_vs_default": {
+        "n_trials": 17,
+        "n_nonzero_diffs": 9,
+        "mean_diff_pp": 4.222026114521044,
+        "ci95_pp": [
+          -2.1899875310625827,
+          11.153552330022919
+        ],
+        "wilcoxon_p": 0.26039294361048326
+      }
+    },
+    {
+      "alpha": 0.6,
+      "prototype_set": "13",
+      "P": 13,
+      "is_default": true,
+      "n_trials": 20,
+      "event_lag_s": 0.0,
+      "mean_token_weight_step": 0.03858889100724232,
+      "mean_frame_weight_step": 0.016616501356022145,
+      "rate_limit_saturation": 0.10525437410487481,
+      "mean_smoothing_lag_s": 0.22749999999999998,
+      "valence_amp_retention_thr0.3": 0.8535019408002518,
+      "arousal_amp_retention_thr0.2": 0.43307119784524434,
+      "valence_dir_acc_thr0.3": {
+        "threshold": 0.3,
+        "n": 129,
+        "accuracy": 0.875968992248062,
+        "p_binomial": 1.8180600804398078e-19
+      },
+      "arousal_dir_acc_thr0.2": {
+        "threshold": 0.2,
+        "n": 153,
+        "accuracy": 0.7058823529411765,
+        "p_binomial": 1.8621555160606742e-07
+      },
+      "valence_clustered_thr0.3": {
+        "threshold": 0.3,
+        "n_events": 129,
+        "n_trials": 18,
+        "pooled_accuracy": 0.875968992248062,
+        "trial_mean_accuracy": 0.843939393939394,
+        "ci95": [
+          0.7111016414141413,
+          0.9482417929292929
+        ],
+        "p_boot_gt_chance": 0.0
+      },
+      "arousal_clustered_thr0.2": {
+        "threshold": 0.2,
+        "n_events": 153,
+        "n_trials": 17,
+        "pooled_accuracy": 0.7058823529411765,
+        "trial_mean_accuracy": 0.677436404028696,
+        "ci95": [
+          0.5252058538148802,
+          0.8098476594399514
+        ],
+        "p_boot_gt_chance": 0.0124
+      },
+      "shuffled_floor": {
+        "n_shuffle": 5,
+        "valence_trial_mean_accuracy": 0.4526142376142376,
+        "arousal_trial_mean_accuracy": 0.40047765982045896
+      },
+      "per_trial_valence_acc": {
+        "001": 0.5,
+        "002": 1.0,
+        "003": 1.0,
+        "004": 0.625,
+        "005": 0.8181818181818182,
+        "006": 1.0,
+        "007": 0.6,
+        "008": 1.0,
+        "010": 1.0,
+        "011": 0.875,
+        "012": 1.0,
+        "013": 1.0,
+        "014": 1.0,
+        "016": 1.0,
+        "017": 0.7727272727272727,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "per_trial_arousal_acc": {
+        "001": 0.5,
+        "002": 0.5,
+        "003": 0.76,
+        "004": 0.6666666666666666,
+        "005": 0.7619047619047619,
+        "006": 0.5,
+        "008": 0.8181818181818182,
+        "010": 1.0,
+        "011": 1.0,
+        "013": 0.9090909090909091,
+        "014": 0.8333333333333334,
+        "015": 0.0,
+        "016": 0.75,
+        "017": 0.5172413793103449,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      }
+    },
+    {
+      "alpha": 0.9,
+      "prototype_set": "13",
+      "P": 13,
+      "is_default": false,
+      "n_trials": 20,
+      "event_lag_s": 0.0,
+      "mean_token_weight_step": 0.06191509446847485,
+      "mean_frame_weight_step": 0.021396787512221554,
+      "rate_limit_saturation": 0.1598627384071326,
+      "mean_smoothing_lag_s": 0.3175,
+      "valence_amp_retention_thr0.3": 0.8195144741503585,
+      "arousal_amp_retention_thr0.2": 0.47319312223756427,
+      "valence_dir_acc_thr0.3": {
+        "threshold": 0.3,
+        "n": 129,
+        "accuracy": 0.813953488372093,
+        "p_binomial": 1.4024199404418035e-13
+      },
+      "arousal_dir_acc_thr0.2": {
+        "threshold": 0.2,
+        "n": 153,
+        "accuracy": 0.7124183006535948,
+        "p_binomial": 7.532214692651903e-08
+      },
+      "valence_clustered_thr0.3": {
+        "threshold": 0.3,
+        "n_events": 129,
+        "n_trials": 18,
+        "pooled_accuracy": 0.813953488372093,
+        "trial_mean_accuracy": 0.7540323873657206,
+        "ci95": [
+          0.6017284451659453,
+          0.8854971841430174
+        ],
+        "p_boot_gt_chance": 0.0008
+      },
+      "arousal_clustered_thr0.2": {
+        "threshold": 0.2,
+        "n_events": 153,
+        "n_trials": 17,
+        "pooled_accuracy": 0.7124183006535948,
+        "trial_mean_accuracy": 0.7024133540563561,
+        "ci95": [
+          0.5527365146685634,
+          0.8261858442436535
+        ],
+        "p_boot_gt_chance": 0.0054
+      },
+      "shuffled_floor": {
+        "n_shuffle": 5,
+        "valence_trial_mean_accuracy": 0.4641710758377425,
+        "arousal_trial_mean_accuracy": 0.44115132782475575
+      },
+      "per_trial_valence_acc": {
+        "001": 0.5,
+        "002": 1.0,
+        "003": 0.7857142857142857,
+        "004": 0.625,
+        "005": 0.6363636363636364,
+        "006": 1.0,
+        "007": 0.6,
+        "008": 0.0,
+        "010": 1.0,
+        "011": 0.875,
+        "012": 1.0,
+        "013": 0.8888888888888888,
+        "014": 0.8888888888888888,
+        "016": 1.0,
+        "017": 0.7727272727272727,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "per_trial_arousal_acc": {
+        "001": 0.8333333333333334,
+        "002": 0.75,
+        "003": 0.76,
+        "004": 0.5,
+        "005": 0.7619047619047619,
+        "006": 0.8333333333333334,
+        "008": 0.7272727272727273,
+        "010": 1.0,
+        "011": 0.8,
+        "013": 0.9090909090909091,
+        "014": 0.8333333333333334,
+        "015": 0.0,
+        "016": 0.75,
+        "017": 0.4827586206896552,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "paired_valence_vs_default": {
+        "n_trials": 18,
+        "n_nonzero_diffs": 5,
+        "mean_diff_pp": -8.990700657367325,
+        "ci95_pp": [
+          -21.156004489337825,
+          -1.2345679012345685
+        ],
+        "wilcoxon_p": 0.042168197097155954
+      },
+      "paired_arousal_vs_default": {
+        "n_trials": 17,
+        "n_nonzero_diffs": 7,
+        "mean_diff_pp": 2.4976950027659974,
+        "ci95_pp": [
+          -3.9573882844673918,
+          9.760357120904775
+        ],
+        "wilcoxon_p": 0.49819405658410876
+      }
+    },
+    {
+      "alpha": 0.3,
+      "prototype_set": "7a",
+      "P": 7,
+      "is_default": false,
+      "n_trials": 20,
+      "event_lag_s": 0.0,
+      "mean_token_weight_step": 0.019408950643625182,
+      "mean_frame_weight_step": 0.010703541169347753,
+      "rate_limit_saturation": 0.048278481188072146,
+      "mean_smoothing_lag_s": 0.31750000000000006,
+      "valence_amp_retention_thr0.3": 0.7820001161162291,
+      "arousal_amp_retention_thr0.2": 0.4111662696824432,
+      "valence_dir_acc_thr0.3": {
+        "threshold": 0.3,
+        "n": 129,
+        "accuracy": 0.8992248062015504,
+        "p_binomial": 3.8868187771535235e-22
+      },
+      "arousal_dir_acc_thr0.2": {
+        "threshold": 0.2,
+        "n": 153,
+        "accuracy": 0.7777777777777778,
+        "p_binomial": 1.4814898911866518e-12
+      },
+      "valence_clustered_thr0.3": {
+        "threshold": 0.3,
+        "n_events": 129,
+        "n_trials": 18,
+        "pooled_accuracy": 0.8992248062015504,
+        "trial_mean_accuracy": 0.8645202020202021,
+        "ci95": [
+          0.7363636363636363,
+          0.9611111111111111
+        ],
+        "p_boot_gt_chance": 0.0
+      },
+      "arousal_clustered_thr0.2": {
+        "threshold": 0.2,
+        "n_events": 153,
+        "n_trials": 17,
+        "pooled_accuracy": 0.7777777777777778,
+        "trial_mean_accuracy": 0.7428467813457671,
+        "ci95": [
+          0.6010181743543813,
+          0.8671158118419781
+        ],
+        "p_boot_gt_chance": 0.001
+      },
+      "shuffled_floor": {
+        "n_shuffle": 5,
+        "valence_trial_mean_accuracy": 0.4724162257495591,
+        "arousal_trial_mean_accuracy": 0.4233878337123773
+      },
+      "per_trial_valence_acc": {
+        "001": 0.5,
+        "002": 1.0,
+        "003": 1.0,
+        "004": 0.75,
+        "005": 0.8181818181818182,
+        "006": 1.0,
+        "007": 0.8,
+        "008": 1.0,
+        "010": 1.0,
+        "011": 0.875,
+        "012": 1.0,
+        "013": 1.0,
+        "014": 1.0,
+        "016": 1.0,
+        "017": 0.8181818181818182,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "per_trial_arousal_acc": {
+        "001": 0.3333333333333333,
+        "002": 0.75,
+        "003": 0.88,
+        "004": 1.0,
+        "005": 0.8095238095238095,
+        "006": 0.5,
+        "008": 0.9090909090909091,
+        "010": 1.0,
+        "011": 1.0,
+        "013": 0.9090909090909091,
+        "014": 0.8333333333333334,
+        "015": 0.0,
+        "016": 0.75,
+        "017": 0.6206896551724138,
+        "018": 1.0,
+        "019": 0.3333333333333333,
+        "020": 1.0
+      },
+      "paired_valence_vs_default": {
+        "n_trials": 18,
+        "n_nonzero_diffs": 3,
+        "mean_diff_pp": 2.058080808080809,
+        "ci95_pp": [
+          0.0,
+          4.810606060606062
+        ],
+        "wilcoxon_p": 0.10880943004054569
+      },
+      "paired_arousal_vs_default": {
+        "n_trials": 17,
+        "n_nonzero_diffs": 8,
+        "mean_diff_pp": 6.541037731707101,
+        "ci95_pp": [
+          0.8502713311029743,
+          12.825783040488922
+        ],
+        "wilcoxon_p": 0.0687035743228782
+      }
+    },
+    {
+      "alpha": 0.6,
+      "prototype_set": "7a",
+      "P": 7,
+      "is_default": false,
+      "n_trials": 20,
+      "event_lag_s": 0.0,
+      "mean_token_weight_step": 0.03974028962598813,
+      "mean_frame_weight_step": 0.017019939857595055,
+      "rate_limit_saturation": 0.11512310933840553,
+      "mean_smoothing_lag_s": 0.2325,
+      "valence_amp_retention_thr0.3": 0.8405645555820619,
+      "arousal_amp_retention_thr0.2": 0.5086011033244857,
+      "valence_dir_acc_thr0.3": {
+        "threshold": 0.3,
+        "n": 129,
+        "accuracy": 0.8527131782945736,
+        "p_binomial": 4.5531217416366397e-17
+      },
+      "arousal_dir_acc_thr0.2": {
+        "threshold": 0.2,
+        "n": 153,
+        "accuracy": 0.738562091503268,
+        "p_binomial": 1.4734086130789468e-09
+      },
+      "valence_clustered_thr0.3": {
+        "threshold": 0.3,
+        "n_events": 129,
+        "n_trials": 18,
+        "pooled_accuracy": 0.8527131782945736,
+        "trial_mean_accuracy": 0.8204826038159372,
+        "ci95": [
+          0.6853780864197532,
+          0.9321022727272728
+        ],
+        "p_boot_gt_chance": 0.0
+      },
+      "arousal_clustered_thr0.2": {
+        "threshold": 0.2,
+        "n_events": 153,
+        "n_trials": 17,
+        "pooled_accuracy": 0.738562091503268,
+        "trial_mean_accuracy": 0.7012320539501067,
+        "ci95": [
+          0.5468834769017324,
+          0.830020516670618
+        ],
+        "p_boot_gt_chance": 0.006
+      },
+      "shuffled_floor": {
+        "n_shuffle": 5,
+        "valence_trial_mean_accuracy": 0.44891694725028064,
+        "arousal_trial_mean_accuracy": 0.4374978881834865
+      },
+      "per_trial_valence_acc": {
+        "001": 0.5,
+        "002": 1.0,
+        "003": 1.0,
+        "004": 0.625,
+        "005": 0.8181818181818182,
+        "006": 1.0,
+        "007": 0.4,
+        "008": 1.0,
+        "010": 1.0,
+        "011": 0.875,
+        "012": 1.0,
+        "013": 0.8888888888888888,
+        "014": 0.8888888888888888,
+        "016": 1.0,
+        "017": 0.7727272727272727,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "per_trial_arousal_acc": {
+        "001": 0.5,
+        "002": 0.5,
+        "003": 0.84,
+        "004": 0.8333333333333334,
+        "005": 0.8095238095238095,
+        "006": 0.6666666666666666,
+        "008": 0.7272727272727273,
+        "010": 1.0,
+        "011": 1.0,
+        "013": 0.9090909090909091,
+        "014": 0.8333333333333334,
+        "015": 0.0,
+        "016": 0.75,
+        "017": 0.5517241379310345,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "paired_valence_vs_default": {
+        "n_trials": 18,
+        "n_nonzero_diffs": 3,
+        "mean_diff_pp": -2.345679012345679,
+        "ci95_pp": [
+          -5.185185185185185,
+          0.0
+        ],
+        "wilcoxon_p": 0.10247043485974941
+      },
+      "paired_arousal_vs_default": {
+        "n_trials": 17,
+        "n_nonzero_diffs": 6,
+        "mean_diff_pp": 2.3795649921410567,
+        "ci95_pp": [
+          -0.3319196016964784,
+          5.345696899449435
+        ],
+        "wilcoxon_p": 0.17295491798842066
+      }
+    },
+    {
+      "alpha": 0.9,
+      "prototype_set": "7a",
+      "P": 7,
+      "is_default": false,
+      "n_trials": 20,
+      "event_lag_s": 0.0,
+      "mean_token_weight_step": 0.06383471886605721,
+      "mean_frame_weight_step": 0.021697618308275927,
+      "rate_limit_saturation": 0.169028267077533,
+      "mean_smoothing_lag_s": 0.25000000000000006,
+      "valence_amp_retention_thr0.3": 0.8123773320108962,
+      "arousal_amp_retention_thr0.2": 0.5480273053999175,
+      "valence_dir_acc_thr0.3": {
+        "threshold": 0.3,
+        "n": 129,
+        "accuracy": 0.8062015503875969,
+        "p_binomial": 5.977923737445377e-13
+      },
+      "arousal_dir_acc_thr0.2": {
+        "threshold": 0.2,
+        "n": 153,
+        "accuracy": 0.7124183006535948,
+        "p_binomial": 7.532214692651903e-08
+      },
+      "valence_clustered_thr0.3": {
+        "threshold": 0.3,
+        "n_events": 129,
+        "n_trials": 18,
+        "pooled_accuracy": 0.8062015503875969,
+        "trial_mean_accuracy": 0.7941558441558442,
+        "ci95": [
+          0.6690142496392497,
+          0.8978559403559403
+        ],
+        "p_boot_gt_chance": 0.0
+      },
+      "arousal_clustered_thr0.2": {
+        "threshold": 0.2,
+        "n_events": 153,
+        "n_trials": 17,
+        "pooled_accuracy": 0.7124183006535948,
+        "trial_mean_accuracy": 0.6961529815688031,
+        "ci95": [
+          0.5417057111245752,
+          0.8250544330584899
+        ],
+        "p_boot_gt_chance": 0.0074
+      },
+      "shuffled_floor": {
+        "n_shuffle": 5,
+        "valence_trial_mean_accuracy": 0.45495791245791245,
+        "arousal_trial_mean_accuracy": 0.4517563171559115
+      },
+      "per_trial_valence_acc": {
+        "001": 0.5,
+        "002": 1.0,
+        "003": 0.7857142857142857,
+        "004": 0.625,
+        "005": 0.6363636363636364,
+        "006": 1.0,
+        "007": 0.6,
+        "008": 1.0,
+        "010": 0.8333333333333334,
+        "011": 0.875,
+        "012": 1.0,
+        "013": 0.7777777777777778,
+        "014": 0.8888888888888888,
+        "016": 1.0,
+        "017": 0.7727272727272727,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "per_trial_arousal_acc": {
+        "001": 0.8333333333333334,
+        "002": 0.5,
+        "003": 0.76,
+        "004": 0.5,
+        "005": 0.7619047619047619,
+        "006": 0.8333333333333334,
+        "008": 0.6363636363636364,
+        "010": 1.0,
+        "011": 1.0,
+        "013": 0.9090909090909091,
+        "014": 0.8333333333333334,
+        "015": 0.0,
+        "016": 0.75,
+        "017": 0.5172413793103449,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "paired_valence_vs_default": {
+        "n_trials": 18,
+        "n_nonzero_diffs": 5,
+        "mean_diff_pp": -4.978354978354979,
+        "ci95_pp": [
+          -9.030884239217574,
+          -1.2345679012345685
+        ],
+        "wilcoxon_p": 0.043114446783075355
+      },
+      "paired_arousal_vs_default": {
+        "n_trials": 17,
+        "n_nonzero_diffs": 4,
+        "mean_diff_pp": 1.8716577540106953,
+        "ci95_pp": [
+          -3.92156862745098,
+          8.73440285204991
+        ],
+        "wilcoxon_p": 0.4614509878333607
+      }
+    },
+    {
+      "alpha": 0.3,
+      "prototype_set": "7b",
+      "P": 7,
+      "is_default": false,
+      "n_trials": 20,
+      "event_lag_s": 0.0,
+      "mean_token_weight_step": 0.019482048265381614,
+      "mean_frame_weight_step": 0.010648187228253284,
+      "rate_limit_saturation": 0.05224240498589977,
+      "mean_smoothing_lag_s": 0.3825,
+      "valence_amp_retention_thr0.3": 0.8204404532846065,
+      "arousal_amp_retention_thr0.2": 0.3854229549374094,
+      "valence_dir_acc_thr0.3": {
+        "threshold": 0.3,
+        "n": 129,
+        "accuracy": 0.9069767441860465,
+        "p_binomial": 4.2740686869144714e-23
+      },
+      "arousal_dir_acc_thr0.2": {
+        "threshold": 0.2,
+        "n": 153,
+        "accuracy": 0.7450980392156863,
+        "p_binomial": 5.08171788096113e-10
+      },
+      "valence_clustered_thr0.3": {
+        "threshold": 0.3,
+        "n_events": 129,
+        "n_trials": 18,
+        "pooled_accuracy": 0.9069767441860465,
+        "trial_mean_accuracy": 0.8670454545454546,
+        "ci95": [
+          0.7388888888888889,
+          0.9632575757575759
+        ],
+        "p_boot_gt_chance": 0.0
+      },
+      "arousal_clustered_thr0.2": {
+        "threshold": 0.2,
+        "n_events": 153,
+        "n_trials": 17,
+        "pooled_accuracy": 0.7450980392156863,
+        "trial_mean_accuracy": 0.7290610538886401,
+        "ci95": [
+          0.5862405187780442,
+          0.8546184944197113
+        ],
+        "p_boot_gt_chance": 0.0016
+      },
+      "shuffled_floor": {
+        "n_shuffle": 5,
+        "valence_trial_mean_accuracy": 0.46390652557319223,
+        "arousal_trial_mean_accuracy": 0.41650092931634514
+      },
+      "per_trial_valence_acc": {
+        "001": 0.5,
+        "002": 1.0,
+        "003": 1.0,
+        "004": 0.75,
+        "005": 0.8181818181818182,
+        "006": 1.0,
+        "007": 0.8,
+        "008": 1.0,
+        "010": 1.0,
+        "011": 0.875,
+        "012": 1.0,
+        "013": 1.0,
+        "014": 1.0,
+        "016": 1.0,
+        "017": 0.8636363636363636,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "per_trial_arousal_acc": {
+        "001": 0.3333333333333333,
+        "002": 0.75,
+        "003": 0.84,
+        "004": 1.0,
+        "005": 0.8095238095238095,
+        "006": 0.5,
+        "008": 0.9090909090909091,
+        "010": 1.0,
+        "011": 1.0,
+        "013": 0.8181818181818182,
+        "014": 0.8333333333333334,
+        "015": 0.0,
+        "016": 0.75,
+        "017": 0.5172413793103449,
+        "018": 1.0,
+        "019": 0.3333333333333333,
+        "020": 1.0
+      },
+      "paired_valence_vs_default": {
+        "n_trials": 18,
+        "n_nonzero_diffs": 3,
+        "mean_diff_pp": 2.3106060606060614,
+        "ci95_pp": [
+          0.0,
+          5.13888888888889
+        ],
+        "wilcoxon_p": 0.10880943004054569
+      },
+      "paired_arousal_vs_default": {
+        "n_trials": 17,
+        "n_nonzero_diffs": 8,
+        "mean_diff_pp": 5.162464985994398,
+        "ci95_pp": [
+          -0.7396294881589004,
+          11.745098039215685
+        ],
+        "wilcoxon_p": 0.18289327757982765
+      }
+    },
+    {
+      "alpha": 0.6,
+      "prototype_set": "7b",
+      "P": 7,
+      "is_default": false,
+      "n_trials": 20,
+      "event_lag_s": 0.0,
+      "mean_token_weight_step": 0.040179425334929304,
+      "mean_frame_weight_step": 0.016918998333700704,
+      "rate_limit_saturation": 0.11219663953214742,
+      "mean_smoothing_lag_s": 0.265,
+      "valence_amp_retention_thr0.3": 0.8757625302172617,
+      "arousal_amp_retention_thr0.2": 0.47679788470269446,
+      "valence_dir_acc_thr0.3": {
+        "threshold": 0.3,
+        "n": 129,
+        "accuracy": 0.8682170542635659,
+        "p_binomial": 1.2225722610064198e-18
+      },
+      "arousal_dir_acc_thr0.2": {
+        "threshold": 0.2,
+        "n": 153,
+        "accuracy": 0.738562091503268,
+        "p_binomial": 1.4734086130789468e-09
+      },
+      "valence_clustered_thr0.3": {
+        "threshold": 0.3,
+        "n_events": 129,
+        "n_trials": 18,
+        "pooled_accuracy": 0.8682170542635659,
+        "trial_mean_accuracy": 0.8161616161616162,
+        "ci95": [
+          0.6544097222222223,
+          0.9457070707070707
+        ],
+        "p_boot_gt_chance": 0.0
+      },
+      "arousal_clustered_thr0.2": {
+        "threshold": 0.2,
+        "n_events": 153,
+        "n_trials": 17,
+        "pooled_accuracy": 0.738562091503268,
+        "trial_mean_accuracy": 0.7090075779528113,
+        "ci95": [
+          0.5516949171518137,
+          0.8380564856036458
+        ],
+        "p_boot_gt_chance": 0.0048
+      },
+      "shuffled_floor": {
+        "n_shuffle": 5,
+        "valence_trial_mean_accuracy": 0.43797939714606376,
+        "arousal_trial_mean_accuracy": 0.42271096944524933
+      },
+      "per_trial_valence_acc": {
+        "001": 0.0,
+        "002": 1.0,
+        "003": 1.0,
+        "004": 0.625,
+        "005": 0.8181818181818182,
+        "006": 1.0,
+        "007": 0.6,
+        "008": 1.0,
+        "010": 1.0,
+        "011": 0.875,
+        "012": 1.0,
+        "013": 1.0,
+        "014": 1.0,
+        "016": 1.0,
+        "017": 0.7727272727272727,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "per_trial_arousal_acc": {
+        "001": 0.5,
+        "002": 0.5,
+        "003": 0.84,
+        "004": 0.8333333333333334,
+        "005": 0.8095238095238095,
+        "006": 0.8333333333333334,
+        "008": 0.7272727272727273,
+        "010": 1.0,
+        "011": 1.0,
+        "013": 0.9090909090909091,
+        "014": 0.8333333333333334,
+        "015": 0.0,
+        "016": 0.75,
+        "017": 0.5172413793103449,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "paired_valence_vs_default": {
+        "n_trials": 18,
+        "n_nonzero_diffs": 1,
+        "mean_diff_pp": -2.7777777777777777,
+        "ci95_pp": [
+          -8.333333333333332,
+          0.0
+        ],
+        "wilcoxon_p": 0.31731050786291415
+      },
+      "paired_arousal_vs_default": {
+        "n_trials": 17,
+        "n_nonzero_diffs": 5,
+        "mean_diff_pp": 3.1571173924115103,
+        "ci95_pp": [
+          -0.5347593582887702,
+          7.843137254901962
+        ],
+        "wilcoxon_p": 0.22491588401596185
+      }
+    },
+    {
+      "alpha": 0.9,
+      "prototype_set": "7b",
+      "P": 7,
+      "is_default": false,
+      "n_trials": 20,
+      "event_lag_s": 0.0,
+      "mean_token_weight_step": 0.06462501263608553,
+      "mean_frame_weight_step": 0.021613865014730883,
+      "rate_limit_saturation": 0.17126844154721044,
+      "mean_smoothing_lag_s": 0.28750000000000003,
+      "valence_amp_retention_thr0.3": 0.8489235645145701,
+      "arousal_amp_retention_thr0.2": 0.5092706994163788,
+      "valence_dir_acc_thr0.3": {
+        "threshold": 0.3,
+        "n": 129,
+        "accuracy": 0.8372093023255814,
+        "p_binomial": 1.3336468301471885e-15
+      },
+      "arousal_dir_acc_thr0.2": {
+        "threshold": 0.2,
+        "n": 153,
+        "accuracy": 0.7320261437908496,
+        "p_binomial": 4.133695472178024e-09
+      },
+      "valence_clustered_thr0.3": {
+        "threshold": 0.3,
+        "n_events": 129,
+        "n_trials": 18,
+        "pooled_accuracy": 0.8372093023255814,
+        "trial_mean_accuracy": 0.7738415905082571,
+        "ci95": [
+          0.6193246452621451,
+          0.9061868686868687
+        ],
+        "p_boot_gt_chance": 0.0002
+      },
+      "arousal_clustered_thr0.2": {
+        "threshold": 0.2,
+        "n_events": 153,
+        "n_trials": 17,
+        "pooled_accuracy": 0.7320261437908496,
+        "trial_mean_accuracy": 0.7226911830562945,
+        "ci95": [
+          0.5693641171202024,
+          0.8463288199292256
+        ],
+        "p_boot_gt_chance": 0.0032
+      },
+      "shuffled_floor": {
+        "n_shuffle": 5,
+        "valence_trial_mean_accuracy": 0.46045935545935546,
+        "arousal_trial_mean_accuracy": 0.45010195844272927
+      },
+      "per_trial_valence_acc": {
+        "001": 0.5,
+        "002": 1.0,
+        "003": 0.7857142857142857,
+        "004": 0.625,
+        "005": 0.6363636363636364,
+        "006": 1.0,
+        "007": 0.8,
+        "008": 0.0,
+        "010": 1.0,
+        "011": 0.875,
+        "012": 1.0,
+        "013": 1.0,
+        "014": 0.8888888888888888,
+        "016": 1.0,
+        "017": 0.8181818181818182,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "per_trial_arousal_acc": {
+        "001": 0.8333333333333334,
+        "002": 0.75,
+        "003": 0.76,
+        "004": 0.6666666666666666,
+        "005": 0.7619047619047619,
+        "006": 0.8333333333333334,
+        "008": 0.6363636363636364,
+        "010": 1.0,
+        "011": 1.0,
+        "013": 0.9090909090909091,
+        "014": 0.8333333333333334,
+        "015": 0.0,
+        "016": 0.75,
+        "017": 0.5517241379310345,
+        "018": 1.0,
+        "019": 0.0,
+        "020": 1.0
+      },
+      "paired_valence_vs_default": {
+        "n_trials": 18,
+        "n_nonzero_diffs": 6,
+        "mean_diff_pp": -7.009780343113675,
+        "ci95_pp": [
+          -19.563892897226232,
+          1.4646464646464654
+        ],
+        "wilcoxon_p": 0.24886387493792206
+      },
+      "paired_arousal_vs_default": {
+        "n_trials": 17,
+        "n_nonzero_diffs": 5,
+        "mean_diff_pp": 4.52547790275985,
+        "ci95_pp": [
+          -1.0695187165775404,
+          11.185498494068474
+        ],
+        "wilcoxon_p": 0.13621686984456766
+      }
+    }
+  ]
+}

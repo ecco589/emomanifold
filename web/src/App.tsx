@@ -3,10 +3,42 @@ import { copy, type Lang } from "./i18n";
 import { Demo } from "./components/Demo";
 import "./styles.css";
 
+function parentLang(): Lang | null {
+  try {
+    if (window.parent === window) return null;
+    const value = window.parent.document.documentElement.dataset.lang;
+    return value === "zh" || value === "en" ? value : null;
+  } catch {
+    return null;
+  }
+}
+
 function readLang(): Lang {
-  const saved = localStorage.getItem("emomanifold-lang");
+  const fromParent = parentLang();
+  if (fromParent) return fromParent;
+  const saved = localStorage.getItem("imcrl-lang") || localStorage.getItem("emomanifold-lang");
   if (saved === "zh" || saved === "en") return saved;
   return "en";
+}
+
+function Embed({ lang }: { lang: Lang }) {
+  useEffect(() => {
+    const report = () => {
+      const root = document.getElementById("root");
+      const height = Math.ceil(root ? root.getBoundingClientRect().bottom : 0);
+      if (height > 0) window.parent.postMessage({ source: "emomanifold", height }, "*");
+    };
+    report();
+    const observer = new ResizeObserver(report);
+    observer.observe(document.body);
+    return () => observer.disconnect();
+  }, [lang]);
+
+  return (
+    <div className="page embed">
+      <Demo lang={lang} />
+    </div>
+  );
 }
 
 export function App() {
@@ -17,7 +49,23 @@ export function App() {
     document.documentElement.lang = lang === "zh" ? "zh-Hans" : "en";
   }, [lang]);
 
+  useEffect(() => {
+    const fromParent = parentLang();
+    if (!fromParent) return;
+    const el = window.parent.document.documentElement;
+    const sync = () => {
+      const value = el.dataset.lang;
+      if (value === "zh" || value === "en") setLang(value);
+    };
+    const observer = new MutationObserver(sync);
+    observer.observe(el, { attributes: true, attributeFilter: ["data-lang"] });
+    return () => observer.disconnect();
+  }, []);
+
+  const embed = new URLSearchParams(window.location.search).has("embed");
   const t = copy[lang];
+
+  if (embed) return <Embed lang={lang} />;
 
   return (
     <div className="page">

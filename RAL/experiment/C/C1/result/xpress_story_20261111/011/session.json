@@ -1,0 +1,36 @@
+{
+  "phase": "c1",
+  "trial_id": "011",
+  "condition": "xpress_story",
+  "assistant_text": "That sounds like a delightful experience at work! It's great to hear about the \"blissful\" nature of your late-night workday.",
+  "n_keyframes": 2,
+  "audio_duration_s": 6.480000019073486,
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "duration_s": 6.986,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "keyframes": [
+    {
+      "scene": "scene_1",
+      "timestamp_s": 0.0,
+      "emotion_raw": "neutral",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_2",
+      "timestamp_s": 0.62,
+      "emotion_raw": "happy",
+      "emotion_name": "happiness",
+      "valence": 0.85,
+      "arousal": 0.62
+    }
+  ]
+}

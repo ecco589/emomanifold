@@ -1,0 +1,44 @@
+{
+  "condition": "emomanifold",
+  "trial_id": "009",
+  "category": "neutral",
+  "user_prompt": "The weather is okay today nothing special.",
+  "assistant_text": "The weather is generally good today, with no special conditions noted.",
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    2560,
+    1440
+  ],
+  "rest_pose": "hardware_temp_deg",
+  "speaker_device": "plughw:4",
+  "audio_delay_s": 0.5,
+  "video_audio": "speech.wav embedded, delayed 0.50s",
+  "not_for_analysis": true,
+  "latency": {
+    "ttff_s": 0.6638,
+    "ttff_ms": 663.76,
+    "gen_wall_s": 4.44,
+    "gen_wall_ms": 4440.0,
+    "per_token_control_ms_mean": 1.016,
+    "per_token_control_ms_std": 1.13,
+    "per_token_control_n": 13,
+    "per_token_control_ms": [
+      0.621,
+      0.616,
+      0.563,
+      0.583,
+      0.544,
+      0.585,
+      0.646,
+      1.992,
+      0.708,
+      0.695,
+      4.55,
+      0.549,
+      0.552
+    ],
+    "inter_token_wall_ms_mean": 314.68,
+    "note": "per_token_control_ms is projection plus FKCN blend, excluding the language-model forward. ttff_s includes that forward, to the first token. gen_wall_s is the last token."
+  }
+}

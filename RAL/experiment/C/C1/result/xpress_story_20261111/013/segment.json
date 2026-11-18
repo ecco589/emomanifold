@@ -1,0 +1,9 @@
+{
+  "set": "#FFD700, #FF4500, #4682B4",
+  "explanation": "The color #FFD700 (gold) is chosen to express warmth and positivity, reflecting the initial excitement of hearing something great. #FF4500 (orange-red) is used to convey caution and alertness, aligning with the need to be cautious. #4682B4 (steel blue) represents calmness and thoughtfulness, suitable for the reflective tone when considering unexpected results.",
+  "chunks": [
+    "That's <0.00> great <0.25> to <0.46> hear <0.72>",
+    "It's <1.72> important <1.87> to <2.05> be <2.25> cautious <2.42> and <2.75> not <3.03> to <3.22> be <3.35> overly <3.64> optimistic <4.05>",
+    "especially <5.67> when <6.03> results <6.34> are <6.61> better <6.88> than <7.01> expected <7.34>"
+  ]
+}

@@ -1,0 +1,5 @@
+model,pole_language,abs_cos_VA,abs_cos_AD,abs_cos_VD,cohesion,random_baseline,in_current_figure
+Qwen2.5-0.5B,English,0.150733,0.194099,0.153416,0.912729,0.410119,yes
+Qwen2.5-0.5B,Chinese,0.220047,0.115519,0.185773,0.897509,0.410119,no
+Llama-3.2-3B,English,0.158112,0.071394,0.121210,0.963138,0.364981,yes
+Llama-3.2-3B,Chinese,0.160830,0.210385,0.282131,0.965356,0.364981,no

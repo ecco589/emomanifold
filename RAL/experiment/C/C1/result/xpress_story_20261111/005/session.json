@@ -1,0 +1,60 @@
+{
+  "phase": "c1",
+  "trial_id": "005",
+  "condition": "xpress_story",
+  "assistant_text": "It sounds like you're experiencing a difficult situation. It's important to address the issue and seek support. You might consider talking to a trusted friend or family member, or reaching out to a counselor or therapist for guidance. Let's work together to find a solution that feels right for you.",
+  "n_keyframes": 5,
+  "audio_duration_s": 18.360000610351562,
+  "robot_move_ms": 100,
+  "robot_smooth_tau_s": 0.25,
+  "duration_s": 18.864,
+  "video_fps": 30.0,
+  "camera_device": "/dev/video2",
+  "camera_rotate_deg": 180,
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "keyframes": [
+    {
+      "scene": "scene_1",
+      "timestamp_s": 0.0,
+      "emotion_raw": "neutral",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_2",
+      "timestamp_s": 1.0,
+      "emotion_raw": "sad",
+      "emotion_name": "sadness",
+      "valence": -0.5,
+      "arousal": -0.57
+    },
+    {
+      "scene": "scene_3",
+      "timestamp_s": 3.0,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_4",
+      "timestamp_s": 6.0,
+      "emotion_raw": "interested",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    },
+    {
+      "scene": "scene_5",
+      "timestamp_s": 14.0,
+      "emotion_raw": "calm",
+      "emotion_name": "neutral",
+      "valence": 0.61,
+      "arousal": -0.47
+    }
+  ]
+}

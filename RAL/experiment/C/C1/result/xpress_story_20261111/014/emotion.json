@@ -1,0 +1,14 @@
+{
+  "scene_1": {
+    "start_time": 0,
+    "emotion": "sad"
+  },
+  "scene_2": {
+    "start_time": 1.86,
+    "emotion": "interested"
+  },
+  "scene_3": {
+    "start_time": 4.92,
+    "emotion": "calm"
+  }
+}

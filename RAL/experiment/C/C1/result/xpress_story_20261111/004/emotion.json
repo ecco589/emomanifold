@@ -1,0 +1,26 @@
+{
+  "scene_1": {
+    "start_time": 0,
+    "emotion": "calm"
+  },
+  "scene_2": {
+    "start_time": 1.48,
+    "emotion": "sad"
+  },
+  "scene_3": {
+    "start_time": 2.75,
+    "emotion": "sorrow"
+  },
+  "scene_4": {
+    "start_time": 4.07,
+    "emotion": "sad"
+  },
+  "scene_5": {
+    "start_time": 6.57,
+    "emotion": "calm"
+  },
+  "scene_6": {
+    "start_time": 9.65,
+    "emotion": "encouraging"
+  }
+}

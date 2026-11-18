@@ -11,6 +11,10 @@ rsync -az "$ROOT/config.py" "$LAB:$RBASE/"
 rsync -az "$ROOT/data/" "$LAB:$RBASE/data/"
 rsync -az "$ROOT/outputs/scalers/" "$LAB:$RBASE/outputs/scalers/"
 rsync -az "$ROOT/scripts/lab/" "$LAB:$RBASE/scripts/lab/"
+if [ -d "$ROOT/web/dist" ]; then
+  ssh "$LAB" "mkdir -p $RBASE/web"
+  rsync -az --delete "$ROOT/web/dist/" "$LAB:$RBASE/web/dist/"
+fi
 
 ssh "$LAB" bash -s <<'REMOTE'
 set -euo pipefail

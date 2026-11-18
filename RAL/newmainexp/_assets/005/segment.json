@@ -1,0 +1,10 @@
+{
+  "set": "#FF6347, #4682B4, #FFD700",
+  "explanation": "The color #FF6347 (Tomato Red) is chosen for its association with strong emotions like anger and urgency, which aligns with the initial emotional response. #4682B4 (Steel Blue) represents calmness and trust, suitable for the advice to address the situation calmly and seek support. #FFD700 (Gold) symbolizes hope and positivity, reflecting the encouragement to take control and feel less upset.",
+  "chunks": [
+    "It <0.00> sounds <0.40> like <0.40> you're <0.60> experiencing <0.83> a <1.25> significant <1.55> emotional <2.07> response <2.64>",
+    "It's <4.17> important <4.36> to <4.59> address <5.15> this <5.15> situation <5.51> assertively <6.00> and <6.63> calmly <7.13>",
+    "You <8.39> might <8.47> consider <8.68> speaking <9.03> with <9.39> someone <9.69> you <9.89> trust <10.22> about <10.65> what <10.97> happened <11.47> expressing <12.57> your <12.57> feelings <13.26> and <13.26> seeking <13.57> support <13.81>",
+    "Remember <15.19> it's <15.56> okay <15.72> to <16.02> feel <16.31> angry <16.54> and <16.87> hurt <17.39> but <17.65> taking <17.84> steps <18.13> to <18.52> address <18.92> the <19.10> situation <20.00> can <20.00> help <20.45> you <20.65> feel <20.92> more <21.07> in <21.39> control <21.81> and <22.05> less <22.54> upset <22.71>"
+  ]
+}

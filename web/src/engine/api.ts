@@ -10,7 +10,8 @@ export type ChatTurn = { role: "system" | "user" | "assistant"; content: string 
 const DEFAULT_API = "http://ubuntu.tail1701c2.ts.net:8788";
 
 export function apiBase(): string {
-  const raw = (import.meta.env.VITE_API_URL as string | undefined) ?? DEFAULT_API;
+  const raw = import.meta.env.VITE_API_URL as string | undefined;
+  if (raw === undefined) return DEFAULT_API.replace(/\/$/, "");
   return raw.replace(/\/$/, "");
 }
 
