@@ -1,5 +1,7 @@
 # EmotionManifold 路线图
 
+本文件是开发备忘。当前公开仓库没有下面提到的 git 标签，也没有 `face/` 硬件驱动目录。没有该目录时，软件仍然可以做流式投影和 Grimace 渲染。
+
 ## 里程碑
 
 | 阶段 | 目标 | 状态 |
@@ -12,15 +14,14 @@
 | M4.2_RAL | 实机 C1 Mirror + C2 人因 + 定稿 | 待做 |
 | M5 | 加入对话功能 | 待做 |
 
-## M3（已完成，回溯见 tag `M3`）
+## M3（实机驱动不在本树中）
 
-1. 7 权重 → factor 融合 → 下发（`face/face_driver.py`）
-2. 实机联调（`face/server.py` + `webui/`）
+1. 7 权重 → factor 融合 → 下发（期望本机另有 `face/face_driver.py`）
+2. 实机联调依赖该驱动；本仓库只保留 `src/robot_face_sink.py` 这个接口
 
-部署包：`face_m3.zip`，说明见 `face/README_DEPLOY.md`。  
-需 M3 可视化工具时：`git checkout M3`（含 `M3test/FKCN_visualize/`）。
+`face/` 与当时的部署压缩包没有放进这个公开树。
 
-## M4.0_RAL（已完成，回溯见 tag `M4.0_RAL`）
+## M4.0_RAL（实验记录在 `RAL/experiment/A/`）
 
 **管线**：主模型切换为 **Qwen2.5-0.5B**；极词挖掘、AdaptiveScaler、流式投影对齐 NIPS B1；中文/英文 VAD 词库与 NRC 对齐。
 

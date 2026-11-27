@@ -1,0 +1,5 @@
+-r requirements.txt
+
+# scripts/lab/api_server.py
+fastapi>=0.110
+uvicorn>=0.27

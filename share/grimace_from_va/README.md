@@ -38,9 +38,10 @@ VA（裁剪到 [-1, 1]）
 
 需要 Python 3.9+、ffmpeg。
 
+在本目录（`share/grimace_from_va`）执行：
+
 ```bash
-cd grimace_from_va
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 python -m playwright install chromium

@@ -1,6 +1,6 @@
 # C1 offline hyperparameter ablation (α × prototype set)
 
-- Field: `/Users/eccoliu/Desktop/EmotionManifold/RAL/experiment/C/C1/result/multicond_noanchor_20260731/ours`  |  trials: 20
+- Field: `RAL/experiment/C/C1/result/multicond_noanchor_20260731/ours`  |  trials: 20
 - Window: 2.0 s; event thresholds V>|0.3|, A>|0.2|
 - Pipeline: clip(command VA) → FKCN → EMA(α) → 10 fps smoothstep + 0.05/frame rate limit → VA readout on fixed P=13 centroids
 

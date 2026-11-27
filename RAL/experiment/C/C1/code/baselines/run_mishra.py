@@ -7,7 +7,7 @@ Usage (from repo root):
 
 Same model via OpenRouter (recommended if OpenAI billing fails):
   export OPENAI_BASE_URL=https://openrouter.ai/api/v1
-  export OPENAI_API_KEY=sk-or-...
+  export OPENAI_API_KEY=...   # 从本机环境读取，不要写进仓库
   python RAL/experiment/C/C1/code/baselines/run_mishra.py --model gpt \\
       --gpt-model openai/gpt-4o-mini
 
@@ -155,7 +155,7 @@ def main() -> None:
 
     if args.model == "gpt" and not os.environ.get("OPENAI_API_KEY"):
         raise SystemExit(
-            "缺少 OPENAI_API_KEY。OpenRouter: export OPENAI_API_KEY=sk-or-... "
+            "缺少 OPENAI_API_KEY。使用 OpenRouter 时请在环境变量中设置 OPENAI_API_KEY，并设置 OPENAI_BASE_URL。"
             "且 OPENAI_BASE_URL=https://openrouter.ai/api/v1"
         )
 

@@ -33,4 +33,4 @@ sleep 1
 curl -sfI "http://127.0.0.1:8787/onnx-community/Qwen2.5-0.5B-Instruct/resolve/main/tokenizer_config.json" | head -3
 REMOTE
 
-echo "OK — http://ubuntu.tail1701c2.ts.net:8787/"
+echo "OK — model files served on port 8787 on ${LAB}"
