@@ -74,8 +74,7 @@ export function App() {
           {t.brand}
         </a>
         <nav>
-          <a href="./">{t.links.github}</a>
-          <a href="./">{t.links.arxiv}</a>
+          <a href="https://github.com/ecco589/emomanifold">{t.links.github}</a>
           <button
             type="button"
             className="lang"

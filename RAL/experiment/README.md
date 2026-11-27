@@ -21,15 +21,14 @@
 
 ## 可复用资产（Modal 前先核对）
 
-**NIPS 检出目录（本机已有）：** `/Users/eccoliu/EmotionManifold-NIPS`  
-（对应 git 分支/标签 `finalV1` = `FinalNIPS`；Modal 脚本在 `modal_experiments/b1_reform_llama32.py`）
+更早一次实验的极词和 scaler 不在本仓库里。已经拷进本树的英文副本在 `A/A3/data/llama32_3b/en/pole_50/`。
 
 | 资产 | 路径 / 状态 | 能否直接用 |
 |------|-------------|------------|
-| Llama Spearman（A1/A2） | 表 I 已有；NIPS `results/B1/llama32_3b/pole_50/report.json` 内 ρ 与表 I 一致 | ✅ **A1/A2 不必重做** |
-| **Llama EN 极词 + scaler（N=50）** | `EmotionManifold-NIPS/results/B1/llama32_3b/pole_50/report.json` → 字段 `word_groups`（六极各 50 词）+ `scaler`（V/A/D 的 scale/bias） | ✅ **直接复用**；不必重拟合 scaler。轴向量未单独存盘，但 `axes_identical: true` → Modal 上加载 Llama Wout + 这批极词即可确定性重建 |
+| Llama Spearman（A1/A2） | 表 I 已有；本树导出的 `pole_50/report.json` 内 ρ 与表 I 一致 | ✅ **A1/A2 不必重做** |
+| **Llama EN 极词 + scaler（N=50）** | 已导出到 `A/A3/data/llama32_3b/en/pole_50/`（`report.json` 的 `word_groups` 为六极各 50 词，另有 `scaler`） | ✅ **直接复用**；不必重拟合 scaler。轴向量未单独存盘，但 `axes_identical: true` → Modal 上加载 Llama Wout + 这批极词即可确定性重建 |
 | Llama EN 其它 N | 同目录 `pole_{10..80}/`（部分档另有独立 `scaler.json` / `lexicon.json`） | 备用；正文默认 **pole_50** |
-| Llama ZH 极词 / scaler | NIPS `results/` 下**未找到** llama32 中文构轴产物 | ❌ A3 若要「Llama × ZH」一行，仍须 Modal 补跑中文极词构轴 + 拟合 scaler |
+| Llama ZH 极词 / scaler | 本树没有 llama32 中文构轴产物 | ❌ A3 若要「Llama × ZH」一行，仍须 Modal 补跑中文极词构轴 + 拟合 scaler |
 | Qwen EN/ZH（现表 II） | `RAL/experiment/A/A1/result/{en,zh}/pole_50/` | ✅ 不动 |
 | B1 三元组 | `RAL/material/b1_sarcasm_triplets/` | ✅ |
 
@@ -44,7 +43,7 @@
 modal token new
 # 需已有 Modal secret: huggingface（含 HF_TOKEN，Llama gated）
 
-cd /Users/eccoliu/Desktop/EmotionManifold
+# 在本仓库根目录
 python -m modal run RAL/experiment/modal/ral_llama32_a3_b1.py
 ```
 

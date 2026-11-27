@@ -54,6 +54,10 @@ data/*.csv
 data/*.json
 !data/vad_lexicon/
 
+# NRC VAD lexicon: research use, no redistribution. See data/NRC-VAD-Lexicon/README.md.
+data/NRC-VAD-Lexicon/*
+!data/NRC-VAD-Lexicon/README.md
+
 # Web (GitHub Pages MVP)
 web/node_modules/
 web/dist/

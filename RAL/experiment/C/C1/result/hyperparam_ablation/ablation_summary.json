@@ -1,5 +1,5 @@
 {
-  "field_root": "/Users/eccoliu/Desktop/EmotionManifold/RAL/experiment/C/C1/result/multicond_noanchor_20260731/ours",
+  "field_root": "RAL/experiment/C/C1/result/multicond_noanchor_20260731/ours",
   "n_trials": 20,
   "window_s": 2.0,
   "smooth_tau_s": 0.6,

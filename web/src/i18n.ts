@@ -8,7 +8,6 @@ export const copy = {
     authors: "",
     links: {
       github: "GitHub",
-      arxiv: "arXiv",
     },
     langSwitch: "中文",
     abstractTitle: "Abstract",
@@ -50,7 +49,7 @@ export const copy = {
     you: "You",
     model: "EmoManifold",
     footer:
-      "Project page MVP. Code and arXiv links will be filled in after release.",
+      "Source code is on GitHub. Manuscript drafts are in the repository under RAL/.",
   },
   zh: {
     brand: "EmoManifold",
@@ -59,7 +58,6 @@ export const copy = {
     authors: "",
     links: {
       github: "GitHub",
-      arxiv: "arXiv",
     },
     langSwitch: "EN",
     abstractTitle: "摘要",
@@ -99,6 +97,6 @@ export const copy = {
     emptyChat: "模型开始写字时，表情会跟着动。",
     you: "你",
     model: "EmoManifold",
-    footer: "项目主页 MVP。代码与 arXiv 链接将在公开后补全。",
+    footer: "源代码在 GitHub。文稿在仓库的 RAL/ 目录。",
   },
 } as const;

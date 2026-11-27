@@ -1,7 +1,7 @@
 platform: macOS-26.6-arm64-arm-64bit
 machine: arm64
 processor: arm
-python: 3.12.9 (/Users/eccoliu/miniforge3/bin/python)
+python: 3.12.9 (miniforge3/bin/python)
 torch: 2.5.1
 mps_available: True
 cpu: Apple M1

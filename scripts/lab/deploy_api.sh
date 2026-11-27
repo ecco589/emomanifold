@@ -33,4 +33,4 @@ sleep 10
 curl -sf http://127.0.0.1:8788/health && echo ""
 REMOTE
 
-echo "OK — http://ubuntu.tail1701c2.ts.net:8788"
+echo "OK — API listening on port 8788 on ${LAB}"

@@ -7,7 +7,7 @@ export type ApiToken = {
 
 export type ChatTurn = { role: "system" | "user" | "assistant"; content: string };
 
-const DEFAULT_API = "http://ubuntu.tail1701c2.ts.net:8788";
+const DEFAULT_API = "http://127.0.0.1:8788";
 
 export function apiBase(): string {
   const raw = import.meta.env.VITE_API_URL as string | undefined;

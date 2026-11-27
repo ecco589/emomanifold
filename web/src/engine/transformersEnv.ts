@@ -7,7 +7,6 @@ type TransformersEnv = {
 export const MODEL_REPO = "onnx-community/Qwen2.5-0.5B-Instruct";
 const PROBE_FILE = "tokenizer_config.json";
 
-const LAB_HOST = "http://ubuntu.tail1701c2.ts.net:8787/";
 const HF_HOST = "https://huggingface.co/";
 
 export const WASM_INIT_STALL_MS = 45_000;
@@ -23,8 +22,7 @@ export function modelHosts(): string[] {
   if (override?.trim()) {
     return [...new Set(override.split(",").map((h) => normalizeHost(h.trim())).filter(Boolean))];
   }
-  if (import.meta.env.PROD) return [HF_HOST];
-  return [LAB_HOST];
+  return [HF_HOST];
 }
 
 export function modelFileUrl(host: string, file: string): string {
@@ -63,7 +61,7 @@ export function configureTransformersEnv(env: TransformersEnv, host: string): st
 }
 
 export function modelHostLabel(host: string): string {
-  if (host.includes("tail") || host.includes("100.70.217.19")) return "lab server";
+  if (host.includes(".ts.net")) return "lab server";
   if (host.includes("huggingface")) return "Hugging Face";
   if (host.includes("hf-mirror")) return "HF Mirror";
   return "model CDN";

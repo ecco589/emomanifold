@@ -1,0 +1,57 @@
+EmoManifold
+Copyright (c) 2026 Yige Liu
+
+This project is licensed under the MIT License. See the LICENSE file
+at the repository root. The MIT license covers the original EmoManifold
+code in this repository. It does not replace the licenses of third-party
+components listed below.
+
+Third-party components
+----------------------
+
+1. Grimace
+
+   Directories: grimace-main/ and share/grimace_from_va/grimace_from_va/vendor/
+
+   Grimace is a comic-style facial expression library. The copy in this
+   repository keeps its upstream MIT license and attribution:
+
+   - grimace-main/LICENSE
+   - grimace-main/README.md
+   - share/grimace_from_va/grimace_from_va/vendor/LICENSE.grimace
+
+   Upstream: https://github.com/grimace-project/web
+   Copyright (c) 2018, as stated in that LICENSE.
+   The vendored LICENSE files are unchanged.
+
+2. NRC Valence, Arousal, and Dominance (VAD) Lexicon
+
+   Creator: Dr. Saif M. Mohammad, National Research Council Canada.
+   Paper: Saif M. Mohammad, "Obtaining Reliable Human Ratings of Valence,
+   Arousal, and Dominance for 20,000 English Words", ACL 2018.
+   Home page: http://saifmohammad.com/WebPages/nrc-vad.html
+
+   The NRC terms allow non-commercial research and educational use and
+   prohibit redistribution of the lexicon. The full lexicon is therefore
+   not included in this tree. Download it yourself into
+   data/NRC-VAD-Lexicon/ if you need to rebuild lexicons or rerun the
+   experiments that read it. See data/NRC-VAD-Lexicon/README.md.
+
+   The small JSON files under data/vad_lexicon/ are the pole-word lists
+   this software loads at runtime. Their numeric VAD scores come from
+   the NRC lexicon. If you use those scores, cite the NRC VAD paper.
+
+3. IEEE LaTeX class and bibliography style
+
+   RAL/ieeeconf/ieeeconf.cls and RAL/IEEEtran.bst are the IEEEtran class
+   and bibliography style by Michael Shell (and earlier IEEE BibTeX
+   styles). They are used only to compile the manuscript under RAL/.
+   Their copyright headers remain in those files. They are not covered
+   by the MIT license at the repository root.
+
+4. Web demo dependencies
+
+   The web/ application depends on React and Vite, installed from npm
+   at build time. grimace-main has its own package.json. Those packages
+   keep their own licenses and are not vendored as source in this tree,
+   except for the Grimace engine described above.
